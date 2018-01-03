@@ -1,0 +1,20 @@
+<div>
+	<md-content md-theme="app" style="vertical-align: center; padding-top: 25px" flex-offset="25" flex="50">
+		<center>
+	  		<h2>Iniciar Sesión</h2>
+	  		<img class="userLogin" class="md-avatar">
+		</center>
+		<form >
+	  		
+	  		<md-input-container class="md-block" flex-offset="25" flex="50">
+	    		<label>Email</label>
+	    		<input ng-model="vm.credentials.email" type="text" required>
+	  		</md-input-container>
+	  		<md-input-container class="md-block" flex-offset="25" flex="50">
+	    		<label>Contraseña</label>
+	    		<input ng-model="vm.credentials.password" type="password" required>
+	  		</md-input-container>
+	  		<center><md-button type="submit" class="md-raised md-primary loginbutton">Iniciar Sesión</md-button></center>
+		</form>       
+	</md-content>
+</div>
