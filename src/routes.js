@@ -11,11 +11,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   $stateProvider
     .state('login', {
       url: '/login',
-      component: 'login'
-    })
-    .state('landing', {
-      url: '/home',
-      component: 'landing',
+      component: 'login',
+      isPrivate: true
     });
 
     $httpProvider.interceptors.push('InterceptorApi');
