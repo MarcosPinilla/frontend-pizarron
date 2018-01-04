@@ -1,9 +1,10 @@
 angular
   .module('app')
-  .config(routesConfig);
+  .config(routesConfig)
+  .run(middlewareConfig);
 
 /** @ngInject */
-function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.otherwise('login');
 
@@ -12,4 +13,23 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/login',
       component: 'login'
     });
+
+    $httpProvider.interceptors.push('InterceptorApi');
+
+
+}
+
+function middlewareConfig($state, CredentialsService, $transitions) {
+  $transitions.onStart({}, function (trans) {
+    var isPrivate =  trans.$to.isPrivate;
+    var to = trans.$to().name;
+
+    if (isPrivate && !CredentialsService.isLogged()) {
+      $state.go('login');
+    }
+
+    if (to === 'login' && CredentialsService.isLogged()) {
+      $state.go('administrator');
+    }
+  })
 }
