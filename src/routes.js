@@ -12,7 +12,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     .state('login', {
       url: '/login',
       component: 'login',
-      isPrivate: true
+      isPrivate: false
     })
     .state('landing', {
       url: '/home',
