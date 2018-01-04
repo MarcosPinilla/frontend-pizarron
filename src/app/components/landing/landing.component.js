@@ -12,5 +12,6 @@
   function landingCtrl() {
     var vm = this;
     vm.hola = 'Esta es la landing page';
+    vm.banner1 = 'app/resources/img/banner1.jpg'
   }
 })();
