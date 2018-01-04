@@ -11,7 +11,7 @@
 
   loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope'];
 
-  function loginCtrl() {
+  function loginCtrl(LoginService, CredentialsService, $state, $rootScope) {
     var vm = this;
 
     vm.loginError = false;
@@ -24,11 +24,11 @@
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
           $rootScope.$emit('isLogin');
-          ObtenerUsuario.get().$promise.then(function (data) {
+          /*ObtenerUsuario.get().$promise.then(function (data) {
             user = data.user;
             localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
             $state.go('dashboard', ({usuario: user.nombre_usuario}));
-          });
+          });*/
 
         }else{
           vm.loginError = true;
