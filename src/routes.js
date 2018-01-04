@@ -18,6 +18,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/home',
       component: 'landing',
       isPrivate: false
+    })
+    .state('dashboard', {
+      url: '/dashboard',
+      component: 'dashboard',
+      isPrivate: true
     });
 
     $httpProvider.interceptors.push('InterceptorApi');
@@ -33,7 +38,7 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     }
 
     if (to === 'login' && CredentialsService.isLogged()) {
-      $state.go('administrator');
+      $state.go('dashboard');
     }
   })
 }

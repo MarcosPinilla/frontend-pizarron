@@ -24,6 +24,7 @@
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
           $rootScope.$emit('isLogin');
+          $state.go('dashboard');
           /*ObtenerUsuario.get().$promise.then(function (data) {
             user = data.user;
             localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
