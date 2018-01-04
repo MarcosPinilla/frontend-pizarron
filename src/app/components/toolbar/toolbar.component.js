@@ -9,7 +9,13 @@
     controllerAs: 'vm'
   });
 
-  function toolbarCtrl() {
+  toolbarCtrl.$inject =['$state'];
+
+  function toolbarCtrl($state) {
     var vm = this;
+
+    vm.iralogin = function () {
+      $state.go('login');
+    };
   }
 })();
