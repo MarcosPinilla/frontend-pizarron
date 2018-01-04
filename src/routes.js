@@ -6,18 +6,21 @@ angular
 /** @ngInject */
 function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('login');
+  $urlRouterProvider.otherwise('home');
 
   $stateProvider
     .state('login', {
       url: '/login',
       component: 'login',
       isPrivate: true
+    })
+    .state('landing', {
+      url: '/home',
+      component: 'landing',
+      isPrivate: false
     });
 
     $httpProvider.interceptors.push('InterceptorApi');
-
-
 }
 
 function middlewareConfig($state, CredentialsService, $transitions) {
