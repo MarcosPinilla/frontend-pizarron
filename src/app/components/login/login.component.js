@@ -9,7 +9,7 @@
     controllerAs: 'vm'
   });
 
-  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', 'RegisterService', 'ObtenerUsuario', 'InstitucionService'];
+  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope'];
 
   function loginCtrl() {
     var vm = this;
