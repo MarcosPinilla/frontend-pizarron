@@ -11,7 +11,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   $stateProvider
     .state('login', {
       url: '/login',
-      component: 'login'
+      component: 'login',
+      isPrivate: true
     });
 
     $httpProvider.interceptors.push('InterceptorApi');
