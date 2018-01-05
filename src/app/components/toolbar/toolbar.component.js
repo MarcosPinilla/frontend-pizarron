@@ -9,13 +9,24 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject =['$state'];
+  toolbarCtrl.$inject =['CredentialsService', '$rootScope','$state'];
 
-  function toolbarCtrl($state) {
+  function toolbarCtrl(CredentialsService, $rootScope, $state) {
     var vm = this;
 
     vm.iralogin = function () {
       $state.go('login');
     };
+
+    vm.isLogged = CredentialsService.isLogged();
+    vm.logout = function () {
+      CredentialsService.clearCredentials();
+      vm.isLogged = false;
+      $state.go('login');
+    }
+
+    $rootScope.$on('isLogin', function () {
+      vm.isLogged = true;
+    })
   }
 })();

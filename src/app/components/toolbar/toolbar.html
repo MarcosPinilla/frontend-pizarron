@@ -13,10 +13,12 @@
       <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
     </md-button>
 -->
-    <md-button ng-click="vm.iralogin()">
+    <md-button ng-if="!vm.isLogged" ui-sref="login">
       INICIAR SESIÓN
     </md-button>
-    <md-button class="md-icon-button" aria-label="Mas">
+
+    <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
+      CERRAR SESIÓN
       <md-icon md-svg-icon="app/resources/icons/menu.svg"></md-icon>
     </md-button>
     
