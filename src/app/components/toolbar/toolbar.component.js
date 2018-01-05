@@ -11,7 +11,7 @@
 
   toolbarCtrl.$inject =['CredentialsService', '$rootScope','$state'];
 
-  function toolbarCtrl($state) {
+  function toolbarCtrl(CredentialsService, $rootScope, $state) {
     var vm = this;
 
     vm.iralogin = function () {
