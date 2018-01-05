@@ -17,3 +17,22 @@ body {
 .comparte {
   background-color: lightblue;
 }
+
+caja {
+	padding-top: 1em;
+	padding-left: 20em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+}
+
+titulo {
+	color: goldenrod;
+}
+
+contenido {
+	color: sienna;
+}
+
+lista {
+	color: steelblue;
+}

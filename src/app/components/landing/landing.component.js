@@ -11,9 +11,10 @@
 
   function landingCtrl() {
     var vm = this;
-    vm.hola = 'Esta es la landing page';
-    vm.banner1 = 'app/resources/img/banner1.jpg'
-    vm.documento = 'app/resources/img/documento_mockup.jpg'
-    vm.banner3 = 'app/resources/img/banner3.jpg'
+    vm.banner1 = 'app/resources/img/banner1.jpg';
+    vm.documento = 'app/resources/img/documento_mockup.jpg';
+    vm.buscador = 'app/resources/img/buscador_mockup.png';
+    vm.favoritos = 'app/resources/img/favoritos_mockup.png';
+    vm.perfil = 'app/resources/img/perfil_mockup.png';
   }
 })();

@@ -17,21 +17,71 @@
           </md-card>
         </div>
         <div flex="50">
-          CREA TU PROPIO MATERIAL
+          <center><titulo><h2>CREA TU PROPIO MATERIAL</h2></titulo></center>
+            <lista>- elige el tamaño de la hoja</lista><br>
+            <lista>- añade y ordena los elementos que necesites</lista><br>
+            <lista>- nombra y guarda el material</lista><br><br>
+            <contenido>
+              puedes guardar y descargar tu material creado en formato pdf, o puedes agendarlo para cuando lo necesites!
+            </contenido>
         </div>
       </div>
     </div>
 
     <div flex class="explora">
-      <md-card>
-        <img ng-src="{{ vm.banner3 }}" class="md-card-image" alt="Washed Out">
-      </md-card>
+      <div layout="column">
+        <div layout="row">
+          <div flex="50">
+            <caja>
+              <center><titulo><h2>EXPLORA</h2></titulo></center>
+              <contenido>
+                busca material creado y publicado por otro profesionales de la educación según nivel y asignatura...
+              </contenido>
+            </caja>
+          </div>
+          <div flex="50">
+            <md-card>
+              <img ng-src="{{ vm.buscador }}" class="md-card-image" alt="Washed Out">
+            </md-card>
+          </div>
+        </div>
+        <div layout="row">
+          <div flex="50">
+            <md-card>
+              <img ng-src="{{ vm.favoritos }}" class="md-card-image" alt="Washed Out">
+            </md-card>
+          </div>
+          <div flex="50">
+            <contenido>
+              y guárdalo en tu cuenta para tu uso!
+            </contenido><br>
+            <lista>- guarda tus materiales favoritos</lista><br>
+            <lista>- comenta y opina</lista><br>
+            <lista>- califica el material</lista>
+          </div>
+        </div>
+      </div>
+      
     </div>
 
     <div flex class="comparte">
-      <md-card>
-        <img ng-src="{{ vm.banner3 }}" class="md-card-image" alt="Washed Out">
-      </md-card>
+      <div layout="row">
+        <div flex="20">
+          <center><titulo><h2>COMPARTE</h2></titulo></center>
+          <lista>- sube tu foto de perfil</lista><br>
+          <lista>- mantén tu información actualizada</lista>
+        </div>
+        <div flex="60">
+          <md-card>
+            <img ng-src="{{ vm.perfil }}" class="md-card-image" alt="Washed Out">
+          </md-card>
+        </div>
+        <div flex="20">
+          <lista>- recibe calificaciones de tus pares</lista><br>
+          <lista>- publica tu propio material</lista>
+        </div>
+      </div>
+      
     </div>
 
   </div>
