@@ -19,10 +19,7 @@ body {
 }
 
 caja {
-	padding-top: 1em;
-	padding-left: 20em;
-	padding-right: 2em;
-	padding-bottom: 1em;
+	margin: 5em;
 }
 
 titulo {
