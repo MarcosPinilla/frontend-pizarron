@@ -8,6 +8,6 @@
 	obtenerUsuario.$inject = ['$resource', 'API'];
 
 	function obtenerUsuario($resource, API) {
-		return $resource(API + 'usuarioLogeado');
+		return $resource(API + 'profesor');
 	}
 })

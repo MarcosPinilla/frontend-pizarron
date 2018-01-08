@@ -26,26 +26,22 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     });
 
     $httpProvider.interceptors.push('InterceptorApi');
+
 }
 
 function middlewareConfig($state, CredentialsService, $transitions) {
-  $transitions.onStart({}, function (trans) {
-    console.log($state);
-    var isPrivate =  trans.$to.isPrivate;
-    var to = trans.$to().name;
-    console.log("aqui voy");
-    console.log(!CredentialsService.isLogged());
-    console.log(isPrivate);
 
-    if (isPrivate==1 && !CredentialsService.isLogged()) {
+  $transitions.onStart({}, function (trans) {
+    var isPrivate = trans.$to.isPrivate;
+
+    var to = trans.$to().name;
+    
+    if (isPrivate && !CredentialsService.isLogged()) {
       $state.go('login');
-      console.log(isPrivate);
     }
 
     if (to === 'login' && CredentialsService.isLogged()) {
       $state.go('dashboard');
-      console.log("lo estoy");
-      console.log(isPrivate);
     }
-  })
+  });
 }
