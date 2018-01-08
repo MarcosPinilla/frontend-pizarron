@@ -11,6 +11,10 @@ body {
   height: 100%; 
 }
 
+.landing-div {
+
+}
+
 #logo-toolbar {
   font-family: "Segoe UI";
   font-weight: bold;
@@ -39,7 +43,7 @@ titular {
 
 #logo {
   height: 100%;
-  width: 100%;
+  width: 12.5rem;
 }
 
 .cuadro-azul {
@@ -58,4 +62,21 @@ titular {
 .cuadro-naranja {
   background-color: #e89a1f;
   height: 10em;
+}
+
+#icon-dash {
+  width: 50%;
+
+}
+
+.card-dash{
+  width: 80%;
+  margin: 50px;
+  padding: 50px;
+}
+
+.dashboard {
+  height: 100%;
+  width: 100%;
+  background: rgba(123, 134, 198, .4)
 }
