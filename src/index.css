@@ -1,35 +1,61 @@
 body {
-  background-color: azure;
+  /*background-color: azure;*/
+  background-color: white;
+  color: #7986CB;
+  font-family: "Segoe UI";
+  background-image: url('app/resources/img/profesor.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 100%; 
 }
 
-.content {
-  background-color: lightgray;
+#logo-toolbar {
+  font-family: "Segoe UI";
+  font-weight: bold;
+  font-size: 2em;
+  text-decoration: underline;
+  height: 1em;
 }
 
-.crea {
-  background-color: moccasin;
+#icono {
+  height: 100%;
+  width: 100%;
+  fill: inherit;
+  color: red;
 }
 
-.explora {
-  background-color: lightgreen;
+#imagen1 {
+  height: 37em;
+  margin-left: 10em;
 }
 
-.comparte {
-  background-color: lightblue;
+titular {
+  font-size: 5em;
+  margin-top: 10em;
+  background: rgba(255, 255, 255, .7)
 }
 
-caja {
-	margin: 5em;
+#logo {
+  height: 100%;
+  width: 100%;
 }
 
-titulo {
-	color: goldenrod;
+.cuadro-azul {
+  background-color: #7986CB;
+  color: white;
 }
 
-contenido {
-	color: sienna;
+.imagen2 {
+  width: 80%;
 }
 
-lista {
-	color: steelblue;
+#triBlanco {
+  height: 6em;
+}
+
+.cuadro-naranja {
+  background-color: #e89a1f;
+  height: 10em;
 }

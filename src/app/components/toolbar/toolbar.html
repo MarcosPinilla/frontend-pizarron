@@ -1,4 +1,4 @@
-<md-toolbar class="md-hue-2">
+<md-toolbar class="md-hue-1">
   <div class="md-toolbar-tools">
     <!--
     <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
@@ -6,7 +6,12 @@
     </md-button>
     -->
 
-    <h2 flex md-truncate>Pizarrón del Profe</h2>
+    <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
+    <div flex="100" md-truncate>
+      <md-button ui-sref="landing" id="logo-toolbar" aria-label="logo">
+        <img src="app/resources/img/logoPizarronBlanco.png" class="md-card-image" id="logo">
+      </md-button>
+    </div>
 
     <!--
     <md-button class="md-icon-button" aria-label="Favorite">
@@ -21,6 +26,5 @@
       CERRAR SESIÓN
       <md-icon md-svg-icon="app/resources/icons/menu.svg"></md-icon>
     </md-button>
-    
   </div>
 </md-toolbar>

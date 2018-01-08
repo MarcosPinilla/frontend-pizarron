@@ -1,88 +1,66 @@
 <div layout="column" flex>
-  <div flex class="content">
-    <md-card>
-      <img ng-src="{{ vm.banner }}" class="md-card-image" alt="Washed Out" ng-click="vm.cambiar()">
-    </md-card>
-  </div>
+  <!-- Aquí va todo el contenido de la landing page organizado en bloques -->
 
-  <div flex class="crea"><br>
-    <div layout="row">
-      <div flex="40">
-        <md-card>
-          <img ng-src="{{ vm.documento }}" class="md-card-image" alt="Washed Out"">
-        </md-card>
-      </div>
-      <caja>
-        <div flex="100">
-          <center><titulo><h1>CREA TU PROPIO MATERIAL</h1></titulo></center>
-          <lista>- elige el tamaño de la hoja</lista><br>
-          <lista>- añade y ordena los elementos que necesites</lista><br>
-          <lista>- nombra y guarda el material</lista><br><br>
-          <contenido><h3>
-            puedes guardar y descargar tu material creado en formato pdf, o puedes agendarlo para cuando lo necesites!
-          </contenido></h3>
-        </div>
-      </caja>
-    </div><br>
+  <!-- Primera sección -->
+  <div layout="row" style="background: rgba(0, 0, 0, 0);">
+    <div flex="50" id="centrar">
+      <center><img id="imagen1" ng-src="app/resources/img/imagen1.png"></center>
+    </div>
+    <div flex="50" style="margin-top: 8em;">
+      <titular>El asistente ideal para tu trabajo escolar.</titular>
+    </div>
   </div>
+  <!-- Fin sección -->
 
-  <div flex class="explora"><br>
-    <div layout="column">
-      <div layout="row">
-        <caja>
-          <div flex="100">
-            <center><titulo><h1>EXPLORA</h1></titulo></center>
-            <contenido><h3>
-              busca material creado y publicado por otro profesionales de la educación según nivel y asignatura...
-            </contenido></h3>
-          </div>
-        </caja>
-        <div flex="40">
-          <md-card>
-            <img ng-src="{{ vm.buscador }}" class="md-card-image" alt="Washed Out">
-          </md-card>
-        </div>
-      </div>
-      <div layout="row">
-        <div flex="40">
-          <md-card>
-            <img ng-src="{{ vm.favoritos }}" class="md-card-image" alt="Washed Out">
-          </md-card>
-        </div>
-        <caja>
-          <div flex="100"><br>
-            <contenido><h3>
-              y guárdalo en tu cuenta para tu uso!
-            </contenido></h3><br>
-            <lista>- guarda tus materiales favoritos</lista><br>
-            <lista>- comenta y opina</lista><br>
-            <lista>- califica el material</lista>
-          </div>
-        </caja>
-      </div>
-    </div><br>
+  <!-- Segunda sección -->
+  <div class="cuadro-azul" style="height: 3em;">
   </div>
+  <div layout="row" class="cuadro-azul">
+    <div flex="33">
+      <center>
+        <h2>Crea guías de trabajo para tus estudiantes</h2>
+        <img class="imagen2" ng-src="app/resources/img/contenido_imagen_1.png" style="margin-top: 2em;">
+      </center>
+    </div>
+    <div style="border-left:thick solid #ffffff"></div>
+    <div flex="33">
+      <center>
+        <h2>Edita colaborativamente con otros profesores</h2>
+        <img class="imagen2" ng-src="app/resources/img/profesor_dibujo.png">
+      </center>
+    </div>
+    <div style="border-left:thick solid #ffffff"></div>
+    <div flex ="33">
+      <center>
+        <h2>Comparte tus documentos en la red de docentes</h2>
+        <img class="imagen2" ng-src="app/resources/img/documentos.png" style="margin-top: 3em;">
+      </center>
+    </div>
+  </div>
+  <div class="cuadro-azul" style="height: 3em;">
+  <!-- Fin sección -->
 
-  <div flex class="comparte"><br>
-    <div layout="row">
-      <caja>
-        <div flex="100">
-          <center><titulo><h2>COMPARTE</h2></titulo></center>
-          <lista>- sube tu foto de perfil</lista><br>
-          <lista>- mantén tu información actualizada</lista>
-        </div>
-      </caja>
-      <div flex="40">
-        <md-card>
-          <img ng-src="{{ vm.perfil }}" class="md-card-image" alt="Washed Out">
-        </md-card>
-      </div>
-      <caja>
-        <div flex="100">
-          <lista>- recibe calificaciones de tus pares</lista><br>
-          <lista>- publica tu propio material</lista>
-        </div>
-      </caja>
-    </div><br>
+  <!-- Tercera sección -->
+  <div layout="row" class="cuadro-naranja">
+    <div flex="50">
+      <h1>ALGUNA IMAGEN</h1>
+    </div>
+    <div flex="50">
+      <h1>COMPRA</h1>
+    </div>
   </div>
+  <!-- Fin sección -->
+
+  <!-- Cuarta sección -->
+  <div layout="row">
+    <div flex="50">
+
+    </div>
+    <div flex="50">
+
+    </div>
+  </div>
+  <!-- Fin sección -->
 </div>
+
+
