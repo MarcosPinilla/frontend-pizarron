@@ -1,7 +1,7 @@
 <div flex="100">
 	<md-content md-theme="app" style="vertical-align: center; padding-top: 25px; background: rgba(255, 255, 255, .7);" flex-offset="25" flex="50">
-		<center>
-	  		<h2>Iniciar Sesión</h2>
+		<center class="titulo">
+	  		INICIAR SESIÓN
 	  		<img class="userLogin" class="md-avatar">
 		</center>
 		<form ng-submit="vm.login(vm.credentials)" >
@@ -14,7 +14,7 @@
 	    		<label>Contraseña</label>
 	    		<input ng-model="vm.credentials.password" type="password" required>
 	  		</md-input-container>
-	  		<center><md-button type="submit" class="md-raised md-primary loginbutton">Iniciar Sesión</md-button></center>
+	  		<center><md-button type="submit" class="md-raised md-warn login-button">Iniciar Sesión</md-button></center>
 	  		<br>
 	  		<center><a href="#">Recuperar Contraseña</a></center>
 		</form>       

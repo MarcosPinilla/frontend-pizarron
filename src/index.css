@@ -29,6 +29,11 @@ body {
   font-weight: bold;
 }
 
+.login-button {
+  background-color: #e89a1f;
+  font-weight: bold;
+}
+
 #icono {
   height: 100%;
   width: 100%;
@@ -89,4 +94,9 @@ titular {
   height: 100%;
   width: 100%;
   background: rgba(123, 134, 198, .4)
+}
+
+.titulo {
+  color: #7986CB;
+  font-size: 2.5em;
 }

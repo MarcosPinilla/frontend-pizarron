@@ -20,9 +20,7 @@
     vm.perfil = 'app/resources/img/perfil_mockup.png';
     vm.isLanding = false;
     if ($location.path() === '/home') {
-      console.log($location.path());
       vm.isLanding = true;
-      console.log(vm.isLanding);
     }
     
 
