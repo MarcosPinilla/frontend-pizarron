@@ -43,12 +43,12 @@ titular {
 
 #logo {
   height: 100%;
-  width: 12.5rem;
+  width: 7.5rem;
 }
 
 .cuadro-azul {
-  background-color: #7986CB;
-  color: white;
+  background-color: #ffffff;
+  color: #e89a1f;
 }
 
 .imagen2 {
@@ -61,6 +61,7 @@ titular {
 
 .cuadro-naranja {
   background-color: #e89a1f;
+  color: #ffffff;
   height: 10em;
 }
 
@@ -73,6 +74,10 @@ titular {
   width: 80%;
   margin: 50px;
   padding: 50px;
+}
+
+.caja-card {
+  background-color: lightgreen;
 }
 
 .dashboard {
