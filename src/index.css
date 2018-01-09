@@ -23,6 +23,11 @@ body {
   height: 1em;
 }
 
+.contratar-toolbar {
+  background-color: #e89a1f;
+  font-weight: bold;
+}
+
 #icono {
   height: 100%;
   width: 100%;
@@ -46,7 +51,7 @@ titular {
   width: 7.5rem;
 }
 
-.cuadro-azul {
+.cuadro-blanco {
   background-color: #ffffff;
   color: #e89a1f;
 }
@@ -62,7 +67,6 @@ titular {
 .cuadro-naranja {
   background-color: #e89a1f;
   color: #ffffff;
-  height: 10em;
 }
 
 #icon-dash {
