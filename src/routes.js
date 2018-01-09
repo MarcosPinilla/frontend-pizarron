@@ -23,7 +23,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/dashboard',
       component: 'dashboard',
       isPrivate: true
-    });
+    })
+    .state('loginrecovery', {
+      url:'/passrecovery',
+      component:'loginrecovery',
+      isPrivate: true
+    })
 
     $httpProvider.interceptors.push('InterceptorApi');
 

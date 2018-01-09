@@ -1,22 +1,25 @@
 <div flex="100">
 	<md-content md-theme="app" style="vertical-align: center; padding-top: 25px; background: rgba(255, 255, 255, .7);" flex-offset="25" flex="50">
 		<center class="titulo">
-	  		INICIAR SESIÓN
+	  		RECUPERAR CONTRASEÑA
 	  		<img class="userLogin" class="md-avatar">
 		</center>
 		<form ng-submit="vm.login(vm.credentials)" >
-	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+	  		<center><span ng-if="vm.loginError" style="color: red">los campos no coinciden</span></center>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Email</label>
 	    		<input ng-model="vm.credentials.email" type="text" required>
 	  		</md-input-container>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
-	    		<label>Contraseña</label>
+	    		<label>Contraseña Nueva</label>
 	    		<input ng-model="vm.credentials.password" type="password" required>
 	  		</md-input-container>
-	  		<center><md-button type="submit" class="md-raised md-warn login-button">Iniciar Sesión</md-button></center>
+	  		<md-input-container class="md-block" flex-offset="25" flex="50">
+	    		<label>Repetir Contraseña Nueva</label>
+	    		<input ng-model="vm.credentials.password" type="password" required>
+	  		</md-input-container>
+	  		<center><md-button type="submit" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
 	  		<br>
-	  		<center><a ui-sref="loginrecovery">Recuperar Contraseña</a></center>
 		</form>       
 	</md-content>
 </div>
