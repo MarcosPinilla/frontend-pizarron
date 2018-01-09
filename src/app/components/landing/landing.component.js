@@ -9,13 +9,22 @@
     controllerAs: 'vm'
   });
 
-  function landingCtrl() {
+  landingCtrl.$inject = ['$location'];
+
+  function landingCtrl($location) {
     var vm = this;
     vm.banner = 'app/resources/img/banner1.jpg';
     vm.documento = 'app/resources/img/documento_mockup.jpg';
     vm.buscador = 'app/resources/img/buscador_mockup.png';
     vm.favoritos = 'app/resources/img/favoritos_mockup.png';
     vm.perfil = 'app/resources/img/perfil_mockup.png';
+    vm.isLanding = false;
+    if ($location.path() === '/home') {
+      console.log($location.path());
+      vm.isLanding = true;
+      console.log(vm.isLanding);
+    }
+    
 
     vm.cambiar = function () {
       switch (vm.banner) {

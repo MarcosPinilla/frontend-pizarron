@@ -14,6 +14,7 @@
   function loginCtrl(LoginService, CredentialsService, $state, $rootScope) {
     var vm = this;
 
+    vm.isLanding = false;
     vm.loginError = false;
     vm.credentials = {};
     var user = {};
