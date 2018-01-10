@@ -9,15 +9,17 @@
     controllerAs: 'vm'
   });
 
-  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope'];
+  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', '$mdDialog'];
 
-  function loginCtrl(LoginService, CredentialsService, $state, $rootScope) {
+  function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog) {
     var vm = this;
 
     vm.isLanding = false;
     vm.loginError = false;
     vm.credentials = {};
     var user = {};
+
+    vm.status = '  ';
 
     vm.login = function (credentials) {
       LoginService.save(credentials, function (data) {
@@ -39,5 +41,23 @@
         console.log(error);
       });
     };
+
+    vm.showPrompt = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Ingresa tu email registrado')
+      .placeholder('ejemplo@ejemplo.cl')
+      .ariaLabel('email')
+      .targetEvent(ev)
+      .required(true)
+      .ok('Enviar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(function(result) {
+      vm.status = 'EMAIL:  ' + result + '.';
+    }, function() {
+      vm.status = 'CANCELADO';
+    });
+  };
   }
 })();
