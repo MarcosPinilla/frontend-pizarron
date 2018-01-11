@@ -31,7 +31,7 @@
         vm.status = 'CANCELADO';
       });
     };
-
+    /**
     $scope.showAdvanced = function(ev) {
       $mdDialog.show({
         controller: DialogController,
@@ -46,7 +46,7 @@
       }, function() {
         $scope.status = 'You cancelled the dialog.';
       });
-    };
+    };**/
   }
 })();
 
