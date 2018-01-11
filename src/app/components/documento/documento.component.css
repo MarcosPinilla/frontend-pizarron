@@ -1,0 +1,9 @@
+.contenedorDnD {
+	width: 500px;
+	height: 500px;
+	margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #F0F0F0 !important;
+
+}

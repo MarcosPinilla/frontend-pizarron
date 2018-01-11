@@ -30,6 +30,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
 
+    .state('documento', {
+      url:'/documento',
+      component:'documento',
+      isPrivate: true
+    })
+
     $httpProvider.interceptors.push('InterceptorApi');
 
 }
