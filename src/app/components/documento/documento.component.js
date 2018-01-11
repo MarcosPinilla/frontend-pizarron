@@ -39,26 +39,26 @@
 
 		stage.add(layer);
 		
-		//se agrega el layer al stage del panel
+		//se agrega el layer al stage
 		panelStage.add(layerPanel);
 
 		//se obtiene la ubicacion de slots
 
-		var star;
+		var starTest;
 		
 		
-			star = new Konva.Star({
+			starTest = new Konva.Star({
 				x : panelStage.width() /2,
 				y : panelStage.height()/2,
 				fill : "blue",
 				numPoints :10,
 				innerRadius : 20,
 				outerRadius : 25,
-				name : 'star ' + i,
+				name : 'star',
 				shadowOffsetX : 5,
 				shadowOffsetY : 5
 			});
-			layerPanel.add(star);
+			layerPanel.add(starTest);
 		
 		layerPanel.draw();
 
@@ -96,11 +96,12 @@
 			layer.draw();
 		});
 
-
+		
 		var previousShape;
 		stage.on("dragmove", function(evt){
 			var pos = stage.getPointerPosition();
 			var shape = layer.getIntersection(pos);
+
 			if (previousShape && shape) {
 				if (previousShape !== shape) {
                 // leave from old targer
@@ -140,6 +141,62 @@
         	previousShape = undefined;
         }
     });
+
+		//EVento para panel izquierdo de shapes
+		/*
+		var previousPanelShape;
+		panelStage.on("dragmove", function(evt){
+			var pos = panelStage.getPointerPosition();
+			var shape = layerPanel.getIntersection(pos);
+
+			if(pos.x>=widthPanel+15){
+				evt.target.moveTo(tempLayer);
+				layer.draw();
+				layerPanel.draw();
+			}
+
+			if (previousShape && shape) {
+				if (previousShape !== shape) {
+                // leave from old targer
+                previousShape.fire('dragleave', {
+                	type : 'dragleave',
+                	target : previousShape,
+                	evt : evt.evt
+                }, true);
+
+                // enter new targer
+                shape.fire('dragenter', {
+                	type : 'dragenter',
+                	target : shape,
+                	evt : evt.evt
+                }, true);
+                previousShape = shape;
+            } else {
+            	previousShape.fire('dragover', {
+            		type : 'dragover',
+            		target : previousShape,
+            		evt : evt.evt
+            	}, true);
+            }
+        } else if (!previousShape && shape) {
+        	previousShape = shape;
+        	shape.fire('dragenter', {
+        		type : 'dragenter',
+        		target : shape,
+        		evt : evt.evt
+        	}, true);
+        } else if (previousShape && !shape) {
+        	previousShape.fire('dragleave', {
+        		type : 'dragleave',
+        		target : previousShape,
+        		evt : evt.evt
+        	}, true);
+        	previousShape = undefined;
+        }
+    });
+
+*/
+
 		stage.on("dragend", function(e){
 			var pos = stage.getPointerPosition();
 			var shape = layer.getIntersection(pos);
@@ -178,5 +235,43 @@
 			text.text('drop ' + e.target.name());
 			layer.draw();
 		});
+
+		starTest.on('click', function() {
+      
+
+			var star;
+		
+		
+			star = new Konva.Star({
+				x : stage.width() /2,
+				y : stage.height()/2,
+				fill : "blue",
+				numPoints :10,
+				innerRadius : 20,
+				outerRadius : 25,
+				draggable: true,
+				name : 'star',
+				shadowOffsetX : 5,
+				shadowOffsetY : 5
+			});
+
+			layer.add(star);
+		
+			layer.draw();
+        
+    	});
+
+
+		vm.pasarStage = function (){
+			starTest.moveTo(layer);
+        	layer.draw();
+        	layerPanel.draw();
+        	
+		}
+
+
+
 	}
+
+
 })();
