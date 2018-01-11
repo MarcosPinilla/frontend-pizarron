@@ -17,16 +17,53 @@
 		var width = document.getElementById('container').clientWidth;
 		var height = document.getElementById('container').clientHeight;
 
+		//dimensiones del panel de shapes
+		var widthPanel = document.getElementById('panel').clientWidth;
+		var heightPanel = document.getElementById('panel').clientHeight;
+
 		var stage = new Konva.Stage({
 			container: 'container',
 			width: width,
 			height: height
 		});
+		//stage del panel
+		var panelStage = new Konva.Stage({
+			container: 'panel',
+			width: widthPanel,
+			height: heightPanel
+		})
+		//layer del panel
+		var layerPanel = new Konva.Layer();
 
 		var layer = new Konva.Layer();
 
 		stage.add(layer);
+		
+		//se agrega el layer al stage del panel
+		panelStage.add(layerPanel);
 
+		//se obtiene la ubicacion de slots
+
+		var star;
+		
+		
+			star = new Konva.Star({
+				x : panelStage.width() /2,
+				y : panelStage.height()/2,
+				fill : "blue",
+				numPoints :10,
+				innerRadius : 20,
+				outerRadius : 25,
+				name : 'star ' + i,
+				shadowOffsetX : 5,
+				shadowOffsetY : 5
+			});
+			layerPanel.add(star);
+		
+		layerPanel.draw();
+
+
+		//_
 		var tempLayer = new Konva.Layer();
 		stage.add(tempLayer);
 

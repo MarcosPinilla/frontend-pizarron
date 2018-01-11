@@ -1,9 +1,19 @@
 .contenedorDnD {
-	width: 500px;
+	width: 700px;
 	height: 500px;
 	margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #F0F0F0 !important;
 
+}
+
+.panelShapes {
+	width: 250px;
+	height:500px; 
+	float:right;
+	margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #F0F0F0 !important;
 }
