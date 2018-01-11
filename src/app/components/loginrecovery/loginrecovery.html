@@ -4,19 +4,19 @@
 	  		RECUPERAR CONTRASEÑA
 	  		<img class="userLogin" class="md-avatar">
 		</center>
-		<form ng-submit="vm.login(vm.credentials)" >
+		<form ng-submit="vm.recover(vm.recoverycredentials)" >
 	  		<center><span ng-if="vm.loginError" style="color: red">los campos no coinciden</span></center>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Email</label>
-	    		<input ng-model="vm.credentials.email" type="text" required>
+	    		<input ng-model="vm.recoverycredentials.emailr" type="text" required>
 	  		</md-input-container>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Contraseña Nueva</label>
-	    		<input ng-model="vm.credentials.password" type="password" required>
+	    		<input ng-model="vm.recoverycredentials.passwordr" type="password" required>
 	  		</md-input-container>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Repetir Contraseña Nueva</label>
-	    		<input ng-model="vm.credentials.password" type="password" required>
+	    		<input ng-model="vm.passwordr" type="password" required>
 	  		</md-input-container>
 	  		<center><md-button type="submit" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
 	  		<br>
