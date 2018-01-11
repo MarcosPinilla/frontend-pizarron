@@ -76,7 +76,7 @@ titular {
 }
 
 #icon-dash {
-  width: 50%;
+  width: 55%;
 
 }
 
@@ -88,6 +88,12 @@ titular {
 
 .caja-card {
   background-color: lightgreen;
+}
+
+.buttondash {
+  width: 80%;
+  margin: 50px;
+  padding: 50px;
 }
 
 .dashboard {

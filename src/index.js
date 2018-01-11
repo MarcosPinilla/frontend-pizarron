@@ -5,10 +5,10 @@ angular
       .primaryPalette('green')
       .accentPalette('lime')
       .warnPalette('red');
-      $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
-      $mdThemingProvider.theme('dark-green').backgroundPalette('green').dark();
-  	  $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
-      $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
-      $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
+      $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark().primaryPalette('grey');
+      $mdThemingProvider.theme('dark-green').backgroundPalette('green').dark().primaryPalette('green');
+  	  $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark().primaryPalette('orange');
+      $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark().primaryPalette('deep-purple');
+      $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark().primaryPalette('blue');
   })
   .constant('API', 'http://localhost:8000/api/');

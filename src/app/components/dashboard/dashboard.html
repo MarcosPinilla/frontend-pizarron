@@ -1,46 +1,32 @@
 <div flex="100" class="dashboard">
 	<md-content layout-xs="column" layout="row" style="background: rgba(255, 255, 255, 0);">
     <div flex-xs flex-gt-xs="60" layout="column">
-      <div class="caja-card">
-        <a href="#1" style="background-color: orange">
-          <md-card md-theme="dark-green" class="card-dash">
-            <center><img src="app/resources/img/newdocument.png" class="md-card-image" id="icon-dash"></center>
-          </md-card>
-        </a>
-      </div>
-      <a href="#2">
-        <md-card md-theme="dark-orange" class="card-dash">
-          <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-        </md-card>
-      </a>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-green" ng-click="vm.showPrompt($event)">
+        <img src="app/resources/img/newdocument.png" class="md-card-image" id="icon-dash">
+      </md-button>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-blue">
+        <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
+      </md-button>
     </div>
     <div flex-xs flex-gt-xs="50" layout="column">
-      <a href="#">
-        <md-card md-theme="dark-blue" class="card-dash">
-          <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-        </md-card>
-      </a>
-      <a href="#">
-        <md-card md-theme="dark-purple" class="card-dash">
-          <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-        </md-card>
-      </a>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-purple">
+        <center><img src="app/resources/img/myfriends.png" class="md-card-image" id="icon-dash"></center>
+      </md-button>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-orange">
+        <center><img src="app/resources/img/searchcontent.png" class="md-card-image" id="icon-dash"></center>
+      </md-button>
 
       <div layout layout-padding layout-align="center end" >
         
       </div>
     </div>
     <div flex-xs flex-gt-xs="50" layout="column">
-      <a href="#">
-        <md-card md-theme="dark-orange" class="card-dash">
-          <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-        </md-card>
-      </a>
-      <a href="#">
-        <md-card md-theme="dark-blue" class="card-dash">
-          <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-        </md-card>
-      </a>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-blue">
+        <center><img src="app/resources/img/mycalendar.png" class="md-card-image" id="icon-dash"></center>
+      </md-button>
+      <md-button class="md-raised md-primary buttondash" md-theme="dark-purple">
+        <center><img src="app/resources/img/newdocument.png" class="md-card-image" id="icon-dash"></center>
+      </md-button>
     </div>
 
   </md-content>
