@@ -73,7 +73,7 @@
 		layer.add(text);
 
 		var star;
-		for (var i = 0; i < 10; i++) {
+		for (var i = 0; i < 4; i++) {
 			star = new Konva.Star({
 				x : stage.width() * Math.random(),
 				y : stage.height() * Math.random(),
@@ -261,6 +261,21 @@
         
     	});
 
+    	vm.export = function(){
+        html2canvas(document.getElementById('container'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500,
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("test.pdf");
+            }
+        });
+    }
+
 
 		vm.pasarStage = function (){
 			starTest.moveTo(layer);
@@ -269,6 +284,67 @@
         	
 		}
 
+
+		vm.crearTextArea = function () {
+
+			var textNode = new Konva.Text({
+	            text: 'Some text here',
+	            x: 50,
+	            y: 50,
+	            draggable:true,
+	            fontSize: 20,
+	            name:'textArea'
+        	});
+
+	        layer.add(textNode);
+	        layer.draw();
+        
+		}
+		
+
+	
+
+		stage.on('click',function (evt) {
+           if(evt.target.name()=="textArea"){
+            	 // create textarea over canvas with absolute position
+
+            // first we need to find its positon
+            var textPosition = evt.target.getAbsolutePosition();
+            var stageBox = stage.getContainer().getBoundingClientRect();
+
+            var areaPosition = {
+                x: textPosition.x + stageBox.left,
+                y: textPosition.y
+            };
+
+
+            // create textarea and style it
+            var textarea = document.createElement('textarea');
+            document.body.appendChild(textarea);
+
+            textarea.value = evt.target.text();
+            textarea.style.position = 'absolute';
+            textarea.style.top = areaPosition.y + 'px';
+            textarea.style.left = areaPosition.x + 'px';
+            textarea.style.width = evt.target.width();
+
+            textarea.focus();
+
+
+            textarea.addEventListener('keydown', function (e) {
+                // hide on enter
+                if (e.keyCode === 13) {
+                    evt.target.text(textarea.value);
+                    layer.draw();
+                    document.body.removeChild(textarea);
+                }
+            });
+        }
+        });
+	
+
+
+        
 
 
 	}
