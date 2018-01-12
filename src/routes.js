@@ -25,7 +25,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
     .state('loginrecovery', {
-      url:'/passrecovery',
+      url:'/passrecovery/:token',
       component:'loginrecovery',
       isPrivate: true
     })

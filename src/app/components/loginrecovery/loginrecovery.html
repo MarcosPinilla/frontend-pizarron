@@ -18,7 +18,7 @@
 	    		<label>Repetir Contraseña Nueva</label>
 	    		<input ng-model="vm.rpass" type="password" required>
 	  		</md-input-container>
-	  		<center><md-button type="submit" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
+	  		<center><md-button ng-click="vm.recover(vm.recovery)" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
 	  		<br>
 		</form>       
 	</md-content>

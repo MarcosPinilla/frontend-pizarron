@@ -8,10 +8,6 @@
   recoveryService.$inject = ['$resource', 'API'];
 
   function recoveryService($resource, API) {
-    return $resource(API + 'resetpassword/:token', {token: '@token'}, {
-      update: {
-        method: 'PUT'
-      }
-    });
+    return $resource(API + 'resetpassword')
   }
 })();

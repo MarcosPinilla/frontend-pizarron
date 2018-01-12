@@ -18,15 +18,15 @@
     var value = 'passrecovery/';
     var hash = url.indexOf(value);
     var tokenurl = url.substring(hash + value.length, url.length);
-    console.log(token);
+    console.log(tokenurl);
 
     vm.recover = function (recovery) {
       var reco = {
-        token: recovery.tokenurl,
+        token: tokenurl,
         email: recovery.email,
         password: recovery.password
       };
-
+      console.log(reco);  
       RecoveryService.save(reco); 
     };
   }
