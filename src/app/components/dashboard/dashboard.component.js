@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  dashboardCtrl.$inject = ['$mdDialog'];
+  dashboardCtrl.$inject = ['$mdDialog', '$state'];
 
-  function dashboardCtrl($mdDialog) {
+  function dashboardCtrl($mdDialog, $state) {
     var vm = this;
 
     vm.showPrompt = function(ev) {
@@ -27,6 +27,7 @@
 
       $mdDialog.show(confirm).then(function(result) {
         vm.status = 'Documento:  ' + result + '.';
+        $state.go('documento');
       }, function() {
         vm.status = 'CANCELADO';
       });

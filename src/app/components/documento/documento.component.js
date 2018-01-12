@@ -12,66 +12,36 @@
 		// Con vm = this, hacemos que se haga referencia al controlador por el 'this' y queda más comodo 
 		// y unificado al mirar el html
 		var vm = this;
-		vm.mensaje = "Alonso";
 
+		//Dimensiones del div 'container'
 		var width = document.getElementById('container').clientWidth;
 		var height = document.getElementById('container').clientHeight;
 
-		//dimensiones del panel de shapes
-		var widthPanel = document.getElementById('panel').clientWidth;
-		var heightPanel = document.getElementById('panel').clientHeight;
-
+		//Stage del container
 		var stage = new Konva.Stage({
 			container: 'container',
 			width: width,
 			height: height
 		});
-		//stage del panel
-		var panelStage = new Konva.Stage({
-			container: 'panel',
-			width: widthPanel,
-			height: heightPanel
-		})
-		//layer del panel
-		var layerPanel = new Konva.Layer();
 
+		//Layer que se asignará a container
 		var layer = new Konva.Layer();
 
+		//Se agrega este layer al container
 		stage.add(layer);
-		
-		//se agrega el layer al stage del panel
-		panelStage.add(layerPanel);
 
-		//se obtiene la ubicacion de slots
-
-		var star;
-		
-		
-			star = new Konva.Star({
-				x : panelStage.width() /2,
-				y : panelStage.height()/2,
-				fill : "blue",
-				numPoints :10,
-				innerRadius : 20,
-				outerRadius : 25,
-				name : 'star ' + i,
-				shadowOffsetX : 5,
-				shadowOffsetY : 5
-			});
-			layerPanel.add(star);
-		
-		layerPanel.draw();
-
-
-		//_
+		//Se genera un layer temporal para añadir a esta capa
 		var tempLayer = new Konva.Layer();
 		stage.add(tempLayer);
 
+		//Se crea un campo texto (para información)
 		var text = new Konva.Text({
 			fill : 'black'
 		});
+		//Se agrega a esta layer
 		layer.add(text);
 
+		//Se crean figuras al azar
 		var star;
 		for (var i = 0; i < 10; i++) {
 			star = new Konva.Star({
@@ -88,8 +58,51 @@
 			});
 			layer.add(star);
 		}
+		//Se dibujan en la capa
 		layer.draw();
 
+
+		//Dimensiones del panel de shapes
+		var widthPanel = document.getElementById('panel').clientWidth;
+		var heightPanel = document.getElementById('panel').clientHeight;
+
+		//Stage del panel
+		var panelStage = new Konva.Stage({
+			container: 'panel',
+			width: widthPanel,
+			height: heightPanel
+		})
+
+		//Layer del panel
+		var layerPanel = new Konva.Layer();
+		
+		//Se agrega el layer al stage del panel
+		panelStage.add(layerPanel);
+
+		//Se agrega una variable temporal para la capa
+		var tempPanelLayer = new Konva.Layer();
+		panelStage.add(tempPanelLayer);
+
+		//Se genera un objeto en el panel
+		var star;
+			star = new Konva.Star({
+				x : panelStage.width() /2,
+				y : panelStage.height()/2,
+				fill : "blue",
+				numPoints :10,
+				innerRadius : 20,
+				outerRadius : 25,
+				name : 'star ' + i,
+				shadowOffsetX : 5,
+				shadowOffsetY : 5,
+				draggable: true
+			});
+			layerPanel.add(star);
+			console.log(star);
+		layerPanel.draw();
+
+			
+		//Para mover las figuras dentro del contenedor
 		stage.on("dragstart", function(e){
 			e.target.moveTo(tempLayer);
 			text.text('Moving ' + e.target.name());
@@ -153,7 +166,7 @@
 			previousShape = undefined;
 			e.target.moveTo(layer);
 			layer.draw();
-			tempLayer.draw();
+			tempPanelLayer.draw();
 		});
 
 		stage.on("dragenter", function(e){
@@ -178,5 +191,120 @@
 			text.text('drop ' + e.target.name());
 			layer.draw();
 		});
+
+
+		//Para mover dentro del panel
+		panelStage.on("dragstart", function(e){
+			e.target.moveTo(tempPanelLayer);
+			layerPanel.draw();
+		});
+
+
+		var previousStagePanel;
+		panelStage.on("dragmove", function(evt){
+			var pos = panelStage.getPointerPosition();
+			var shape = layerPanel.getIntersection(pos);
+
+			console.log(pos);
+			console.log(shape);
+
+			if (pos.x >= widthPanel + 15) {
+				evt.target.moveTo(tempLayer);
+				layer.draw();
+				tempPanelLayer.draw();
+
+				var star;
+		
+			
+				star = new Konva.Star({
+					x : panelStage.width() /2,
+					y : panelStage.height()/2,
+					fill : "blue",
+					numPoints :10,
+					innerRadius : 20,
+					outerRadius : 25,
+					name : 'star ' + i,
+					shadowOffsetX : 5,
+					shadowOffsetY : 5,
+					draggable: true
+				});
+				layerPanel.add(star);
+			
+			layerPanel.draw();
+			}
+			if (previousStagePanel && shape) {
+				if (previousStagePanel !== shape) {
+                // leave from old targer
+                previousStagePanel.fire('dragleave', {
+                	type : 'dragleave',
+                	target : previousStagePanel,
+                	evt : evt.evt
+                }, true);
+
+                // enter new targer
+                shape.fire('dragenter', {
+                	type : 'dragenter',
+                	target : shape,
+                	evt : evt.evt
+                }, true);
+                previousStagePanel = shape;
+            } else {
+            	previousStagePanel.fire('dragover', {
+            		type : 'dragover',
+            		target : previousStagePanel,
+            		evt : evt.evt
+            	}, true);
+            }
+        } else if (!previousStagePanel && shape) {
+        	previousStagePanel = shape;
+        	shape.fire('dragenter', {
+        		type : 'dragenter',
+        		target : shape,
+        		evt : evt.evt
+        	}, true);
+        } else if (previousStagePanel && !shape) {
+        	previousStagePanel.fire('dragleave', {
+        		type : 'dragleave',
+        		target : previousStagePanel,
+        		evt : evt.evt
+        	}, true);
+        	previousStagePanel = undefined;
+        }
+    });
+		panelStage.on("dragend", function(e){
+			var pos = panelStage.getPointerPosition();
+			var shape = layerPanel.getIntersection(pos);
+			if (shape) {
+				previousStagePanel.fire('drop', {
+					type : 'drop',
+					target : previousStagePanel,
+					evt : e.evt
+				}, true);
+			}
+			previousStagePanel = undefined;
+			e.target.moveTo(layerPanel);
+			layerPanel.draw();
+			tempLayer.draw();
+		});
+		
+		var json = stage.toJSON();
+
+    	console.log(json);
+
+    	var json = panelStage.toJSON();
+
+    	console.log(json);
+		html2canvas(document.getElementById('todo'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500,
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("test.pdf");
+            }
+        });
 	}
 })();
