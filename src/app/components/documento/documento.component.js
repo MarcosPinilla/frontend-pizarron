@@ -92,14 +92,14 @@
 				numPoints :10,
 				innerRadius : 20,
 				outerRadius : 25,
-				name : 'star ' + i,
+				name : 'star',
 				shadowOffsetX : 5,
 				shadowOffsetY : 5,
 				draggable: true
 			});
 			layerPanel.add(star);
 			console.log(star);
-		layerPanel.draw();
+		//layerPanel.draw();
 
 			
 		//Para mover las figuras dentro del contenedor
@@ -108,6 +108,99 @@
 			text.text('Moving ' + e.target.name());
 			layer.draw();
 		});
+
+		var textNode = new Konva.Text({
+            text: 'Nuevo texto',
+            x: 50,
+            y: 50,
+            fontSize: 20,
+            draggable: true,
+            name: 'textArea'
+        });
+
+        layerPanel.add(textNode);
+        layerPanel.draw();
+		
+		//Creación de un text área
+		panelStage.on('dblclick', function(evt) {
+			if (evt.target.name() === "textArea") {
+            // create textarea over canvas with absolute position
+
+            // first we need to find its positon
+            var textPosition = evt.target.getAbsolutePosition();
+            var stageBox = panelStage.getContainer().getBoundingClientRect();
+
+            var areaPosition = {
+                x: textPosition.x + stageBox.left,
+                y: textPosition.y
+            };
+
+
+            // create textarea and style it
+            var textarea = document.createElement('textarea');
+            document.body.appendChild(textarea);
+
+            textarea.value = evt.target.text();
+            textarea.style.position = 'absolute';
+            textarea.style.top = areaPosition.y + 'px';
+            textarea.style.left = areaPosition.x + 'px';
+            textarea.style.width = evt.target.width();
+
+            textarea.focus();
+
+
+            textarea.addEventListener('keydown', function (e) {
+                // hide on enter
+                if (e.keyCode === 13) {
+                    evt.target.text(textarea.value);
+                    layerPanel.draw();
+                    document.body.removeChild(textarea);
+                }
+            });
+        }
+        });
+
+
+		//Creación de un text área
+		stage.on('dblclick', function(evt) {
+			if (evt.target.name() === "textArea") {
+            // create textarea over canvas with absolute position
+
+            // first we need to find its positon
+            var textPosition = evt.target.getAbsolutePosition();
+            var stageBox = stage.getContainer().getBoundingClientRect();
+
+            var areaPosition = {
+                x: textPosition.x + stageBox.left,
+                y: textPosition.y
+            };
+
+
+            // create textarea and style it
+            var textarea = document.createElement('textarea');
+            document.body.appendChild(textarea);
+
+            textarea.value = evt.target.text();
+            textarea.style.position = 'absolute';
+            textarea.style.top = areaPosition.y + 'px';
+            textarea.style.left = areaPosition.x + 'px';
+            textarea.style.width = evt.target.width();
+
+            textarea.focus();
+
+
+            textarea.addEventListener('keydown', function (e) {
+                // hide on enter
+                if (e.keyCode === 13) {
+                    evt.target.text(textarea.value);
+                    layer.draw();
+                    document.body.removeChild(textarea);
+                }
+            });
+
+        }
+        });
+
 
 
 		var previousShape;
@@ -211,24 +304,35 @@
 			if (pos.x >= widthPanel + 15) {
 				evt.target.moveTo(tempLayer);
 				layer.draw();
-				tempPanelLayer.draw();
 
-				var star;
-		
+				if(evt.target.name() === 'textArea') {
+					var textNode = new Konva.Text({
+			            text: 'Nuevo texto',
+			            x: 50,
+			            y: 50,
+			            fontSize: 20,
+			            draggable: true,
+			            name: 'textArea'
+			        });
+			        layerPanel.add(textNode);
+				} else if (evt.target.name() === 'star') {
+					var star;
 			
-				star = new Konva.Star({
-					x : panelStage.width() /2,
-					y : panelStage.height()/2,
-					fill : "blue",
-					numPoints :10,
-					innerRadius : 20,
-					outerRadius : 25,
-					name : 'star ' + i,
-					shadowOffsetX : 5,
-					shadowOffsetY : 5,
-					draggable: true
-				});
-				layerPanel.add(star);
+					star = new Konva.Star({
+						x : panelStage.width() /2,
+						y : panelStage.height()/2,
+						fill : "blue",
+						numPoints :10,
+						innerRadius : 20,
+						outerRadius : 25,
+						name : 'star',
+						shadowOffsetX : 5,
+						shadowOffsetY : 5,
+						draggable: true
+					});
+					layerPanel.add(star);	
+				}
+				
 			
 			layerPanel.draw();
 			}
@@ -294,7 +398,9 @@
     	var json = panelStage.toJSON();
 
     	console.log(json);
-		html2canvas(document.getElementById('todo'), {
+
+    	vm.exportar = function () {
+	    	html2canvas(document.getElementById('todo'), {
             onrendered: function (canvas) {
                 var data = canvas.toDataURL();
                 var docDefinition = {
@@ -305,6 +411,7 @@
                 };
                 pdfMake.createPdf(docDefinition).download("test.pdf");
             }
-        });
+        });  
+	    };
 	}
 })();
