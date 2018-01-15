@@ -33,7 +33,7 @@
       }).join(seperator);
     };
   })
-  .controller('DemoBasicController', function DemoCtrl($mdDialog) {
+  .controller('DemoBasicCtrl', function DemoCtrl($mdDialog) {
     this.settings = {
       printLayout: true,
       showRuler: true,
