@@ -16,6 +16,8 @@
 
     vm.isLanding = false;
     vm.loginError = false;
+    vm.messageCode = null;
+    vm.message = null;
     vm.credentials = {};
     var user = {};
 
@@ -61,7 +63,10 @@
       var e = {
         email: result
       }
-      SendService.save(e)
+      SendService.save(e, function(data) {
+        vm.messageCode = data.code;
+        vm.message = data.message;
+      });
       vm.status = 'EMAIL:  ' + result + '.- ENVIADO';
       console.log(status)
     }, function() {

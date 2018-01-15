@@ -1,0 +1,13 @@
+<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 100px;padding-right: 100px ">
+    <h3>Agregar Colaborador</h3>
+    <form ng-submit="vm.crearmaterial(vm.material)" >
+	    <md-input-container class="md-block" flex="100">
+	    	<label>Correo del colaborador</label>
+	    	<input type="text" ng-model="vm.material.nombre">
+	    </md-input-container>
+	    <br>
+	    <center><md-button ui-sref="editdocument" class="md-raised md-warn login-button">Agregar Colaborador</md-button></center>
+	    <br>
+    </form>  
+
+</md-content>

@@ -49,9 +49,45 @@
         .targetEvent(ev)
       );
     };
-  });;
+  });
 
-  function editdocumentCtrl() {
+  editdocumentCtrl.$inject = ['$mdDialog'];
+  dialogoController.$inject = ['$mdDialog'];
+
+  function editdocumentCtrl($mdDialog) {
     var vm = this;
+    vm.customFullscreen = true;
+
+    vm.showAddColaborator = function(ev) {
+      $mdDialog.show({
+        controller: dialogoController,
+        templateUrl: 'app/components/editdocument/agregarcolaborador.dialog.html',
+        //  parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+      }).then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
   }
+
+  function dialogoController($mdDialog) {
+    var vm = this;
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
 })();
