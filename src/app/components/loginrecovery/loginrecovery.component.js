@@ -27,7 +27,16 @@
         password: recovery.password
       };
       console.log(reco);  
-      RecoveryService.save(reco); 
+      RecoveryService.save(reco, function (data) {
+        console.log("Code: " + data.code);
+        console.log("Message: " + data.message);
+        if(data.code = 1) {
+          //Indicar que la contraseña fue cambiada con exito
+          window.location.replace("http://localhost:3000/login")
+        }else {
+          //Indicar que hubo un error al cambiar la contraseña
+        }
+      }); 
     };
   }
 })();
