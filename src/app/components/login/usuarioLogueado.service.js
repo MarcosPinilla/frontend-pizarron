@@ -1,13 +1,13 @@
 (function () {
-	'use strict';
+  'use strict';
 
-	angular
-	.module('app')
-	.service('ObtenerUsuario', obtenerUsuario);
+  angular
+  .module('app')
+  .service('ObtenerUsuario', obtenerUsuario);
 
-	obtenerUsuario.$inject = ['$resource', 'API'];
+  obtenerUsuario.$inject = ['$resource', 'API'];
 
-	function obtenerUsuario($resource, API) {
-		return $resource(API + 'profesor');
-	}
+  function obtenerUsuario($resource, API) {
+    return $resource(API + 'profesor');
+  }
 })
