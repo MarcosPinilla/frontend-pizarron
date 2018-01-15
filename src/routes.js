@@ -29,6 +29,16 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component:'loginrecovery',
       isPrivate: true
     })
+    .state('profesor', {
+      url: '/profesor',
+      component: 'profesor',
+      isPrivate: true
+    })
+    .state('editdocument', {
+      url:'/editdocument',
+      component: 'editdocument',
+      isPrivate: true
+    });
 
     $httpProvider.interceptors.push('InterceptorApi');
 
