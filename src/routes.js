@@ -25,8 +25,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
     .state('loginrecovery', {
-      url:'/passrecovery/:token',
-      component:'loginrecovery',
+      url: '/passrecovery/:token',
+      component: 'loginrecovery',
       isPrivate: true
     })
     .state('profesor', {
@@ -35,22 +35,18 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
     .state('editdocument', {
-      url:'/editdocument',
+      url: '/editdocument',
       component: 'editdocument',
       isPrivate: true
     });
-
-    $httpProvider.interceptors.push('InterceptorApi');
-
+  $httpProvider.interceptors.push('InterceptorApi');
 }
 
 function middlewareConfig($state, CredentialsService, $transitions) {
-
   $transitions.onStart({}, function (trans) {
     var isPrivate = trans.$to.isPrivate;
 
     var to = trans.$to().name;
-    
     if (isPrivate && !CredentialsService.isLogged()) {
       $state.go('login');
     }
