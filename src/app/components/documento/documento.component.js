@@ -163,6 +163,7 @@
 
 		//Creación de un text área
 		stage.on('dblclick', function(evt) {
+			console.log(evt.currentTarget)
 			if (evt.target.name() === "textArea") {
             // create textarea over canvas with absolute position
 
@@ -196,10 +197,25 @@
                     layer.draw();
                     document.body.removeChild(textarea);
                 }
-            });
-
-        }
+            });         
+	        }
         });
+
+
+
+		layer.on('click', function(evt) {
+			console.log(evt.currentTarget);
+			var json = evt.target.toJSON();
+
+			console.log(json);
+			if (evt.target) {
+             console.log("hola")
+
+
+            
+        	}
+        });
+
 
 
 
@@ -400,7 +416,7 @@
     	console.log(json);
 
     	vm.exportar = function () {
-	    	html2canvas(document.getElementById('todo'), {
+	    	html2canvas(document.getElementById('todocanvas'), {
             onrendered: function (canvas) {
                 var data = canvas.toDataURL();
                 var docDefinition = {
@@ -413,5 +429,49 @@
             }
         });  
 	    };
-	}
+
+	    var panelcanvas = new fabric.Canvas('panelcanvas');
+	    var canvas = new fabric.Canvas('canvas');
+
+        var cuadrado = new fabric.Rect({
+            top : 100,
+            left : 100,
+            width : 60,
+            height : 70,
+            fill : 'red'
+        });
+
+        var textbox = new fabric.Textbox('Escribe aquí', {
+		  left: 50,
+		  top: 50,
+		  width: 150,
+		  fontSize: 20
+		});
+
+        panelcanvas.add(cuadrado);
+        panelcanvas.add(textbox).setActiveObject(textbox);
+
+       	cuadrado.on('selected', function() {
+			console.log("Hola");
+				var rect = new fabric.Rect({
+	            top : 100,
+	            left : 100,
+	            width : 60,
+	            height : 70,
+	            fill : 'blue'
+	        	});
+
+        	canvas.add(rect);
+		});
+
+		textbox.on('selected', function() {
+			var texto = new fabric.Textbox('Escribe aquí', {
+			  left: 50,
+			  top: 50,
+			  width: 150,
+			  fontSize: 20
+			});
+			canvas.add(texto);
+		})
+	}	
 })();

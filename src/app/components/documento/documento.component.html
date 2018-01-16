@@ -7,6 +7,19 @@
     <div id="container" class="contenedorDnD"></div>
   </div>
 </div>
+
+
+
+<div id="todocanvas" layout="row">
+  <div flex="30" style="border: 1px solid black;">
+	<canvas id="panelcanvas" width="250" height="500"></canvas>
+  </div>
+
+  <div flex="70" style="border: 1px solid black;">
+    <canvas id="canvas" width="700" height="500"></canvas>
+  </div>
+</div>
+
 <div flex="50">
-	<center><button ng-click="vm.exportar()">Exportar a pdf</button></center>
+  <center><button ng-click="vm.exportar()">Exportar a pdf</button></center>
 </div>
