@@ -1,24 +1,25 @@
+
 <div flex="100">
 	<md-content md-theme="app" style="vertical-align: center; padding-top: 25px; background: rgba(255, 255, 255, .7);" flex-offset="25" flex="50">
 		<center class="titulo">
 	  		RECUPERAR CONTRASEÑA
 	  		<img class="userLogin" class="md-avatar">
 		</center>
-		<form ng-submit="vm.recover(vm.recoverycredentials)" >
-	  		<center><span ng-if="vm.loginError" style="color: red">los campos no coinciden</span></center>
+		<form ng-submit="vm.recover(vm.recovery)" >
+	  		<!--<center><span ng-if="vm.loginError" style="color: red">los campos no coinciden</span></center>-->
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Email</label>
-	    		<input ng-model="vm.recoverycredentials.emailr" type="text" required>
+	    		<input ng-model="vm.recovery.email" type="text" required>
 	  		</md-input-container>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Contraseña Nueva</label>
-	    		<input ng-model="vm.recoverycredentials.passwordr" type="password" required>
+	    		<input ng-model="vm.recovery.password" type="password" required>
 	  		</md-input-container>
 	  		<md-input-container class="md-block" flex-offset="25" flex="50">
 	    		<label>Repetir Contraseña Nueva</label>
-	    		<input ng-model="vm.passwordr" type="password" required>
+	    		<input ng-model="vm.rpass" type="password" required>
 	  		</md-input-container>
-	  		<center><md-button type="submit" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
+	  		<center><md-button ng-click="vm.recover(vm.recovery)" class="md-raised md-warn login-button">Cambiar clave</md-button></center>
 	  		<br>
 		</form>       
 	</md-content>

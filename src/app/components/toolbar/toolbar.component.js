@@ -9,7 +9,7 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject =['CredentialsService', '$rootScope','$state'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $state) {
     var vm = this;
@@ -27,6 +27,6 @@
 
     $rootScope.$on('isLogin', function () {
       vm.isLogged = true;
-    })
+    });
   }
 })();

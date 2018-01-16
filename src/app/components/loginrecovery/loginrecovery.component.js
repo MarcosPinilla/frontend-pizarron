@@ -9,12 +9,10 @@
     controllerAs: 'vm'
   });
 
-  loginrecoveryCtrl.$inject=['$state', '$rootScope', 'RecoveryService', 'RecoveryCredentialsService'];
+  loginrecoveryCtrl.$inject = ['RecoveryService', '$state', '$rootScope'];
 
-  function loginrecoveryCtrl(RecoveryService, RecoveryCredentialsService, $state, $rootScope) {
+  function loginrecoveryCtrl(RecoveryService, $state) {
     var vm = this;
-
-    vm.recoverycredentials = {};
 
     var url = window.location.href; 
     var value = 'passrecovery/';
@@ -22,30 +20,23 @@
     var tokenurl = url.substring(hash + value.length, url.length);
     console.log(tokenurl);
 
-
-      vm.recover = function (recoverycredentials) {
-        RecoveryService.save(recoverycredentials, function (data) {
-            if(data.token) {
-              RecoveryCredentialsService.setTokenr(tokenurl);
-              RecoveryCredentialsService.setEmailr(data.emailr);
-              RecoveryCredentialsService.setPasswordr(data.passwordr);
-              $rootScope.$emit('isRecover');
-              console.log(data);
-              /**$state.go('dashboard');
-              ObtenerUsuario.get().$promise.then(function (data) {
-                user = data.user;
-                localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
-                $state.go('dashboard', ({usuario: user.nombre_usuario}));
-              });**/
-
-            }else{
-            vm.loginError = true;
-            }        
-          }, function (error) {
-            console.log(error);
-          }
-        );
+    vm.recover = function (recovery) {
+      var reco = {
+        token: tokenurl,
+        email: recovery.email,
+        password: recovery.password
       };
-    
+      console.log(reco);  
+      RecoveryService.save(reco, function (data) {
+        console.log("Code: " + data.code);
+        console.log("Message: " + data.message);
+        if(data.code = 1) {
+          //Indicar que la contraseña fue cambiada con exito
+          $state.go('login');
+        }else {
+          //Indicar que hubo un error al cambiar la contraseña
+        }
+      }); 
+    };
   }
 })();

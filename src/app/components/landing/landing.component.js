@@ -22,9 +22,7 @@
     if ($location.path() === '/home') {
       vm.isLanding = true;
     }
-    
-
-    vm.cambiar = function () {
+    /** vm.cambiar = function () {
       switch (vm.banner) {
         case 'app/resources/img/banner1.jpg':
           vm.banner = 'app/resources/img/banner2.jpg';
@@ -36,7 +34,6 @@
           vm.banner = 'app/resources/img/banner1.jpg';
           break;
       }
-      
-    }
+    } */
   }
 })();

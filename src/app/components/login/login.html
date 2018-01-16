@@ -16,8 +16,9 @@
 	  		</md-input-container>
 	  		<center><md-button type="submit" class="md-raised md-warn login-button">Iniciar Sesión</md-button></center>
 	  		<br>
-	  		<center><a href="#" ng-click="vm.showPrompt($event)">Recuperar Contraseña</a></center>
+	  		<center><a ng-model="vm.correo.email" ng-click="vm.showPrompt($event, vm.correo)">Recuperar Contraseña</a></center>
 	  		<br>
+	  		<center><p>{{vm.message}}<p></center>
 	  		<br>
 		</form>       
 	</md-content>
