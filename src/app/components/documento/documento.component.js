@@ -13,6 +13,10 @@
 		// y unificado al mirar el html
 		var vm = this;
 
+		//PRUEBAS CON KONVAJS
+
+		/*
+
 		//Dimensiones del div 'container'
 		var width = document.getElementById('container').clientWidth;
 		var height = document.getElementById('container').clientHeight;
@@ -429,29 +433,40 @@
             }
         });  
 	    };
+		*/
+	    //PRUEBAS CON FABRICJS
 
 	    var panelcanvas = new fabric.Canvas('panelcanvas');
 	    var canvas = new fabric.Canvas('canvas');
+	    vm.fontTest="";
+	    vm.fontTest2=0;
 
-        var cuadrado = new fabric.Rect({
-            top : 100,
-            left : 100,
-            width : 60,
-            height : 70,
-            fill : 'red'
-        });
+	    vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
+	    vm.fontsizes=[];
 
-        var textbox = new fabric.Textbox('Escribe aquí', {
-		  left: 50,
-		  top: 50,
-		  width: 150,
-		  fontSize: 20
-		});
+	    for(var i=0;i<100;i++){
+	    	vm.fontsizes.push(i);
+	    }
 
-        panelcanvas.add(cuadrado);
-        panelcanvas.add(textbox).setActiveObject(textbox);
+	    vm.usarFont = function(font) {
+	     //alert(font);
+		  var myfont = new FontFaceObserver(font)
+		  myfont.load()
+		    .then(function() {
+		      // when font is loaded, use it.
+		      canvas.getActiveObject().set("fontFamily", font);
+		      canvas.renderAll();
+		    }).catch(function(e) {
+		      console.log(e)
+		      alert('font loading failed ' + font);
+			});
+		}
 
-       	cuadrado.on('selected', function() {
+		 vm.usarFontSize = function(fontsize) {
+	    	canvas.getActiveObject().set("fontSize", fontsize);
+ 			canvas.renderAll();  
+		}
+		    vm.generarFigura=function() {
 			console.log("Hola");
 				var rect = new fabric.Rect({
 	            top : 100,
@@ -461,17 +476,42 @@
 	            fill : 'blue'
 	        	});
 
-        	canvas.add(rect);
-		});
+        	canvas.add(rect).setActiveObject(rect);
+		};
 
-		textbox.on('selected', function() {
+		vm.generarTexto = function() {
 			var texto = new fabric.Textbox('Escribe aquí', {
 			  left: 50,
 			  top: 50,
 			  width: 150,
 			  fontSize: 20
 			});
-			canvas.add(texto);
-		})
-	}	
+			canvas.add(texto).setActiveObject(texto);
+		}
+
+		vm.eliminar = function() {
+	    
+	      	var activeGroup = canvas.getActiveGroup();
+		    if (activeGroup) {
+		        var activeObjects = activeGroup.getObjects();
+		        for (let i in activeObjects) {
+		            canvas.remove(activeObjects[i]);
+		        }
+		        canvas.discardActiveGroup();
+		        canvas.renderAll();
+		    } else canvas.getActiveObject().remove();
+			    
+			}
+
+
+			var canvasWrapper = document.getElementById('todocanvas');
+			canvasWrapper.tabIndex = 1000;
+			canvasWrapper.addEventListener("keydown", function(e){
+				 e = e || window.event;
+   				 var key = e.which || e.keyCode;
+				 if(key===46){
+				 	vm.eliminar();
+			    }
+			}, false);
+		}	
 })();
