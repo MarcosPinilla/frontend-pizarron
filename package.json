@@ -69,5 +69,8 @@
     "extends": [
       "xo-space"
     ]
+  },
+  "dependencies": {
+    "fontfaceobserver": "^2.0.13"
   }
 }

@@ -1,5 +1,43 @@
+<!--
+<div id="todo" layout="row">
+  <div flex="30" style="border: 1px solid black;">
+	<div id="panel" class="panelShapes"></div>
+  </div>
+
+  <div flex="70" style="border: 1px solid black;">
+    <div id="container" class="contenedorDnD"></div>
+  </div>
+</div>
+-->
+<div layout="row">
+  <div flex="20" style="border: 1px solid black;">
+    <md-input-container style="margin-right: 10px;">
+        <label>Font</label>
+        <md-select ng-model="vm.fontTest">
+          <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
+        </md-select>
+      </md-input-container>
+  </div>
+  <div flex="20" style="border: 1px solid black;">
+       <md-input-container style="margin-right: 10px;">
+        <label>Font size</label>
+        <md-select ng-model="vm.fontTest2">
+          <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
+        </md-select>
+      </md-input-container>
+  </div>
+  <div flex="20" style="border: 1px solid black;"></div>
+  <div flex="20" style="border: 1px solid black;"></div>
+  <div flex="20" style="border: 1px solid black;"></div>
+</div>
+
 <div id="todocanvas" layout="row">
   <div flex="30" style="border: 1px solid black;">
+
+    <md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
+
+    <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
+
 	<canvas id="panelcanvas" width="250" height="500"></canvas>
   </div>
 
