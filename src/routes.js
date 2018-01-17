@@ -44,6 +44,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/editdocument',
       component: 'editdocument',
       isPrivate: true
+    })
+    .state('listarprofesores', {
+      url: '/listarprofesores',
+      component: 'editdocument',
+      isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
 }
