@@ -76,6 +76,7 @@
 
   function dialogoController($mdDialog) {
     var vm = this;
+    vm.profesores = {};
 
     vm.hide = function () {
       $mdDialog.hide();
