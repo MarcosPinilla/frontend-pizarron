@@ -51,44 +51,57 @@
     };
   });
 
-  editdocumentCtrl.$inject = ['$mdDialog'];
-  dialogoController.$inject = ['$mdDialog'];
+  editdocumentCtrl.$inject = ['$mdDialog', 'ListarprofesoresService'];
 
-  function editdocumentCtrl($mdDialog) {
+  function editdocumentCtrl($mdDialog, ListarprofesoresService) {
     var vm = this;
+
+    vm.profesores = [];
+
     vm.customFullscreen = true;
 
-    vm.showAddColaborator = function(ev) {
+    ListarprofesoresService.query().$promise.then(function (data) {
+      vm.profesores = data;
+      console.log("NO VIMOH");
+      console.log(vm.profesores);
+    });
+
+    vm.mostrarColaborador = function(ev, profesor) {
       $mdDialog.show({
         controller: dialogoController,
         templateUrl: 'app/components/editdocument/agregarcolaborador.dialog.html',
         //  parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
+        locals: {
+          profesor: profesor,
+          ListarprofesoresService: ListarprofesoresService,
+        },
         fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
       }).then(function (answer) {
         vm.status = 'Documento:  ' + answer + '.';
       }, function () {
         vm.status = 'CANCELADO';
       });
+
+      function dialogoController($mdDialog, profesor ,ListarprofesoresService) {
+        var vm = this;
+        vm.profe = profesor;
+        console.log("Africa de toto");
+        console.log(vm.profe);
+      
+        vm.hide = function () {
+          $mdDialog.hide();
+        };
+
+        vm.cancel = function () {
+          $mdDialog.cancel();
+        };
+
+        vm.answer = function (answer) {
+          $mdDialog.hide(answer);
+        };
+      }
     };
   }
-
-  function dialogoController($mdDialog) {
-    var vm = this;
-    vm.profesores = {};
-
-    vm.hide = function () {
-      $mdDialog.hide();
-    };
-
-    vm.cancel = function () {
-      $mdDialog.cancel();
-    };
-
-    vm.answer = function (answer) {
-      $mdDialog.hide(answer);
-    };
-  }
-
 })();
