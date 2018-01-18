@@ -1,0 +1,40 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2><strong>Añadir profesor:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Nombres</label>
+		<input ng-model="vm.profesor.nombres_profesor" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Apellidos</label>
+		<input ng-model="vm.profesor.apellidos_profesor" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+		<label>Cargo</label>
+		<input ng-model="vm.profesor.cargo" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Profesión</label>
+		<input ng-model="vm.profesor.profesion" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Foto</label>
+		<input ng-model="vm.profesor.url_foto_profesor" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+      <label>Sexo</label>
+      <md-select ng-model="vm.profesor.id_sexo">
+        <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
+          {{ sexo.desc_sexo }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Comuna</label>
+      <md-select ng-model="vm.profesor.id_comuna">
+        <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
+          {{ comuna.nombre_comuna }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadirprofesor(vm.profesor)" md-theme="dark-green" aria-label="addprofe">añadir profesor</md-button></center>
+</div>

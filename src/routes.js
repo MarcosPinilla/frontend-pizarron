@@ -39,6 +39,36 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'editdocument',
       isPrivate: true
     })
+    .state('usuario', {
+      url: '/usuario',
+      component: 'usuario',
+      isPrivate: true
+    })
+    .state('establecimiento', {
+      url: '/establecimiento',
+      component: 'establecimiento',
+      isPrivate: true
+    })
+    .state('asignatura', {
+      url: '/asignatura',
+      component: 'asignatura',
+      isPrivate: true
+    })
+    .state('material', {
+      url: '/material',
+      component: 'material',
+      isPrivate: true
+    })
+    .state('elemento', {
+      url: '/elemento',
+      component: 'elemento',
+      isPrivate: true
+    })
+    .state('objetivomineduc', {
+      url: '/objetivomineduc',
+      component: 'objetivomineduc',
+      isPrivate: true
+    })
     .state('listarprofesores', {
       url: '/listarprofesores',
       component: 'editdocument',

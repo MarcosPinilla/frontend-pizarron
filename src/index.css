@@ -109,3 +109,13 @@ titular {
 .buttoncrudadd{
   float: right;
 }
+
+.modal-image{
+  width: 200px;
+}
+
+.modal-profesor{
+  padding: 400px;
+  margin: 400px;
+  width: 1000px;
+}

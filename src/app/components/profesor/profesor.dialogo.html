@@ -1,0 +1,11 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2><strong>Información del profesor:</strong></h2>
+	<center flex="100"><img alt="{{ vm.person.nombres_profesor }}" ng-src="{{ vm.person.url_foto_profesor }}" class="modal-image"/></center>
+	<p><strong>Nombres: </strong>{{ vm.person.nombres_profesor }}</p>
+	<p><strong>Apellidos: </strong>{{ vm.person.apellidos_profesor }}</p>
+	<p><strong>Sexo: </strong>{{ vm.person.sexo.desc_sexo }}</p>
+	<p><strong>Comuna: </strong>{{ vm.person.comuna.nombre_comuna }}</p>
+	<p><strong>Cargo: </strong>{{ vm.person.cargo }}</p>
+	<p><strong>Profesión: </strong>{{ vm.person.profesion }}</p>
+	<p><strong>Email: </strong>{{ vm.person.usuario.email }}</p>
+</div>
