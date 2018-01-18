@@ -1,0 +1,28 @@
+<div style="padding-left: 200px; padding-right: 200px;">
+	<h2><strong>Añadir usuario:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Email</label>
+		<input ng-model="vm.usuario.email" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Contraseña</label>
+		<input ng-model="vm.usuario.password" type="password" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+      <label>Rol</label>
+      <md-select ng-model="vm.usuario.id_rol">
+        <md-option ng-repeat="rol in vm.roles" value="{{ rol.id }}">
+          {{ rol.nombre_rol }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Contrato</label>
+      <md-select ng-model="vm.usuario.id_contrato">
+        <md-option ng-repeat="contrato in vm.contratos" value="{{ contrato.id }}">
+          {{ contrato.id }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadirusuario(vm.usuario)" md-theme="dark-green" aria-label="addprofe">añadir usuario</md-button></center>
+</div>

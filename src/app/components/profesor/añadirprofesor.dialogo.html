@@ -36,5 +36,13 @@
         </md-option>
       </md-select>
     </md-input-container>
+    <md-input-container class="md-block" >
+      <label>Usuario</label>
+      <md-select ng-model="vm.profesor.id_usuario">
+        <md-option ng-repeat="usuario in vm.usuarios" value="{{ usuario.id }}">
+          {{ usuario.email }}
+        </md-option>
+      </md-select>
+    </md-input-container>
 	<center><md-button class="md-raised md-primary" ng-click="vm.anadirprofesor(vm.profesor)" md-theme="dark-green" aria-label="addprofe">añadir profesor</md-button></center>
 </div>

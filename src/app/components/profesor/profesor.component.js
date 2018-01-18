@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  profesorCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService']
+  profesorCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService', 'UsuarioService', '$state']
 
-  function profesorCtrl($mdDialog, ProfesorService, SexoService, ComunaService) {
+  function profesorCtrl($mdDialog, ProfesorService, SexoService, ComunaService, UsuarioService, $state) {
     var vm = this;
 
     vm.people = {};
@@ -20,6 +20,13 @@
       vm.people = data;
       console.log(vm.people);
     });
+
+    vm.verprofes = function () {
+      ProfesorService.query().$promise.then(function (data) {
+      vm.people = data;
+      console.log(vm.people);
+    });
+    }
 
     vm.anadirprofesor = function (person, event) {
       $mdDialog.show({
@@ -36,6 +43,11 @@
       })
       .then(function (answer) {
         vm.status = 'Documento:  ' + answer + '.';
+        ProfesorService.query().$promise.then(function (data) {
+          vm.people = data;
+          console.log(vm.people);
+        });
+
       }, function () {
         vm.status = 'CANCELADO';
       });
@@ -45,6 +57,7 @@
       ProfesorService.delete({id: id});
       ProfesorService.query().$promise.then(function (data) {
         vm.people = data;
+        console.log(vm.people);
       });
     };
 
@@ -63,6 +76,10 @@
       })
       .then(function (answer) {
         vm.status = 'Documento:  ' + answer + '.';
+        ProfesorService.query().$promise.then(function (data) {
+          vm.people = data;
+          console.log(vm.people);
+        });
       }, function () {
         vm.status = 'CANCELADO';
       });
@@ -89,7 +106,7 @@
       });
     };
   }
-  function dialogoController($mdDialog, person, ProfesorService, $state, SexoService, ComunaService) {
+  function dialogoController($mdDialog, person, ProfesorService, $state, SexoService, ComunaService, UsuarioService) {
         var vm = this;
         vm.person = person;
         vm.upperson = {
@@ -97,11 +114,14 @@
           id_comuna: 1,
           id_sexo: 1
         };
-        vm.profesor= {
-          id_usuario: 1
-        };
+        vm.profesor= {};
         vm.sexos ={};
         vm.comunas={};
+        vm.usuarios={};
+
+        UsuarioService.query().$promise.then(function (data) {
+          vm.usuarios = data;
+        });
 
         SexoService.query().$promise.then(function (data) {
         vm.sexos = data;
@@ -114,12 +134,14 @@
         vm.anadirprofesor = function (profesor) {
           ProfesorService.save(profesor);
           $state.go('profesor');
+          vm.hide();
         };
 
 
         vm.actualizarprofesor = function (profesor) {
           ProfesorService.update({id: vm.person.id}, profesor, function () {
             $state.go('profesor');
+            vm.hide();
           }, function () {});
         };
 
