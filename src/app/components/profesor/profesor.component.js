@@ -91,7 +91,7 @@
   }
   function dialogoController($mdDialog, person, ProfesorService, $state, SexoService, ComunaService) {
         var vm = this;
-        //vm.person = person;
+        vm.person = person;
         vm.upperson = {
           id_usuario: 1,
           id_comuna: 1,
