@@ -69,9 +69,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'objetivomineduc',
       isPrivate: true
     })
-    .state('listarprofesores', {
-      url: '/listarprofesores',
-      component: 'editdocument',
+    .state('listarusuarios', {
+      url: '/listarusuarios',
+      component: 'listarusuarios',
       isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');

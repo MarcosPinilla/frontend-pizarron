@@ -51,57 +51,79 @@
     };
   });
 
-  editdocumentCtrl.$inject = ['$mdDialog', 'ListarprofesoresService'];
+  editdocumentCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ListarusuariosService'];
 
-  function editdocumentCtrl($mdDialog, ListarprofesoresService) {
+  function editdocumentCtrl($mdDialog, ProfesorService, ListarusuariosService) {
     var vm = this;
 
-    vm.profesores = [];
-
+    vm.profesores = {};
+    vm.usuarios = {};
     vm.customFullscreen = true;
 
-    ListarprofesoresService.query().$promise.then(function (data) {
+    /*ProfesorService.query().$promise.then(function (data) {
       vm.profesores = data;
-      console.log("NO VIMOH");
       console.log(vm.profesores);
+    });*/
+
+    ListarusuariosService.query().$promise.then(function (data) {
+      vm.usuarios = data;
     });
 
-    vm.mostrarColaborador = function(ev, profesor) {
+    vm.mostrarColaborador = function(ev, usuarios) {
       $mdDialog.show({
         controller: dialogoController,
+        controllerAs: 'vm',
         templateUrl: 'app/components/editdocument/agregarcolaborador.dialog.html',
-        //  parent: angular.element(document.body),
+        parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
         locals: {
-          profesor: profesor,
-          ListarprofesoresService: ListarprofesoresService,
+          usuarios: usuarios
         },
-        fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
-      }).then(function (answer) {
+      })
+      .then(function (answer) {
         vm.status = 'Documento:  ' + answer + '.';
       }, function () {
         vm.status = 'CANCELADO';
       });
+    };
+  }
 
-      function dialogoController($mdDialog, profesor ,ListarprofesoresService) {
-        var vm = this;
-        vm.profe = profesor;
-        console.log("Africa de toto");
-        console.log(vm.profe);
-      
-        vm.hide = function () {
-          $mdDialog.hide();
-        };
+  function dialogoController($timeout, $q, $mdDialog, usuarios, ListarusuariosService, $state) {
+    var vm = this;
 
-        vm.cancel = function () {
-          $mdDialog.cancel();
-        };
+    vm.usuarios = usuarios;
+    vm.querySearch   = querySearch;
 
-        vm.answer = function (answer) {
-          $mdDialog.hide(answer);
-        };
-      }
+    function querySearch (query) {
+      //console.log(vm.usuarios);
+      //console.log(query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios);
+      //console.log(query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios);
+      return query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios;
+    }
+    
+    function createFilterFor(query) {
+
+      var lowercaseQuery = query;
+      console.log(lowercaseQuery);
+
+      return function filterFn(usuario) {
+        console.log(usuario.email);
+        return (usuario.email.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
     };
   }
 })();
