@@ -1,0 +1,25 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2><strong>Editar información del establecimiento:</strong></h2>
+	<md-divider></md-divider>
+	<md-input-container class="md-block">
+		<label>Nombre</label>
+		<input ng-model="vm.upestablecimiento.nombre_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Descripción</label>
+		<input ng-model="vm.upestablecimiento.desc_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Foto</label>
+		<input ng-model="vm.upestablecimiento.url_foto_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+      <label>Tipo Establecimiento</label>
+      <md-select ng-model="vm.upestablecimiento.id_tipo_establecimiento">
+        <md-option ng-repeat="tipo in vm.tipoestablecimientos" value="{{ tipo.id }}">
+          {{ tipo.nombre_tipo_establecimiento }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarestablecimiento(vm.upestablecimiento)" md-theme="dark-green" aria-label="addprofe">actualizar establecimiento</md-button></center>
+</div>

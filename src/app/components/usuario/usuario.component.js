@@ -56,6 +56,42 @@
       })
       .then(function (answer) {
         vm.status = 'Documento:  ' + answer + '.';
+        UsuarioService.query().$promise.then(function (data) {
+          vm.usuarios = data;
+          console.log(vm.usuarios);
+        });
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+
+    vm.eliminarusuario = function (id) {
+      UsuarioService.delete({id: id});
+      UsuarioService.query().$promise.then(function (data) {
+        vm.usuarios = data;
+        console.log(vm.usuarios);
+      });
+    };
+
+    vm.actualizarusuario = function (person, event) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/usuario/actualizarusuario.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: event,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          person : person
+        }
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+        UsuarioService.query().$promise.then(function (data) {
+          vm.usuarios = data;
+          console.log(vm.usuarios);
+        });
       }, function () {
         vm.status = 'CANCELADO';
       });
@@ -76,6 +112,8 @@
         vm.roles ={};
         vm.contratos={};
 
+        vm.upusuario={};
+
         vm.usuario={};
 
         RolService.query().$promise.then(function (data) {
@@ -89,13 +127,15 @@
 
         vm.anadirusuario = function (usuario) {
           UsuarioService.save(usuario);
-          $state.go('usuario');
+          vm.hide();
         };
 
 
-        vm.actualizarprofesor = function (profesor) {
-          ProfesorService.update({id: vm.person.id}, profesor, function () {
-            $state.go('profesor');
+        vm.actualizarusuario = function (usuario) {
+          console.log('entre al actualizarusuario');
+          UsuarioService.update({id: vm.person.id}, usuario, function () {
+            vm.hide();
+            console.log('se debio actualizar')
           }, function () {});
         };
 
