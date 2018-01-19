@@ -1,0 +1,29 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2><strong>Editar información del usuario:</strong></h2>
+	<md-divider></md-divider>
+	<md-input-container class="md-block">
+		<label>Email</label>
+		<input ng-model="vm.upusuario.email" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Password</label>
+		<input ng-model="vm.upusuario.password" type="Password" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+      <label>Rol</label>
+      <md-select ng-model="vm.upusuario.id_rol">
+        <md-option ng-repeat="rol in vm.roles" value="{{ rol.id }}">
+          {{ rol.nombre_rol }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label>Contrato</label>
+      <md-select ng-model="vm.upusuario.id_contrato">
+        <md-option ng-repeat="contrato in vm.contratos" value="{{ contrato.id }}">
+          {{ contrato.id }}
+        </md-option>
+      </md-select>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarusuario(vm.upusuario)" md-theme="dark-green" aria-label="addusuario">actualizar usuario</md-button></center>
+</div>

@@ -13,8 +13,8 @@
       <md-list-item ng-repeat="usuario in vm.usuarios" ng-click="vm.goToPerson(usuario, $event)" class="noright">
         <p>{{ usuario.email }} </p>
         <p class=" md-secondary">{{ usuario.rol.nombre_rol }}</p>
-        <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarprofesor(person)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
-        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarprofesor(person.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
+        <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarusuario(usuario)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
+        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarusuario(usuario.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
       
         <!--<md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
         <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
