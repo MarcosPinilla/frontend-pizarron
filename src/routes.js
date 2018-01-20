@@ -34,6 +34,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'profesor',
       isPrivate: true
     })
+    .state('restaurarProfesor', {
+      url: '/restaurarprofesor',
+      component: 'restaurarProfesor',
+      isPrivate: true
+    })
     .state('editdocument', {
       url: '/editdocument',
       component: 'editdocument',
