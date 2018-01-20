@@ -1,13 +1,26 @@
 <md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 100px;padding-right: 100px ">
-    <h3>Agregar Colaborador {{profesor}}</h3>
+    <h3>Agregar Colaborador {{vm.usuarios[0].email}}</h3>
     <form ng-cloack>
-	    <md-input-container class="md-block" flex="100" ng->
-	    	<label>Correo del colaborador {{vm.profesor}}</label>
-	    	<input type="text" ng-model="vm.material.nombre">
-	    </md-input-container>
+	    <md-autocomplete
+            md-selected-item="vm.selectedItem"
+            md-search-text="vm.searchText"
+            md-items="item in vm.querySearch(vm.searchText)"
+            md-item-text="item.display"
+            md-min-length="0"
+            placeholder="Correo del Colaborador?"
+            md-autofocus>
+          <md-item-template>
+          	<span>{{item.email}}</span>
+          </md-item-template>
+          <md-not-found>
+          	<!-- revisar md-item-text -->
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.email}}</span>
+          </md-not-found>
+        </md-autocomplete>
 	    <br>
-	    <center><md-button ui-sref="editdocument" class="md-raised md-warn login-button">Agregar Colaborador {{vm.profesor}}</md-button></center>
+	    <center><md-button ui-sref="editdocument" class="md-raised md-warn login-button">Agregar Colaborador</md-button></center>
 	    <br>
     </form>  
 
 </md-content>
+
