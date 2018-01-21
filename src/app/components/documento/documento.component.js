@@ -22,6 +22,9 @@
 	    vm.fontTest2=0;
 	    vm.esTexto=true;
 	    vm.mensaje="nada";
+	    var _clipboard = null;
+	    var ctrlDown=false;
+	    vm.esGrupo=false;
 
 	    vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
 	    vm.fontsizes=[];
@@ -98,7 +101,7 @@
 			canvas.add(texto).setActiveObject(texto);
 			console.log(texto);
 			//canvas.getActiveObject().set("fontFamily", 'Lobster');
-			//canvas.renderAll();
+			canvas.renderAll();
 		}	
 
 		vm.eliminar = function() {
@@ -111,7 +114,9 @@
 		        }
 		        canvas.discardActiveGroup();
 		        canvas.renderAll();
-		    } else canvas.getActiveObject().remove();
+		    } else if(canvas.getActiveObject()){
+		    	canvas.getActiveObject().remove();
+		    }
 			    
 			}
 
@@ -123,8 +128,80 @@
    				 var key = e.which || e.keyCode;
 				 if(key===46){
 				 	vm.eliminar();
+				 }else if(key===17){
+				 	ctrlDown=true;
+				 
+			    }else if(ctrlDown && key === 67 ){
+			    	vm.copy();
+			    }else if(ctrlDown && key === 86 ){
+			    	vm.paste();
 			    }
-			}, false);
+			}, false)
+
+			canvasWrapper.addEventListener("keyup",function(e){
+				 e = e || window.event;
+   				 var key = e.which || e.keyCode;
+				if(key===17){
+				 	ctrlDown=false;
+			    }
+			},false)
+
+
+			vm.copy=function() {
+			
+				var activeGroup = canvas.getActiveGroup();
+			    if (activeGroup) {
+			        activeGroup.clone(function(cloned) {
+					_clipboard = cloned;
+					});
+					vm.esGrupo=true;
+			    } else if(canvas.getActiveObject()){
+			    	canvas.getActiveObject().clone(function(cloned) {
+					_clipboard = cloned;
+				});
+			    	vm.esGrupo=false;
+			    }
+			    
+
+				
+			}
+
+			vm.paste=function() {
+				// clone again, so you can do multiple copies.
+				if(vm.esGrupo){
+					canvas.discardActiveGroup();
+				}else{
+					canvas.discardActiveObject();
+				}
+				_clipboard.clone(function(clonedObj) {
+					canvas.discardActiveObject();
+					clonedObj.set({
+						left: clonedObj.left + 10,
+						top: clonedObj.top + 10,
+						evented: true,
+					});
+					console.log(vm.esGrupo)
+					if (vm.esGrupo) {
+						//clonedObj.canvas = canvas;
+						 var arrayObj = clonedObj.getObjects();
+					     for (let i in arrayObj) {
+					     	canvas.add(arrayObj[i]);
+				         }
+						 //clonedObj.setCoords();
+						 _clipboard.top += 10;
+						_clipboard.left += 10;
+						canvas.setActiveGroup(clonedObj);
+						canvas.renderAll();
+					} else {
+						canvas.add(clonedObj);
+						_clipboard.top += 10;
+						_clipboard.left += 10;
+						canvas.setActiveObject(clonedObj);
+						canvas.renderAll();
+					}
+					
+				});
+			}
 			
 		}
 
