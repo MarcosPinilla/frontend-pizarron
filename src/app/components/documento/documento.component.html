@@ -11,18 +11,24 @@
 -->
 <div layout="row">
   <div flex="20" style="border: 1px solid black;">
+    {{vm.esTexto}}  <md-checkbox ng-click="vm.cambiar()"></md-checkbox>
     <md-input-container style="margin-right: 10px;">
         <label>Font</label>
-        <md-select ng-model="vm.fontTest">
+        <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
+          
           <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
+          
         </md-select>
       </md-input-container>
+    
   </div>
   <div flex="20" style="border: 1px solid black;">
        <md-input-container style="margin-right: 10px;">
         <label>Font size</label>
-        <md-select ng-model="vm.fontTest2">
+        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto">
+          
           <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
+          
         </md-select>
       </md-input-container>
   </div>
