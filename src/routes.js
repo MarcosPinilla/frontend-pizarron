@@ -78,6 +78,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/listarusuarios',
       component: 'listarusuarios',
       isPrivate: true
+    })
+    .state('listarasignaturas', {
+      url: '/listarasignaturas',
+      component: 'listarasignaturas',
+      isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
 }
