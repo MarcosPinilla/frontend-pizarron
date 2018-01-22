@@ -16,7 +16,7 @@
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
 	    <label>Asignatura</label>
-	     <md-select required="true" ng-model="vm.material.asignatura">
+	     <md-select required="true" ng-model="vm.material.id_asignatura">
 	        <md-option ng-repeat="asignatura in vm.asignaturas" ng-value="asignatura.id">
 	        	{{asignatura.nombre_asignatura}}
 	    	</md-option>
@@ -24,26 +24,26 @@
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
 	    <label>Nivel</label>
-	    <md-select required="true" ng-model="vm.material.nivel">
-	        <md-option><em>Sin Nivel</em></md-option>
-	       	<!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
-	        {{vm.asignatura.nombre}}
-	        </md-option>-->
-	        <md-option>Kinder</md-option>
-	        <md-option>1° Básico</md-option>
-	   		<md-option>2° Básico</md-option>
+	    <md-select required="true" ng-model="vm.material.id_nivel">
+	        <md-option ng-repeat="nivel in vm.niveles" ng-value="nivel.id">
+	        	{{nivel.nombre_nivel}}
+	        </md-option>
 	    </md-select>
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
 	    <label>Tipo de material</label>
-	    <md-select required="true" ng-model="vm.material.tipo_material">
-	       	<md-option><em>Ninguna</em></md-option>
-	        <!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
-	        {{vm.asignatura.nombre}}
-	        </md-option>-->
-	        <md-option>Taller</md-option>
-	        <md-option>Prueba</md-option>
-	    	<md-option>Otro</md-option>
+	    <md-select required="true" ng-model="vm.material.id_tipo_material">
+	    	<md-option ng-repeat="tipo_material in vm.tipo_materiales" ng-value="tipo_material.id">
+	    		{{tipo_material.nombre_tipo_material}}
+	    	</md-option>
+	    </md-select>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Nivel de acceso</label>
+	    <md-select required="true" ng-model="vm.material.id_visibilidad">
+	    	<md-option required="true" ng-value="1">Publico</md-option>
+	    	<md-option required="true" ng-value="2">Seguidores y Colaboradores</md-option>
+	    	<md-option required="true" ng-value="3">Solo Colaboradores</md-option>
 	    </md-select>
 	</md-input-container>
 	<br>

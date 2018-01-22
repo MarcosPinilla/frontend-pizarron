@@ -9,12 +9,14 @@
     controllerAs: 'vm'
   });
 
-  dashboardCtrl.$inject = ['$mdDialog', 'ListarasignaturasService'];
+  dashboardCtrl.$inject = ['$mdDialog', 'ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService', 'MaterialService'];
 
-  function dashboardCtrl($mdDialog, ListarasignaturasService) {
+  function dashboardCtrl($mdDialog, ListarasignaturasService, ListarnivelesService, ListartipomaterialService) {
     var vm = this;
     vm.usuario = localStorage.getItem("user");
     vm.asignaturas = {};
+    vm.niveles = {};
+    vm.tipo_material = {}
 
     vm.customFullscreen = true;
 
@@ -23,7 +25,14 @@
       vm.asignaturas = data;
     });
 
-    console.log("Tortinos, Tortinos how did you know?");
+    ListarnivelesService.query().$promise.then(function (data) {
+      vm.niveles = data;
+    });
+
+    ListartipomaterialService.query().$promise.then(function (data) {
+      vm.tipo_material = data;
+    });
+
     //console.log(vm.asignaturas);
 
     vm.showPrompt = function (ev) {
@@ -44,7 +53,7 @@
       });
     };
 
-    vm.showNewDocument = function (ev, usuario, asignaturas) {
+    vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
@@ -55,7 +64,9 @@
         fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
         locals: {
           usuario: usuario,
-          asignaturas: asignaturas
+          asignaturas: asignaturas,
+          niveles: niveles,
+          tipomaterial: tipomaterial
         },
       })
       .then(function (answer) {
@@ -82,30 +93,28 @@
     };
   }
 
-  function dialogoController($mdDialog, usuario, asignaturas, $state) {
+  function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService) {
 
-    //Asignatura
-    //Nivel
-    //Tipo de material
     var vm = this;
     vm.usuario = usuario;
     vm.asignaturas = asignaturas;
-    vm.niveles = {};
-    vm.tipo_materiales = {};
+    vm.niveles = niveles;
+    vm.tipo_materiales = tipomaterial;
 
     vm.material = {};
 
-    console.log(vm.usuario);
+    /*console.log(vm.usuario);
     console.log(vm.asignaturas);
+    console.log(vm.niveles);
+    console.log(vm.tipo_materiales);*/
 
     vm.crearmaterial = function (material) {
-      console.log("1337");
-      //console.log(material);
-      if(material.titulo_material != null && material.asignatura != null && material.nivel != null && material.tipo_material != null) {
-        console.log("I TURN MYSELFT IN A TORTINO MORTY! I'M TORTINO RICK!");
+      if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
         console.log(material);
+        MaterialService.save(material)
+        $mdDialog.hide();
+        $state.go('editdocument');
       }
-      
     };     
 
     vm.hide = function () {
