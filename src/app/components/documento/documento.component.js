@@ -22,6 +22,7 @@
 	    vm.fontTest2=0;
 	    vm.esTexto=true;
 	    vm.mensaje="nada";
+	    vm.cortar = false;
 	    var _clipboard = null;
 	    var ctrlDown=false;
 	    vm.esGrupo=false;
@@ -124,27 +125,18 @@
 			var canvasWrapper = document.getElementById('todocanvas');
 			canvasWrapper.tabIndex = 1000;
 			canvasWrapper.addEventListener("keydown", function(e){
-				 e = e || window.event;
-   				 var key = e.which || e.keyCode;
-				 if(key===46){
+				e = e || window.event;
+				 var key = e.which || e.keyCode;
+				if(key===46){
 				 	vm.eliminar();
-				 }else if(key===17){
-				 	ctrlDown=true;
-				 
-			    }else if(ctrlDown && key === 67 ){
+				} else if(e.ctrlKey && key === 67) {
 			    	vm.copy();
-			    }else if(ctrlDown && key === 86 ){
+			    } else if (e.ctrlKey && key === 86) {
 			    	vm.paste();
-			    }
-			}, false)
-
-			canvasWrapper.addEventListener("keyup",function(e){
-				 e = e || window.event;
-   				 var key = e.which || e.keyCode;
-				if(key===17){
-				 	ctrlDown=false;
-			    }
-			},false)
+			     } else if (e.ctrlKey && key === 88) {
+			    	vm.cut();
+}
+			}, false);
 
 
 			vm.copy=function() {
@@ -161,6 +153,28 @@
 				});
 			    	vm.esGrupo=false;
 			    }
+			    vm.cortar = false;
+			}
+
+			vm.cut = function() {
+			
+				var activeGroup = canvas.getActiveGroup();
+			    if (activeGroup) {
+			        activeGroup.clone(function(cloned) {
+						_clipboard = cloned;
+					});
+					activeGroup.forEachObject(function(o){ canvas.remove(o) });
+					canvas.discardActiveGroup().renderAll();
+					vm.esGrupo=true;
+			    } else if(canvas.getActiveObject()){
+			    	canvas.getActiveObject().clone(function(cloned) {
+						_clipboard = cloned;
+						canvas.getActiveObject().remove();
+					});
+			    	vm.esGrupo=false;
+			    	
+				}
+				vm.cortar = true;
 			    
 
 				
@@ -201,7 +215,74 @@
 					}
 					
 				});
+
+				if(vm.cortar) {
+					_clipboard = null;
+				}
 			}
+
+
+
+		var json = panelcanvas.toJSON();
+    	console.log(json);
+    	var json = canvas.toJSON();
+    	console.log(json);
+
+    	//Subir imágen desde computador
+		document.getElementById('archivo').addEventListener("change", function (e) {
+		  var file = e.target.files[0];
+		  var reader = new FileReader();
+		  reader.onload = function (f) {
+		    var data = f.target.result;                    
+		    fabric.Image.fromURL(data, function (img) {
+		      //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
+		      canvas.add(img).renderAll();
+		      var a = canvas.setActiveObject(img);
+		      var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+		    });
+		  };
+		  reader.readAsDataURL(file);
+		});
+
+
+	    //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
+	    vm.subir = function() {
+	    	var URL = document.getElementById("url").value;
+	    	console.log(URL);
+	    	fabric.Image.fromURL(URL, function(imagen) {
+				canvas.add(imagen).renderAll();
+				var a = canvas.setActiveObject(imagen);
+				var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+			})
+		} 
+
+		/* DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
+		vm.subir = function() {
+			var URL = document.getElementById("url").value;
+			fabric.util.loadImage(URL, function(img) {
+			    var object = new fabric.Image(img);
+			    canvas.add(object);
+			    canvas.renderAll();
+			    canvas.setActiveObject(object);    
+			}, null, {crossOrigin: 'Anonymous'});
+		}*/
+
+
+		//Lógica para exportar a pdf, utilizando el elemento de canvas
+		vm.exportar = function () {
+			html2canvas(document.getElementById('todocanvas'), {
+		        onrendered: function (canvas) {
+		            var data = canvas.toDataURL();
+		            var docDefinition = {
+		                content: [{
+		                    image: data,
+		                    width: 500,
+		                }]
+		            };
+		            pdfMake.createPdf(docDefinition).download("test.pdf");
+		        }
+			});  
+		};
 			
 		}
 

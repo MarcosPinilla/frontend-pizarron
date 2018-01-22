@@ -52,6 +52,17 @@
   </div>
 </div>
 
-<div flex="50">
-  <center><button ng-click="vm.exportar()">Exportar a pdf</button></center>
+<div layout="row">
+  <div flex="50">
+    <button ng-click="vm.exportar()">Exportar a pdf</button>
+  </div>
+  <div flex="50">
+    <input type="file" id="archivo"><br/>
+  </div>  
+</div>
+<div layout="row">
+  <div flex="50">
+    <input type="text" id="url"><br/>
+    <button ng-click="vm.subir()">Subir desde URL</button>
+  </div>  
 </div>
