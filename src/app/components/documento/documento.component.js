@@ -80,21 +80,7 @@
 		//Layer del panel
 		var layerPanel = new Konva.Layer();
 		
-    	//Lógica para exportar a pdf, utilizando el elemento de canvas
-    	vm.exportar = function () {
-	    	html2canvas(document.getElementById('todocanvas'), {
-	            onrendered: function (canvas) {
-	                var data = canvas.toDataURL();
-	                var docDefinition = {
-	                    content: [{
-	                        image: data,
-	                        width: 500,
-	                    }]
-	                };
-	                pdfMake.createPdf(docDefinition).download("test.pdf");
-	            }
-        	});  
-	    };
+    	
 		*/
 	    //PRUEBAS CON FABRICJS
 
@@ -118,9 +104,6 @@
             hasControls: false
         });
 
-	    for(var i=0;i<100;i++){
-	    	vm.fontsizes.push(i);
-	    }
         //Instancia de un objeto para escribir
         var textbox = new fabric.Textbox('Escribe aquí', {
 		  left: 50,
@@ -129,6 +112,14 @@
 		  fontSize: 20,
           hasControls: false
 		});
+
+        panelcanvas.add(cuadrado);
+        panelcanvas.add(textbox);
+
+	    for(var i=0;i<100;i++){
+	    	vm.fontsizes.push(i);
+	    }
+        
 
 	    vm.usarFont = function(font) {
 	     //alert(font);
@@ -143,16 +134,24 @@
 		      alert('font loading failed ' + font);
 			});
 		}
-        panelcanvas.add(cuadrado);
-        panelcanvas.add(textbox);
-
+        
        	cuadrado.on('selected', function() {
 			var rect = new fabric.Rect({
-		 vm.usarFontSize = function(fontsize) {
+				top : 100,
+	            left : 100,
+	            width : 60,
+	            height : 70,
+	            fill : 'blue'
+	        	});
+        	canvas.add(rect).setActiveObject(rect);
+		});
+
+		vm.usarFontSize = function(fontsize) {
 	    	canvas.getActiveObject().set("fontSize", fontsize);
  			canvas.renderAll();  
-		}
-		    vm.generarFigura=function() {
+		} 
+
+	    vm.generarFigura=function() {
 			console.log("Hola");
 				var rect = new fabric.Rect({
 	            top : 100,
@@ -187,19 +186,33 @@
 		        canvas.renderAll();
 		    } else canvas.getActiveObject().remove();
 			    
-			}
+		}
 
 
-			var canvasWrapper = document.getElementById('todocanvas');
+		var canvasWrapper = document.getElementById('todocanvas');
 			canvasWrapper.tabIndex = 1000;
 			canvasWrapper.addEventListener("keydown", function(e){
 				 e = e || window.event;
    				 var key = e.which || e.keyCode;
 				 if(key===46){
 				 	vm.eliminar();
+			    } else if(e.ctrlKey && key === 67) {
+			    	vm.copiar();
+			    } else if (e.ctrlKey && key === 86) {
+			    	vm.pegar();
+			    } else if (e.ctrlKey && key === 88) {
+			    	vm.cortar();
 			    }
 			}, false);
-		}	
+		
+
+		textbox.on('selected', function() {
+			var texto = new fabric.Textbox('Escribe aquí', {
+			  left: 50,
+			  top: 50,
+			  width: 150,
+			  fontSize: 20
+			});
 			canvas.add(texto).setActiveObject(texto);
 		});
 
@@ -247,5 +260,325 @@
 			    canvas.setActiveObject(object);    
 			}, null, {crossOrigin: 'Anonymous'});
 		}*/
-	}	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//Lógica para copiar, pegar y cortar
+	vm.copiar = function() {
+		//Obtiene los objetos activos en ese momento y los almacena
+		var grupo = canvas.getActiveGroup();
+		var objeto = canvas.getActiveObject();
+
+		if (grupo) {
+			grupo.clone(function(copiado) {
+				vm.clipboard = copiado;
+			});
+		} else if (objeto) {
+			objeto.clone(function(copiado) {
+				vm.clipboard = copiado;
+			});	
+		}
+		
+	}
+
+	///FALTA HACER QUE SE DESUNAN
+	vm.pegar = function() {
+		// clone again, so you can do multiple copies.
+		vm.clipboard.clone(function(copiadoObj) {
+			canvas.discardActiveObject();
+			copiadoObj.set({
+				left: copiadoObj.left + 10,
+				top: copiadoObj.top + 10,
+				evented: true,
+			});
+			if (copiadoObj.type === 'activeSelection') {
+				// active selection needs a reference to the canvas.
+				copiadoObj.canvas = canvas;
+				copiadoObj.forEachObject(function(obj) {
+					canvas.add(obj);
+				});
+				// this should solve the unselectability
+				copiadoObj.setCoords();
+			} else {
+				canvas.add(copiadoObj);
+			}
+			vm.clipboard.top += 10;
+			vm.clipboard.left += 10;
+			canvas.setActiveObject(copiadoObj);
+			/*
+			if(copiadoObj.length > 1) {
+				var grupo = canvas.getActiveGroup();
+				grupo.destroy();
+			} */
+
+			canvas.renderAll();
+		});
+	}
+ 	
+	//MUCHOS DETALLES QUE ARREGLAR AQUI 	
+	vm.cortar = function() {
+		//Obtiene los objetos activos en ese momento y los almacena
+		var grupo = canvas.getActiveGroup();
+		var objeto = canvas.getActiveObject();
+
+		if (grupo) {
+			grupo.clone(function(cortar) {
+				vm.clipboard = cortar;
+			});
+			grupo.forEachObject(function(o){ canvas.remove(o) });
+      		canvas.discardActiveGroup().renderAll();
+		} else if (objeto) {
+			objeto.clone(function(cortar) {
+				vm.clipboard = cortar;	
+			});
+			objeto.remove();
+		}		
+	}
+
+	//Lógica para exportar a pdf, utilizando el elemento de canvas
+	vm.exportar = function () {
+    	html2canvas(document.getElementById('todocanvas'), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500,
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("test.pdf");
+            }
+    	});  
+    };
+
+
+
+	}
+
 })();
