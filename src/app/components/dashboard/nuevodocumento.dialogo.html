@@ -1,41 +1,55 @@
-<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 100px;padding-right: 100px ">
-    <h3>Creando un nuevo documento</h3>
-    <form ng-submit="vm.crearmaterial(vm.material)" >
-	    <md-input-container class="md-block" flex="100">
-	    	<label>Nombre del Nuevo Documento</label>
-	    	<input type="text" ng-model="vm.material.nombre">
-	    </md-input-container>
-	    <md-input-container class="md-block" flex="100">
-	    	<label>Descripción del Documento</label>
-	    	<input type="text" ng-model="vm.material.descripcion">
-	    </md-input-container>
-	    <md-input-container class="md-block" flex="100">
-	      	<label>Asignatura</label>
-	      	<md-select ng-model="vm.asignatura.nombre">
-	            <md-option><em>Ninguna</em></md-option>
-	            <!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
-	              {{vm.asignatura.nombre}}
-	            </md-option>-->
-	            <md-option>Lenguaje</md-option>
-	            <md-option>Matematica</md-option>
-	    		<md-option>Historia</md-option>
-	      	</md-select>
-	    </md-input-container>
-	    <md-input-container class="md-block" flex="100">
-	      	<label>Nivel</label>
-	      	<md-select ng-model="vm.nivel.nombre">
-	            <md-option><em>Sin Nivel</em></md-option>
-	            <!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
-	              {{vm.asignatura.nombre}}
-	            </md-option>-->
-	            <md-option>Kinder</md-option>
-	            <md-option>1° Básico</md-option>
-	    		<md-option>2° Básico</md-option>
-	      	</md-select>
-	    </md-input-container>
-	    <br>
-	    <center><md-button ui-sref="editdocument" class="md-raised md-warn login-button">Crear Documento</md-button></center>
-	    <br>
-    </form>  
-
+<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 65px;padding-right: 65px ">
+	<form>
+	<md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1><strong>Nuevo Documento</strong></h1>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <br>
+	<md-input-container class="md-block" flex="100">
+	    <label>Titulo del Documento</label>
+	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.material.titulo_material">
+	    <div ng-messages="form.titulo.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Asignatura</label>
+	     <md-select required="true" ng-model="vm.material.asignatura">
+	        <md-option ng-repeat="asignatura in vm.asignaturas" ng-value="asignatura.id">
+	        	{{asignatura.nombre_asignatura}}
+	    	</md-option>
+	    </md-select>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Nivel</label>
+	    <md-select required="true" ng-model="vm.material.nivel">
+	        <md-option><em>Sin Nivel</em></md-option>
+	       	<!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
+	        {{vm.asignatura.nombre}}
+	        </md-option>-->
+	        <md-option>Kinder</md-option>
+	        <md-option>1° Básico</md-option>
+	   		<md-option>2° Básico</md-option>
+	    </md-select>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Tipo de material</label>
+	    <md-select required="true" ng-model="vm.material.tipo_material">
+	       	<md-option><em>Ninguna</em></md-option>
+	        <!--<md-option ng-repeat="asignatura in asignatura" ng-value="vm.asignatura.nombre" ng-disabled="$index === 1">
+	        {{vm.asignatura.nombre}}
+	        </md-option>-->
+	        <md-option>Taller</md-option>
+	        <md-option>Prueba</md-option>
+	    	<md-option>Otro</md-option>
+	    </md-select>
+	</md-input-container>
+	<br>
+	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.crearmaterial(vm.material)">Crear Documento</md-button></center>
+	<!-- ng-click="vm.crearmaterial(vm.material)" -->
+	<!--ui-sref="editdocument" -->
+	<br>
+	</form>
 </md-content>

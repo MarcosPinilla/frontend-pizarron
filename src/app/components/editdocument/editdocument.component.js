@@ -59,12 +59,7 @@
     vm.profesores = {};
     vm.usuarios = {};
     vm.customFullscreen = true;
-
-    /*ProfesorService.query().$promise.then(function (data) {
-      vm.profesores = data;
-      console.log(vm.profesores);
-    });*/
-
+    
     ListarusuariosService.query().$promise.then(function (data) {
       vm.usuarios = data;
     });
