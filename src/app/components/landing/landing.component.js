@@ -11,7 +11,7 @@
 
   landingCtrl.$inject = ['$location'];
 
-  function landingCtrl($location) {
+  function landingCtrl ($location) {
     var vm = this;
     vm.banner = 'app/resources/img/banner1.jpg';
     vm.documento = 'app/resources/img/documento_mockup.jpg';
@@ -19,6 +19,7 @@
     vm.favoritos = 'app/resources/img/favoritos_mockup.png';
     vm.perfil = 'app/resources/img/perfil_mockup.png';
     vm.isLanding = false;
+    
     if ($location.path() === '/home') {
       vm.isLanding = true;
     }

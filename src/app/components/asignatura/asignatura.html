@@ -6,11 +6,11 @@
     </center>
     <md-divider></md-divider>
     <md-content layout-padding layout-wrap>
-        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirprofesor()" md-theme="dark-green" aria-label="addprofe">añadir asignatura</md-button>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirasignatura()" md-theme="dark-green" aria-label="addasignatura">añadir asignatura</md-button>
     </md-content>
     <md-list ng-cloak>
       <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="asignatura in vm.asignaturas" ng-click="vm.goToAsignatura(asignatura, $event)" class="noright">
+      <md-list-item ng-repeat="asignatura in vm.asignaturas" ng-click="vm.goToAsignatura(asignatura, $event)" class="noright listaObjetos">
         <p>{{ asignatura.nombre_asignatura }}</p>
         <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarasignatura(asignatura)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
         <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarasignatura(asignatura.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>

@@ -6,13 +6,12 @@
     </center>
     <md-divider></md-divider>
     <md-content layout-padding layout-wrap>
-        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirprofesor()" md-theme="dark-green" aria-label="addprofe">añadir objetivo</md-button>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirobjetivo()" md-theme="dark-green" aria-label="addobjetivo">añadir objetivo</md-button>
     </md-content>
     <md-list ng-cloak>
       <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="person in vm.people" ng-click="vm.goToPerson(person, $event)" class="noright">
-        <img alt="{{ person.nombres_profesor }}" ng-src="{{ person.url_foto_profesor }}" class="md-avatar" />
-        <p>{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</p>
+      <md-list-item ng-repeat="objetivo in vm.objetivosMineduc" ng-click="vm.goToObjetivo(objetivo, $event)" class="noright listaObjetos">
+        <p>{{ objetivo.nombre_objetivo_mineduc }}</p>
         <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarprofesor(person)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
         <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarprofesor(person.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
       

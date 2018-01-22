@@ -12,7 +12,7 @@
     </md-content>
     <md-list ng-cloak>
       <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="person in vm.people" ng-click="vm.goToPerson(person, $event)" class="noright">
+      <md-list-item ng-repeat="person in vm.people" ng-click="vm.goToPerson(person, $event)" class="noright listaObjetos">
         <img alt="{{ person.nombres_profesor }}" ng-src="{{ person.url_foto_profesor }}" class="md-avatar" />
         <p>{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</p>
         <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarprofesor(person)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>

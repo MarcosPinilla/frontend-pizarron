@@ -10,7 +10,7 @@
     </md-content>
     <md-list ng-cloak>
       <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="establecimiento in vm.establecimientos" ng-click="vm.goToEstablecimiento(establecimiento, $event)" class="noright">
+      <md-list-item ng-repeat="establecimiento in vm.establecimientos" ng-click="vm.goToEstablecimiento(establecimiento, $event)" class="noright listaObjetos">
         <img alt="{{ establecimiento.nombre_establecimiento }}" ng-src="{{ establecimiento.url_foto_establecimiento }}" class="md-avatar" />
         <p>{{ establecimiento.nombre_establecimiento }}</p>
         <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarestablecimiento(establecimiento)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>

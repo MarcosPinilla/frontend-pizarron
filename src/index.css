@@ -1,4 +1,4 @@
-body {
+html, body {
   /*background-color: azure;*/
   background-color: white;
   color: #7986CB;
@@ -8,8 +8,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  height: 100%; 
-  margin-top: 4em;
+  margin-top: 2em;
 }
 
 .landing-div {
@@ -118,4 +117,16 @@ titular {
   padding: 400px;
   margin: 400px;
   width: 1000px;
+}
+
+.listaObjetos:nth-child(even) {
+  
+}
+
+.listaObjetos:nth-child(odd) {
+  background-color: #ebebeb;
+}
+
+.tituloDialogo {
+  color: #7986CB;
 }

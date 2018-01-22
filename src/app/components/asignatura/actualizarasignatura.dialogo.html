@@ -1,0 +1,13 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2 class="tituloDialogo"><strong>Editar información de la asignatura:</strong></h2>
+	<md-divider></md-divider>
+	<md-input-container class="md-block">
+		<label>Nombre</label>
+		<input ng-model="vm.upasignatura.nombre_asignatura" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Descripción</label>
+		<input ng-model="vm.upasignatura.descripcion_asignatura" type="text" required>
+	</md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarasignatura(vm.upasignatura)" md-theme="dark-green" aria-label="editasignatura">actualizar asignatura</md-button></center>
+</div>

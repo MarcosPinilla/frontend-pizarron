@@ -105,45 +105,45 @@
       });
     };
   }
+
   function dialogoController($mdDialog, asignatura, AsignaturaService, $state, TipoestablecimientoService) {
-        var vm = this;
-        vm.asignaturasxd={};
-        vm.asignatura = asignatura;
-        vm.upestablecimiento = {};
-        vm.tipoestablecimientos={};
+    var vm = this;
+    vm.asignaturasxd={};
+    vm.asignatura = asignatura;
+    vm.upestablecimiento = {};
+    vm.tipoestablecimientos={};
 
-        AsignaturaService.query().$promise.then(function (data) {
-          vm.asignaturasxd = data;
-        });
+    AsignaturaService.query().$promise.then(function (data) {
+      vm.asignaturasxd = data;
+    });
 
-        TipoestablecimientoService.query().$promise.then(function (data) {
-          vm.tipoestablecimientos = data;
-        });
+    TipoestablecimientoService.query().$promise.then(function (data) {
+      vm.tipoestablecimientos = data;
+    });
 
-        vm.anadirasignatura = function (asignatura) {
-          AsignaturaService.save(asignatura);
-          vm.hide();
-        };
-
-
-        vm.actualizarasignatura = function (asignatura) {
-          AsignaturaService.update({id: vm.asignatura.id}, asignatura, function () {
-            vm.hide();
-          }, function () {});
-        };
+    vm.anadirasignatura = function (asignatura) {
+      AsignaturaService.save(asignatura);
+      vm.hide();
+    };
 
 
-        vm.hide = function () {
-          $mdDialog.hide();
-        };
+    vm.actualizarasignatura = function (asignatura) {
+      AsignaturaService.update({id: vm.asignatura.id}, asignatura, function () {
+        vm.hide();
+      }, function () {});
+    };
 
-        vm.cancel = function () {
-          $mdDialog.cancel();
-        };
 
-        vm.answer = function (answer) {
-          $mdDialog.hide(answer);
-        };
-      }
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
 
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
 })();

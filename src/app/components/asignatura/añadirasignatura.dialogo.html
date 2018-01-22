@@ -1,0 +1,12 @@
+<div style="padding-left: 200px; padding-right: 200px;">
+	<h2 class="tituloDialogo"><strong>Añadir asignatura:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Nombre asignatura</label>
+		<input ng-model="vm.asignatura.nombre_asignatura" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Descripción</label>
+		<input ng-model="vm.asignatura.descripcion_asignatura" type="text" required>
+	</md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadirasignatura(vm.asignatura)" md-theme="dark-green" aria-label="addasignatura">añadir asignatura</md-button></center>
+</div>
