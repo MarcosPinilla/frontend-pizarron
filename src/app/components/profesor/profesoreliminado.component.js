@@ -9,54 +9,26 @@
     controllerAs: 'vm'
   });
 
-  restaurarProfesorCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService', 'UsuarioService', '$state']
+  restaurarProfesorCtrl.$inject = ['$mdDialog','ProfesorEliminadoService','SexoService', 'ComunaService', 'UsuarioService', '$state']
 
-  function restaurarProfesorCtrl($mdDialog, ProfesorService, SexoService, ComunaService, UsuarioService, $state) {
+  function restaurarProfesorCtrl($mdDialog, ProfesorEliminadoService, SexoService, ComunaService, UsuarioService, $state) {
     var vm = this;
 
     vm.people = {};
 
     ProfesorEliminadoService.query().$promise.then(function (data) {
       vm.people = data;
-      console.log(vm.people);
+      //console.log(vm.people);
     });
 
-    /**vm.verprofes = function () {
-      ProfesorService.query().$promise.then(function (data) {
-        vm.people = data;
-        console.log(vm.people);
-      });
-    }*/
-
-    vm.eliminarprofesor = function (id) {
-      ProfesorService.delete({id: id});
-      ProfesorService.query().$promise.then(function (data) {
-        vm.people = data;
-        console.log(vm.people);
-      });
-    };
-
     vm.restaurarProfesor = function (person, event) {
-      $mdDialog.show({
-        controller: dialogoController,
-        controllerAs: 'vm',
-        templateUrl: 'app/components/profesor/editarprofesor.dialogo.html',
-        parent: angular.element(document.body),
-        targetEvent: event,
-        clickOutsideToClose: true,
-        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
-        locals: {
-          person : person
-        }
-      })
-      .then(function (answer) {
-        vm.status = 'Documento:  ' + answer + '.';
-        ProfesorService.query().$promise.then(function (data) {
-          vm.people = data;
-          console.log(vm.people);
-        });
-      }, function () {
-        vm.status = 'CANCELADO';
+      ProfesorEliminadoService.update({id: person.id}, person, function () {
+        //$state.go('profesor');
+        //vm.hide();
+      }, function () {});
+      ProfesorEliminadoService.query().$promise.then(function (data) {
+        vm.people = data;
+        console.log(vm.people);
       });
     };
 
@@ -106,21 +78,6 @@
         vm.comunas = data;
         });
 
-        vm.anadirprofesor = function (profesor) {
-          ProfesorService.save(profesor);
-          $state.go('profesor');
-          vm.hide();
-        };
-
-
-        vm.actualizarprofesor = function (profesor) {
-          ProfesorService.update({id: vm.person.id}, profesor, function () {
-            $state.go('profesor');
-            vm.hide();
-          }, function () {});
-        };
-
-
         vm.hide = function () {
           $mdDialog.hide();
         };
@@ -133,5 +90,4 @@
           $mdDialog.hide(answer);
         };
       }
-
 })();
