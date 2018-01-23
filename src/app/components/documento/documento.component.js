@@ -103,7 +103,7 @@
 			  top: 50,
 			  width: 150,
 			  fontSize: 20,
-			  fontFamily: 'Lobster',
+			  fontFamily: 'Lobster'
 			});
 
 			canvas.add(texto)
@@ -124,6 +124,14 @@
 		        canvas.discardActiveGroup();
 		        canvas.renderAll();
 		    } else if(canvas.getActiveObject()){
+		    	if(canvas.getActiveObject().get('type')==="textbox"){
+		    		//vm.esTexto=true;
+					$scope.$apply(function () {
+						vm.esTexto=true;
+						vm.fontTest="";
+			    		vm.fontTest2=0;
+		    		});
+		    	}
 		    	canvas.getActiveObject().remove();
 		    }
 			    
