@@ -92,19 +92,16 @@
     vm.querySearch   = querySearch;
 
     function querySearch (query) {
-      //console.log(vm.usuarios);
-      //console.log(query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios);
-      //console.log(query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios);
       return query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios;
     }
     
     function createFilterFor(query) {
 
       var lowercaseQuery = query;
-      console.log(lowercaseQuery);
+      //console.log(lowercaseQuery);
 
       return function filterFn(usuario) {
-        console.log(usuario.email);
+        //console.log(usuario.email);
         return (usuario.email.indexOf(lowercaseQuery) === 0);
       };
     }

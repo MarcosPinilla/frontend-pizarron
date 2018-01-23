@@ -130,3 +130,39 @@ titular {
 .tituloDialogo {
   color: #7986CB;
 }
+
+.dashboard-button {
+  /*Override*/
+  font-size: 18px;
+  border-radius: 0px;
+  text-transform: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+  min-width: 100px;
+
+  margin-bottom: 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dashboard-button-fab {
+  background-color: none;
+  line-height: 3.5rem;
+  min-width: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+div.scroll {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
+
+div.hidden {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}

@@ -4,7 +4,7 @@
   angular
   .module('app')
   .component('dashboard', {
-    templateUrl: 'app/components/dashboard/dashboard.html',
+    templateUrl: 'app/components/dashboard/dashboardbeta.html',
     controller: dashboardCtrl,
     controllerAs: 'vm'
   });
