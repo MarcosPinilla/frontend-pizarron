@@ -268,8 +268,12 @@
 
         <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
 
-        <input type="file" id="archivo"><br/>
-       
+        <input type="file" id="archivo">
+        
+        <span>URL:</span>
+        <input type="text" id="url">
+        <md-button class="md-raised md-primary" ng-click="vm.subir()">Subir desde URL</md-button>
+    
       </md-card>
     </md-content>
   
@@ -287,12 +291,5 @@
   </div>
 </div>
 
-  
-<div layout="row">
-  <div flex="50">
-    <input type="text" id="url"><br/>
-    <button ng-click="vm.subir()">Subir desde URL</button>
-  </div>  
-</div>
 
 

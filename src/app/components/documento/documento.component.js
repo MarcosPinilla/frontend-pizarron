@@ -60,6 +60,7 @@
 	    vm.esTexto=true;
 	    vm.mensaje="nada";
 	    vm.cortar = false;
+	    vm.enCanvas = false;
 	    var _clipboard = null;
 	    var ctrlDown=false;
 	    vm.esGrupo=false;
@@ -236,6 +237,7 @@
 			}
 
 			vm.paste=function() {
+				
 				// clone again, so you can do multiple copies.
 				if(vm.esGrupo){
 					canvas.discardActiveGroup();
@@ -252,31 +254,29 @@
 					console.log(vm.esGrupo)
 					if (vm.esGrupo) {
 						//clonedObj.canvas = canvas;
-						 var arrayObj = clonedObj.getObjects();
-					     for (let i in arrayObj) {
-					     	canvas.add(arrayObj[i]);
-				         }
+						var arrayObj = clonedObj.getObjects();
+						for (let i in arrayObj) {
+							canvas.add(arrayObj[i]);
+						}
 						 //clonedObj.setCoords();
 						 _clipboard.top += 10;
-						_clipboard.left += 10;
-						canvas.setActiveGroup(clonedObj);
-						canvas.renderAll();
-					} else {
-						canvas.add(clonedObj);
-						_clipboard.top += 10;
-						_clipboard.left += 10;
-						canvas.setActiveObject(clonedObj);
-						canvas.renderAll();
-					}
-					
-				});
+						 _clipboard.left += 10;
+						 canvas.setActiveGroup(clonedObj);
+						 canvas.renderAll();
+						} else {
+							canvas.add(clonedObj);
+							_clipboard.top += 10;
+							_clipboard.left += 10;
+							canvas.setActiveObject(clonedObj);
+							canvas.renderAll();
+						}
+					});
 
 				if(vm.cortar) {
 					_clipboard = null;
 				}
+
 			}
-
-
 
 		//var json = panelcanvas.toJSON();
     	console.log(json);
@@ -303,6 +303,7 @@
 
 
 	    //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
+	    /*
 	    vm.subir = function() {
 	    	var URL = document.getElementById("url").value;
 	    	console.log(URL);
@@ -313,11 +314,12 @@
 				var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
 			})
 		} 
+		*/
 		//delimitación de canvas apra objetos
 		canvas.on('object:moving', function (e) {
 	        var obj = e.target;
 	         // if object is too big ignore
-	        if(obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width){
+	        if(obj.currentHeight > canvas.height || obj.currentWidth > canvas.width){
 	            return;
 	        }        
 	        obj.setCoords();        
@@ -327,22 +329,24 @@
 	            obj.left = Math.max(obj.left, obj.left-obj.getBoundingRect().left);
 	        }
 	        // bot-right corner
-	        if(obj.getBoundingRect().top+obj.getBoundingRect().height  > obj.canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  > obj.canvas.width){
+	        if(obj.getBoundingRect().top+obj.getBoundingRect().height  > canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  > canvas.width){
 	            obj.top = Math.min(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
 	            obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
 	        }
 		});
 
-		/* DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
+		//DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
 		vm.subir = function() {
 			var URL = document.getElementById("url").value;
 			fabric.util.loadImage(URL, function(img) {
 			    var object = new fabric.Image(img);
+			    object.scaleToWidth(canvas.getWidth());
+		      	object.scaleToHeight(canvas.getHeight());
 			    canvas.add(object);
 			    canvas.renderAll();
-			    canvas.setActiveObject(object);    
+			    //canvas.setActiveObject(object);    
 			}, null, {crossOrigin: 'Anonymous'});
-		}*/
+		}
 
 
 		//Lógica para exportar a pdf, utilizando el elemento de canvas
