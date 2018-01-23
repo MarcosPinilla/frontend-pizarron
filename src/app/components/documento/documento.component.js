@@ -6,17 +6,54 @@
 			templateUrl: 'app/components/documento/documento.component.html',
 			controller: documentoCtrl,
 			controllerAs: 'vm'
-		});
+		})
+		 
+		  .filter('keyboardShortcut', function($window) {
+		    return function(str) {
+		      if (!str) return;
+		      var keys = str.split('-');
+		      var isOSX = /Mac OS X/.test($window.navigator.userAgent);
 
-	function documentoCtrl($scope) {
+		      var seperator = (!isOSX || keys.length > 2) ? '+' : '';
+
+		      var abbreviations = {
+		        M: isOSX ? '⌘' : 'Ctrl',
+		        A: isOSX ? 'Option' : 'Alt',
+		        S: 'Shift'
+		      };
+
+		      return keys.map(function(key, index) {
+		        var last = index == keys.length - 1;
+		        return last ? key : abbreviations[key];
+		      }).join(seperator);
+		    };
+		  });
+
+	function documentoCtrl($scope,$mdDialog) {
 		// Con vm = this, hacemos que se haga referencia al controlador por el 'this' y queda más comodo 
 		// y unificado al mirar el html
 		var vm = this;
 
+		//MENU BAR
+		vm.settings = {
+	      printLayout: true,
+	      showRuler: true,
+	      showSpellingSuggestions: true,
+	      presentationMode: 'edit'
+	    };
+
+	    vm.sampleAction = function(name, ev) {
+	      $mdDialog.show($mdDialog.alert()
+	        .title(name)
+	        .textContent('You triggered the "' + name + '" action')
+	        .ok('Great')
+	        .targetEvent(ev)
+	      );
+	    };
 		
 	    //PRUEBAS CON FABRICJS
 
-	    var panelcanvas = new fabric.Canvas('panelcanvas');
+	    //var panelcanvas = new fabric.Canvas('panelcanvas');
 	    var canvas = new fabric.Canvas('canvas');
 	    vm.fontTest="";
 	    vm.fontTest2=0;
@@ -52,6 +89,7 @@
 					vm.esTexto=true;
 					vm.fontTest="";
 		    		vm.fontTest2=0;
+		    		
 	    		});
 			}else if (evt.target.get('type')==='image'){
 				//vm.esTexto=true;
@@ -59,6 +97,7 @@
 					vm.esTexto=true;
 					vm.fontTest="";
 		    		vm.fontTest2=0;
+		    	
 	    		});
 			}		
 		});
@@ -76,7 +115,6 @@
 		      alert('font loading failed ' + font);
 			});
 		}
-		
 
 		 vm.usarFontSize = function(fontsize) {
 	    	canvas.getActiveObject().set("fontSize", fontsize);
@@ -137,7 +175,8 @@
 			    
 		}
 
-
+			//Se crea una variable a partir del contenedor del canvas, lo que permitirá
+			//reconocer las teclas presionadas en el mismo.
 			var canvasWrapper = document.getElementById('todocanvas');
 			canvasWrapper.tabIndex = 1000;
 			canvasWrapper.addEventListener("keydown", function(e){
@@ -239,7 +278,7 @@
 
 
 
-		var json = panelcanvas.toJSON();
+		//var json = panelcanvas.toJSON();
     	console.log(json);
     	var json = canvas.toJSON();
     	console.log(json);
@@ -252,6 +291,8 @@
 		    var data = f.target.result;                    
 		    fabric.Image.fromURL(data, function (img) {
 		      //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
+		      img.scaleToWidth(canvas.getWidth());
+		      img.scaleToHeight(canvas.getHeight());
 		      canvas.add(img).renderAll();
 		      var a = canvas.setActiveObject(img);
 		      var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
@@ -266,11 +307,31 @@
 	    	var URL = document.getElementById("url").value;
 	    	console.log(URL);
 	    	fabric.Image.fromURL(URL, function(imagen) {
+
 				canvas.add(imagen).renderAll();
 				var a = canvas.setActiveObject(imagen);
 				var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
 			})
 		} 
+		//delimitación de canvas apra objetos
+		canvas.on('object:moving', function (e) {
+	        var obj = e.target;
+	         // if object is too big ignore
+	        if(obj.currentHeight > obj.canvas.height || obj.currentWidth > obj.canvas.width){
+	            return;
+	        }        
+	        obj.setCoords();        
+	        // top-left  corner
+	        if(obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0){
+	            obj.top = Math.max(obj.top, obj.top-obj.getBoundingRect().top);
+	            obj.left = Math.max(obj.left, obj.left-obj.getBoundingRect().left);
+	        }
+	        // bot-right corner
+	        if(obj.getBoundingRect().top+obj.getBoundingRect().height  > obj.canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  > obj.canvas.width){
+	            obj.top = Math.min(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
+	            obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
+	        }
+		});
 
 		/* DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
 		vm.subir = function() {
