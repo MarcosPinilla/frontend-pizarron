@@ -160,6 +160,13 @@
 		        for (let i in activeObjects) {
 		            canvas.remove(activeObjects[i]);
 		        }
+		        if(vm.esTexto===false){
+		        	$scope.$apply(function () {
+						vm.esTexto=true;
+						vm.fontTest="";
+			    		vm.fontTest2=0;
+		    		});
+		        }
 		        canvas.discardActiveGroup();
 		        canvas.renderAll();
 		    } else if(canvas.getActiveObject()){
