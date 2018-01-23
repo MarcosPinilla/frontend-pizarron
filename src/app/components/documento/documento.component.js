@@ -53,7 +53,14 @@
 					vm.fontTest="";
 		    		vm.fontTest2=0;
 	    		});
-			}	
+			}else if (evt.target.get('type')==='image'){
+				//vm.esTexto=true;
+				$scope.$apply(function () {
+					vm.esTexto=true;
+					vm.fontTest="";
+		    		vm.fontTest2=0;
+	    		});
+			}		
 		});
 
 	    vm.usarFont = function(font) {
