@@ -88,6 +88,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/listarniveles',
       component: 'listarniveles',
       isPrivate: true
+    })
+    .state('administrator', {
+      url: '/administrator',
+      component: 'administrator',
+      isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
 }

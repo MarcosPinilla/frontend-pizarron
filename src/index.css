@@ -94,6 +94,13 @@ titular {
   padding: 50px;
 }
 
+.buttonadmin {
+  width: 83%;
+  margin: 25px;
+  padding: 25px;
+  font-size: 20px;
+}
+
 .dashboard {
   height: 100%;
   width: 100%;
