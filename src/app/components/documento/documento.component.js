@@ -8,7 +8,7 @@
 			controllerAs: 'vm'
 		});
 
-	function documentoCtrl() {
+	function documentoCtrl($scope) {
 		// Con vm = this, hacemos que se haga referencia al controlador por el 'this' y queda más comodo 
 		// y unificado al mirar el html
 		var vm = this;
@@ -39,22 +39,22 @@
 	   	canvas.on('object:selected', function(evt) {
 			if(evt.target.get('type')==='textbox'){
 				//vm.esTexto=false;
-				vm.esTexto=false;
-				vm.fontTest2=evt.target.get('fontSize');
-				vm.fontTest=evt.target.get('fontFamily');
-				
+
+				$scope.$apply(function () {
+					vm.esTexto=false;
+					vm.fontTest2=evt.target.get('fontSize');
+					vm.fontTest=evt.target.get('fontFamily');
+				});	
+					
 			}else if (evt.target.get('type')==='rect'){
 				//vm.esTexto=true;
-				vm.esTexto=true;;
-				vm.fontTest="";
-	    		vm.fontTest2=0;
-
+				$scope.$apply(function () {
+					vm.esTexto=true;
+					vm.fontTest="";
+		    		vm.fontTest2=0;
+	    		});
 			}	
 		});
-
-		vm.cambiar = function(){
-			vm.esTexto=!vm.esTexto;
-		}
 
 	    vm.usarFont = function(font) {
 	     //alert(font);
@@ -86,7 +86,8 @@
 	            fill : 'blue'
 	        	});
 
-        	canvas.add(rect).setActiveObject(rect);
+        	//canvas.add(rect).setActiveObject(rect);
+			canvas.add(rect);
 		};
 		
 		vm.generarTexto = function() {
@@ -98,8 +99,8 @@
 			  fontFamily: 'Lobster',
 			});
 
-
-			canvas.add(texto).setActiveObject(texto);
+			canvas.add(texto)
+			//canvas.add(texto).setActiveObject(texto);
 			console.log(texto);
 			//canvas.getActiveObject().set("fontFamily", 'Lobster');
 			canvas.renderAll();
@@ -119,7 +120,7 @@
 		    	canvas.getActiveObject().remove();
 		    }
 			    
-			}
+		}
 
 
 			var canvasWrapper = document.getElementById('todocanvas');
@@ -133,9 +134,9 @@
 			    	vm.copy();
 			    } else if (e.ctrlKey && key === 86) {
 			    	vm.paste();
-			     } else if (e.ctrlKey && key === 88) {
+			    } else if (e.ctrlKey && key === 88) {
 			    	vm.cut();
-}
+				}
 			}, false);
 
 
