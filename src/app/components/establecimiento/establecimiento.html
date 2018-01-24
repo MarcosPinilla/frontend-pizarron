@@ -1,0 +1,26 @@
+<div flex-offset="20" flex="60" style="background-color: white">
+  <md-content layout-padding layout-wrap>
+    <center>
+      <h2 class="titulo">Establecimientos</h2>
+      <br>
+    </center>
+    <md-divider></md-divider>
+    <md-content layout-padding layout-wrap>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirestablecimiento()" md-theme="dark-green" aria-label="addprofe">añadir establecimiento</md-button>
+    </md-content>
+    <md-list ng-cloak>
+      <md-subheader class="md-no-sticky">Nombre</md-subheader>
+      <md-list-item ng-repeat="establecimiento in vm.establecimientos" ng-click="vm.goToEstablecimiento(establecimiento, $event)" class="noright listaObjetos">
+        <img alt="{{ establecimiento.nombre_establecimiento }}" ng-src="{{ establecimiento.url_foto_establecimiento }}" class="md-avatar" />
+        <p>{{ establecimiento.nombre_establecimiento }}</p>
+        <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarestablecimiento(establecimiento)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
+        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarestablecimiento(establecimiento.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
+      
+        <!--<md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
+        <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
+      </md-list-item>
+    </md-list>  
+    
+
+  </md-content>
+</div> 

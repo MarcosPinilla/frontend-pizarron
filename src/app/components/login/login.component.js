@@ -9,15 +9,18 @@
     controllerAs: 'vm'
   });
 
-  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', '$mdDialog'];
+  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', '$mdDialog', 'SendService'];
 
-  function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog) {
+  function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog, SendService) {
     var vm = this;
 
     vm.isLanding = false;
     vm.loginError = false;
+    vm.messageCode = null;
+    vm.message = null;
     vm.credentials = {};
     var user = {};
+
 
     vm.status = '  ';
 
@@ -42,8 +45,9 @@
       });
     };
 
-    vm.showPrompt = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
+    vm.showPrompt = function(ev, emailto) {
+    // Appending dialog to document.body to cover 
+    var correorec = emailto;
     var confirm = $mdDialog.prompt()
       .title('Ingresa tu email registrado')
       .placeholder('ejemplo@ejemplo.cl')
@@ -54,8 +58,19 @@
       .cancel('Cancelar');
 
     $mdDialog.show(confirm).then(function(result) {
-      vm.status = 'EMAIL:  ' + result + '.';
+      console.log("Entró");
+      console.log(result);
+      var e = {
+        email: result
+      }
+      SendService.save(e, function(data) {
+        vm.messageCode = data.code;
+        vm.message = data.message;
+      });
+      vm.status = 'EMAIL:  ' + result + '.- ENVIADO';
+      console.log(status)
     }, function() {
+      console.log("No Entró");
       vm.status = 'CANCELADO';
     });
   };

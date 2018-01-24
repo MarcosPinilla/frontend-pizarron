@@ -1,0 +1,25 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2 class="tituloDialogo"><strong>Editar información del profesor:</strong></h2>
+	<md-divider></md-divider>
+	<md-input-container class="md-block">
+		<label>Nombres</label>
+		<input ng-model="vm.upperson.nombres_profesor" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Apellidos</label>
+		<input ng-model="vm.upperson.apellidos_profesor" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Cargo</label>
+		<input ng-model="vm.upperson.cargo" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Profesión</label>
+		<input ng-model="vm.upperson.profesion" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Foto</label>
+		<input ng-model="vm.upperson.url_foto_profesor" type="text" required>
+	</md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarprofesor(vm.upperson)" md-theme="dark-green" aria-label="addprofe">actualizar profesor</md-button></center>
+</div>

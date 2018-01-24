@@ -1,0 +1,11 @@
+<div style="padding-left: 100px; padding-right: 100px;">
+	<h2 class="tituloDialogo"><strong>Información de la Asignatura:</strong></h2>
+	<p><strong>Nombre: </strong>{{ vm.asignatura.nombre_asignatura }}</p>
+	<p><strong>Descripción: </strong>{{ vm.asignatura.descripcion_asignatura }}</p>
+	<p><strong>Objetivos Mineduc: </strong></p>
+	<md-list ng-cloak>
+      <md-list-item ng-repeat="objetivo in vm.asignatura.objetivos_aprendizaje_mineduc" class="noright">
+        <p>{{ objetivo.nombre_objetivo_mineduc }}:  <i>{{ objetivo.descripcion_objetivo_mineduc }}</i></p>
+      </md-list-item>
+    </md-list>
+</div>

@@ -25,28 +25,88 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
     .state('loginrecovery', {
-      url:'/passrecovery/:token',
-      component:'loginrecovery',
+      url: '/passrecovery/:token',
+      component: 'loginrecovery',
       isPrivate: true
     })
-
     .state('documento', {
       url:'/documento',
       component:'documento',
       isPrivate: true
     })
-
-    $httpProvider.interceptors.push('InterceptorApi');
-
+    .state('profesor', {
+      url: '/profesor',
+      component: 'profesor',
+      isPrivate: true
+    })
+    .state('restaurarProfesor', {
+      url: '/restaurarprofesor',
+      component: 'restaurarProfesor',
+      isPrivate: true
+    })
+    .state('editdocument', {
+      url: '/editdocument',
+      component: 'editdocument',
+      isPrivate: true
+    })
+    .state('usuario', {
+      url: '/usuario',
+      component: 'usuario',
+      isPrivate: true
+    })
+    .state('establecimiento', {
+      url: '/establecimiento',
+      component: 'establecimiento',
+      isPrivate: true
+    })
+    .state('asignatura', {
+      url: '/asignatura',
+      component: 'asignatura',
+      isPrivate: true
+    })
+    .state('material', {
+      url: '/material',
+      component: 'material',
+      isPrivate: true
+    })
+    .state('elemento', {
+      url: '/elemento',
+      component: 'elemento',
+      isPrivate: true
+    })
+    .state('objetivomineduc', {
+      url: '/objetivomineduc',
+      component: 'objetivomineduc',
+      isPrivate: true
+    })
+    .state('listarusuarios', {
+      url: '/listarusuarios',
+      component: 'listarusuarios',
+      isPrivate: true
+    })
+    .state('listarasignaturas', {
+      url: '/listarasignaturas',
+      component: 'listarasignaturas',
+      isPrivate: true
+    })
+    .state('listarniveles', {
+      url: '/listarniveles',
+      component: 'listarniveles',
+      isPrivate: true
+    })
+    .state('administrator', {
+      url: '/administrator',
+      component: 'administrator',
+      isPrivate: true
+    });
+  $httpProvider.interceptors.push('InterceptorApi');
 }
 
 function middlewareConfig($state, CredentialsService, $transitions) {
-
   $transitions.onStart({}, function (trans) {
     var isPrivate = trans.$to.isPrivate;
 
     var to = trans.$to().name;
-    
     if (isPrivate && !CredentialsService.isLogged()) {
       $state.go('login');
     }

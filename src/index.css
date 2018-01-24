@@ -1,4 +1,4 @@
-body {
+html, body {
   /*background-color: azure;*/
   background-color: white;
   color: #7986CB;
@@ -8,8 +8,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  height: 100%; 
-  margin-top: 4em;
+  margin-top: 2em;
 }
 
 .landing-div {
@@ -95,6 +94,13 @@ titular {
   padding: 50px;
 }
 
+.buttonadmin {
+  width: 83%;
+  margin: 25px;
+  padding: 25px;
+  font-size: 20px;
+}
+
 .dashboard {
   height: 100%;
   width: 100%;
@@ -104,4 +110,66 @@ titular {
 .titulo {
   color: #7986CB;
   font-size: 2.5em;
+}
+
+.buttoncrudadd{
+  float: right;
+}
+
+.modal-image{
+  width: 200px;
+}
+
+.modal-profesor{
+  padding: 400px;
+  margin: 400px;
+  width: 1000px;
+}
+
+.listaObjetos:nth-child(even) {
+  
+}
+
+.listaObjetos:nth-child(odd) {
+  background-color: #ebebeb;
+}
+
+.tituloDialogo {
+  color: #7986CB;
+}
+
+.dashboard-button {
+  /*Override*/
+  font-size: 18px;
+  border-radius: 0px;
+  text-transform: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 100%;
+  min-width: 100px;
+
+  margin-bottom: 4px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dashboard-button-fab {
+  background-color: none;
+  line-height: 3.5rem;
+  min-width: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+div.scroll {
+    width: 100px;
+    height: 100px;
+    overflow: scroll;
+}
+
+div.hidden {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
 }

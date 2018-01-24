@@ -1,0 +1,23 @@
+<div style="padding-left: 200px; padding-right: 200px;">
+	<h2 class="tituloDialogo"><strong>Añadir establecimiento:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Nombre</label>
+		<input ng-model="vm.newestablecimiento.nombre_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Descripción</label>
+		<input ng-model="vm.newestablecimiento.desc_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Foto</label>
+		<input ng-model="vm.newestablecimiento.url_foto_establecimiento" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block" >
+      <label>Tipo Establecimiento</label>
+      <md-select ng-model="vm.newestablecimiento.id_tipo_establecimiento">
+        <md-option ng-repeat="tipo in vm.tipoestablecimientos" value="{{ tipo.id }}">
+          {{ tipo.nombre_tipo_establecimiento }}
+        </md-option>
+      </md-select>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadirestablecimiento(vm.newestablecimiento)" md-theme="dark-green" aria-label="addprofe">añadir establecimiento</md-button></center>
+</div>
