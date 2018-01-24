@@ -101,6 +101,19 @@
     vm.niveles = niveles;
     vm.tipo_materiales = tipomaterial;
 
+    ListarasignaturasService.query().$promise.then(function (data) {
+      vm.asignaturas = data;
+    });
+
+    ListarnivelesService.query().$promise.then(function (data) {
+      vm.niveles = data;
+    });
+
+    ListartipomaterialService.query().$promise.then(function (data) {
+      vm.tipo_materiales = data;
+    });
+
+
     vm.material = {};
 
     /*console.log(vm.usuario);

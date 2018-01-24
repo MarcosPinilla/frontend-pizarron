@@ -99,6 +99,7 @@ titular {
   margin: 25px;
   padding: 25px;
   font-size: 20px;
+  position: relative;
 }
 
 .dashboard {

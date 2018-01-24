@@ -9,7 +9,11 @@
     controllerAs: 'vm'
   });
 
-  function materialCtrl() {
+  materialCtrl.$inject = ['MaterialService'];
+
+  function materialCtrl(MaterialService) {
     var vm = this;
+
+    vm.materiales = {};
   }
 })();
