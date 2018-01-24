@@ -65,6 +65,17 @@
 	    var ctrlDown=false;
 	    vm.esGrupo=false;
 
+    	var _config = {
+			canvasState             : [],
+			currentStateIndex       : -1,
+			undoStatus              : false,
+			redoStatus              : false,
+			undoFinishedStatus      : 1,
+			redoFinishedStatus      : 1,
+	    	undoButton              : document.getElementById('undo'),
+			redoButton              : document.getElementById('redo'),
+		};
+
 	    vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
 	    vm.fontsizes=[];
 
@@ -75,32 +86,41 @@
 	    //Función para detectar click en canvas
 	    
 	   	canvas.on('object:selected', function(evt) {
-			if(evt.target.get('type')==='textbox'){
+	   		console.log(evt);
+			if(evt.target.get('type') === 'textbox'){
 				//vm.esTexto=false;
 
 				$scope.$apply(function () {
-					vm.esTexto=false;
-					vm.fontTest2=evt.target.get('fontSize');
-					vm.fontTest=evt.target.get('fontFamily');
+					vm.esTexto = false;
+					vm.fontTest2 = evt.target.get('fontSize');
+					vm.fontTest = evt.target.get('fontFamily');
 				});	
 					
-			}else if (evt.target.get('type')==='rect'){
+			}else if (evt.target.get('type') === 'rect'){
 				//vm.esTexto=true;
 				$scope.$apply(function () {
-					vm.esTexto=true;
-					vm.fontTest="";
-		    		vm.fontTest2=0;
+					vm.esTexto = true;
+					vm.fontTest = "";
+		    		vm.fontTest2 = 0;
 		    		
 	    		});
-			}else if (evt.target.get('type')==='image'){
+			}else if (evt.target.get('type') === 'image'){
 				//vm.esTexto=true;
 				$scope.$apply(function () {
-					vm.esTexto=true;
-					vm.fontTest="";
-		    		vm.fontTest2=0;
-		    	
+					vm.esTexto = true;
+					vm.fontTest = "";
+		    		vm.fontTest2 = 0;
 	    		});
-			}		
+			}
+		});
+
+
+		canvas.on('selection:cleared', function(evt) {
+			$scope.$apply(function () {
+				vm.esTexto = true;
+				vm.fontTest = "";
+	    		vm.fontTest2 = 0;
+	    	});
 		});
 
 	    vm.usarFont = function(font) {
@@ -123,14 +143,13 @@
 		}
 		
 		vm.generarFigura=function() {
-			console.log("Hola");
-				var rect = new fabric.Rect({
+			var rect = new fabric.Rect({
 	            top : 100,
 	            left : 100,
 	            width : 60,
 	            height : 70,
 	            fill : 'blue'
-	        	});
+        	});
 
         	//canvas.add(rect).setActiveObject(rect);
 			canvas.add(rect);
@@ -183,107 +202,206 @@
 			    
 		}
 
-			//Se crea una variable a partir del contenedor del canvas, lo que permitirá
-			//reconocer las teclas presionadas en el mismo.
-			var canvasWrapper = document.getElementById('todocanvas');
-			canvasWrapper.tabIndex = 1000;
-			canvasWrapper.addEventListener("keydown", function(e){
-				e = e || window.event;
-				 var key = e.which || e.keyCode;
-				if(key===46){
-				 	vm.eliminar();
-				} else if(e.ctrlKey && key === 67) {
-			    	vm.copy();
-			    } else if (e.ctrlKey && key === 86) {
-			    	vm.paste();
-			    } else if (e.ctrlKey && key === 88) {
-			    	vm.cut();
-				}
-			}, false);
+		//Se crea una variable a partir del contenedor del canvas, lo que permitirá
+		//reconocer las teclas presionadas en el mismo.
+		var canvasWrapper = document.getElementById('todocanvas');
+		canvasWrapper.tabIndex = 1000;
+		canvasWrapper.addEventListener("keydown", function(e){
+			e = e || window.event;
+			 var key = e.which || e.keyCode;
+			if(key===46){
+			 	vm.eliminar();
+			} else if(e.ctrlKey && key === 67) {
+		    	vm.copy();
+		    } else if (e.ctrlKey && key === 86) {
+		    	vm.paste();
+		    } else if (e.ctrlKey && key === 88) {
+		    	vm.cut();
+			} else if (e.ctrlKey && key == 90) {
+				vm.undo();
+			} else if (e.ctrlKey && key == 89) {
+				vm.redo();
+			}
+		}, false);
 
 
-			vm.copy=function() {
-			
-				var activeGroup = canvas.getActiveGroup();
-			    if (activeGroup) {
-			        activeGroup.clone(function(cloned) {
-					_clipboard = cloned;
-					});
-					vm.esGrupo=true;
-			    } else if(canvas.getActiveObject()){
-			    	canvas.getActiveObject().clone(function(cloned) {
+		vm.copy = function() {
+		
+			var activeGroup = canvas.getActiveGroup();
+		    if (activeGroup) {
+		        activeGroup.clone(function(cloned) {
+				_clipboard = cloned;
+				});
+				vm.esGrupo = true;
+		    } else if(canvas.getActiveObject()){
+		    	canvas.getActiveObject().clone(function(cloned) {
+				_clipboard = cloned;
+			});
+		    	vm.esGrupo = false;
+		    }
+		    vm.cortar = false;
+		}
+
+		//Función para cortar, se llama desde ctrl + x y desde panel de edición
+		vm.cut = function() {
+			//Se obtiene el grupo seleccionado actualmente
+			var activeGroup = canvas.getActiveGroup();
+
+		    if (activeGroup) {
+		        //Se clona en el portapapeles
+		        activeGroup.clone(function(cloned) {
 					_clipboard = cloned;
 				});
-			    	vm.esGrupo=false;
-			    }
-			    vm.cortar = false;
-			}
+				//Se remueve cada uno de los objetos 
+				activeGroup.forEachObject(function(o){ canvas.remove(o) });
+				//Se desactiva el grupo seleccionado y se renderiza
+				canvas.discardActiveGroup().renderAll();
 
-			vm.cut = function() {
+				//Se actualiza la variable esGrupo a true
+				vm.esGrupo = true;
+		    } else if(canvas.getActiveObject()){
+		    	//Si es un objeto único, se clona en el portapaples
+		    	canvas.getActiveObject().clone(function(cloned) {
+					_clipboard = cloned;
+					//Se elimina el objeto
+					canvas.getActiveObject().remove();
+				});
+				//Se actualiza la variable esGrupor por false
+		    	vm.esGrupo = false;
+			}
+			//Se actualiza la variable cortar por true, para saber que al pegar, luego se debe vaciar
+			//el portapapeles
+			vm.cortar = true;
+		}
+
+		vm.paste = function() {
 			
-				var activeGroup = canvas.getActiveGroup();
-			    if (activeGroup) {
-			        activeGroup.clone(function(cloned) {
-						_clipboard = cloned;
-					});
-					activeGroup.forEachObject(function(o){ canvas.remove(o) });
-					canvas.discardActiveGroup().renderAll();
-					vm.esGrupo=true;
-			    } else if(canvas.getActiveObject()){
-			    	canvas.getActiveObject().clone(function(cloned) {
-						_clipboard = cloned;
-						canvas.getActiveObject().remove();
-					});
-			    	vm.esGrupo=false;
-			    	
-				}
-				vm.cortar = true;
-			    
-
-				
+			// clone again, so you can do multiple copies.
+			if(vm.esGrupo){
+				canvas.discardActiveGroup();
+			}else{
+				canvas.discardActiveObject();
 			}
+			_clipboard.clone(function(clonedObj) {
+				canvas.discardActiveObject();
+				clonedObj.set({
+					left: clonedObj.left + 10,
+					top: clonedObj.top + 10,
+					evented: true,
+				});
+				console.log(vm.esGrupo)
+				if (vm.esGrupo) {
+					//clonedObj.canvas = canvas;
+					var arrayObj = clonedObj.getObjects();
+					for (let i in arrayObj) {
+						canvas.add(arrayObj[i]);
+					}
+					 //clonedObj.setCoords();
+					 _clipboard.top += 10;
+					 _clipboard.left += 10;
+					 canvas.setActiveGroup(clonedObj);
+					 canvas.renderAll();
+					} else {
+						canvas.add(clonedObj);
+						_clipboard.top += 10;
+						_clipboard.left += 10;
+						canvas.setActiveObject(clonedObj);
+						canvas.renderAll();
+					}
+				});
 
-			vm.paste=function() {
-				
-				// clone again, so you can do multiple copies.
-				if(vm.esGrupo){
-					canvas.discardActiveGroup();
-				}else{
-					canvas.discardActiveObject();
-				}
-				_clipboard.clone(function(clonedObj) {
-					canvas.discardActiveObject();
-					clonedObj.set({
-						left: clonedObj.left + 10,
-						top: clonedObj.top + 10,
-						evented: true,
-					});
-					console.log(vm.esGrupo)
-					if (vm.esGrupo) {
-						//clonedObj.canvas = canvas;
-						var arrayObj = clonedObj.getObjects();
-						for (let i in arrayObj) {
-							canvas.add(arrayObj[i]);
-						}
-						 //clonedObj.setCoords();
-						 _clipboard.top += 10;
-						 _clipboard.left += 10;
-						 canvas.setActiveGroup(clonedObj);
-						 canvas.renderAll();
-						} else {
-							canvas.add(clonedObj);
-							_clipboard.top += 10;
-							_clipboard.left += 10;
-							canvas.setActiveObject(clonedObj);
-							canvas.renderAll();
-						}
-					});
-
-				if(vm.cortar) {
-					_clipboard = null;
-				}
-
+			if(vm.cortar) {
+				_clipboard = null;
 			}
+		}
+
+		canvas.on('object:modified', function() {
+	  		vm.updateCanvasState();
+			}
+		);
+  
+		canvas.on('object:added', function() {
+	  		vm.updateCanvasState();
+			}
+		);
+
+		vm.updateCanvasState = function() {
+			if((_config.undoStatus == false && _config.redoStatus == false)) {
+				var jsonData        = canvas.toJSON();
+				var canvasAsJson        = JSON.stringify(jsonData);
+				if(_config.currentStateIndex < _config.canvasState.length-1) {
+					var indexToBeInserted = _config.currentStateIndex+1;
+					_config.canvasState[indexToBeInserted] = canvasAsJson;
+					var numberOfElementsToRetain = indexToBeInserted+1;
+					_config.canvasState = _config.canvasState.splice(0,numberOfElementsToRetain);
+				} else {
+		    		_config.canvasState.push(canvasAsJson);
+				}
+			    _config.currentStateIndex = _config.canvasState.length-1;
+				if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1){
+					_config.redoButton.disabled= "disabled";
+				}
+			}
+		}
+
+ 
+		vm.undo = function() {
+			if(_config.undoFinishedStatus) {
+				if(_config.currentStateIndex == -1) {
+		    		_config.undoStatus = false;
+				} else {
+				    if (_config.canvasState.length >= 1) {
+	        			_config.undoFinishedStatus = 0;
+				    	if(_config.currentStateIndex != 0) {
+					    	_config.undoStatus = true;
+				        	canvas.loadFromJSON(_config.canvasState[_config.currentStateIndex-1],function() {
+								var jsonData = JSON.parse(_config.canvasState[_config.currentStateIndex-1]);
+						    	canvas.renderAll();
+					      		_config.undoStatus = false;
+					      		_config.currentStateIndex -= 1;
+								_config.undoButton.removeAttribute("disabled");
+								if(_config.currentStateIndex !== _config.canvasState.length-1){
+									_config.redoButton.removeAttribute('disabled');
+								}
+								_config.undoFinishedStatus = 1;
+				      		});
+				        } else if(_config.currentStateIndex == 0) {
+			 		      	canvas.clear();
+							_config.undoFinishedStatus = 1;
+							_config.undoButton.disabled= "disabled";
+							_config.redoButton.removeAttribute('disabled');
+					      	_config.currentStateIndex -= 1;
+				        }
+				    }
+				}
+			}
+		}
+	  
+		vm.redo = function() {
+			if(_config.redoFinishedStatus) {
+				if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1) {
+					_config.redoButton.disabled= "disabled";
+				} else {
+				  	if (_config.canvasState.length > _config.currentStateIndex && _config.canvasState.length != 0) {
+						_config.redoFinishedStatus = 0;
+				    	_config.redoStatus = true;
+				      	canvas.loadFromJSON(_config.canvasState[_config.currentStateIndex+1],function() {
+							var jsonData = JSON.parse(_config.canvasState[_config.currentStateIndex+1]);
+					    	canvas.renderAll();
+				    		_config.redoStatus = false;
+				      		_config.currentStateIndex += 1;
+							if(_config.currentStateIndex != -1) {
+								_config.undoButton.removeAttribute('disabled');
+							}
+							_config.redoFinishedStatus = 1;
+				            if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1) {
+				              _config.redoButton.disabled= "disabled";
+				            }
+				        });
+				    }
+				}
+			}
+		}
 
 		//var json = panelcanvas.toJSON();
     	console.log(json);
