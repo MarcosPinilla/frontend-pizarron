@@ -148,7 +148,7 @@ titular {
   width: 100%;
   min-width: 100px;
 
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   text-align: center;
   vertical-align: middle;
 }
@@ -162,14 +162,7 @@ titular {
   border-radius: 50%;
 }
 
-div.scroll {
-    width: 100px;
-    height: 100px;
-    overflow: scroll;
-}
-
-div.hidden {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
+md-list.make-scrollable {
+    height: 300px;
+    overflow-y: scroll;
 }
