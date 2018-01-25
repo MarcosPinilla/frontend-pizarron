@@ -53,29 +53,6 @@
       });
     };
 
-    vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
-      $mdDialog.show({
-        controller: dialogoController,
-        controllerAs: 'vm',
-        templateUrl: 'app/components/dashboard/nuevodocumento.dialogo.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
-        locals: {
-          usuario: usuario,
-          asignaturas: asignaturas,
-          niveles: niveles,
-          tipomaterial: tipomaterial
-        },
-      })
-      .then(function (answer) {
-        vm.status = 'Documento:  ' + answer + '.';
-      }, function () {
-        vm.status = 'CANCELADO';
-      });
-    };
-
     vm.showCalendar = function (ev) {
       $mdDialog.show({
         controller: dialogoController,
