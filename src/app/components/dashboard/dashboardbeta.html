@@ -1,100 +1,22 @@
 <div layout="row" layout-wrap ng-cloack flex style="height: 100%;">
 	<!-- Left -->
-	<div class="hidden" flex="20" style=" background-color: #ecf0f1; color:#FAFAFA; height: 100%; position: fixed; left: 0; width: 250px;">
-		<!-- Buttons -->
-		<md-button class="dashboard-button" flex="100" style="background-color: #43A047; height: 6%" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
-			<md-icon md-svg-icon="app/resources/icons/ic_description_white_24px.svg"></md-icon> Nuevo documento
-		</md-button>
-		<md-button class="dashboard-button" flex="100" style="background-color: #039BE5; height: 6%">
-			<md-icon md-svg-icon="app/resources/icons/ic_folder_white_24px.svg"></md-icon> Mi Material
-		</md-button>
-		<md-button class="dashboard-button" flex="100" style="background-color: #E91E63; height: 6%">
-			<md-icon md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon> Mis Favoritos
-		</md-button>
-		<md-button class="dashboard-button" flex="100" style="background-color: #FF9800; height: 6%">
-			Otra opcion
-		</md-button>
-		<div class="dashboard-button" flex="100" style="background-color: #FAFAFA; height: 60%">
-			Espacio vacio
-		</div>
-		<div class="row" style="background-color: #95a5a6; height: 10%;">
-			<md-button class="dashboard-button-fab">
-				<md-icon md-svg-icon="app/resources/icons/ic_person_white_24px.svg"></md-icon>
-			</md-button>
-			<md-button class="dashboard-button-fab" style="float: right;">
-				<md-icon md-svg-icon="app/resources/icons/ic_settings_white_24px.svg"></md-icon>
-			</md-button>
-		</div>
-		<div flex="8" style="background-color: #95a5a6; height: 8%;">
-			No deberias leer esto
-		</div>
-	</div>
-
+		<my-sidebar></my-sidebar>
+		<!-- Sider-bar here -->
 	<!-- Left Space -->
 	<div flex="5"></div>
 	<!-- Center -->
-	<div class="center" flex-offset="20" flex="50" style=" background-color: #FAFAFA;">
-		<h1>Centerr</h1>
+	<div class="center" flex-offset="20" flex="50">
+		<my-center></my-center>
 	</div>
 	<!-- Rigth Space -->
 	<div flex="5"></div>
-
 	<!-- Right --> 
 	<div class="hidden" flex="20" style="height: 100%; position: fixed; right: 0; width: 250px;">
 		<div flex="8" style="background: #95a5a6; height: 28%">Notificaciones</div>
 		<div flex="74" style="visibility: hidden; height: 30%"></div>
 		<div flex="8" style="background: #E0E0E0; height: 28%; border: 10px;">
-			<md-toolbar layout="row" class="md-hue-3">
-      			<div class="md-toolbar-tools" style="background-color: #7986CB;">
-        			<span style="color: white">Chat</span>
-      			</div>
-    		</md-toolbar>
-    		<md-content>
-		      	<md-list class="make-scrollable" flex>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Jorge Solis</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="https://i.imgur.com/kA3SmWq.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Felipe Acuña</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="http://i0.kym-cdn.com/entries/icons/facebook/000/016/546/hidethepainharold.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Marco Pinilla</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="http://cdn.ebaumsworld.com/mediaFiles/picture/718392/84890874.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Felipe Acuña</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="http://i.imgur.com/x16uR0p.png" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Felipe Acuña</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="https://pbs.twimg.com/media/C_HiysOXgAAbJtf.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Felipe Acuña</h3>
-			          	</div>
-		        	</md-list-item>
-		        	<md-list-item class="md-3-line" ng-click="null">
-		        		<img ng-src="https://pbs.twimg.com/profile_images/896540882148745219/znT0TbV4_400x400.jpg" class="md-avatar" alt="{{item.who}}" />
-			          	<div class="md-list-item-text" layout="column">
-			            	<h3>Felipe Acuña</h3>
-			          	</div>
-		        	</md-list-item>
-		      	</md-list>
-	    	</md-content>
+		<!-- Chat -->
+		<my-chat></my-chat>
 		</div>
 	</div>
 </div>

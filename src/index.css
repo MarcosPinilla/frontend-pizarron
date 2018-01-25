@@ -1,14 +1,21 @@
-html, body {
+body {
   /*background-color: azure;*/
   background-color: white;
   color: #7986CB;
-  font-family: "Segoe UI";
   background-image: url('app/resources/img/profesor.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  margin-top: 2em;
+  margin-top: 4em;
+}
+
+.view-toolbar {
+  height: 20%;
+}
+
+.view-ui {
+  height: 80%;
 }
 
 .landing-div {
@@ -167,3 +174,30 @@ md-list.make-scrollable {
     height: 300px;
     overflow-y: scroll;
 }
+
+.post {
+  color: white;
+  /*background-color: #bdc3c7;*/
+}
+
+.post md-toolbar {
+  background-color: #7986CB;
+}
+
+.preview { 
+  height: 500px;
+  overflow: hidden;
+  border-bottom: 2px solid #7f8c8d;
+}
+
+.post-card {
+  margin-top: 30px;
+  border-radius: 4px;
+}
+
+.center-content {
+  background-color: red;
+}
+
+
+
