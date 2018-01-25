@@ -79,9 +79,9 @@
     vm.crearmaterial = function (material) {
       if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
         console.log(material);
-        MaterialService.save(material)
+        //MaterialService.save(material)
         $mdDialog.hide();
-        $state.go('editdocument');
+        //$state.go('editdocument');
       }
     };     
 
