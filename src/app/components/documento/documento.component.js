@@ -204,7 +204,7 @@
 
 		//Se crea una variable a partir del contenedor del canvas, lo que permitirá
 		//reconocer las teclas presionadas en el mismo.
-		var canvasWrapper = document.getElementById('todocanvas');
+		var canvasWrapper = document.getElementById('canvas');
 		canvasWrapper.tabIndex = 1000;
 		canvasWrapper.addEventListener("keydown", function(e){
 			e = e || window.event;
@@ -403,11 +403,6 @@
 			}
 		}
 
-		//var json = panelcanvas.toJSON();
-    	console.log(json);
-    	var json = canvas.toJSON();
-    	console.log(json);
-
     	//Subir imágen desde computador
 		document.getElementById('archivo').addEventListener("change", function (e) {
 		  var file = e.target.files[0];
@@ -489,7 +484,27 @@
 		        }
 			});  
 		};
-			
+
+		vm.obtener = function() {
+			var json = canvas.toJSON();
+    		console.log(json);
+
+    		var svg = canvas.toSVG();
+    		console.log(svg);
+
+			var canvasAsJson = JSON.stringify(json);
+			console.log(canvasAsJson);
+		}
+    	
+		vm.load = function() {
+			var json = document.getElementById("load").value;
+			console.log(json);
+			canvas.loadFromJSON(json);
+		}	
+
+
+
+
 		}
 
 })();
