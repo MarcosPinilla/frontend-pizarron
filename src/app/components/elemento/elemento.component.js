@@ -27,13 +27,30 @@
     }
   }]);
 
-  function elementoCtrl() {
+  elementoCtrl.$inject = ['ElementoService'];
+
+  function elementoCtrl(ElementoService) {
     var vm = this;
 
-    vm.elemento={};
+    vm.elemento={
+      descripcion_elemento: "el kratos",
+      id_tipo_elemento: 1,
+      nombre_archivo: "kratos xd"
+    };
+    vm.elementos={};
 
-    vm.crear = function (modelo){
-      console.log(modelo);
+    ElementoService.query().$promise.then(function (data) {
+      vm.elementos = data;
+      console.log(vm.elementos);
+    });
+
+    vm.crear = function (){
+      ElementoService.save(vm.elemento);
+      ElementoService.query().$promise.then(function (data) {
+      vm.elementos = data;
+      console.log(vm.elementos);
+    });
+      //console.log("se guardo elemento" + vm.elemento);
     };
 
 

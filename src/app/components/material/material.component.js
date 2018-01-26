@@ -15,5 +15,10 @@
     var vm = this;
 
     vm.materiales = {};
+
+    MaterialService.query().$promise.then(function (data) {
+      vm.materiales = data;
+      console.log(vm.materiales);
+    });
   }
 })();
