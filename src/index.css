@@ -116,9 +116,7 @@ titular {
 }
 
 .dashboard {
-  height: 100%;
-  width: 100%;
-  background: rgba(123, 134, 198, .4)
+  background-color: #E0E0E0; 
 }
 
 .titulo {
@@ -193,7 +191,7 @@ md-list.make-scrollable {
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 70%;
   height: auto;
    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -214,4 +212,20 @@ md-list.make-scrollable {
   background-color: red;
 }
 
+.sidebar {
+  background-color: #ecf0f1; 
+  color:#FAFAFA; height: 100%; 
+  position: fixed; 
+  left: 0; 
+  width: 200px;
+  min-width: 210px;
+}
 
+.sidebar-button {
+  text-align: left;
+  height: 6%;
+}
+
+.button-text {
+  margin-left: 10px;
+}
