@@ -35,6 +35,14 @@
 		// y unificado al mirar el html
 		var vm = this;
 
+		/*
+		//Forma de iniciar el editar documento
+		if (vm.contenido_material === '') {
+			vm.cargar();
+		}
+
+		*/
+
 		//MENU BAR
 		vm.settings = {
 			printLayout: true,
@@ -510,7 +518,7 @@
 		vm.guardar = function(documento) {
 			var json = canvas.toJSON();
 			var canvasAsJson = JSON.stringify(json);
-			var json = {objects: canvasAsJson}
+			json = {objects: canvasAsJson}
 			vm.id = 1;
 			//documento.contenido_material = canvasAsJson;
 			ActualizarContenidoMaterialService.update({id: vm.id}, json, function() {
@@ -521,13 +529,10 @@
 
 		//Método para cargar el documento ya guardado en la base de datos
 		vm.cargar = function() {
-			var json = canvas.toJSON();
-			var canvasAsJson = JSON.stringify(json);
-			var json = {objects: canvasAsJson}
 			vm.id = 1;
 			//documento.contenido_material = canvasAsJson;
 			ObtenerContenidoMaterialService.get({id: vm.id}, function(data) {
-				console.log("Obtenido con exito con éxito");
+				console.log("Obtenido con éxito");
 				vm.nuevo = data;
 				console.log(vm.nuevo.contenido_material);
 				canvas.loadFromJSON(vm.nuevo.contenido_material);
