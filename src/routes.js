@@ -48,7 +48,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/editdocument/:id',
       controller: 'EditarDocumento.controller',
       controllerAs: 'vm',
-      templateUrl: 'app/components/editdocument/editdocument.html'
+      templateUrl: 'app/components/editdocument/editdocument.component.html'
     })
     .state('usuario', {
       url: '/usuario',
