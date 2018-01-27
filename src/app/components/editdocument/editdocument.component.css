@@ -4,9 +4,9 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
 
 .contenedorDnD {
-	width: 700px;
-	height: 500px;
-	margin: 0;
+  width: 700px;
+  height: 500px;
+  margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #F0F0F0 !important;
@@ -14,10 +14,10 @@
 }
 
 .panelShapes {
-	width: 250px;
-	height:500px; 
-	float:right;
-	margin: 0;
+  width: 250px;
+  height:500px; 
+  float:right;
+  margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #F0F0F0 !important;
@@ -41,6 +41,8 @@
   line-height: 1.6rem; }
 
 
+
+
 /*
 Copyright 2016 Google Inc. All Rights Reserved. 
 Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
@@ -50,13 +52,13 @@ Use of this source code is governed by an MIT-style license that can be foundin 
 }
 
 @font-face {
-	font-family: 'Shadows Into Light', cursive;
+  font-family: 'Shadows Into Light', cursive;
 }
 
 @font-face {
-	font-family: 'Dancing Script', cursive;
+  font-family: 'Dancing Script', cursive;
 }
 
 @font-face {
-	font-family: 'Source Code Pro', monospace;
+  font-family: 'Source Code Pro', monospace;
 }

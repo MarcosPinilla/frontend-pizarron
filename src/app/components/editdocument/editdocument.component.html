@@ -1,3 +1,4 @@
+
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
       <md-toolbar-filler layout layout-align="center center">
@@ -8,12 +9,12 @@
         <md-menu-bar>
           <md-menu>
             <button ng-click="$mdMenu.open()">
-              File
+              Archivo
             </button>
             <md-menu-content>
               <md-menu-item>
                 <md-button ng-click="vm.sampleAction('share', $event)">
-                  Share...
+                  Compartir...
                 </md-button>
               </md-menu-item>
               <md-menu-divider></md-menu-divider>
@@ -46,11 +47,6 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="vm.cargar()">
-                  Cargar
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
                 <md-button disabled="disabled" ng-click="vm.sampleAction('Rename', $event)">
                   Rename
                 </md-button>
@@ -66,18 +62,18 @@
           </md-menu>
           <md-menu>
             <button ng-click="$mdMenu.open()">
-              Edit
+              Editar
             </button>
             <md-menu-content>
               <md-menu-item class="md-indent">
                 <md-button id="undo" ng-click="vm.undo('undo', $event)">
-                  Undo
+                  Deshacer
                   <span class="md-alt-text">{{ 'M-Z' | keyboardShortcut }}</span>
                 </md-button>
               </md-menu-item>
               <md-menu-item class="md-indent">
                 <md-button id="redo" ng-click="vm.redo('redo', $event)">
-                  Redo
+                  Rehacer
                   <span class="md-alt-text">{{ 'M-Y' | keyboardShortcut }}</span>
                 </md-button>
               </md-menu-item>
@@ -186,7 +182,7 @@
      <div layout="row">
   <div flex="10">
     <md-input-container style="margin-right: 10px;">
-        <label>Font</label>
+        <label>Fuente</label>
         <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
           
           <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
@@ -197,7 +193,7 @@
   </div>
   <div flex="10" >
        <md-input-container style="margin-right: 10px;">
-        <label>Font size</label>
+        <label>Tamaño de fuente</label>
         <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto">
           
           <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
@@ -216,22 +212,47 @@
 
   <md-content class="page-container">
       <md-card class="page" style="height: 550px;background-color: #f2f2f2;">
-        <md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
+        <!--<md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
+-->
+        <div layout="row">
+          <div flex=50>
+           <md-button  style="width:80px; height:100px;" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
+          <md-icon md-svg-icon="app/resources/fabric/textbox.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+          </md-button>
+        </div>
 
-        <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
+       <!-- <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
+-->
+        <div flex=50>
+         <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarFigura()">
+          <md-icon md-svg-icon="app/resources/fabric/rect.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+        </md-button>
+      </div>
+
+        </div>
+       
 
         <input type="file" id="archivo">
         
-        <span>URL:</span>
-        <input type="text" id="url">
-        <md-button class="md-raised md-primary" ng-click="vm.subir()">Subir desde URL</md-button>
-  
-        <md-button class="md-raised md-primary" ng-click="vm.obtener()">Obtener JSON</md-button>
+       <md-content>
         
-        <span>Cargar:</span>
-        <input type="text" id="load">
-        <md-button class="md-raised md-primary" ng-click="vm.load()">Cargar JSON</md-button>
-    
+           <div layout="row">
+           
+            <div flex="60">
+          <md-input-container>
+ 
+              
+                <label>URL</label>
+                <input id="url" type="text" >
+              
+          </md-input-container>
+        </div>
+         <div flex="40">
+              <md-button class="md-raised md-primary" ng-click="vm.subir()">Subir</md-button>
+            </div>
+        </div>        
+      </md-content>
+      
       </md-card>
     </md-content>
   

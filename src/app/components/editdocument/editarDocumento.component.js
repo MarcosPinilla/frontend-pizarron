@@ -27,20 +27,16 @@
 
   function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService) {
     var vm = this;
-    console.log($stateParams.id);
 
     vm.documento = MaterialService.get({id: $stateParams.id});
 
     vm.documento.$promise.then(function(data){
-      console.log(data);
       vm.documento = data;
-      console.log(vm.documento.titulo_material);
+      
       //Forma de iniciar el editar documento
-      console.log(vm.documento.contenido_material)
       if (vm.documento.contenido_material !== undefined) {
-        console.log("what")
         vm.cargar();
-    }
+      }
     });
 
     //MENU BAR
@@ -69,6 +65,7 @@
       vm.esTexto=true;
       vm.mensaje="nada";
       vm.cortar = false;
+      vm.copiar = false;
       vm.enCanvas = false;
       var _clipboard = null;
       var ctrlDown=false;
@@ -140,25 +137,25 @@
           // when font is loaded, use it.
           canvas.getActiveObject().set("fontFamily", font);
           canvas.renderAll();
-      }).catch(function(e) {
-        console.log(e)
-        alert('font loading failed ' + font);
-      });
-    }
+        }).catch(function(e) {
+          console.log(e)
+          alert('font loading failed ' + font);
+        });
+      }
 
-    vm.usarFontSize = function(fontsize) {
-      canvas.getActiveObject().set("fontSize", fontsize);
-      canvas.renderAll();  
-    }
-    
-    vm.generarFigura=function() {
-      var rect = new fabric.Rect({
-        top : 100,
-        left : 100,
-        width : 60,
-        height : 70,
-        fill : 'blue'
-      });
+      vm.usarFontSize = function(fontsize) {
+        canvas.getActiveObject().set("fontSize", fontsize);
+        canvas.renderAll();  
+      }
+
+      vm.generarFigura=function() {
+        var rect = new fabric.Rect({
+          top : 100,
+          left : 100,
+          width : 60,
+          height : 70,
+          fill : 'blue'
+        });
 
           //canvas.add(rect).setActiveObject(rect);
           canvas.add(rect);
@@ -209,7 +206,7 @@
           canvas.getActiveObject().remove();
         }
 
-    }
+      }
 
     //Se crea una variable a partir del contenedor del canvas, lo que permitirá
     //reconocer las teclas presionadas en el mismo.
@@ -235,7 +232,7 @@
 
 
     vm.copy = function() {
-
+      vm.copiar=true;
       var activeGroup = canvas.getActiveGroup();
       if (activeGroup) {
         activeGroup.clone(function(cloned) {
@@ -248,11 +245,13 @@
         });
         vm.esGrupo = false;
       }
+
       vm.cortar = false;
     }
 
     //Función para cortar, se llama desde ctrl + x y desde panel de edición
     vm.cut = function() {
+      vm.copiar=false;
       //Se obtiene el grupo seleccionado actualmente
       var activeGroup = canvas.getActiveGroup();
 
@@ -284,43 +283,45 @@
     }
 
     vm.paste = function() {
-      
-      // clone again, so you can do multiple copies.
-      if(vm.esGrupo){
-        canvas.discardActiveGroup();
-      }else{
-        canvas.discardActiveObject();
-      }
-      _clipboard.clone(function(clonedObj) {
-        canvas.discardActiveObject();
-        clonedObj.set({
-          left: clonedObj.left + 10,
-          top: clonedObj.top + 10,
-          evented: true,
-        });
-        console.log(vm.esGrupo)
-        if (vm.esGrupo) {
-          //clonedObj.canvas = canvas;
-          var arrayObj = clonedObj.getObjects();
-          for (let i in arrayObj) {
-            canvas.add(arrayObj[i]);
-          }
-           //clonedObj.setCoords();
-           _clipboard.top += 10;
-           _clipboard.left += 10;
-           canvas.setActiveGroup(clonedObj);
-           canvas.renderAll();
-          } else {
-            canvas.add(clonedObj);
-            _clipboard.top += 10;
-            _clipboard.left += 10;
-            canvas.setActiveObject(clonedObj);
-            canvas.renderAll();
-          }
-        });
+      if(vm.cortar || vm.copiar){
+        // clone again, so you can do multiple copies.
+        if(vm.esGrupo){
+          canvas.discardActiveGroup();
+        }else{
+          canvas.discardActiveObject();
+        }
+        _clipboard.clone(function(clonedObj) {
+          canvas.discardActiveObject();
+          clonedObj.set({
+            left: clonedObj.left + 10,
+            top: clonedObj.top + 10,
+            evented: true,
+          });
+          console.log(vm.esGrupo)
+          if (vm.esGrupo) {
+            //clonedObj.canvas = canvas;
+            var arrayObj = clonedObj.getObjects();
+            for (let i in arrayObj) {
+              canvas.add(arrayObj[i]);
+            }
+             //clonedObj.setCoords();
+             _clipboard.top += 10;
+             _clipboard.left += 10;
+             canvas.setActiveGroup(clonedObj);
+             canvas.renderAll();
+            } else {
+              canvas.add(clonedObj);
+              _clipboard.top += 10;
+              _clipboard.left += 10;
+              canvas.setActiveObject(clonedObj);
+              canvas.renderAll();
+            }
+          });
 
-      if(vm.cortar) {
-        _clipboard = null;
+        if(vm.cortar) {
+          _clipboard = null;
+          vm.cortar=false;
+        }
       }
     }
 
@@ -425,7 +426,7 @@
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
-      });
+        });
         };
         reader.readAsDataURL(file);
       });
@@ -450,8 +451,8 @@
            // if object is too big ignore
            if(obj.currentHeight > canvas.height || obj.currentWidth > canvas.width){
             return;
-           }        
-           obj.setCoords();        
+          }        
+          obj.setCoords();        
           // top-left  corner
           if(obj.getBoundingRect().top < 0 || obj.getBoundingRect().left < 0){
             obj.top = Math.max(obj.top, obj.top-obj.getBoundingRect().top);
@@ -462,7 +463,7 @@
             obj.top = Math.min(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
             obj.left = Math.min(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
           }
-      });
+        });
 
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
     vm.subir = function() {
@@ -474,7 +475,7 @@
         canvas.add(object);
         canvas.renderAll();
           //canvas.setActiveObject(object);    
-      }, null, {crossOrigin: 'Anonymous'});
+        }, null, {crossOrigin: 'Anonymous'});
     }
 
 
@@ -518,6 +519,7 @@
     vm.guardar = function(documento) {
       var json = canvas.toJSON();
       var canvasAsJson = JSON.stringify(json);
+
       json = {objects: canvasAsJson}
       //documento.contenido_material = canvasAsJson;
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
@@ -532,7 +534,6 @@
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
-        console.log(vm.nuevo.contenido_material);
         canvas.loadFromJSON(vm.nuevo.contenido_material);
       });
     }
