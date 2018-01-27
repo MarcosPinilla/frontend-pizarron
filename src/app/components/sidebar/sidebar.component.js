@@ -70,6 +70,7 @@
     vm.tipo_materiales = tipomaterial;
 
     vm.material = {};
+    vm.material_id = '';
 
     /*console.log(vm.usuario);
     console.log(vm.asignaturas);
@@ -78,9 +79,16 @@
 
     vm.crearmaterial = function (material) {
       if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
-        console.log(material);
-        //MaterialService.save(material)
-        $mdDialog.hide();
+        //console.log(material);
+        MaterialService.save(material, function (res){
+          console.log(res);
+          vm.material_id = res.id;
+          $state.go('editdocument', {id: res.id});
+          $mdDialog.hide();
+        },function (err) {
+          console.log(err);
+        });
+     
         //$state.go('editdocument');
       }
     };     
