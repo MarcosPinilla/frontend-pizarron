@@ -69,6 +69,7 @@
 	    vm.esTexto=true;
 	    vm.mensaje="nada";
 	    vm.cortar = false;
+	    vm.copiar = false;
 	    vm.enCanvas = false;
 	    var _clipboard = null;
 	    var ctrlDown=false;
@@ -235,7 +236,7 @@
 
 
 		vm.copy = function() {
-
+			vm.copiar=true;
 			var activeGroup = canvas.getActiveGroup();
 			if (activeGroup) {
 				activeGroup.clone(function(cloned) {
@@ -248,11 +249,13 @@
 				});
 				vm.esGrupo = false;
 			}
+
 			vm.cortar = false;
 		}
 
 		//Función para cortar, se llama desde ctrl + x y desde panel de edición
 		vm.cut = function() {
+			vm.copiar=false;
 			//Se obtiene el grupo seleccionado actualmente
 			var activeGroup = canvas.getActiveGroup();
 
@@ -284,43 +287,45 @@
 		}
 
 		vm.paste = function() {
-			
-			// clone again, so you can do multiple copies.
-			if(vm.esGrupo){
-				canvas.discardActiveGroup();
-			}else{
-				canvas.discardActiveObject();
-			}
-			_clipboard.clone(function(clonedObj) {
-				canvas.discardActiveObject();
-				clonedObj.set({
-					left: clonedObj.left + 10,
-					top: clonedObj.top + 10,
-					evented: true,
-				});
-				console.log(vm.esGrupo)
-				if (vm.esGrupo) {
-					//clonedObj.canvas = canvas;
-					var arrayObj = clonedObj.getObjects();
-					for (let i in arrayObj) {
-						canvas.add(arrayObj[i]);
-					}
-					 //clonedObj.setCoords();
-					 _clipboard.top += 10;
-					 _clipboard.left += 10;
-					 canvas.setActiveGroup(clonedObj);
-					 canvas.renderAll();
-					} else {
-						canvas.add(clonedObj);
-						_clipboard.top += 10;
-						_clipboard.left += 10;
-						canvas.setActiveObject(clonedObj);
-						canvas.renderAll();
-					}
-				});
+			if(vm.cortar || vm.copiar){
+				// clone again, so you can do multiple copies.
+				if(vm.esGrupo){
+					canvas.discardActiveGroup();
+				}else{
+					canvas.discardActiveObject();
+				}
+				_clipboard.clone(function(clonedObj) {
+					canvas.discardActiveObject();
+					clonedObj.set({
+						left: clonedObj.left + 10,
+						top: clonedObj.top + 10,
+						evented: true,
+					});
+					console.log(vm.esGrupo)
+					if (vm.esGrupo) {
+						//clonedObj.canvas = canvas;
+						var arrayObj = clonedObj.getObjects();
+						for (let i in arrayObj) {
+							canvas.add(arrayObj[i]);
+						}
+						 //clonedObj.setCoords();
+						 _clipboard.top += 10;
+						 _clipboard.left += 10;
+						 canvas.setActiveGroup(clonedObj);
+						 canvas.renderAll();
+						} else {
+							canvas.add(clonedObj);
+							_clipboard.top += 10;
+							_clipboard.left += 10;
+							canvas.setActiveObject(clonedObj);
+							canvas.renderAll();
+						}
+					});
 
-			if(vm.cortar) {
-				_clipboard = null;
+				if(vm.cortar) {
+					_clipboard = null;
+					vm.cortar=false;
+				}
 			}
 		}
 

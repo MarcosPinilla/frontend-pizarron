@@ -1,61 +1,4 @@
-<!--
-<div layout="row">
-  <div flex="20" style="border: 1px solid black;">
-    <md-input-container style="margin-right: 10px;">
-        <label>Font</label>
-        <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
-          
-          <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
-          
-        </md-select>
-      </md-input-container>
-    
-  </div>
-  <div flex="20" style="border: 1px solid black;">
-       <md-input-container style="margin-right: 10px;">
-        <label>Font size</label>
-        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto">
-          
-          <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
-          
-        </md-select>
-      </md-input-container>
-  </div>
-  <div flex="20" style="border: 1px solid black;"></div>
-  <div flex="20" style="border: 1px solid black;"></div>
-  <div flex="20" style="border: 1px solid black;"></div>
-</div>
 
-<div id="todocanvas" layout="row">
-  <div flex="30" style="border: 1px solid black;">
-
-    <md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
-
-    <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
-
-	<canvas id="panelcanvas" width="250" height="500"></canvas>
-  </div>
-
-  <div flex="70" style="border: 1px solid black;">
-    <canvas id="canvas" width="700" height="500"></canvas>
-  </div>
-</div>
-
-<div layout="row">
-  <div flex="50">
-    <button ng-click="vm.exportar()">Exportar a pdf</button>
-  </div>
-  <div flex="50">
-    <input type="file" id="archivo"><br/>
-  </div>  
-</div>
-<div layout="row">
-  <div flex="50">
-    <input type="text" id="url"><br/>
-    <button ng-click="vm.subir()">Subir desde URL</button>
-  </div>  
-</div>
--->
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
       <md-toolbar-filler layout layout-align="center center">
@@ -274,22 +217,71 @@
 
   <md-content class="page-container">
       <md-card class="page" style="height: 550px;background-color: #f2f2f2;">
-        <md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
+        <!--<md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
+-->
+        <div layout="row">
+          <div flex=50>
+           <md-button  style="width:80px; height:100px;" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
+          <md-icon md-svg-icon="app/resources/fabric/textbox.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+          </md-button>
+        </div>
 
-        <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
+       <!-- <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
+-->
+        <div flex=50>
+         <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarFigura()">
+          <md-icon md-svg-icon="app/resources/fabric/rect.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+        </md-button>
+      </div>
+
+        </div>
+       
 
         <input type="file" id="archivo">
         
-        <span>URL:</span>
-        <input type="text" id="url">
-        <md-button class="md-raised md-primary" ng-click="vm.subir()">Subir desde URL</md-button>
+       <md-content>
+        
+           <div layout="row">
+           
+            <div flex="60">
+          <md-input-container>
+ 
+              
+                <label>URL</label>
+                <input id="url" type="text" >
+              
+          </md-input-container>
+        </div>
+         <div flex="40">
+              <md-button class="md-raised md-primary" ng-click="vm.subir()">Subir</md-button>
+            </div>
+        </div>
+
+        <div layout="row">
+           
+            <div flex="60">
+          <md-input-container>
+ 
+              
+                <label>Cargar JSON</label>
+                <input id="load" type="text" >
+              
+          </md-input-container>
+        </div>
+         <div flex="40">
+              <md-button class="md-raised md-primary"ng-click="vm.load()">Cargar</md-button>
+            </div>
+        </div>
+        
+      </md-content>
+      
   
         <md-button class="md-raised md-primary" ng-click="vm.obtener()">Obtener JSON</md-button>
-        
+        <!--
         <span>Cargar:</span>
         <input type="text" id="load">
         <md-button class="md-raised md-primary" ng-click="vm.load()">Cargar JSON</md-button>
-    
+    -->
       </md-card>
     </md-content>
   
