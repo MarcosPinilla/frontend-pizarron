@@ -45,9 +45,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       isPrivate: true
     })
     .state('editdocument', {
-      url: '/editdocument',
-      component: 'editdocument',
-      isPrivate: true
+      url: '/editdocument/:id',
+      controller: 'EditarDocumento.controller',
+      controllerAs: 'vm',
+      templateUrl: 'app/components/editdocument/editdocument.html'
     })
     .state('usuario', {
       url: '/usuario',
