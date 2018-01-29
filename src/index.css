@@ -11,9 +11,13 @@ body {
   margin-top: 4em;
 }
 
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: #5C6BC0;
+}
+
 a {
     text-decoration: none;
-    color: #5C6BC0;
+    color: #3949AB;
 }
 
 .view-toolbar {
@@ -152,15 +156,13 @@ titular {
 
 .dashboard-button {
   /*Override*/
-  font-size: 18px;
+  font-size: 14px;
   border-radius: 0px;
   text-transform: none;
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
   width: 100%;
   min-width: 100px;
 
-  margin-bottom: 2px;
   text-align: center;
   vertical-align: middle;
 }
@@ -209,23 +211,60 @@ md-list.make-scrollable {
 }
 
 .center-content {
-  background-color: red;
 }
 
-.sidebar {
-  background-color: #ecf0f1; 
-  color:#FAFAFA; height: 100%; 
+.sidebar-left {
+  background-color: #3F51B5; 
+  color:#FAFAFA; 
+  height: 100%; 
   position: fixed; 
   left: 0; 
   width: 200px;
   min-width: 210px;
 }
 
+.sidebar-right {
+  background-color: #E8EAF6;
+  position: fixed;
+  right: 0;
+  widows: 200px;
+  min-width: 200px;
+}
+
+.sidebar-buttons {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .sidebar-button {
   text-align: left;
-  height: 6%;
+  height: 5%;
 }
 
 .button-text {
-  margin-left: 10px;
 }
+
+.sidebar-perfil {
+  text-align: center;
+}
+
+.img-circle {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-radius: 50%;
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar-left-divider {
+  border-top-width: 4px; 
+}
+
+.sidebar-right-divider {
+  border-top-width: 2px;
+}
+
