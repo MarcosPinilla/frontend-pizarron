@@ -1,0 +1,13 @@
+<div style="padding-left: 200px; padding-right: 200px;">
+	<h2 class="tituloDialogo"><strong>Añadir Elemento:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Nombre de Archivo</label>
+		<input ng-model="vm.newelemento.nombre_archivo" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Descripción</label>
+		<input ng-model="vm.newelemento.descripcion_elemento" type="text" required>
+	</md-input-container>
+	<center><center><input type="file" fileread="vm.newelemento.contenido_archivo"></center></center>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">añadir elemento</md-button></center>
+</div>
