@@ -6,20 +6,21 @@
     </center>
     <md-divider></md-divider>
     <md-content layout-padding layout-wrap>
-        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirprofesor()" md-theme="dark-green" aria-label="addprofe">añadir elemento</md-button>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">añadir elemento</md-button>
     </md-content>
     <md-list ng-cloak>
       <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="person in vm.people" ng-click="vm.goToPerson(person, $event)" class="noright listaObjetos">
-        <img alt="{{ person.nombres_profesor }}" ng-src="{{ person.url_foto_profesor }}" class="md-avatar" />
-        <p>{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</p>
+      <md-list-item ng-repeat="elemento in vm.elementos" ng-click="vm.goToElemento(elemento, $event)" class="noright listaObjetos">
+        <img ng-src="{{ elemento.contenido_elemento }}" class="md-avatar" />
+        <p>{{ elemento.descripcion_elemento}}</p>
         <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarprofesor(person)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
-        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarprofesor(person.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
+        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarelemento(elemento.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
       
         <!--<md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
         <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
       </md-list-item>
     </md-list>  
+        
     
 
   </md-content>
