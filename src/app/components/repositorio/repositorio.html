@@ -1,0 +1,14 @@
+<div class="repository-left hidden" style="height: 100%;">
+	<div class="div-buscador" flex-offset="10" flex="80">
+		
+		<md-input-container class="buscador-repo" flex="100">
+			<label>Buscador</label>
+			<input ng-model="buscador" type="text" >
+		</md-input-container>
+		
+	</div>
+	<div ng-repeat="elemento in vm.elementos|filter:buscador">
+		<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
+	</div>
+</div>
+<!-- -->

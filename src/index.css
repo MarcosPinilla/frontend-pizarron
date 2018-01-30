@@ -213,6 +213,16 @@ md-list.make-scrollable {
 .center-content {
 }
 
+.repository-left {
+  background-color: #3f4652; 
+  color:#FAFAFA; 
+  height: 100%; 
+  position: fixed; 
+  left: 0; 
+  width: 300px;
+  min-width: 210px;
+}
+
 .sidebar-left {
   background-color: #3F51B5; 
   color:#FAFAFA; 
@@ -268,3 +278,26 @@ md-list.make-scrollable {
   border-top-width: 2px;
 }
 
+.img-repository{
+  width: 130px;
+  padding: 5px;
+  float: left;
+}
+
+.buscador-repo{
+  margin-left: 25px;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+.div-buscador{
+  background-color: white;
+  color: black;
+  position: relative;
+  box-sizing: border-box;
+  border: 0 none #fff;
+  border-radius: 7px;
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(63,70,82,.67);
+  margin-top: 7px;
+}

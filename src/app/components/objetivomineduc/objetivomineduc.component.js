@@ -9,7 +9,7 @@
     controllerAs: 'vm'
   });
 
-  objetivomineduc.$inject = ['$mdDialog', 'ObjetivoMineducService'];
+  objetivomineducCtrl.$inject = ['$mdDialog', 'ObjetivoMineducService'];
 
   function objetivomineducCtrl($mdDialog, ObjetivoMineducService) {
     var vm = this;
