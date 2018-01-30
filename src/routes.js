@@ -99,6 +99,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/repositorio',
       component: 'repositorio',
       isPrivate: true    
+    })
+    .state('etiqueta', {
+      url: '/etiqueta',
+      component: 'etiqueta',
+      isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
 }
