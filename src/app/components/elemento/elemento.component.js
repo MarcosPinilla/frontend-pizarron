@@ -108,34 +108,32 @@
   function dialogoController($mdDialog, elemento, ElementoService, $state) {
     var vm = this;
     vm.elemento = elemento;
-    vm.newelemento={
-      id_tipo_elemento: 1
-    };
+    
     vm.upelemento = {};
     vm.elementos = {};
-  
+
+    vm.etiquetas=[];
+    
+
+    vm.newelemento={
+      id_tipo_elemento: 1,
+      etiquetas: vm.etiquetas
+    };
 
     ElementoService.query().$promise.then(function (data) {
       vm.elementos = data;
     });
 
+    vm.anadiretiqueta = function (etiqueta) {
+      vm.etiquetas.push(etiqueta);
+    }
+
     vm.anadirelemento = function () {
       ElementoService.save(vm.newelemento);
+      vm.etiquetas=[];
       $state.go('elemento');
       vm.hide();
     };
-
-    vm.anadirobjetivomineduc = function (asignatura) {
-      //AsignaturaService.save(asignatura);
-      vm.hide();
-    };
-
-    vm.actualizarasignatura = function (asignatura) {
-      /**AsignaturaService.update({id: vm.asignatura.id}, asignatura, function () {
-        vm.hide();
-      }, function () {});*/
-    };
-
 
     vm.hide = function () {
       $mdDialog.hide();
