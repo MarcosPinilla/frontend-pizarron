@@ -1,0 +1,16 @@
+<div style="padding-left: 200px; padding-right: 200px;">
+	<h2 class="tituloDialogo"><strong>Añadir Etiqueta:</strong></h2>
+	<md-input-container class="md-block">
+		<label>Nombre de Etiqueta</label>
+		<input ng-model="vm.newetiqueta.nombre_etiqueta" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Elemento</label>
+	    <md-select required="true" ng-model="vm.newetiqueta.id_elemento">
+	    	<md-option ng-repeat="elemento in vm.elementos" ng-value="elemento.id">
+	    		{{elemento.descripcion_elemento}}
+	    	</md-option>
+	    </md-select>
+	</md-input-container>
+	<center><md-button class="md-raised md-primary" ng-click="vm.anadiretiqueta()" md-theme="dark-green" aria-label="addprofe">añadir etiqueta</md-button></center>
+</div>

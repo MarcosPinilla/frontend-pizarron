@@ -1,29 +1,37 @@
-<div class="sidebar hidden" flex="20">
+<div class="sidebar-left hidden" flex="20" style="height: 100%;">
+	<div class="sidebar-perfil" flex style="height: 14em;">
+		<img class="img-circle preview" src="app/resources/img/perfil.jpg">
+		<span><h4>Bienvenido Felipe!</h4></span>
+	</div>
 	<!-- Buttons -->
-	<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #43A047;" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
-		<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_note_add_white_24px.svg"></md-icon> Nuevo Documento
-	</md-button>
-	<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #039BE5">
-		<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_folder_white_24px.svg"></md-icon> Mi Material
-	</md-button>
-	<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #E91E63">
-		<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon> Mis Favoritos
-	</md-button>
-	<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #FF9800">
-		<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_info_white_24px.svg"></md-icon> Otra Opcion
-	</md-button>
-	<div class="dashboard-button" flex="100" style="background-color: #FAFAFA; height: 60%">
-		Espacio vacio
-	</div>
-	<div class="row" style="background-color: #95a5a6; height: 10%;">
-		<md-button class="dashboard-button-fab">
-			<md-icon md-svg-icon="app/resources/icons/ic_person_white_24px.svg"></md-icon>
-		</md-button>
-		<md-button class="dashboard-button-fab" style="float: right;">
-			<md-icon md-svg-icon="app/resources/icons/ic_settings_white_24px.svg"></md-icon>
-		</md-button>
-	</div>
-	<div flex="8" style="background-color: #95a5a6; height: 8%;">
-		No deberias leer esto
+	<div class="sidebar-buttons" layout="row">
+		<div flex="5"></div>
+		<div layout="column" flex="90" flex-offset="5">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #43A047;" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
+				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_note_add_white_24px.svg"></md-icon> Nuevo Documento
+			</md-button>
+			<md-divider class="sidebar-left-divider"></md-divider>
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #039BE5">
+				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_folder_white_24px.svg"></md-icon> Mi Material
+			</md-button>
+			<md-divider class="sidebar-left-divider"></md-divider>
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #E91E63">
+				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon> Mis Favoritos
+			</md-button>
+			<md-divider class="sidebar-left-divider"></md-divider>
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #FF9800">
+				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_info_white_24px.svg"></md-icon> Otra Opcion
+			</md-button>
+			<md-divider class="sidebar-left-divider"></md-divider>
+			<div class="row" style="background-color: #5C6BC0; height: 6%;">
+				<md-button class="dashboard-button-fab">
+					<md-icon md-svg-icon="app/resources/icons/ic_settings_white_24px.svg"></md-icon>
+				</md-button>
+				<md-button class="dashboard-button-fab" ng-click="vm.logout()" style="float: right;">
+					<md-icon md-svg-icon="app/resources/icons/ic_exit_to_app_white_24px.svg"></md-icon>
+				</md-button>
+			</div>
+		</div>
+		<div flex=5></div>
 	</div>
 </div>

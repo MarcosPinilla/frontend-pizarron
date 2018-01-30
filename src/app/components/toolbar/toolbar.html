@@ -1,50 +1,51 @@
-<md-toolbar class="md-hue-1" style="position: fixed; top: 0;">
-  <div class="md-toolbar-tools">
+<div layout="column">
+  <md-toolbar class="tooolbar" style="position: fixed; top: 0; height: 6%">
+    <div class="md-toolbar-tools">
 
-    <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-      <md-icon md-svg-icon="app/resources/icons/menu1.svg"></md-icon>
-    </md-button>
+      <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+        <md-icon md-svg-icon="app/resources/icons/menu1.svg"></md-icon>
+      </md-button>
 
 
-    <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
-    <div flex="" md-truncate>
-      <md-button ui-sref="landing" id="logo-toolbar" aria-label="logo">
-        <img src="app/resources/img/cabecera_logotipo.png" class="md-card-image" id="logo">
+      <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
+      <div flex="" md-truncate>
+        <md-button ui-sref="landing" id="logo-toolbar" aria-label="logo">
+          <img src="app/resources/img/cabecera_logotipo.png" class="md-card-image" id="logo">
+        </md-button>
+      </div>
+
+      <md-button ng-if="!vm.isLogged">
+        NOSOTROS
+      </md-button>
+
+      <md-button ng-if="!vm.isLogged">
+        TESTIMONIOS
+      </md-button>
+
+      <md-button ng-if="!vm.isLogged">
+        CONTACTO
+      </md-button>
+
+
+      <md-button ng-if="!vm.isLogged" ui-sref="login">
+        INICIAR SESIÓN
+      </md-button>
+
+      <md-button ng-if="!vm.isLogged" class="contratar-toolbar md-raised md-warn">
+        CONTRATAR
+      </md-button>
+      
+      <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
+        CERRAR SESIÓN
+      </md-button>
+
+      <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
+        <md-icon md-svg-icon="app/resources/icons/usuario.svg"></md-icon>
+      </md-button>
+
+      <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
+        <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
       </md-button>
     </div>
-
-    <md-button>
-      NOSOTROS
-    </md-button>
-
-    <md-button>
-      TESTIMONIOS
-    </md-button>
-
-    <md-button>
-      CONTACTO
-    </md-button>
-
-
-    <md-button ng-if="!vm.isLogged" ui-sref="login">
-      INICIAR SESIÓN
-    </md-button>
-
-    <md-button ng-if="!vm.isLogged" class="contratar-toolbar md-raised md-warn">
-      CONTRATAR
-    </md-button>
-    
-    <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
-      CERRAR SESIÓN
-    </md-button>
-
-    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
-      <md-icon md-svg-icon="app/resources/icons/usuario.svg"></md-icon>
-    </md-button>
-
-    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
-      <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
-    </md-button>
-
-  </div>
-</md-toolbar>
+  </md-toolbar>
+</div>
