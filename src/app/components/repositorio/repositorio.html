@@ -1,3 +1,4 @@
+<!--
 <div class="repository-left hidden" style="height: 100%;">
 	<div class="div-buscador" flex-offset="10" flex="80">
 		
@@ -11,4 +12,37 @@
 		<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
 	</div>
 </div>
-<!-- -->
+ -->
+ <md-content layout-gt-sm="row" layout-padding>
+
+		<md-input-container flex="100">
+			<label>Buscador</label>
+			<input ng-model="buscador" type="text">
+		</md-input-container>
+		
+</md-content>
+<div style="overflow-y: scroll; height:200px;">
+	
+		<div ng-repeat="elemento in vm.elementos|filter:buscador">
+			<md-button aria-label="name" ng-click="vm.generarImagen(elemento.contenido_elemento)">
+				<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
+			</md-button>
+		</div>
+
+<!--
+		<div ng-repeat="elemento in vm.elementos">
+		  <div layout="row" ng-if="$even">
+		    <div flex>
+		      <md-button aria-label="name" ng-click="vm.generarImagen((vm.elementos |filter:buscador )[$index].contenido_elemento)">
+				<img ng-src="{{ (vm.elementos |filter:buscador )[$index].contenido_elemento }}" class="img-repository" />
+			</md-button>
+		    </div>
+		    <div flex>
+		      <md-button aria-label="name" ng-click="vm.generarImagen((vm.elementos |filter:buscador )[$index+1].contenido_elemento)">
+				<img ng-src="{{ (vm.elementos |filter:buscador)[$index+1].contenido_elemento }}" class="img-repository" />
+			</md-button>  
+		    </div>
+		  </div>
+		</div>
+		->>
+</div>

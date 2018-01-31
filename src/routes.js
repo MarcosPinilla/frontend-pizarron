@@ -100,11 +100,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'administrator',
       isPrivate: true
     })
+    /*
     .state('repositorio', {
       url: '/repositorio',
       component: 'repositorio',
       isPrivate: true    
     })
+    */
     .state('etiqueta', {
       url: '/etiqueta',
       component: 'etiqueta',
