@@ -533,7 +533,12 @@
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
       var json = canvas.toJSON();
-      var canvasAsJson = JSON.stringify(json);
+
+      //se comprime el json
+      var jsonComprimido = JSONC.compress( json );
+      jsonComprimido = JSONC.pack( jsonComprimido, true );
+
+      var canvasAsJson = JSON.stringify(jsonComprimido);
 
       json = {objects: canvasAsJson}
       //documento.contenido_material = canvasAsJson;
@@ -549,7 +554,11 @@
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
-        canvas.loadFromJSON(vm.nuevo.contenido_material);
+        var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+        json = JSONC.decompress(json);
+        console.log(json)
+        canvas.loadFromJSON(json);
+        //canvas.loadFromJSON(vm.nuevo.contenido_material);
       });
     }
     
