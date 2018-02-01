@@ -1,0 +1,33 @@
+
+
+<div layout="row" layout-align="center start">
+	<h1>Listado de Documentos</h1>
+</div>
+<div layout="row" layout-align="center">
+	<div>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+					<th md-column>Titulo</th>
+						<th md-column>Asignatura</th>
+						<th md-column>Nivel</th>
+						<th md-column></th>
+
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr ng-repeat="documento in vm.materiales "  md-row>
+						<td md-cell>{{documento.titulo_material}}</td>
+						<td md-cell>{{documento.asignatura.nombre_asignatura}}</td>
+						<td md-cell>{{documento.nivel.nombre_nivel}}</td>
+						<td md-cell>
+						<a ui-sref="editdocument({id:documento.id})"><md-button class="md-raised md-success">Ver</md-button></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</div>
+	
+</div>

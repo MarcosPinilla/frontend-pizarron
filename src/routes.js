@@ -45,6 +45,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       controllerAs: 'vm',
       templateUrl: 'app/components/editdocument/editdocument.html'
     })
+    .state('obtenerMaterialProfesor', {
+      url: '/obtenerMaterialProfesor',
+      controller: 'MaterialesProfesor.controller',
+      controllerAs: 'vm',
+      templateUrl: 'app/components/editdocument/documentos.html'
+    })
     .state('usuario', {
       url: '/usuario',
       component: 'usuario',
