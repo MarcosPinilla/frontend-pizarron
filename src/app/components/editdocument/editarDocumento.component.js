@@ -83,6 +83,8 @@
         vm.orientacion = '2';
       }
 
+      //Contador de figuras agregadas
+      vm.figuras = 0;
 
       var _config = {
         canvasState             : [],
@@ -161,7 +163,7 @@
         canvas.renderAll();  
       }
 
-      vm.generarFigura=function() {
+      vm.generarFigura = function() {
         var rect = new fabric.Rect({
           top : 100,
           left : 100,
@@ -172,19 +174,26 @@
 
           //canvas.add(rect).setActiveObject(rect);
           canvas.add(rect);
+
+          //Aumenta el contador de figuras
+          vm.figuras++;
         };
 
         $scope.$on('someEvent', function(event, ruta) {
           vm.generarImagen(ruta);
         })
 
-        vm.generarImagen=function(ruta){
+        vm.generarImagen = function(ruta){
           fabric.Image.fromURL(ruta, function(img) {
             //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
             img.scaleToWidth(canvas.getWidth());
             img.scaleToHeight(canvas.getHeight());
             canvas.add(img).renderAll();
             var a = canvas.setActiveObject(img);
+              
+            //Aumenta el contador de figuras
+            vm.figuras++;
+
             //canvas.add(oImg);
           });
         }
@@ -203,6 +212,9 @@
           console.log(texto);
           //canvas.getActiveObject().set("fontFamily", 'Lobster');
           canvas.renderAll();
+
+          //Aumenta el contador de figuras
+          vm.figuras++;
         } 
 
       vm.generarLinea = function(){
@@ -225,35 +237,48 @@
 
         canvas.add(linea);
 
+        //Aumenta el contador de figuras
+        vm.figuras++;
+
       }
 
     vm.eliminar = function() {
-
       var activeGroup = canvas.getActiveGroup();
       if (activeGroup) {
         var activeObjects = activeGroup.getObjects();
         for (let i in activeObjects) {
           canvas.remove(activeObjects[i]);
-        }
-        if(vm.esTexto===false){
+
           $scope.$apply(function () {
-            vm.esTexto=true;
-            vm.fontTest="";
-            vm.fontTest2=0;
+            //Baja el contador de figuras
+            vm.figuras--;
+          });
+          
+        }
+        if(vm.esTexto === false){
+          $scope.$apply(function () {
+            vm.esTexto = true;
+            vm.fontTest = "";
+            vm.fontTest2 = 0;
           });
         }
         canvas.discardActiveGroup();
         canvas.renderAll();
       } else if(canvas.getActiveObject()){
-        if(canvas.getActiveObject().get('type')==="textbox"){
+        if(canvas.getActiveObject().get('type') === "textbox"){
             //vm.esTexto=true;
             $scope.$apply(function () {
-              vm.esTexto=true;
-              vm.fontTest="";
-              vm.fontTest2=0;
+              vm.esTexto = true;
+              vm.fontTest = "";
+              vm.fontTest2 = 0;
             });
           }
           canvas.getActiveObject().remove();
+
+          $scope.$apply(function () {
+            //Baja el contador de figuras
+            vm.figuras--;
+          });
         }
 
       }
@@ -311,7 +336,14 @@
               _clipboard = cloned;
             });
         //Se remueve cada uno de los objetos 
-        activeGroup.forEachObject(function(o){ canvas.remove(o) });
+        activeGroup.forEachObject(function(o){
+          canvas.remove(o); 
+
+          $scope.$apply(function () {
+            //Baja el contador de figuras
+            vm.figuras--;
+          });
+        });
         //Se desactiva el grupo seleccionado y se renderiza
         canvas.discardActiveGroup().renderAll();
 
@@ -321,8 +353,14 @@
           //Si es un objeto único, se clona en el portapaples
           canvas.getActiveObject().clone(function(cloned) {
             _clipboard = cloned;
-          //Se elimina el objeto
-          canvas.getActiveObject().remove();
+
+            //Se elimina el objeto
+            canvas.getActiveObject().remove();
+            
+            $scope.$apply(function () {
+              //Baja el contador de figuras
+              vm.figuras--;
+            });
         });
         //Se actualiza la variable esGrupor por false
         vm.esGrupo = false;
@@ -353,6 +391,11 @@
             var arrayObj = clonedObj.getObjects();
             for (let i in arrayObj) {
               canvas.add(arrayObj[i]);
+              
+              $scope.$apply(function () {
+                //Aumenta el contador de figuras
+                vm.figuras++;
+              });
             }
              //clonedObj.setCoords();
              _clipboard.top += 10;
@@ -361,6 +404,12 @@
              canvas.renderAll();
             } else {
               canvas.add(clonedObj);
+
+              $scope.$apply(function () {
+                //Aumenta el contador de figuras
+                vm.figuras++;
+              });
+
               _clipboard.top += 10;
               _clipboard.left += 10;
               canvas.setActiveObject(clonedObj);
@@ -370,7 +419,7 @@
 
         if(vm.cortar) {
           _clipboard = null;
-          vm.cortar=false;
+          vm.cortar = false;
         }
       }
     }
@@ -471,14 +520,17 @@
           var data = f.target.result;                    
           fabric.Image.fromURL(data, function (img) {
           //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
-          img.scaleToWidth(canvas.getWidth());
-          img.scaleToHeight(canvas.getHeight());
+          img.scaleToWidth(canvas.width);
+          img.scaleToHeight(canvas.height);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
         });
         };
         reader.readAsDataURL(file);
+        
+        //Aumenta el contador de figuras
+        vm.figuras++;
       });
 
 
@@ -526,6 +578,9 @@
         canvas.renderAll();
           //canvas.setActiveObject(object);    
         }, null, {crossOrigin: 'Anonymous'});
+      
+      //Aumenta el contador de figuras
+      vm.figuras++;
     }
 
 
