@@ -187,11 +187,33 @@
           });
 
           canvas.add(texto)
-      //canvas.add(texto).setActiveObject(texto);
-      console.log(texto);
-      //canvas.getActiveObject().set("fontFamily", 'Lobster');
-      canvas.renderAll();
-    } 
+          //canvas.add(texto).setActiveObject(texto);
+          console.log(texto);
+          //canvas.getActiveObject().set("fontFamily", 'Lobster');
+          canvas.renderAll();
+        } 
+
+      vm.generarLinea = function(){
+        var linea = new fabric.Line([ 250, 125, 250, 175 ], {
+        
+          fill: 'red',
+          stroke: 'red',
+          strokeWidth: 5,
+          selectable: true
+        });
+
+        linea.setControlsVisibility({
+          bl: true,
+          br: false,
+          tl: false,
+          tr: false,
+          mt: false,
+          mb: false,
+      });
+
+        canvas.add(linea);
+
+      }
 
     vm.eliminar = function() {
 

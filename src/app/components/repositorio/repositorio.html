@@ -13,7 +13,7 @@
 	</div>
 </div>
  -->
- <md-content layout-gt-sm="row" layout-padding>
+ <md-content layout-gt-sm="row" layout-padding style="background-color: #F0F0F0;">
 
 		<md-input-container flex="100">
 			<label>Buscador</label>
@@ -21,12 +21,17 @@
 		</md-input-container>
 		
 </md-content>
-<div style="overflow-y: scroll; height:200px;">
+<div style="overflow-y: scroll;background-color: #F0F0F0;">
 	
-		<div ng-repeat="elemento in vm.elementos|filter:buscador">
+		<div ng-repeat="elemento in vm.elementos|filter:buscador" class="hover12">
+			<!--
 			<md-button aria-label="name" ng-click="vm.generarImagen(elemento.contenido_elemento)">
 				<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
 			</md-button>
+		-->
+			<figure style="margin-left:0px;">
+				<img ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.generarImagen(elemento.contenido_elemento)" class="img-repository" />
+			</figure>
 		</div>
 
 <!--
@@ -44,5 +49,5 @@
 		    </div>
 		  </div>
 		</div>
-		->>
+		-->
 </div>
