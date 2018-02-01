@@ -33,10 +33,7 @@
       ListartipomaterialService.query().$promise.then(function (data) {
         vm.tipo_material = data;
       });
-
-      console.log("Bust a move!");
       
-
       vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({
           controller: dialogoController,
