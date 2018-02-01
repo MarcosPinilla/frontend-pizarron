@@ -91,7 +91,7 @@
         console.log("Entra a la funcino" + material);
         MaterialService.save(material );
         $mdDialog.hide();
-        $state.go('editdocument');
+        $state.go('documento');
       }
     };     
 

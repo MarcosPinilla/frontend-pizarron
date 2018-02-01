@@ -375,3 +375,26 @@ md-list.make-scrollable {
   height: auto;
   display: block;
 }
+/*
+.hover12 figure {
+  background-color: #ffffcc;
+}
+.hover12 figure img {
+  opacity: 1;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}*/
+.hover12 figure:hover img {
+  /*opacity: .5;*/
+  background-color: #d9d9d9;
+}
+
+.hover12 figure:active img {
+  /*opacity: .5;*/
+  background-color: #cccccc;
+}
+
+.hover12 figure img:focus{
+  outline: none;
+}
+
