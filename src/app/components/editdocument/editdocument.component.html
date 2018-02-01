@@ -58,6 +58,11 @@
                   <span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
                 </md-button>
               </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.configuracionPagina()">
+                  Configuración de hoja
+                </md-button>
+              </md-menu-item>
             </md-menu-content>
           </md-menu>
           <md-menu>
@@ -201,7 +206,6 @@
         </md-select>
       </md-input-container>
   </div>
-
 </div>
   </md-toolbar>
 
@@ -266,7 +270,7 @@
                 </div>
             </div>        
           </md-content>
-
+  <md-button class="md-raised md-primary" ng-click="vm.tamanoHoja()">Cambiar tamaño</md-button>
       
       </md-card>
 
@@ -278,7 +282,7 @@
   <div flex="75" >
     <md-content class="page-container">
       <md-card class="page">
-        <canvas id="canvas" height="550" width="1125">
+        <canvas id="canvas" height="1122" width="794">
           
         </canvas>
       </md-card>
