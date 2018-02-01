@@ -110,6 +110,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/etiqueta',
       component: 'etiqueta',
       isPrivate: true
+    })
+    .state('perfil', {
+      url: '/perfil',
+      component: 'perfil',
+      isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
 }

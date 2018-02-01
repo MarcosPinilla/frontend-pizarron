@@ -238,7 +238,7 @@ md-list.make-scrollable {
   position: fixed;
   right: 0;
   widows: 200px;
-  min-width: 200px;
+  min-width: 210px;
 }
 
 .sidebar-buttons {
@@ -300,4 +300,78 @@ md-list.make-scrollable {
   outline: none;
   box-shadow: 0 0 10px 2px rgba(63,70,82,.67);
   margin-top: 7px;
+}
+
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 50%;
+  margin-left: 1.9em;
+  margin-right: 1.9em;
+}
+
+.perfil-contenedor {
+  background-color: #E0E0E0;
+}
+
+.perfil-information {
+  background-color: white; 
+  height: 22em; 
+  border-radius: 8px;
+  margin: 1.5em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.perfil-publicaciones-valoradas {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+
+}
+
+.perfil-publicaciones-recientes {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.perfil-information-img {
+  background: linear-gradient(
+    to right, 
+    #5C6BC0 0%, 
+    #5C6BC0 50%, 
+    #E8EAF6 50%, 
+    #E8EAF6 100%
+  );
+}
+
+.titulo-perfil-valoradas {
+  background-color: #E91E63;
+  color: #E8EAF6
+}
+
+.titulo-perfil-recientes {
+  background-color: #5C6BC0;
+  color: #E8EAF6
+}
+
+.texto-titulo-perfil {
+  margin-left: 1em;
+}
+
+.img-perfil {
+  width: 75%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 50%;
+  /*border-width: 20px;
+  border-color: white;
+  border-style: solid;*/
+  height: auto;
+  display: block;
 }

@@ -2,9 +2,9 @@
   <md-toolbar class="tooolbar" style="position: fixed; top: 0; height: 6%">
     <div class="md-toolbar-tools">
 
-      <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+      <!--<md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
         <md-icon md-svg-icon="app/resources/icons/menu1.svg"></md-icon>
-      </md-button>
+      </md-button>-->
 
 
       <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
@@ -26,7 +26,6 @@
         CONTACTO
       </md-button>
 
-
       <md-button ng-if="!vm.isLogged" ui-sref="login">
         INICIAR SESIÓN
       </md-button>
@@ -34,17 +33,17 @@
       <md-button ng-if="!vm.isLogged" class="contratar-toolbar md-raised md-warn">
         CONTRATAR
       </md-button>
-      
-      <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
-        CERRAR SESIÓN
-      </md-button>
 
-      <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
-        <md-icon md-svg-icon="app/resources/icons/usuario.svg"></md-icon>
+      <md-button ng-if="vm.isLogged" class="md-icon-button" arial-label="xd">
+        <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       </md-button>
-
+      <md-divider class="vertical-divider"></md-divider>
       <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
         <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
+      </md-button>
+
+      <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
+        CERRAR SESIÓN
       </md-button>
     </div>
   </md-toolbar>
