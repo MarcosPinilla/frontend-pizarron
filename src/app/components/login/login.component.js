@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', '$mdDialog', 'SendService'];
+  loginCtrl.$inject = ['LoginService', 'CredentialsService', '$state', '$rootScope', '$mdDialog', 'SendService', 'UsuarioService'];
 
-  function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog, SendService) {
+  function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog, SendService, UsuarioService) {
     var vm = this;
 
     vm.isLanding = false;
@@ -30,8 +30,9 @@
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
           $rootScope.$emit('isLogin');
-          $state.go('dashboard');
-          ObtenerUsuario.get().$promise.then(function (data) {
+          //$state.go('dashboard');
+          UsuarioService.query().$promise.then(function (data) {
+            console.log(JSON.stringify(data.user));
             user = data.user;
             localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
             $state.go('dashboard', ({usuario: user.nombre_usuario}));

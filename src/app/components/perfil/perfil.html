@@ -1,0 +1,67 @@
+<div layout="row" layout-wrap>
+	<!-- Left -->
+  	<div flex="20"><my-sidebar></my-sidebar></div>
+  	<!-- Center -->
+ 	<div class="perfil-contenedor" flex="60" layout="container" layout-wrap>
+ 		<div class="perfil-information row" layout="row" flex="95" style="">
+ 			<!-- Perfil Imagen -->
+ 			<div class="perfil-information-img" layout="column" style="border-radius: 8px" flex>
+ 				<div style="height: 10%;"></div>
+ 				<div style="height: 80%; overflow: hidden">
+ 					<img class="img-perfil" src="app/resources/img/perfil.jpg">
+ 				</div>
+ 				<div style="height: 10%"></div>
+ 			</div>	
+ 			<!-- Perfil informacion -->	
+ 			<div flex style="color: #37474F">
+ 				<md-list>
+ 					<md-list-item>
+ 						<div class="md-list-item-text">
+ 							<h3>Nombre: Jorge Andres Solís García</h3>
+ 							<p>Cargo: Desarrollador</p>
+ 							<h4>Título: Ingeniero Informatico</h4>
+ 						</div>
+ 					</md-list-item>
+ 				</md-list>
+ 				<md-list>
+ 					<md-list-item>
+ 						<div class="md-list-item-text">
+ 							<h3>Institución: Colegio Santa Cruz, Temuco</h3>
+ 							<p>Celular: +56911111111</p>
+ 							<h4>Correo: jsolisdev@gmail.com</h4>
+ 						</div>
+ 					</md-list-item>
+ 				</md-list>
+ 			</div>
+ 			<!-- Perfil Opciones -->
+ 			<div flex>Agregar al compádre</div>
+ 		</div>
+
+ 		<div class="perfil-publicaciones-valoradas" flex="95" layout="column">
+ 			<div class="titulo-perfil-valoradas">
+ 				<h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
+ 			</div>
+ 			<div layout="row">
+ 				<!-- Left -->
+ 				<div flex="30" style="background-color: red; margin-left: 1em;">A</div>
+ 				<div flex="5">3</div>
+ 				<!-- Center -->
+ 				<div flex="30" style="background-color: red">B</div>
+ 				<div flex="5">5</div>
+ 				<!-- Right -->
+ 				<div flex="30" style="background-color: red; margin-right: 1em;">C</div>
+ 			</div>
+ 		</div>
+
+ 		<div class="perfil-publicaciones-recientes" flex="95" layout="column">
+ 			<div class="titulo-perfil-recientes">
+ 				<h2 class="texto-titulo-perfil">Las más recientes</h2>
+ 			</div>
+ 			<div>
+ 				Siivagunner
+ 			</div>
+ 		</div>
+ 	</div>
+  	<!-- Right -->
+  	<div flex="20"><my-chat></my-chat></div>
+</div>
