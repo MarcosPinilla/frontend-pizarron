@@ -9,9 +9,19 @@
     	controllerAs: 'vm'
   	});
 
-  	//perfilCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['PerfilService', '$rootScope', '$state'];
 
-  	function perfilCtrl() {
+  	function perfilCtrl(PerfilService) {
   		var vm = this;
+
+      vm.perfil = {};
+       PerfilService.get().$promise.then(function (data) {
+            console.log(data);
+            vm.perfil = data;
+            console.log(vm.perfil.profesores.url_foto_profesor);
+       });
+
+
+
   	}
 })();

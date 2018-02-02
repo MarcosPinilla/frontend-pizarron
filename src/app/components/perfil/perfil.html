@@ -8,7 +8,7 @@
  			<div class="perfil-information-img" layout="column" style="border-radius: 8px" flex>
  				<div style="height: 10%;"></div>
  				<div style="height: 80%; overflow: hidden">
- 					<img class="img-perfil" src="app/resources/img/perfil.jpg">
+ 					<img class="img-perfil" ng-src= "{{ vm.perfil.profesores.url_foto_profesor }}">
  				</div>
  				<div style="height: 10%"></div>
  			</div>	
@@ -17,9 +17,9 @@
  				<md-list>
  					<md-list-item>
  						<div class="md-list-item-text">
- 							<h3>Nombre: Jorge Andres Solís García</h3>
- 							<p>Cargo: Desarrollador</p>
- 							<h4>Título: Ingeniero Informatico</h4>
+ 							<h3>Nombre: {{ vm.perfil.profesores.nombres_profesor }}  {{ vm.perfil.profesores.apellidos_profesor }}</h3>
+ 							<p>Cargo: {{ vm.perfil.profesores.cargo }}</p>
+ 							<h4>Título: {{ vm.perfil.profesores.profesion }}</h4>
  						</div>
  					</md-list-item>
  				</md-list>
@@ -28,7 +28,7 @@
  						<div class="md-list-item-text">
  							<h3>Institución: Colegio Santa Cruz, Temuco</h3>
  							<p>Celular: +56911111111</p>
- 							<h4>Correo: jsolisdev@gmail.com</h4>
+ 							<h4>Correo: {{ vm.perfil.email }}</h4>
  						</div>
  					</md-list-item>
  				</md-list>
