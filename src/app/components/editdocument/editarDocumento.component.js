@@ -61,6 +61,11 @@
 
       //var panelcanvas = new fabric.Canvas('panelcanvas');
       var canvas = new fabric.Canvas('canvas');
+      var context = canvas.getContext("2d");
+
+      //context.imageSmoothingQuality = "low" || "medium" || "high"
+      context.imageSmoothingQuality = "high"
+
       vm.fontTest="";
       vm.fontTest2=0;
       vm.esTexto=true;
@@ -215,8 +220,8 @@
         vm.generarImagen=function(ruta){
           fabric.Image.fromURL(ruta, function(img) {
             //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-            img.scaleToWidth(canvas.getWidth());
-            img.scaleToHeight(canvas.getHeight());
+            img.scaleToWidth(canvas.getWidth()/4);
+            img.scaleToHeight(canvas.getHeight()/4);
             canvas.add(img).renderAll();
             var a = canvas.setActiveObject(img);
             //canvas.add(oImg);
@@ -529,8 +534,8 @@
           var data = f.target.result;                    
           fabric.Image.fromURL(data, function (img) {
           //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
-          img.scaleToWidth(canvas.getWidth());
-          img.scaleToHeight(canvas.getHeight());
+          img.scaleToWidth(canvas.getWidth()/4);
+          img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
@@ -554,6 +559,7 @@
     } 
     */
     //delimitación de canvas apra objetos
+    
     canvas.on('object:moving', function (e) {
       var obj = e.target;
            // if object is too big ignore
