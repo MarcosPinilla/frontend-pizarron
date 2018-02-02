@@ -367,7 +367,7 @@ md-list.make-scrollable {
 }
 
 .titulo-perfil-recientes {
-  background-color: #5C6BC0;
+  background-color: #43A047;
   color: #E8EAF6
 }
 
@@ -386,6 +386,54 @@ md-list.make-scrollable {
   height: auto;
   display: block;
 }
+
+.perfil-post-left {
+  background-color: #EEEEEE;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.perfil-post-center {
+  background-color: #EEEEEE;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.perfil-post-right {
+  background-color: #EEEEEE;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.perfil-post-img {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.perfil-post-titulo {
+  background-color: #EC407A;
+  height: 20%;
+  color: #E8EAF6;
+  font-size: 24px; 
+  text-align: center;
+}
+
+.perfil-post-titulo-recientes {
+  background-color: #4CAF50;
+  height: 20%;
+  color: #E8EAF6;
+  font-size: 24px; 
+  text-align: center;
+}
+
 /*
 .hover12 figure {
   background-color: #ffffcc;
@@ -408,4 +456,3 @@ md-list.make-scrollable {
 .hover12 figure img:focus{
   outline: none;
 }
-
