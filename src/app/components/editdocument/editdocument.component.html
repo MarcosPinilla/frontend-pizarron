@@ -219,10 +219,13 @@
       <md-card class="page" style="height: 580px;background-color: #f2f2f2;">
 
         <md-content>
-
-          <md-button class="md-raised md-primary" ng-click="vm.seleccionarArchivo()">
-              Seleccionar imágen
-          </md-button>
+          <div layou="row">
+            <div flex="100">
+              <input class="ng-hide" id="archivo" multiple type="file" aria-label="asd" />
+              <label for="archivo" class="md-button md-raised md-primary" style="width: 95%;" aria-label="asd">Seleccionar imágen desde equipo</label>
+            </div>
+           
+          </div>
             <!--
            <md-content>
             

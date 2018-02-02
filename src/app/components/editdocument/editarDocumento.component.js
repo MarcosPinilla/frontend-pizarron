@@ -212,10 +212,6 @@
           vm.generarImagen(ruta);
         })
 
-         $scope.$on('imagenSeleccionada', function(event, ruta) {
-          vm.generarImagen(ruta);
-        })
-
         vm.generarImagen=function(ruta){
           fabric.Image.fromURL(ruta, function(img) {
             //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
@@ -525,7 +521,7 @@
     }
 
       //Subir imágen desde computador
-      /*
+      
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -542,7 +538,7 @@
         };
         reader.readAsDataURL(file);
       });
-      */
+      
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
       /*
@@ -683,26 +679,6 @@
       });
     };
 
-    //Selección de archivo
-    vm.seleccionarArchivo = function(ev) {
-      $mdDialog.show({
-        controller: seleccionarArchivoController,
-        controllerAs: 'vm',
-        templateUrl: 'app/components/editdocument/seleccionarArchivo.dialog.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
-        locals: {
-          
-        },
-      })
-      .then(function () {
-       
-      }, function () {
-      });
-    };
-
     //Método para cambiar la orientación de la hoja
     vm.orientacionHoja = function(orientacion) {
       vm.orientacion = orientacion;
@@ -753,41 +729,6 @@
     };
   }
 
-  function seleccionarArchivoController($mdDialog, $rootScope, $state) {
-    var vm = this;
-
-    vm.hide = function () {
-      $mdDialog.hide();
-    };
-
-    vm.cancel = function () {
-      $mdDialog.cancel();
-    };
-
-
-     setTimeout(function() {
-        document.getElementById('archivo').addEventListener("change", function (e) {
-        var file = e.target.files[0];
-        var reader = new FileReader();
-        reader.onload = function (f) {
-          var data = f.target.result;                    
-          vm.generarImagen(data);
-          
-        };
-        reader.readAsDataURL(file);
-        vm.hide();
-        
-      });
-    }, 100);
-
-
-
-    vm.generarImagen=function(ruta) {
-      $rootScope.$broadcast('imagenSeleccionada', ruta);
-    }
-  }
-
-
-
+ 
 
 })();
