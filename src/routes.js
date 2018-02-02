@@ -50,6 +50,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       controllerAs: 'vm',
       templateUrl: 'app/components/editdocument/editdocument.component.html'
     })
+    .state('obtenerMaterialProfesor', {
+      url: '/obtenerMaterialProfesor',
+      controller: 'MaterialesProfesor.controller',
+      controllerAs: 'vm',
+      templateUrl: 'app/components/editdocument/documentos.html'
+    })
     .state('usuario', {
       url: '/usuario',
       component: 'usuario',
@@ -110,6 +116,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     .state('etiqueta', {
       url: '/etiqueta',
       component: 'etiqueta',
+      isPrivate: true
+    })
+    .state('perfil', {
+      url: '/perfil',
+      component: 'perfil',
       isPrivate: true
     });
   $httpProvider.interceptors.push('InterceptorApi');
