@@ -20,6 +20,17 @@ a {
     color: #3949AB;
 }
 
+.login-div{
+  background-image: url('app/resources/img/login-background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-top: 100px;
+  height: 100%; 
+  overflow: hidden;
+}
+
 .view-toolbar {
   height: 20%;
 }
