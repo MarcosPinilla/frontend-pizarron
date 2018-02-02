@@ -33,10 +33,13 @@
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
-      
+      console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
-      if (vm.documento.contenido_material !== undefined) {
+      if (vm.documento.contenido_material !== null) {
         vm.cargar();
+      } else {
+        //Contador de figuras agregadas
+        vm.figuras = 0;
       }
     });
 
@@ -82,9 +85,6 @@
       } else {
         vm.orientacion = '2';
       }
-
-      //Contador de figuras agregadas
-      vm.figuras = 0;
 
       var _config = {
         canvasState             : [],
@@ -223,8 +223,8 @@
         vm.generarImagen = function(ruta){
           fabric.Image.fromURL(ruta, function(img) {
             //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-            img.scaleToWidth(canvas.getWidth());
-            img.scaleToHeight(canvas.getHeight());
+            img.scaleToWidth(canvas.getWidth()/4);
+            img.scaleToHeight(canvas.getHeight()/4);
             canvas.add(img).renderAll();
             var a = canvas.setActiveObject(img);
 
@@ -286,6 +286,9 @@
         });
 
         canvas.add(triangle);
+
+        //Aumenta el contador de figuras
+        vm.figuras++;
       }
 
       vm.generarCirculo = function(){
@@ -297,6 +300,9 @@
         });
 
         canvas.add(circle)
+
+        //Aumenta el contador de figuras
+        vm.figuras++;
       }
 
     vm.eliminar = function() {
@@ -653,18 +659,26 @@
 
     //Lógica para exportar a pdf, utilizando el elemento de canvas
     vm.exportar = function () {
-      html2canvas(document.getElementById('canvas'), {
+      /*html2canvas(document.getElementById('canvas'), {
         onrendered: function (canvas) {
           var data = canvas.toDataURL();
+          console.log(data);
           var docDefinition = {
             content: [{
               image: data,
-              width: 794,
+              width: 500,
             }]
           };
           pdfMake.createPdf(docDefinition).download("test.pdf");
         }
-      });  
+      }); */
+
+      var imgPdfData = canvas.toDataURL("image/jpeg", 1.0);
+      var pdf=new jsPDF("p", "mm", "a4");
+      var width = pdf.internal.pageSize.width;    
+      var height = pdf.internal.pageSize.height;
+      pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
+      pdf.save('test.pdf');
     };
 
     //Provisorio para tests
@@ -715,7 +729,10 @@
         console.log(json)
         canvas.loadFromJSON(json);
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
       });
+
     }
     
     vm.configuracionPagina = function(ev) {
@@ -761,6 +778,16 @@
         canvas.setDimensions({width: width, height: height});  
       }
     }
+
+
+    $scope.$watch("vm.figuras",function(numero) {
+     
+      if (numero > 50) {
+        alert("Ha llegado a su límite");
+      }
+       
+     
+    });
   }
 
   function configuracionPaginaController($mdDialog, orientacion, tipo) {
