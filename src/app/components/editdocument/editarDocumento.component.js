@@ -33,10 +33,13 @@
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
-      
+      console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
-      if (vm.documento.contenido_material !== undefined) {
+      if (vm.documento.contenido_material !== null) {
         vm.cargar();
+      } else {
+        //Contador de figuras agregadas
+        vm.figuras = 0;
       }
     });
 
@@ -61,6 +64,11 @@
 
       //var panelcanvas = new fabric.Canvas('panelcanvas');
       var canvas = new fabric.Canvas('canvas');
+      var context = canvas.getContext("2d");
+
+      //context.imageSmoothingQuality = "low" || "medium" || "high"
+      context.imageSmoothingQuality = "high"
+
       vm.fontTest="";
       vm.fontTest2=0;
       vm.esTexto=true;
@@ -83,9 +91,6 @@
         vm.orientacion = '2';
       }
 
-      //Contador de figuras agregadas
-      vm.figuras = 0;
-
       var _config = {
         canvasState             : [],
         currentStateIndex       : -1,
@@ -98,7 +103,7 @@
       };
 
       vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
-      vm.fontsizes=[];
+      vm.fontsizes = [];
 
       for(var i=0;i<100;i++){
         vm.fontsizes.push(i);
@@ -162,8 +167,42 @@
         canvas.getActiveObject().set("fontSize", fontsize);
         canvas.renderAll();  
       }
+      /*
+      //Los bordres no se reescalarán junto con el elemento
+  canvas.on({
+    'object:scaling': function(e) {
+        var obj = e.target;
+        obj.strokeWidth = obj.strokeWidth / ((obj.scaleX + obj.scaleY) / 2);
+        var activeObject = canvas.getActiveObject();
+        activeObject.set('strokeWidth',obj.strokeWidth);
+    }
+});
+      */
+      //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
+      canvas.on("object:selected", function (e) {
+        if (e.target) {
+          e.target.bringToFront();
+          canvas.renderAll();
+        }
+      });
+      /*
+      //Función que genera un rectángulo sin relleno y con bordes negros
+      vm.generarFiguraBordes=function() {
+        var rect = new fabric.Rect({
+          top : 100,
+          left : 100,
+          width : 60,
+          height : 70,
+          fill : '',
+          stroke : 'black',
+          strokeWidth : 2
+        });
 
-      vm.generarFigura = function() {
+          //canvas.add(rect).setActiveObject(rect);
+          canvas.add(rect);
+        };
+*/
+        vm.generarFigura=function() {
         var rect = new fabric.Rect({
           top : 100,
           left : 100,
@@ -179,20 +218,20 @@
           vm.figuras++;
         };
 
-        $scope.$on('someEvent', function(event, ruta) {
+        $scope.$on('agregarImagenRepositorio', function(event, ruta) {
           vm.generarImagen(ruta);
+
+          //Aumenta el contador de figuras
+          vm.figuras++;
         })
 
         vm.generarImagen = function(ruta){
           fabric.Image.fromURL(ruta, function(img) {
             //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-            img.scaleToWidth(canvas.getWidth());
-            img.scaleToHeight(canvas.getHeight());
+            img.scaleToWidth(canvas.getWidth()/4);
+            img.scaleToHeight(canvas.getHeight()/4);
             canvas.add(img).renderAll();
             var a = canvas.setActiveObject(img);
-              
-            //Aumenta el contador de figuras
-            vm.figuras++;
 
             //canvas.add(oImg);
           });
@@ -240,6 +279,35 @@
         //Aumenta el contador de figuras
         vm.figuras++;
 
+      }
+
+      vm.generarTriangulo = function(){
+        var triangle = new fabric.Triangle({
+          width: 100, 
+          height: 100, 
+          left: 50,
+          top: 300, 
+          fill: '#cca'
+        });
+
+        canvas.add(triangle);
+
+        //Aumenta el contador de figuras
+        vm.figuras++;
+      }
+
+      vm.generarCirculo = function(){
+        var circle = new fabric.Circle({
+          radius: 50,
+          left: 275,
+          top: 75,
+          fill: '#aac'
+        });
+
+        canvas.add(circle)
+
+        //Aumenta el contador de figuras
+        vm.figuras++;
       }
 
     vm.eliminar = function() {
@@ -446,6 +514,7 @@
         } else {
           _config.canvasState.push(canvasAsJson);
         }
+        
         _config.currentStateIndex = _config.canvasState.length-1;
         if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1){
           _config.redoButton.disabled= "disabled";
@@ -484,6 +553,10 @@
           }
         }
       }
+      $scope.$apply(function () {
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
+      });
     }
 
     vm.redo = function() {
@@ -510,9 +583,14 @@
           }
         }
       }
+      $scope.$apply(function () {
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
+      }); 
     }
 
       //Subir imágen desde computador
+      
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -520,8 +598,8 @@
           var data = f.target.result;                    
           fabric.Image.fromURL(data, function (img) {
           //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
-          img.scaleToWidth(canvas.width);
-          img.scaleToHeight(canvas.height);
+          img.scaleToWidth(canvas.getWidth()/4);
+          img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
@@ -532,7 +610,7 @@
         //Aumenta el contador de figuras
         vm.figuras++;
       });
-
+      
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
       /*
@@ -548,6 +626,7 @@
     } 
     */
     //delimitación de canvas apra objetos
+    
     canvas.on('object:moving', function (e) {
       var obj = e.target;
            // if object is too big ignore
@@ -586,18 +665,26 @@
 
     //Lógica para exportar a pdf, utilizando el elemento de canvas
     vm.exportar = function () {
-      html2canvas(document.getElementById('canvas'), {
+      /*html2canvas(document.getElementById('canvas'), {
         onrendered: function (canvas) {
           var data = canvas.toDataURL();
+          console.log(data);
           var docDefinition = {
             content: [{
               image: data,
-              width: 794,
+              width: 500,
             }]
           };
           pdfMake.createPdf(docDefinition).download("test.pdf");
         }
-      });  
+      }); */
+
+      var imgPdfData = canvas.toDataURL("image/jpeg", 1.0);
+      var pdf=new jsPDF("p", "mm", "a4");
+      var width = pdf.internal.pageSize.width;    
+      var height = pdf.internal.pageSize.height;
+      pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
+      pdf.save('test.pdf');
     };
 
     //Provisorio para tests
@@ -648,7 +735,10 @@
         console.log(json)
         canvas.loadFromJSON(json);
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
       });
+
     }
     
     vm.configuracionPagina = function(ev) {
@@ -694,6 +784,16 @@
         canvas.setDimensions({width: width, height: height});  
       }
     }
+
+
+    $scope.$watch("vm.figuras",function(numero) {
+     
+      if (numero > 50) {
+        alert("Ha llegado a su límite");
+      }
+       
+     
+    });
   }
 
   function configuracionPaginaController($mdDialog, orientacion, tipo) {
@@ -725,4 +825,7 @@
       $mdDialog.hide(configuracion);
     };
   }
+
+ 
+
 })();

@@ -6,7 +6,6 @@
 
       <div>
         <h2 class="md-toolbar-tools">{{ vm.documento.titulo_material }}</h2>
-        <h2 class="md-toolbar-tools">Figuras disponibles: {{vm.figuras}}/50</h2>
         <md-menu-bar>
           <md-menu>
             <button ng-click="$mdMenu.open()">
@@ -207,6 +206,10 @@
         </md-select>
       </md-input-container>
   </div>
+  
+    <h5>Figuras: {{vm.figuras}}/50</h5>
+  
+  
 </div>
   </md-toolbar>
 
@@ -214,14 +217,19 @@
 
   <div id="todocanvas" layout="row">
 
-  <div flex="25">
+  <div flex="25" style="background-color: #fafafa;">
    
   <md-content class="page-container">
-      <md-card class="page" style="height: 550px;background-color: #f2f2f2;">
+      <md-card class="page" style="height: 580px;background-color: #f2f2f2;">
 
         <md-content>
-
-          <input type="file" id="archivo">
+          <div layou="row">
+            <div flex="100">
+              <input class="ng-hide" id="archivo" multiple type="file" aria-label="asd" />
+              <label for="archivo" class="md-button md-raised md-primary" style="width: 95%;" aria-label="asd">Seleccionar imágen desde equipo</label>
+            </div>
+           
+          </div>
             <!--
            <md-content>
             
@@ -244,8 +252,7 @@
 -->
         <md-tabs md-dynamic-height md-border-bottom>
           <md-tab label="Figuras">
-            <!--<md-button class="md-raised md-primary" ng-click="vm.generarTexto()">Generar cuadro de texto</md-button>  
-  -->
+         
             <div layout="row" style="background-color: #F0F0F0;">
               <div flex=50>
                <md-button  style="width:80px; height:100px;" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
@@ -253,11 +260,26 @@
               </md-button>
             </div>
 
-           <!-- <md-button class="md-raised md-primary" ng-click="vm.generarFigura()">Generar figura</md-button>
-    -->
+         
             <div flex=50>
              <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarFigura()">
               <md-icon md-svg-icon="app/resources/fabric/rect.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+            </md-button>
+            </div>
+
+            </div>
+
+            <div layout="row" style="background-color: #F0F0F0;">
+              <div flex=50>
+               <md-button  style="width:80px; height:100px;" aria-label="Generar triangulo" ng-click="vm.generarTriangulo()">
+              <md-icon md-svg-icon="app/resources/fabric/triangulo.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+              </md-button>
+            </div>
+
+         
+            <div flex=50>
+             <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarCirculo()">
+              <md-icon md-svg-icon="app/resources/fabric/circulo.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
             </md-button>
             </div>
 
@@ -273,11 +295,9 @@
         </md-tabs>
       </md-content>
         
-    
       </md-card>
 
     </md-content>
-  
   
   </div>
 
