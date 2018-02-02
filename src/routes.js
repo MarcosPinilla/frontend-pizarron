@@ -29,6 +29,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'loginrecovery',
       isPrivate: true
     })
+    .state('documento', {
+      url:'/documento',
+      component:'documento',
+      isPrivate: true
+    })
     .state('profesor', {
       url: '/profesor',
       component: 'profesor',
@@ -43,7 +48,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       url: '/editdocument/:id',
       controller: 'EditarDocumento.controller',
       controllerAs: 'vm',
-      templateUrl: 'app/components/editdocument/editdocument.html'
+      templateUrl: 'app/components/editdocument/editdocument.component.html'
+    })
+    .state('obtenerMaterialProfesor', {
+      url: '/obtenerMaterialProfesor',
+      controller: 'MaterialesProfesor.controller',
+      controllerAs: 'vm',
+      templateUrl: 'app/components/editdocument/documentos.html'
     })
     .state('usuario', {
       url: '/usuario',
@@ -95,11 +106,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
       component: 'administrator',
       isPrivate: true
     })
+    /*
     .state('repositorio', {
       url: '/repositorio',
       component: 'repositorio',
       isPrivate: true    
     })
+    */
     .state('etiqueta', {
       url: '/etiqueta',
       component: 'etiqueta',

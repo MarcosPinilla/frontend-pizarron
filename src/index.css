@@ -20,6 +20,17 @@ a {
     color: #3949AB;
 }
 
+.login-div{
+  background-image: url('app/resources/img/login-background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-top: 100px;
+  height: 100%; 
+  overflow: hidden;
+}
+
 .view-toolbar {
   height: 20%;
 }
@@ -421,4 +432,27 @@ md-list.make-scrollable {
   color: #E8EAF6;
   font-size: 24px; 
   text-align: center;
+}
+
+/*
+.hover12 figure {
+  background-color: #ffffcc;
+}
+.hover12 figure img {
+  opacity: 1;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}*/
+.hover12 figure:hover img {
+  /*opacity: .5;*/
+  background-color: #d9d9d9;
+}
+
+.hover12 figure:active img {
+  /*opacity: .5;*/
+  background-color: #cccccc;
+}
+
+.hover12 figure img:focus{
+  outline: none;
 }
