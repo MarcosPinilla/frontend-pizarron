@@ -162,8 +162,42 @@
         canvas.getActiveObject().set("fontSize", fontsize);
         canvas.renderAll();  
       }
+      /*
+      //Los bordres no se reescalarán junto con el elemento
+  canvas.on({
+    'object:scaling': function(e) {
+        var obj = e.target;
+        obj.strokeWidth = obj.strokeWidth / ((obj.scaleX + obj.scaleY) / 2);
+        var activeObject = canvas.getActiveObject();
+        activeObject.set('strokeWidth',obj.strokeWidth);
+    }
+});
+      */
+      //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
+      canvas.on("object:selected", function (e) {
+        if (e.target) {
+          e.target.bringToFront();
+          canvas.renderAll();
+        }
+      });
+      /*
+      //Función que genera un rectángulo sin relleno y con bordes negros
+      vm.generarFiguraBordes=function() {
+        var rect = new fabric.Rect({
+          top : 100,
+          left : 100,
+          width : 60,
+          height : 70,
+          fill : '',
+          stroke : 'black',
+          strokeWidth : 2
+        });
 
-      vm.generarFigura = function() {
+          //canvas.add(rect).setActiveObject(rect);
+          canvas.add(rect);
+        };
+*/
+        vm.generarFigura=function() {
         var rect = new fabric.Rect({
           top : 100,
           left : 100,
@@ -179,7 +213,7 @@
           vm.figuras++;
         };
 
-        $scope.$on('someEvent', function(event, ruta) {
+        $scope.$on('agregarImagenRepositorio', function(event, ruta) {
           vm.generarImagen(ruta);
 
           //Aumenta el contador de figuras
@@ -240,6 +274,29 @@
         //Aumenta el contador de figuras
         vm.figuras++;
 
+      }
+
+      vm.generarTriangulo = function(){
+        var triangle = new fabric.Triangle({
+          width: 100, 
+          height: 100, 
+          left: 50,
+          top: 300, 
+          fill: '#cca'
+        });
+
+        canvas.add(triangle);
+      }
+
+      vm.generarCirculo = function(){
+        var circle = new fabric.Circle({
+          radius: 50,
+          left: 275,
+          top: 75,
+          fill: '#aac'
+        });
+
+        canvas.add(circle)
       }
 
     vm.eliminar = function() {
@@ -522,6 +579,7 @@
     }
 
       //Subir imágen desde computador
+      
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -541,7 +599,7 @@
         //Aumenta el contador de figuras
         vm.figuras++;
       });
-
+      
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
       /*
@@ -734,4 +792,7 @@
       $mdDialog.hide(configuracion);
     };
   }
+
+ 
+
 })();
