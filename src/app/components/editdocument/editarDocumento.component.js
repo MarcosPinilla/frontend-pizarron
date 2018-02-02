@@ -98,7 +98,7 @@
       };
 
       vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
-      vm.fontsizes=[];
+      vm.fontsizes = [];
 
       for(var i=0;i<100;i++){
         vm.fontsizes.push(i);
@@ -181,6 +181,9 @@
 
         $scope.$on('someEvent', function(event, ruta) {
           vm.generarImagen(ruta);
+
+          //Aumenta el contador de figuras
+          vm.figuras++;
         })
 
         vm.generarImagen = function(ruta){
@@ -190,9 +193,6 @@
             img.scaleToHeight(canvas.getHeight());
             canvas.add(img).renderAll();
             var a = canvas.setActiveObject(img);
-              
-            //Aumenta el contador de figuras
-            vm.figuras++;
 
             //canvas.add(oImg);
           });
@@ -446,6 +446,7 @@
         } else {
           _config.canvasState.push(canvasAsJson);
         }
+        
         _config.currentStateIndex = _config.canvasState.length-1;
         if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1){
           _config.redoButton.disabled= "disabled";
@@ -484,6 +485,10 @@
           }
         }
       }
+      $scope.$apply(function () {
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
+      });
     }
 
     vm.redo = function() {
@@ -510,6 +515,10 @@
           }
         }
       }
+      $scope.$apply(function () {
+        vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
+      }); 
     }
 
       //Subir imágen desde computador
