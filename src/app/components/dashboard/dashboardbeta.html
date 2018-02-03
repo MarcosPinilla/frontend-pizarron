@@ -1,21 +1,8 @@
-<div class="dashboard" layout="row" layout-wrap ng-cloack flex>
-	<!-- Left -->
-	<my-sidebar></my-sidebar>
-	<!-- Left Space -->
-	<div flex="5"></div>
+<div layout="row" layout-wrap>
+	<!-- Left ~ Sidebar -->
+	<div flex="35"><my-sidebar></my-sidebar></div>
 	<!-- Center -->
-	<div class="center" flex-offset="20" flex="50">
-		<my-center></my-center>
-	</div>
-	<!-- Rigth Space -->
-	<div flex="5"></div>
-	<!-- Right --> 
-	<my-chat></my-chat>
-	<!--<div class="hidden" flex="20" style="height: 100%; position: fixed; right: 0; width: 250px;">
-		<div flex="8" style="background: #95a5a6; height: 28%">Notificaciones</div>
-		<div flex="74" style="visibility: hidden; height: 30%"></div>
-		<div flex="8" style="background: #E0E0E0; height: 28%; border: 10px;">
-		<my-chat></my-chat>
-		</div>
-	</div>-->
+	<div class="center" flex="30"><my-center></my-center></div>
+	<!-- Right ~ Chat -->
+	<div flex="35"><my-chat></my-chat></div>
 </div>

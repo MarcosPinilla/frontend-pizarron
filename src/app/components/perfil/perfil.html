@@ -8,7 +8,7 @@
  			<div class="perfil-information-img" layout="column" style="border-radius: 8px" flex>
  				<div style="height: 10%;"></div>
  				<div style="height: 80%; overflow: hidden">
- 					<img class="img-perfil" src="app/resources/img/perfil.jpg">
+ 					<img class="img-perfil" ng-src= "{{ vm.perfil.profesores.url_foto_profesor }}">
  				</div>
  				<div style="height: 10%"></div>
  			</div>	
@@ -17,9 +17,9 @@
  				<md-list>
  					<md-list-item>
  						<div class="md-list-item-text">
- 							<h3>Nombre: Jorge Andres Solís García</h3>
- 							<p>Cargo: Desarrollador</p>
- 							<h4>Título: Ingeniero Informatico</h4>
+ 							<h3>Nombre: {{ vm.perfil.profesores.nombres_profesor }}  {{ vm.perfil.profesores.apellidos_profesor }}</h3>
+ 							<p>Cargo: {{ vm.perfil.profesores.cargo }}</p>
+ 							<h4>Título: {{ vm.perfil.profesores.profesion }}</h4>
  						</div>
  					</md-list-item>
  				</md-list>
@@ -28,37 +28,116 @@
  						<div class="md-list-item-text">
  							<h3>Institución: Colegio Santa Cruz, Temuco</h3>
  							<p>Celular: +56911111111</p>
- 							<h4>Correo: jsolisdev@gmail.com</h4>
+ 							<h4>Correo: {{ vm.perfil.email }}</h4>
  						</div>
  					</md-list-item>
  				</md-list>
  			</div>
  			<!-- Perfil Opciones -->
- 			<div flex>Agregar al compádre</div>
+ 			<div flex>Parte reservada para estadisticas</div>
  		</div>
-
+ 		<!-- Valoradas -->
  		<div class="perfil-publicaciones-valoradas" flex="95" layout="column">
  			<div class="titulo-perfil-valoradas">
  				<h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
  			</div>
  			<div layout="row">
  				<!-- Left -->
- 				<div flex="30" style="background-color: red; margin-left: 1em;">A</div>
- 				<div flex="5">3</div>
+ 				<div class="perfil-post-left" flex="30" layout="column">
+ 					<div class="perfil-post-titulo">1# Guia de Matematicas</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
+ 				<div flex="5"></div>
  				<!-- Center -->
- 				<div flex="30" style="background-color: red">B</div>
- 				<div flex="5">5</div>
+ 				<div class="perfil-post-center" flex="30" layout="column">
+ 					<div class="perfil-post-titulo">2# Taller de multiplicaciones</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
+ 				<div flex="5"></div>
  				<!-- Right -->
- 				<div flex="30" style="background-color: red; margin-right: 1em;">C</div>
+ 				<div class="perfil-post-right" flex="30" layout="column">
+ 					<div class="perfil-post-titulo">3# Prueba de sumas</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
  			</div>
  		</div>
-
+ 		<!-- Recientes -->
  		<div class="perfil-publicaciones-recientes" flex="95" layout="column">
  			<div class="titulo-perfil-recientes">
  				<h2 class="texto-titulo-perfil">Las más recientes</h2>
  			</div>
- 			<div>
- 				Siivagunner
+ 			<div layout="row">
+ 				<!-- Left -->
+ 				<div class="perfil-post-left" flex="30" layout="column">
+ 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
+ 				<div flex="5"></div>
+ 				<!-- Center -->
+ 				<div class="perfil-post-center" flex="30" layout="column">
+ 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
+ 				<div flex="5"></div>
+ 				<!-- Right -->
+ 				<div class="perfil-post-right" flex="30" layout="column">
+ 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
+ 					<div class="perfil-post-img">
+ 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 					</div>
+ 					<div>
+ 						<md-button class="md-raised">Ver Documento</md-button>
+
+ 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      					</md-button>
+ 					</div>
+ 				</div>
  			</div>
  		</div>
  	</div>

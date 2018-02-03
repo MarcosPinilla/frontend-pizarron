@@ -1,7 +1,7 @@
 <div class="sidebar-left hidden" style="height: 100%;">
 	<div class="sidebar-perfil" flex style="height: 14em;">
-		<a href="perfil"><img class="img-circle preview" src="app/resources/img/perfil.jpg"></a>
-		<span><h4>Bienvenido Felipe!</h4></span>
+		<a href="perfil"><img class="img-circle preview" ng-src="{{ vm.perfil.profesores.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
+		<span><h4>Bienvenido {{ vm.perfil.profesores.nombres_profesor }}!</h4></span>
 	</div>
 	<!-- Buttons -->
 	<div class="sidebar-buttons" layout="row">
