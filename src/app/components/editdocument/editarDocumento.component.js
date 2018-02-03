@@ -239,12 +239,14 @@
               //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
               img.scaleToWidth(canvas.getWidth()/4);
               img.scaleToHeight(canvas.getHeight()/4);
-              canvas.add(img).renderAll();
+              canvas.add(img);
               var a = canvas.setActiveObject(img);
-
+               $scope.$apply(function () {
+                vm.figuras = canvas.getObjects().length;
+              });
               //canvas.add(oImg);
             });
-            vm.figuras = canvas.getObjects().length;
+            
           }
           
         }
@@ -548,6 +550,11 @@
                 _config.undoStatus = false;
                 _config.currentStateIndex -= 1;
                 _config.undoButton.removeAttribute("disabled");
+
+                 $scope.$apply(function () {
+                  vm.figuras = canvas.getObjects().length;
+                });
+
                 if(_config.currentStateIndex !== _config.canvasState.length-1){
                   _config.redoButton.removeAttribute('disabled');
                 }
@@ -562,6 +569,7 @@
             }
           }
         }
+        
       }
       
     }
@@ -579,6 +587,9 @@
               canvas.renderAll();
               _config.redoStatus = false;
               _config.currentStateIndex += 1;
+               $scope.$apply(function () {
+                vm.figuras = canvas.getObjects().length;
+              });
               if(_config.currentStateIndex != -1) {
                 _config.undoButton.removeAttribute('disabled');
               }
@@ -589,6 +600,7 @@
             });
           }
         }
+      
       }
      
     }
