@@ -207,7 +207,7 @@
       </md-input-container>
   </div>
   
-    <h5>Figuras: {{vm.figuras}}/50</h5>
+    <h5>Figuras: {{vm.figuras}}/50 <span style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></h5>
   
   
 </div>
@@ -256,6 +256,7 @@
             <div layout="row" style="background-color: #F0F0F0;">
               <div flex=50>
                <md-button  style="width:80px; height:100px;" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
+                
               <md-icon md-svg-icon="app/resources/fabric/textbox.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
               </md-button>
             </div>
