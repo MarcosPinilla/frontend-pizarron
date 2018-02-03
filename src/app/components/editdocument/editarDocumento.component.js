@@ -604,7 +604,7 @@
           img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
-          var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+          //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
         });
         };
         reader.readAsDataURL(file);
@@ -735,10 +735,10 @@
         vm.nuevo = data;
         var json = JSONC.unpack( vm.nuevo.contenido_material,true );
         json = JSONC.decompress(json);
-        console.log(json)
+        console.log(json.objects.length)
         canvas.loadFromJSON(json);
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
-        vm.figuras = canvas.getObjects().length;
+        vm.figuras = json.objects.length;
         console.log(vm.figuras);
       });
 
