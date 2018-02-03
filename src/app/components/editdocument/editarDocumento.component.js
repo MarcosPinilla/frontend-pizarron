@@ -245,7 +245,7 @@
                 vm.figuras = canvas.getObjects().length;
               });
               //canvas.add(oImg);
-            });
+            }, { crossOrigin: '' });
             
           }
           
@@ -647,6 +647,9 @@
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+          $scope.$apply(function () {
+            vm.figuras = canvas.getObjects().length;
+          }); 
         });
         };
         reader.readAsDataURL(file);
@@ -692,14 +695,17 @@
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
     vm.subir = function() {
       var URL = document.getElementById("url").value;
-      fabric.util.loadImage(URL, function(img) {
-        var object = new fabric.Image(img);
-        object.scaleToWidth(canvas.getWidth());
-        object.scaleToHeight(canvas.getHeight());
-        canvas.add(object);
-        canvas.renderAll();
+      fabric.Image.fromURL(URL, function(img) {
+        
+        img.scaleToWidth(canvas.getWidth()/4);
+        img.scaleToHeight(canvas.getHeight()/4);
+        canvas.add(img);
+            var a = canvas.setActiveObject(img);
+            $scope.$apply(function () {
+            vm.figuras = canvas.getObjects().length;
+        });
           //canvas.setActiveObject(object);    
-        }, null, {crossOrigin: 'Anonymous'});
+        },{crossOrigin: 'Anonymous'});
       
      
     }
