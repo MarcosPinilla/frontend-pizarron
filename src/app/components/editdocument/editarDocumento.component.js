@@ -182,10 +182,15 @@
       */
       //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
       canvas.on("object:selected", function (e) {
-        if (e.target) {
-          e.target.bringToFront();
+        var activeGroup = canvas.getActiveGroup();
+        if (activeGroup) {
+          
+        } else if(canvas.getActiveObject()){
+          
+           canvas.getActiveObject().bringToFront();
           canvas.renderAll();
         }
+        
       });
       /*
       //Función que genera un rectángulo sin relleno y con bordes negros
@@ -216,15 +221,12 @@
           //canvas.add(rect).setActiveObject(rect);
           canvas.add(rect);
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
+         
         };
 
         $scope.$on('agregarImagenRepositorio', function(event, ruta) {
           vm.generarImagen(ruta);
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
         })
 
         vm.generarImagen = function(ruta){
@@ -254,8 +256,8 @@
           //canvas.getActiveObject().set("fontFamily", 'Lobster');
           canvas.renderAll();
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
+        
+
         } 
 
       vm.generarLinea = function(){
@@ -278,9 +280,7 @@
 
         canvas.add(linea);
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
-
+        
       }
 
       vm.generarTriangulo = function(){
@@ -294,8 +294,7 @@
 
         canvas.add(triangle);
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
+       
       }
 
       vm.generarCirculo = function(){
@@ -308,8 +307,7 @@
 
         canvas.add(circle)
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
+      
       }
 
     vm.eliminar = function() {
@@ -319,11 +317,7 @@
         for (let i in activeObjects) {
           canvas.remove(activeObjects[i]);
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
-          
+         
         }
         if(vm.esTexto === false){
           $scope.$apply(function () {
@@ -345,10 +339,6 @@
           }
           canvas.getActiveObject().remove();
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
         }
 
       }
@@ -409,10 +399,6 @@
         activeGroup.forEachObject(function(o){
           canvas.remove(o); 
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
         });
         //Se desactiva el grupo seleccionado y se renderiza
         canvas.discardActiveGroup().renderAll();
@@ -427,10 +413,6 @@
             //Se elimina el objeto
             canvas.getActiveObject().remove();
             
-            $scope.$apply(function () {
-              //Baja el contador de figuras
-              vm.figuras--;
-            });
         });
         //Se actualiza la variable esGrupor por false
         vm.esGrupo = false;
@@ -461,11 +443,7 @@
             var arrayObj = clonedObj.getObjects();
             for (let i in arrayObj) {
               canvas.add(arrayObj[i]);
-              
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
-                vm.figuras++;
-              });
+             
             }
              //clonedObj.setCoords();
              _clipboard.top += 10;
@@ -474,11 +452,6 @@
              canvas.renderAll();
             } else {
               canvas.add(clonedObj);
-
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
-                vm.figuras++;
-              });
 
               _clipboard.top += 10;
               _clipboard.left += 10;
@@ -555,10 +528,7 @@
           }
         }
       }
-      $scope.$apply(function () {
-        vm.figuras = canvas.getObjects().length;
-        console.log(vm.figuras);
-      });
+      
     }
 
     vm.redo = function() {
@@ -585,11 +555,18 @@
           }
         }
       }
+     
+    }
+
+    vm.canvasModifiedCallback = function() {
       $scope.$apply(function () {
         vm.figuras = canvas.getObjects().length;
         console.log(vm.figuras);
       }); 
-    }
+    };
+
+    canvas.on('object:added', vm.canvasModifiedCallback);
+    canvas.on('object:removed', vm.canvasModifiedCallback);
 
       //Subir imágen desde computador
       
@@ -609,8 +586,7 @@
         };
         reader.readAsDataURL(file);
         
-        //Aumenta el contador de figuras
-        vm.figuras++;
+    
       });
       
 
@@ -660,8 +636,7 @@
           //canvas.setActiveObject(object);    
         }, null, {crossOrigin: 'Anonymous'});
       
-      //Aumenta el contador de figuras
-      vm.figuras++;
+     
     }
 
 
