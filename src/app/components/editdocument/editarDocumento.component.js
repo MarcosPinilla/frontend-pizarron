@@ -64,10 +64,12 @@
 
       //var panelcanvas = new fabric.Canvas('panelcanvas');
       var canvas = new fabric.Canvas('canvas');
+     
       var context = canvas.getContext("2d");
 
+
       //context.imageSmoothingQuality = "low" || "medium" || "high"
-      context.imageSmoothingQuality = "high"
+      context.imageSmoothingQuality = "medium";
 
       vm.fontTest="";
       vm.fontTest2=0;
@@ -717,6 +719,7 @@
       var canvasAsJson = JSON.stringify(jsonComprimido);
 
       json = {objects: canvasAsJson}
+      console.log(canvasAsJson);
       //documento.contenido_material = canvasAsJson;
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
         console.log("Guardado con éxito");
@@ -772,7 +775,10 @@
       
       //Se valida que no se clickee de nuevo en la opción ya ocupada 
       if ((vm.orientacion === '1' && canvas.height < canvas.width) || (vm.orientacion === '2' && canvas.height > canvas.width)) {
-        canvas.setDimensions({width: canvas.height, height: canvas.width});  
+        canvas.setDimensions({width: canvas.height, height: canvas.width}); 
+        document.getElementById("contenedor-canvas").style.width=document.getElementById("contenedor-canvas").style.height;
+        document.getElementById("contenedor-canvas").style.height=document.getElementById("contenedor-canvas").style.width; 
+
       }
       
     }
@@ -781,7 +787,9 @@
     vm.tamanoHoja = function(tipo, width, height) {
       vm.tipoHoja = tipo;
       if (canvas.width !== width && canvas.height !== height) {
-        canvas.setDimensions({width: width, height: height});  
+        canvas.setDimensions({width: width, height: height}); 
+        document.getElementById("contenedor-canvas").style.width=width+'px'; 
+        document.getElementById("contenedor-canvas").style.height=height+'px';
       }
     }
 
