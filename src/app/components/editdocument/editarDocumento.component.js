@@ -77,6 +77,7 @@
       vm.mensaje="nada";
       vm.cortar = false;
       vm.copiar = false;
+      vm.pegar=false;
       vm.enCanvas = false;
       var _clipboard = null;
       var ctrlDown=false;
@@ -182,10 +183,15 @@
       */
       //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
       canvas.on("object:selected", function (e) {
-        if (e.target) {
-          e.target.bringToFront();
+        var activeGroup = canvas.getActiveGroup();
+        if (activeGroup) {
+          
+        } else if(canvas.getActiveObject()){
+          
+           canvas.getActiveObject().bringToFront();
           canvas.renderAll();
         }
+        
       });
       /*
       //Función que genera un rectángulo sin relleno y con bordes negros
@@ -205,111 +211,128 @@
         };
 */
         vm.generarFigura=function() {
-        var rect = new fabric.Rect({
-          top : 100,
-          left : 100,
-          width : 60,
-          height : 70,
-          fill : 'blue'
-        });
+          if(vm.figuras<50){
+            var rect = new fabric.Rect({
+            top : 100,
+            left : 100,
+            width : 60,
+            height : 70,
+            fill : 'blue'
+          });
 
-          //canvas.add(rect).setActiveObject(rect);
-          canvas.add(rect);
-
-          //Aumenta el contador de figuras
-          vm.figuras++;
+            //canvas.add(rect).setActiveObject(rect);
+            canvas.add(rect);
+            vm.figuras = canvas.getObjects().length;
+          }
+        
+         
         };
 
         $scope.$on('agregarImagenRepositorio', function(event, ruta) {
           vm.generarImagen(ruta);
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
         })
 
         vm.generarImagen = function(ruta){
-          fabric.Image.fromURL(ruta, function(img) {
-            //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-            img.scaleToWidth(canvas.getWidth()/4);
-            img.scaleToHeight(canvas.getHeight()/4);
-            canvas.add(img).renderAll();
-            var a = canvas.setActiveObject(img);
-
-            //canvas.add(oImg);
-          });
+          if(vm.figuras<50){
+            fabric.Image.fromURL(ruta, function(img) {
+              //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
+              img.scaleToWidth(canvas.getWidth()/4);
+              img.scaleToHeight(canvas.getHeight()/4);
+              canvas.add(img);
+              var a = canvas.setActiveObject(img);
+               $scope.$apply(function () {
+                vm.figuras = canvas.getObjects().length;
+              });
+              //canvas.add(oImg);
+            }, { crossOrigin: '' });
+            
+          }
+          
         }
 
         vm.generarTexto = function() {
-          var texto = new fabric.Textbox('Escribe aquí', {
-            left: 50,
-            top: 50,
-            width: 150,
-            fontSize: 20,
-            fontFamily: 'Lobster'
-          });
+          if(vm.figuras<50){
+            var texto = new fabric.Textbox('Escribe aquí', {
+              left: 50,
+              top: 50,
+              width: 150,
+              fontSize: 20,
+              fontFamily: 'Lobster'
+            });
 
-          canvas.add(texto)
-          //canvas.add(texto).setActiveObject(texto);
-          console.log(texto);
-          //canvas.getActiveObject().set("fontFamily", 'Lobster');
-          canvas.renderAll();
+            canvas.add(texto)
+            //canvas.add(texto).setActiveObject(texto);
+            console.log(texto);
+            //canvas.getActiveObject().set("fontFamily", 'Lobster');
+            canvas.renderAll();
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
+            vm.figuras = canvas.getObjects().length;
+          }
+          
+        
+
         } 
 
       vm.generarLinea = function(){
-        var linea = new fabric.Line([ 250, 125, 250, 175 ], {
-        
-          fill: 'red',
-          stroke: 'red',
-          strokeWidth: 5,
-          selectable: true
-        });
+        if(vm.figuras<50){
+           var linea = new fabric.Line([ 250, 125, 250, 175 ], {
+          
+            fill: 'red',
+            stroke: 'red',
+            strokeWidth: 5,
+            selectable: true
+          });
 
-        linea.setControlsVisibility({
-          bl: true,
-          br: false,
-          tl: false,
-          tr: false,
-          mt: false,
-          mb: false,
-      });
+          linea.setControlsVisibility({
+            bl: true,
+            br: false,
+            tl: false,
+            tr: false,
+            mt: false,
+            mb: false,
+          });
 
-        canvas.add(linea);
+          canvas.add(linea);
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
-
+          vm.figuras = canvas.getObjects().length;
+        }
+       
       }
 
       vm.generarTriangulo = function(){
-        var triangle = new fabric.Triangle({
-          width: 100, 
-          height: 100, 
-          left: 50,
-          top: 300, 
-          fill: '#cca'
-        });
+        if(vm.figuras<50){
+          var triangle = new fabric.Triangle({
+            width: 100, 
+            height: 100, 
+            left: 50,
+            top: 300, 
+            fill: '#cca'
+          });
 
         canvas.add(triangle);
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
+        vm.figuras = canvas.getObjects().length;
+        }
+        
+       
       }
 
       vm.generarCirculo = function(){
-        var circle = new fabric.Circle({
-          radius: 50,
-          left: 275,
-          top: 75,
-          fill: '#aac'
-        });
+        if(vm.figuras<50){
+          var circle = new fabric.Circle({
+            radius: 50,
+            left: 275,
+            top: 75,
+            fill: '#aac'
+          });
 
-        canvas.add(circle)
+          canvas.add(circle)
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
+          vm.figuras = canvas.getObjects().length;
+      
+        }
+        
       }
 
     vm.eliminar = function() {
@@ -319,11 +342,7 @@
         for (let i in activeObjects) {
           canvas.remove(activeObjects[i]);
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
-          
+         
         }
         if(vm.esTexto === false){
           $scope.$apply(function () {
@@ -345,10 +364,6 @@
           }
           canvas.getActiveObject().remove();
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
         }
 
       }
@@ -363,9 +378,11 @@
       if(key===46){
         vm.eliminar();
       } else if(e.ctrlKey && key === 67) {
-        vm.copy();
+          vm.copy();
       } else if (e.ctrlKey && key === 86) {
+
         vm.paste();
+
       } else if (e.ctrlKey && key === 88) {
         vm.cut();
       } else if (e.ctrlKey && key == 90) {
@@ -409,10 +426,6 @@
         activeGroup.forEachObject(function(o){
           canvas.remove(o); 
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
         });
         //Se desactiva el grupo seleccionado y se renderiza
         canvas.discardActiveGroup().renderAll();
@@ -427,10 +440,6 @@
             //Se elimina el objeto
             canvas.getActiveObject().remove();
             
-            $scope.$apply(function () {
-              //Baja el contador de figuras
-              vm.figuras--;
-            });
         });
         //Se actualiza la variable esGrupor por false
         vm.esGrupo = false;
@@ -459,31 +468,29 @@
           if (vm.esGrupo) {
             //clonedObj.canvas = canvas;
             var arrayObj = clonedObj.getObjects();
+
             for (let i in arrayObj) {
               canvas.add(arrayObj[i]);
-              
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
-                vm.figuras++;
-              });
+              vm.pegar=true;
             }
              //clonedObj.setCoords();
              _clipboard.top += 10;
              _clipboard.left += 10;
              canvas.setActiveGroup(clonedObj);
              canvas.renderAll();
+
+            
             } else {
               canvas.add(clonedObj);
-
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
-                vm.figuras++;
-              });
-
               _clipboard.top += 10;
               _clipboard.left += 10;
               canvas.setActiveObject(clonedObj);
               canvas.renderAll();
+
+              $scope.$apply(function () {
+              vm.figuras = canvas.getObjects().length;
+              console.log(vm.figuras);
+            }); 
             }
           });
 
@@ -491,7 +498,10 @@
           _clipboard = null;
           vm.cortar = false;
         }
+
       }
+
+      vm.pegar=false;
     }
 
     canvas.on('object:modified', function() {
@@ -540,6 +550,11 @@
                 _config.undoStatus = false;
                 _config.currentStateIndex -= 1;
                 _config.undoButton.removeAttribute("disabled");
+
+                 $scope.$apply(function () {
+                  vm.figuras = canvas.getObjects().length;
+                });
+
                 if(_config.currentStateIndex !== _config.canvasState.length-1){
                   _config.redoButton.removeAttribute('disabled');
                 }
@@ -554,11 +569,9 @@
             }
           }
         }
+        
       }
-      $scope.$apply(function () {
-        vm.figuras = canvas.getObjects().length;
-        console.log(vm.figuras);
-      });
+      
     }
 
     vm.redo = function() {
@@ -574,6 +587,9 @@
               canvas.renderAll();
               _config.redoStatus = false;
               _config.currentStateIndex += 1;
+               $scope.$apply(function () {
+                vm.figuras = canvas.getObjects().length;
+              });
               if(_config.currentStateIndex != -1) {
                 _config.undoButton.removeAttribute('disabled');
               }
@@ -584,12 +600,38 @@
             });
           }
         }
+      
       }
-      $scope.$apply(function () {
+     
+    }
+
+    vm.canvasModifiedCallback = function() {
+     
+        $scope.$apply(function () {
         vm.figuras = canvas.getObjects().length;
         console.log(vm.figuras);
       }); 
-    }
+      
+      
+    };
+
+    vm.canvasModifiedAdd = function() {
+      if(vm.pegar){
+        vm.pegar=false;
+        $scope.$apply(function () {
+          vm.figuras = canvas.getObjects().length;
+          console.log(vm.figuras);
+          vm.pegar=false;
+         }); 
+
+        vm.pegar=false;
+      }
+      
+      
+    };
+
+    canvas.on('object:removed', vm.canvasModifiedCallback);
+    canvas.on('object:added', vm.canvasModifiedAdd);
 
       //Subir imágen desde computador
       
@@ -605,12 +647,14 @@
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
           //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+          $scope.$apply(function () {
+            vm.figuras = canvas.getObjects().length;
+          }); 
         });
         };
         reader.readAsDataURL(file);
         
-        //Aumenta el contador de figuras
-        vm.figuras++;
+    
       });
       
 
@@ -651,17 +695,19 @@
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
     vm.subir = function() {
       var URL = document.getElementById("url").value;
-      fabric.util.loadImage(URL, function(img) {
-        var object = new fabric.Image(img);
-        object.scaleToWidth(canvas.getWidth());
-        object.scaleToHeight(canvas.getHeight());
-        canvas.add(object);
-        canvas.renderAll();
+      fabric.Image.fromURL(URL, function(img) {
+        
+        img.scaleToWidth(canvas.getWidth()/4);
+        img.scaleToHeight(canvas.getHeight()/4);
+        canvas.add(img);
+            var a = canvas.setActiveObject(img);
+            $scope.$apply(function () {
+            vm.figuras = canvas.getObjects().length;
+        });
           //canvas.setActiveObject(object);    
-        }, null, {crossOrigin: 'Anonymous'});
+        },{crossOrigin: 'Anonymous'});
       
-      //Aumenta el contador de figuras
-      vm.figuras++;
+     
     }
 
 
@@ -797,11 +843,15 @@
     $scope.$watch("vm.figuras",function(numero) {
      
       if (numero > 50) {
-        alert("Ha llegado a su límite");
+
+        setTimeout(function(){
+         vm.eliminar() 
+        }, 100);
       }
        
      
     });
+      
   }
 
   function configuracionPaginaController($mdDialog, orientacion, tipo) {
