@@ -30,13 +30,13 @@
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
           $rootScope.$emit('isLogin');
-          //$state.go('dashboard');
-          UsuarioService.query().$promise.then(function (data) {
+          $state.go('dashboard');
+          /*UsuarioService.query().$promise.then(function (data) {
             console.log(JSON.stringify(data.user));
             user = data.user;
             localStorage.setItem('usuarioLogueado', JSON.stringify(data.user));
             $state.go('dashboard', ({usuario: user.nombre_usuario}));
-          });
+          });*/
 
         }else{
           vm.loginError = true;
