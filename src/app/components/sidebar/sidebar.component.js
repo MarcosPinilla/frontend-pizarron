@@ -9,7 +9,7 @@
     	controllerAs: 'vm'
   	});
 
-  	sidebarCtrl.$inject = ['$mdDialog', 'ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService', 'MaterialService', 'PerfilService'];
+  	sidebarCtrl.$inject = ['$mdDialog', 'ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService', 'PerfilService', 'MaterialService'];
 
   	function sidebarCtrl($mdDialog, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, PerfilService) {
   		var vm = this;
@@ -18,15 +18,14 @@
       vm.asignaturas = {};
       vm.niveles = {};
       vm.tipo_material = {};
-
+      vm.perfil = {};
 
       vm.customFullscreen = true;
-
-      vm.perfil = {};
+      
        PerfilService.get().$promise.then(function (data) {
             console.log(data);
             vm.perfil = data;
-            console.log(vm.perfil.profesores.url_foto_profesor);
+            //console.log(vm.perfil.profesores.url_foto_profesor);
        });
 
       /*Lista las asignaturas*/
