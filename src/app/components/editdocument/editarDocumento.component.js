@@ -246,7 +246,7 @@
                 vm.figuras = canvas.getObjects().length;
               });
               //canvas.add(oImg);
-            }, { crossOrigin: '' });
+            }, { crossOrigin: 'Anonymous' });
             
           }
           
@@ -705,10 +705,11 @@
         img.scaleToWidth(canvas.getWidth()/4);
         img.scaleToHeight(canvas.getHeight()/4);
         canvas.add(img);
-            var a = canvas.setActiveObject(img);
-            $scope.$apply(function () {
+          
+        $scope.$apply(function () {
             vm.figuras = canvas.getObjects().length;
         });
+        var a = canvas.setActiveObject(img);
           //canvas.setActiveObject(object);    
         },{crossOrigin: 'Anonymous'});
       
