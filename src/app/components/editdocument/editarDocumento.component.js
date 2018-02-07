@@ -235,7 +235,7 @@
 
         vm.generarImagen = function(ruta){
           if(vm.figuras<50){
-            fabric.Image.fromURL(ruta, function(img) {
+            fabric.Image.fromURL('http://localhost:8000/corazon.png', function(img) {
               //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
               img.src=ruta;
               img.scaleToWidth(canvas.getWidth()/4);
@@ -772,10 +772,30 @@
 
       json = {objects: canvasAsJson}
       console.log(canvasAsJson);
+      vm.documento.contenido_material=json
+    
+
+      var documentoTemp={};
+      documentoTemp.id=vm.documento.id;
+      documentoTemp.titulo_material=vm.documento.titulo_material;
+      documentoTemp.contenido_material=canvasAsJson;
+      documentoTemp.vista_previa=vm.documento.vista_previa;
+      documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
+      documentoTemp.id_asignatura=vm.documento.id_asignatura;
+      documentoTemp.id_nivel=vm.documento.id_nivel;
+      documentoTemp.id_visibilidad=vm.documento.id_visibilidad;
+
+      console.log(documentoTemp)
+
       //documento.contenido_material = canvasAsJson;
+      MaterialService.update({id:vm.documento.id},documentoTemp,function(){
+         console.log("Guardado con éxito");
+      });
+      /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
         console.log("Guardado con éxito");
       });
+      */
     }
 
 

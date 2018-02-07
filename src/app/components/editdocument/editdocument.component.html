@@ -5,7 +5,15 @@
       </md-toolbar-filler>
 
       <div>
-        <h2 class="md-toolbar-tools">{{ vm.documento.titulo_material }}</h2>
+         <div class="md-toolbar-tools">
+          <div>
+             <md-tooltip>
+              Cambiar título
+            </md-tooltip>
+            <input class="input-titulo" ng-model="vm.documento.titulo_material">
+          </div>
+         
+        </div>
         <md-menu-bar>
           <md-menu>
             <button ng-click="$mdMenu.open()">
