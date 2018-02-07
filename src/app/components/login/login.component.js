@@ -14,6 +14,8 @@
   function loginCtrl(LoginService, CredentialsService, $state, $rootScope, $mdDialog, SendService, UsuarioService) {
     var vm = this;
 
+    $rootScope.$emit('isinLogin'); 
+
     vm.isLanding = false;
     vm.loginError = false;
     vm.messageCode = null;

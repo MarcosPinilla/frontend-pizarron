@@ -127,6 +127,16 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     url: '/perfil',
     component: 'perfil',
     isPrivate: true
+  })
+  .state('notificaciones', {
+    url: '/notificaciones',
+    component: 'notificacion',
+    isPrivate: true
+  })
+  .state('profesores', {
+    url: '/profesores',
+    component: 'profesores',
+    isPrivate: true
   });
 
   $httpProvider.interceptors.push('InterceptorApi');

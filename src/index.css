@@ -299,6 +299,7 @@ md-list.make-scrollable {
   margin-left: 25px;
   margin-top: 12px;
   margin-bottom: 0;
+  width: 90%
 }
 
 .div-buscador{
@@ -434,6 +435,76 @@ md-list.make-scrollable {
   text-align: center;
 }
 
+.perfil-agregar-amigo {
+  float: right; 
+}
+
+.notificaciones-contenedor {  
+  background-color: #EEEEEE;
+  margin-top: 1em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+}
+
+.notificaciones-footer {
+  margin-top: 0.5em;
+}
+
+.notificaciones-contenedor md-divider {
+  background-color: ;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+}
+
+.notificaciones-lista {
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  font-size: 18px;
+  background-color: white;
+}
+
+.notificacion-imagen {
+  background-color: #F5F5F5;
+}
+
+.notificacion-imagen img {
+  float: right;
+  width: 45%;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 50%;
+  /*border-width: 20px;
+  border-color: white;
+  border-style: solid;*/
+  height: auto;
+  display: block;
+}
+
+.notificacion-mensaje {
+  background-color: #F5F5F5;
+  font-size: 16px;
+}
+
+.notificacion-mensaje a {
+  margin-left: 0.5em;
+  color: #5E35B1;
+}
+
+.notificacion-mensaje p {
+  margin-top: 0;
+  margin-left: 0.5em;
+  color: #BDBDBD;
+  
+}
+
+.notificacion-botones {
+  background-color: #F5F5F5;
+}
+
+.notificacion-titulo {
+  background-color: #5C6BC0;
+  color: white;
+  margin-bottom: 0.5em;
+}
 /*
 .hover12 figure {
   background-color: #ffffcc;
@@ -455,4 +526,12 @@ md-list.make-scrollable {
 
 .hover12 figure img:focus{
   outline: none;
+}
+.card-profesor{
+  float: left;
+  width: 32.2%
+  min-width: 385px;
+}
+.buscador-profes{
+  background-color: white;
 }

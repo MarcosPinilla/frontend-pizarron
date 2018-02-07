@@ -1,33 +1,8 @@
-<div flex="100" class="dashboard">
-	<md-content layout-xs="column" layout="row" style="background: rgba(255, 255, 255, 0);">
-    <div flex-xs flex-gt-xs="60" layout="column">
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-green" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
-        <img src="app/resources/img/newdocument.png" class="md-card-image" id="icon-dash">
-      </md-button>
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-blue">
-        <center><img src="app/resources/img/mydocuments.png" class="md-card-image" id="icon-dash"></center>
-      </md-button>
-    </div>
-    <div flex-xs flex-gt-xs="50" layout="column">
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-purple">
-        <center><img src="app/resources/img/myfriends.png" class="md-card-image" id="icon-dash"></center>
-      </md-button>
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-orange">
-        <center><img src="app/resources/img/searchcontent.png" class="md-card-image" id="icon-dash"></center>
-      </md-button>
-
-      <div layout layout-padding layout-align="center end" >
-        
-      </div>
-    </div>
-    <div flex-xs flex-gt-xs="50" layout="column">
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-blue" ng-click="vm.showCalendar($event)">
-        <center><img src="app/resources/img/mycalendar.png" class="md-card-image" id="icon-dash"></center>
-      </md-button>
-      <md-button class="md-raised md-primary buttondash" md-theme="dark-purple">
-        <center><img src="app/resources/img/newdocument.png" class="md-card-image" id="icon-dash"></center>
-      </md-button>
-    </div>
-
-  </md-content>
+<div class="dashboard" layout="row" layout-wrap>
+	<!-- Left ~ Sidebar -->
+	<div flex="35"><my-sidebar></my-sidebar></div>
+	<!-- Center -->
+	<div flex><publicaciones></publicaciones></div>
+	<!-- Right ~ Chat -->
+	<div flex="35"><my-chat></my-chat></div>
 </div>
