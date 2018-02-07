@@ -1,0 +1,29 @@
+<div flex= "100">
+	<div class="div-buscador" flex-offset="30" flex="40">
+		
+		<md-input-container class="buscador-repo" flex="98">
+			<label flex="100">Buscador</label>
+			<input ng-model="buscador" type="text" flex="100">
+		</md-input-container>
+		
+	</div>
+	<div>
+		<md-card ng-repeat="person in vm.people|filter:buscador" class="card-profesor">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</span>
+            <span class="md-subhead">{{ person.profesion }}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media">
+            	<img ng-src="{{ person.url_foto_profesor }}">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Añadir como amigo</md-button>
+          <md-button>Seguir</md-button>
+        </md-card-actions>
+      </md-card>
+	</div>
+</div>
