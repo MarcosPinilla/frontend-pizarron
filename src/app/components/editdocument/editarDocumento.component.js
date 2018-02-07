@@ -784,8 +784,9 @@
       if(vm.documento.titulo_material!=undefined){
 
         documentoTemp.titulo_material=vm.documento.titulo_material;
+        vm.nombreInicial=vm.documento.titulo_material;
       }else{
-
+        vm.documento.titulo_material=vm.nombreInicial;
         documentoTemp.titulo_material=vm.nombreInicial
       }
       
