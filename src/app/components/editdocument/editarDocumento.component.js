@@ -29,10 +29,13 @@
 
     var vm = this;
 
+    vm.nombreInicial="";
+
     vm.documento = MaterialService.get({id: $stateParams.id});
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
+      vm.nombreInicial=vm.documento.titulo_material;
       console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
       if (vm.documento.contenido_material !== null) {
@@ -235,8 +238,9 @@
 
         vm.generarImagen = function(ruta){
           if(vm.figuras<50){
-            fabric.Image.fromURL(ruta, function(img) {
+            fabric.Image.fromURL('http://localhost:8000/corazon.png', function(img) {
               //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
+              img.src=ruta;
               img.scaleToWidth(canvas.getWidth()/4);
               img.scaleToHeight(canvas.getHeight()/4);
               canvas.add(img);
@@ -245,7 +249,7 @@
                 vm.figuras = canvas.getObjects().length;
               });
               //canvas.add(oImg);
-            }, { crossOrigin: '' });
+            }, { crossOrigin: 'Anonymous' });
             
           }
           
@@ -390,6 +394,10 @@
       } else if (e.ctrlKey && key == 89) {
         vm.redo();
       }
+       $scope.$apply(function () {
+          vm.figuras = canvas.getObjects().length;
+                  
+        });
     }, false);
 
 
@@ -700,10 +708,11 @@
         img.scaleToWidth(canvas.getWidth()/4);
         img.scaleToHeight(canvas.getHeight()/4);
         canvas.add(img);
-            var a = canvas.setActiveObject(img);
-            $scope.$apply(function () {
+          
+        $scope.$apply(function () {
             vm.figuras = canvas.getObjects().length;
         });
+        var a = canvas.setActiveObject(img);
           //canvas.setActiveObject(object);    
         },{crossOrigin: 'Anonymous'});
       
@@ -766,10 +775,39 @@
 
       json = {objects: canvasAsJson}
       console.log(canvasAsJson);
+      vm.documento.contenido_material=json
+    
+
+      var documentoTemp={};
+      documentoTemp.id=vm.documento.id;
+      console.log(vm.documento.titulo_material)
+      if(vm.documento.titulo_material!=undefined){
+
+        documentoTemp.titulo_material=vm.documento.titulo_material;
+        vm.nombreInicial=vm.documento.titulo_material;
+      }else{
+        vm.documento.titulo_material=vm.nombreInicial;
+        documentoTemp.titulo_material=vm.nombreInicial
+      }
+      
+      documentoTemp.contenido_material=canvasAsJson;
+      documentoTemp.vista_previa=vm.documento.vista_previa;
+      documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
+      documentoTemp.id_asignatura=vm.documento.id_asignatura;
+      documentoTemp.id_nivel=vm.documento.id_nivel;
+      documentoTemp.id_visibilidad=vm.documento.id_visibilidad;
+
+      console.log(documentoTemp)
+
       //documento.contenido_material = canvasAsJson;
+      MaterialService.update({id:vm.documento.id},documentoTemp,function(){
+         console.log("Guardado con éxito");
+      });
+      /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
         console.log("Guardado con éxito");
       });
+      */
     }
 
 
