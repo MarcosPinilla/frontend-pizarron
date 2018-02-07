@@ -76,6 +76,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'material',
     isPrivate: true
   })
+  .state('favoritos', {
+    url: '/favoritos',
+    component: 'favoritos',
+    isPrivate: true
+  })
   .state('elemento', {
     url: '/elemento',
     component: 'elemento',
