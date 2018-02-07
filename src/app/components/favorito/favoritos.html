@@ -1,0 +1,33 @@
+<md-content layout-padding layout-wrap>
+    <center>
+      <h2 class="titulo">Favoritos</h2>
+      <br>
+    </center>
+    <md-divider></md-divider>
+    <md-list ng-cloak>
+      <md-list-item ng-repeat="favorito in vm.favoritos"  >
+        <md-card  >
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{ favorito.titulo_material }}</span>
+            <span class="md-subhead">{{ favorito.contenido_material}}</span>
+            <span class="md-subhead">{{ favorito.nivel.nombre_nivel}}</span>
+            <span class="md-subhead">{{ favorito.asignatura.nombre_asignatura}}</span>
+            <span class="md-subhead">{{ favorito.tipo_material.nombre_tipo_material}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-md card-media"><img ng-src="{{vm.imagePath}}" class="md-card-image" alt="Washed Out"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-icon-button"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon></md-button>
+         <md-button > <a ui-sref="editdocument({id:favorito.id})" style="color: black">Icono de ir</a></md-button>
+        </md-card-actions>
+      </md-card>
+        
+      </md-list-item>
+    </md-list>  
+    
+
+  </md-content>
+</div> 
