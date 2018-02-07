@@ -29,10 +29,13 @@
 
     var vm = this;
 
+    vm.nombreInicial="";
+
     vm.documento = MaterialService.get({id: $stateParams.id});
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
+      vm.nombreInicial=vm.documento.titulo_material;
       console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
       if (vm.documento.contenido_material !== null) {
@@ -777,7 +780,15 @@
 
       var documentoTemp={};
       documentoTemp.id=vm.documento.id;
-      documentoTemp.titulo_material=vm.documento.titulo_material;
+      console.log(vm.documento.titulo_material)
+      if(vm.documento.titulo_material!=undefined){
+
+        documentoTemp.titulo_material=vm.documento.titulo_material;
+      }else{
+
+        documentoTemp.titulo_material=vm.nombreInicial
+      }
+      
       documentoTemp.contenido_material=canvasAsJson;
       documentoTemp.vista_previa=vm.documento.vista_previa;
       documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
