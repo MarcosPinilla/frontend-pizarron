@@ -16,7 +16,7 @@
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-lg card-media">
-            	<img ng-src="{{ person.url_foto_profesor }}">
+            	<img ng-src="{{ person.url_foto_profesor }}" ng-click="vm.goToPerson(person, $event)">
             </div>
           </md-card-title-media>
         </md-card-title>
