@@ -238,7 +238,7 @@
 
         vm.generarImagen = function(ruta){
           if(vm.figuras<50){
-            fabric.Image.fromURL('http://localhost:8000/corazon.png', function(img) {
+            fabric.Image.fromURL(ruta, function(img) {
               //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
               img.src=ruta;
               img.scaleToWidth(canvas.getWidth()/4);
@@ -734,14 +734,34 @@
           };
           pdfMake.createPdf(docDefinition).download("test.pdf");
         }
-      }); */
+      }); 
+      
+      ////////////////////////////////////////////////////
+
 
       var imgPdfData = canvas.toDataURL("image/jpeg", 1.0);
       var pdf=new jsPDF("p", "mm", "a4");
       var width = pdf.internal.pageSize.width;    
       var height = pdf.internal.pageSize.height;
       pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
-      pdf.save('test.pdf');
+      pdf.save('test.pdf'); */
+
+      kendo.drawing
+        .drawDOM("#canvas", 
+        { 
+            forcePageBreak: ".page-break", 
+            paperSize: "A4",
+            margin: { top: "1cm", bottom: "1cm" },
+            scale: 0.8,
+            height: 500, 
+            template: $("#page-template").html(),
+            keepTogether: ".prevent-split"
+        })
+            .then(function(group){
+            kendo.drawing.pdf.saveAs(group, "Exported_Itinerary.pdf")
+        });
+
+
     };
 
     //Provisorio para tests
