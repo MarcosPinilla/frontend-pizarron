@@ -14,6 +14,8 @@
   function toolbarCtrl(CredentialsService, $rootScope, $state) {
     var vm = this;
 
+    vm.isinLogged = false;
+
     vm.iralogin = function () {
       $state.go('login');
     };
@@ -28,5 +30,14 @@
     $rootScope.$on('isLogin', function () {
       vm.isLogged = true;
     });
+
+    $rootScope.$on('isinLogin', function () {
+      vm.isinLogged = true;
+    });
+
+    vm.gohome = function () {
+      vm.isinLogged = false;
+      $state.go('landing');
+    }
   }
 })();
