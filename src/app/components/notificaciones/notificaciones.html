@@ -1,0 +1,45 @@
+<div class="dashboard" layout="row" layout-wrap>
+	<!-- Left ~ Sidebar -->
+	<div flex="20"><my-sidebar></my-sidebar></div>
+	<!-- Center -->
+	<div flex class="notificaciones-contenedor" layout="column">
+		<div class="notificacion-titulo"><h2 style="margin-left: 0.5em;">Lista de notificaciones</h2></div>
+		<!-- Lista -->
+		<div class="notificaciones-lista" layout="row" flex>
+			<div class="notificacion-imagen" flex="10">
+				<img ng-src= "https://scontent-eze1-1.xx.fbcdn.net/v/t1.0-9/10372266_10209027489747206_4877061340362593155_n.jpg?oh=726bca5cafd8ec5df3c348bd12125c07&oe=5AF2DB96">
+			</div>			
+			<div class="notificacion-mensaje" flex="50">
+				<div class="md-list-item-text">
+					<a href=#>Marcos Pinilla</a> te ha enviado una solicitud de amistad
+					<p>hace una hora</p>
+				</div>
+			</div>
+			<div class="notificacion-botones" flex="40" layout="row">
+				<md-button class="md-raised">Agregar a amigos</md-button>
+				<md-button class="md-raised">borrar</md-button>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="notificaciones-lista" layout="row" flex>
+			<div class="notificacion-imagen" flex="10">
+				<img ng-src= "https://scontent-eze1-1.xx.fbcdn.net/v/t1.0-9/10372266_10209027489747206_4877061340362593155_n.jpg?oh=726bca5cafd8ec5df3c348bd12125c07&oe=5AF2DB96">
+			</div>			
+			<div class="notificacion-mensaje" flex="50">
+				<div class="md-list-item-text">
+					<a href=#>Marcos Pinilla</a> te ha enviado una solicitud de amistad
+					<p>hace una hora</p>
+				</div>
+			</div>
+			<div class="notificacion-botones" flex="40" layout="row">
+				<md-button class="md-raised">Agregar a amigos</md-button>
+				<md-button class="md-raised">borrar</md-button>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div class="notificaciones-footer"></div>
+	</div>
+
+	<!-- Right ~ Chat -->
+	<div flex="20"><my-chat></my-chat></div>
+</div>

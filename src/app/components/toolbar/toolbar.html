@@ -37,7 +37,7 @@
       <md-button ng-if="vm.isLogged" class="md-icon-button" arial-label="xd">
         <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       </md-button>
-      <md-divider class="vertical-divider"></md-divider>
+      <md-divider ng-if="vm.isLogged" class="vertical-divider"></md-divider>
       <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
         <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
       </md-button>
