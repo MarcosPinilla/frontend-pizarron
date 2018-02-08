@@ -6,77 +6,26 @@
 
     <h4>Quién tiene acceso...</h4>
     <div class="contenedor-colaboradores">
+      
 
-      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch  ng-repeat="colaborador in vm.colaboradores ">
         <md-card-title>
           <md-card-title-media>
             <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
           </md-card-title-media>
           <md-card-title-text>
-            <span class="md-headline">Felipe Acuña</span>
+            <span class="md-headline">Id profesor {{colaborador.id_profesor}}</span>
             <span class="md-subhead">Profesor de matemáticas</span>
           </md-card-title-text>
 
-          <md-button class="md-icon-button" aria-label="Custom Icon Button">
+          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)">
             <md-icon style="font-size:30px !important;">cancel</md-icon>
           </md-button>
           
         </md-card-title>
       </md-card>
 
-       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-media>
-            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
-          </md-card-title-media>
-          <md-card-title-text>
-            <span class="md-headline">Felipe Acuña</span>
-            <span class="md-subhead">Profesor de matemáticas</span>
-          </md-card-title-text>
-
-          <md-button class="md-icon-button" aria-label="Custom Icon Button">
-            <md-icon style="font-size:30px !important;">cancel</md-icon>
-          </md-button>
-          
-        </md-card-title>
-      </md-card>
-
-       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-media>
-            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
-          </md-card-title-media>
-          <md-card-title-text>
-            <span class="md-headline">Felipe Acuña</span>
-            <span class="md-subhead">Profesor de matemáticas</span>
-          </md-card-title-text>
-
-          <md-button class="md-icon-button" aria-label="Custom Icon Button">
-            <md-icon style="font-size:30px !important;">cancel</md-icon>
-          </md-button>
-          
-        </md-card-title>
-      </md-card>
-
-       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-media>
-            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
-          </md-card-title-media>
-          <md-card-title-text>
-            <span class="md-headline">Felipe Acuña</span>
-            <span class="md-subhead">Profesor de matemáticas</span>
-          </md-card-title-text>
-
-          <md-button class="md-icon-button" aria-label="Custom Icon Button">
-            <md-icon style="font-size:30px !important;">cancel</md-icon>
-          </md-button>
-          
-        </md-card-title>
-      </md-card>
-
-       
-
+      
        
     </div>
 
@@ -96,7 +45,7 @@
           </md-not-found>
         </md-autocomplete>
 	    <br>
-	    <center><md-button ui-sref="editdocument" class="md-raised md-warn login-button">Agregar Colaborador</md-button></center>
+	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.agregarColaborador(vm.selectedItem.id)">Agregar Colaborador</md-button></center>
 	    <br>
     </form>  
 
