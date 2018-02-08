@@ -9,21 +9,41 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['ProfesorService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['ProfesorService', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl(ProfesorService) {
+  	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
   		var vm = this;
-
-      var id = getUrlParameter('id');
       vm.perfil = {};
-      
-      ProfesorService.get({id: id}).$promise.then(function (data) {
-        console.log(data);
+      vm.isUser = false;
+      vm.id = getUrlParameter('id');
+
+      //Si intentamos buscar un perfil
+      if(vm.id) {
+        ProfesorService.get({id: vm.id}).$promise.then(function (data) {
+        //console.log(data);
         if(data.error)
           vm.perfil.nombres_profesor = data.mensaje;
         else
         vm.perfil = data;
-      });
+        vm.isUser = false;
+        });
+      }else { //SI es el perfil del profesor
+        console.log("entre aqui");
+        PerfilService.get().$promise.then(function (data) {
+              //console.log(data.profesores);
+              vm.perfil = data.profesores;
+              vm.isUser = true;
+        });
+      }
+
+      vm.anadiramigo = function(wea) {
+        //console.log(wea);
+        /*var text = '{ "id" :' + wea + '}';
+        var obj = JSON.parse(text);
+        console.log(obj);*/ 
+        //console.log(wea)
+        AmigoService.save(wea);
+      }
 
       function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
