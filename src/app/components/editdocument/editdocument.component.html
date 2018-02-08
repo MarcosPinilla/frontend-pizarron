@@ -10,7 +10,7 @@
       </div>
 </script>
 
-
+  
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
       <md-toolbar-filler layout layout-align="center center">
@@ -24,7 +24,7 @@
             </md-tooltip>
             <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título">
           </div>
-         
+
         </div>
         <md-menu-bar>
           <md-menu>
@@ -200,6 +200,9 @@
               <md-menu-item><md-button ng-click="vm.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item>
             </md-menu-content>
           </md-menu>
+            <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
+              <span>Compartir</span><md-icon>people</md-icon>
+            </md-button>
         </md-menu-bar>
       </div>
     </div>

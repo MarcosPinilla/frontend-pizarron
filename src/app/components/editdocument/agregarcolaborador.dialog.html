@@ -1,19 +1,97 @@
-<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 100px;padding-right: 100px ">
-    <h3>Agregar Colaborador {{vm.usuarios[0].email}}</h3>
+
+<md-content layout-padding layout-wrap md-theme="app" flex="100" style="width: 700px;">
+    <div style="background: rgb(63,81,181); color:white;">
+      <h2>Compartir material</h2>
+    </div>
+
+    <h4>Quién tiene acceso...</h4>
+    <div class="contenedor-colaboradores">
+
+      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-media>
+            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
+          </md-card-title-media>
+          <md-card-title-text>
+            <span class="md-headline">Felipe Acuña</span>
+            <span class="md-subhead">Profesor de matemáticas</span>
+          </md-card-title-text>
+
+          <md-button class="md-icon-button" aria-label="Custom Icon Button">
+            <md-icon style="font-size:30px !important;">cancel</md-icon>
+          </md-button>
+          
+        </md-card-title>
+      </md-card>
+
+       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-media>
+            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
+          </md-card-title-media>
+          <md-card-title-text>
+            <span class="md-headline">Felipe Acuña</span>
+            <span class="md-subhead">Profesor de matemáticas</span>
+          </md-card-title-text>
+
+          <md-button class="md-icon-button" aria-label="Custom Icon Button">
+            <md-icon style="font-size:30px !important;">cancel</md-icon>
+          </md-button>
+          
+        </md-card-title>
+      </md-card>
+
+       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-media>
+            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
+          </md-card-title-media>
+          <md-card-title-text>
+            <span class="md-headline">Felipe Acuña</span>
+            <span class="md-subhead">Profesor de matemáticas</span>
+          </md-card-title-text>
+
+          <md-button class="md-icon-button" aria-label="Custom Icon Button">
+            <md-icon style="font-size:30px !important;">cancel</md-icon>
+          </md-button>
+          
+        </md-card-title>
+      </md-card>
+
+       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-media>
+            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
+          </md-card-title-media>
+          <md-card-title-text>
+            <span class="md-headline">Felipe Acuña</span>
+            <span class="md-subhead">Profesor de matemáticas</span>
+          </md-card-title-text>
+
+          <md-button class="md-icon-button" aria-label="Custom Icon Button">
+            <md-icon style="font-size:30px !important;">cancel</md-icon>
+          </md-button>
+          
+        </md-card-title>
+      </md-card>
+
+       
+
+       
+    </div>
+
     <form ng-cloack>
-	    <md-autocomplete
+	    <md-autocomplete style="width:100%;"
             md-selected-item="vm.selectedItem"
             md-search-text="vm.searchText"
             md-items="item in vm.querySearch(vm.searchText)"
             md-item-text="item.email"
             md-min-length="0"
-            placeholder="Correo del Colaborador?"
-            md-autofocus>
+            placeholder="Correo del nuevo colaborador">
           <md-item-template>
           	<span>{{item.email}}</span>
           </md-item-template>
           <md-not-found>
-          	<!-- revisar md-item-text -->
             <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.email}}</span>
           </md-not-found>
         </md-autocomplete>
@@ -23,4 +101,5 @@
     </form>  
 
 </md-content>
+
 

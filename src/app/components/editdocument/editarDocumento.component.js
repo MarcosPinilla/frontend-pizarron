@@ -909,6 +909,26 @@
        
      
     });
+
+     vm.mostrarColaborador = function(ev, usuarios) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/editdocument/agregarcolaborador.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          usuarios: usuarios
+        },
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
       
   }
 
@@ -943,5 +963,52 @@
   }
 
  
+  function dialogoController($timeout, $q, $mdDialog, ListarusuariosService, $state) {
+    var vm = this;
+
+    vm.profesores = {};
+    vm.usuarios = {};
+    vm.customFullscreen = true;
+    
+    ListarusuariosService.query().$promise.then(function (data) {
+      vm.usuarios = data;
+      vm.usuarios = vm.usuarios.filter(vm.filtro);
+      console.log(vm.usuarios)
+    });
+
+    vm.filtro = function(usuario){
+      return usuario.id != 1;
+      
+    }
+
+    vm.querySearch   = querySearch;
+
+    function querySearch (query) {
+      return query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios;
+    }
+    
+    function createFilterFor(query) {
+
+      var lowercaseQuery = query;
+      //console.log(lowercaseQuery);
+
+      return function filterFn(usuario) {
+        //console.log(usuario.email);
+        return (usuario.email.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
 
 })();

@@ -43,6 +43,17 @@
 
     
 }
+.fill-space {
+  
+  flex: 1 1 auto;
+}
+
+
+.contenedor-colaboradores{
+  overflow-y: scroll; 
+  height:360px;
+  background: #e6e6e6;
+}
 /*
 .page-container {
   padding: 32px; }
