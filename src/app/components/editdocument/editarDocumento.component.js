@@ -117,7 +117,36 @@
 
       //Función para detectar click en canvas
       
-      canvas.on('object:selected', function(evt) {
+      canvas.on('selection:updated', function(evt) {
+        console.log(evt);
+        if(evt.target.get('type') === 'textbox'){
+        //vm.esTexto=false;
+          console.log("hola");
+        $scope.$apply(function () {
+          vm.esTexto = false;
+          vm.fontTest2 = evt.target.get('fontSize');
+          vm.fontTest = evt.target.get('fontFamily');
+        }); 
+
+      }else if (evt.target.get('type') === 'rect'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'image'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+        });
+      }
+    });
+
+      canvas.on('selection:created', function(evt) {
         console.log(evt);
         if(evt.target.get('type') === 'textbox'){
         //vm.esTexto=false;
@@ -185,10 +214,14 @@
 });
       */
       //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
-      canvas.on("object:selected", function (e) {
+      canvas.on("selection:updated", function (e) {
           canvas.getActiveObject().bringToFront();
           canvas.renderAll();    
       });
+      canvas.on("selection:created", function (e) {
+          canvas.getActiveObject().bringToFront();
+          canvas.renderAll();    
+      })
       /*
       //Función que genera un rectángulo sin relleno y con bordes negros
       vm.generarFiguraBordes=function() {

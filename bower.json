@@ -6,7 +6,7 @@
     "angular-ui-router": "1.0.0-beta.3",
     "angular-material": "^1.1.5",
     "angular-resource": "1.6.8",
-    "fabric.js": "fabric#^1.7.22",
+    "fabric.js": "fabric#^2.0.0",
     "jsoncomp": "jsonc#^1.6.1"
   },
   "devDependencies": {
