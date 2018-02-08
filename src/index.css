@@ -299,6 +299,7 @@ md-list.make-scrollable {
   margin-left: 25px;
   margin-top: 12px;
   margin-bottom: 0;
+  width: 90%
 }
 
 .div-buscador{
@@ -525,4 +526,12 @@ md-list.make-scrollable {
 
 .hover12 figure img:focus{
   outline: none;
+}
+.card-profesor{
+  float: left;
+  width: 32.2%
+  min-width: 385px;
+}
+.buscador-profes{
+  background-color: white;
 }

@@ -9,9 +9,23 @@
     	controllerAs: 'vm'
   	});
 
-  	//centerCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
+  	centerCtrl.$inject = ['DarFavorito','$state'];
 
-  	function centerCtrl() {
+  	function centerCtrl(DarFavorito, $state) {
   		var vm = this;
+      vm.material = {
+        material_id: "2"
+      }
+
+
+      vm.darFavorito = function(data){
+      DarFavorito.save(data,function(res){
+        console.log(res);
+        $state.go('dashboard');
+      },function(err){
+        console.log(err);
+      });
+      console.log(data);
+    };
   	}
 })();

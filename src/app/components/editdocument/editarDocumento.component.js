@@ -121,7 +121,7 @@
         console.log(evt);
         if(evt.target.get('type') === 'textbox'){
         //vm.esTexto=false;
-
+          console.log("hola");
         $scope.$apply(function () {
           vm.esTexto = false;
           vm.fontTest2 = evt.target.get('fontSize');
@@ -186,15 +186,8 @@
       */
       //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
       canvas.on("object:selected", function (e) {
-        var activeGroup = canvas.getActiveGroup();
-        if (activeGroup) {
-          
-        } else if(canvas.getActiveObject()){
-          
-           canvas.getActiveObject().bringToFront();
-          canvas.renderAll();
-        }
-        
+          canvas.getActiveObject().bringToFront();
+          canvas.renderAll();    
       });
       /*
       //Función que genera un rectángulo sin relleno y con bordes negros
@@ -249,7 +242,7 @@
                 vm.figuras = canvas.getObjects().length;
               });
               //canvas.add(oImg);
-            }, { crossOrigin: 'Anonymous' });
+            }, null, '');
             
           }
           
@@ -265,6 +258,14 @@
               fontFamily: 'Lobster'
             });
 
+            texto.setControlsVisibility({
+              bl: false,
+              br: false,
+              mb: false,
+              mt: false,
+              tl: false,
+              tr: false,
+            });
             canvas.add(texto)
             //canvas.add(texto).setActiveObject(texto);
             console.log(texto);
@@ -340,8 +341,21 @@
       }
 
     vm.eliminar = function() {
-      var activeGroup = canvas.getActiveGroup();
-      if (activeGroup) {
+      var seleccion = canvas.getActiveObject();
+
+      if (seleccion.type === 'activeSelection') {
+        seleccion.forEachObject(function(obj) {
+          canvas.remove(obj);
+        });
+      } else {
+        canvas.remove(seleccion);
+      }
+
+      
+
+      //var activeGroup = canvas.getActiveGroup();
+      /*
+      if (false) {
         var activeObjects = activeGroup.getObjects();
         for (let i in activeObjects) {
           canvas.remove(activeObjects[i]);
@@ -357,7 +371,7 @@
         }
         canvas.discardActiveGroup();
         canvas.renderAll();
-      } else if(canvas.getActiveObject()){
+      } else if(false){
         if(canvas.getActiveObject().get('type') === "textbox"){
             //vm.esTexto=true;
             $scope.$apply(function () {
@@ -368,7 +382,7 @@
           }
           canvas.getActiveObject().remove();
 
-        }
+        } */
 
       }
 
@@ -403,18 +417,11 @@
 
     vm.copy = function() {
       vm.copiar=true;
-      var activeGroup = canvas.getActiveGroup();
-      if (activeGroup) {
-        activeGroup.clone(function(cloned) {
-          _clipboard = cloned;
-        });
-        vm.esGrupo = true;
-      } else if(canvas.getActiveObject()){
-        canvas.getActiveObject().clone(function(cloned) {
-          _clipboard = cloned;
-        });
-        vm.esGrupo = false;
-      }
+
+      //Se copia la selección al clipboard
+      canvas.getActiveObject().clone(function(cloned) {
+        _clipboard = cloned;
+      });
 
       vm.cortar = false;
     }
@@ -422,36 +429,22 @@
     //Función para cortar, se llama desde ctrl + x y desde panel de edición
     vm.cut = function() {
       vm.copiar=false;
-      //Se obtiene el grupo seleccionado actualmente
-      var activeGroup = canvas.getActiveGroup();
+      
+      var seleccion = canvas.getActiveObject();
+      
+      seleccion.clone(function(cloned) {
+        _clipboard = cloned;
 
-      if (activeGroup) {
-            //Se clona en el portapapeles
-            activeGroup.clone(function(cloned) {
-              _clipboard = cloned;
-            });
-        //Se remueve cada uno de los objetos 
-        activeGroup.forEachObject(function(o){
-          canvas.remove(o); 
+        if (seleccion.type === 'activeSelection') {
+          seleccion.forEachObject(function(obj) {
+            canvas.remove(obj);
+          });
+        } else {
+          canvas.remove(seleccion);
+        }
+      });
 
-        });
-        //Se desactiva el grupo seleccionado y se renderiza
-        canvas.discardActiveGroup().renderAll();
 
-        //Se actualiza la variable esGrupo a true
-        vm.esGrupo = true;
-      } else if(canvas.getActiveObject()){
-          //Si es un objeto único, se clona en el portapaples
-          canvas.getActiveObject().clone(function(cloned) {
-            _clipboard = cloned;
-
-            //Se elimina el objeto
-            canvas.getActiveObject().remove();
-            
-        });
-        //Se actualiza la variable esGrupor por false
-        vm.esGrupo = false;
-      }
       //Se actualiza la variable cortar por true, para saber que al pegar, luego se debe vaciar
       //el portapapeles
       vm.cortar = true;
@@ -460,11 +453,6 @@
     vm.paste = function() {
       if(vm.cortar || vm.copiar){
         // clone again, so you can do multiple copies.
-        if(vm.esGrupo){
-          canvas.discardActiveGroup();
-        }else{
-          canvas.discardActiveObject();
-        }
         _clipboard.clone(function(clonedObj) {
           canvas.discardActiveObject();
           clonedObj.set({
@@ -472,43 +460,34 @@
             top: clonedObj.top + 10,
             evented: true,
           });
-          console.log(vm.esGrupo)
-          if (vm.esGrupo) {
-            //clonedObj.canvas = canvas;
-            var arrayObj = clonedObj.getObjects();
+          if (clonedObj.type === 'activeSelection') {
+            // active selection needs a reference to the canvas.
+            clonedObj.canvas = canvas;
+            clonedObj.forEachObject(function(obj) {
+              canvas.add(obj);
+            });
+            // this should solve the unselectability
+            clonedObj.setCoords();
+          } else {
+            canvas.add(clonedObj);
+          }
+          _clipboard.top += 10;
+          _clipboard.left += 10;
 
-            for (let i in arrayObj) {
-              canvas.add(arrayObj[i]);
-              vm.pegar=true;
-            }
-             //clonedObj.setCoords();
-             _clipboard.top += 10;
-             _clipboard.left += 10;
-             canvas.setActiveGroup(clonedObj);
-             canvas.renderAll();
-
-            
-            } else {
-              canvas.add(clonedObj);
-              _clipboard.top += 10;
-              _clipboard.left += 10;
-              canvas.setActiveObject(clonedObj);
-              canvas.renderAll();
-
-              $scope.$apply(function () {
+          $scope.$apply(function () {
               vm.figuras = canvas.getObjects().length;
               console.log(vm.figuras);
-            }); 
-            }
           });
+
+          canvas.setActiveObject(clonedObj);
+          canvas.requestRenderAll();
+        });  
 
         if(vm.cortar) {
           _clipboard = null;
           vm.cortar = false;
         }
-
       }
-
       vm.pegar=false;
     }
 
@@ -654,6 +633,7 @@
           img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
+          a._removeCacheCanvas();
           //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
           $scope.$apply(function () {
             vm.figuras = canvas.getObjects().length;
@@ -810,12 +790,15 @@
         documentoTemp.titulo_material=vm.nombreInicial
       }
       
+      var svg = canvas.toSVG();
+
       documentoTemp.contenido_material=canvasAsJson;
-      documentoTemp.vista_previa=vm.documento.vista_previa;
+      documentoTemp.vista_previa= svg;
       documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
       documentoTemp.id_asignatura=vm.documento.id_asignatura;
       documentoTemp.id_nivel=vm.documento.id_nivel;
       documentoTemp.id_visibilidad=vm.documento.id_visibilidad;
+      
 
       console.log(documentoTemp)
 
@@ -844,6 +827,16 @@
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
         vm.figuras = json.objects.length;
         console.log(vm.figuras);
+        
+
+
+
+        console.log(vm.nuevo.vista_previa);
+        var hola = document.getElementById("vista").innerHTML = vm.nuevo.vista_previa;
+        console.log(hola);
+
+        var vista = document.getElementsByTagName("svg");
+        console.log(vista);
       });
 
     }

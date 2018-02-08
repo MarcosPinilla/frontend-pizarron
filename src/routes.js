@@ -76,6 +76,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'material',
     isPrivate: true
   })
+  .state('favoritos', {
+    url: '/favoritos',
+    component: 'favoritos',
+    isPrivate: true
+  })
   .state('elemento', {
     url: '/elemento',
     component: 'elemento',
@@ -126,6 +131,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   .state('notificaciones', {
     url: '/notificaciones',
     component: 'notificacion',
+    isPrivate: true
+  })
+  .state('profesores', {
+    url: '/profesores',
+    component: 'profesores',
     isPrivate: true
   });
 
