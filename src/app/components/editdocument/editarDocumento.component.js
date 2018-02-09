@@ -38,7 +38,7 @@
       vm.nombreInicial=vm.documento.titulo_material;
       console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
-      if (vm.documento.contenido_material !== null) {
+      if (vm.documento.contenido_material !== undefined) {
         vm.cargar();
       } else {
         //Contador de figuras agregadas
@@ -822,13 +822,15 @@
         documentoTemp.titulo_material=vm.nombreInicial
       }
       
+      //Se añade color blanco para la vista previa
+      canvas.backgroundColor = 'white';
       var svg = canvas.toSVG({
         width: canvas.width / 3,
         height: canvas.height / 3
       });
 
-      console.log(canvas.width / 3)
-      console.log(canvas.height / 3)
+      //Se vuelve a hacer transparente
+      canvas.backgroundColor = 'transparent';
 
       documentoTemp.contenido_material=canvasAsJson;
       documentoTemp.vista_previa= svg;
@@ -865,17 +867,6 @@
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
         vm.figuras = json.objects.length;
         console.log(vm.figuras);
-        
-
-
-
-        console.log(vm.nuevo.vista_previa);
-        var hola = document.getElementById("vista").innerHTML = vm.nuevo.vista_previa;
-
-
-        var vista = document.getElementsByTagName("svg");
-
-        
       });
 
     }

@@ -19,15 +19,20 @@
       vm.materiales.$promise.then(function(data){
         console.log(data);
         vm.materiales = data;
+        vm.materiales[0].autor = "hola";
+        vm.materiales[1].autor = "holaas";
+        vm.materiales[2].autor = "holaasd";
+
+        console.log(vm.materiales);
         
         setTimeout(function() {
           /*for(material in vm.materiales) {
             document.getElementById(material.id).innerHTML = material.vista_previa;  
           } */
           for(let i = 0; i < vm.materiales.length; i++) {
-            document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;  
+            document.getElementById(vm.materiales[i].id).innerHTML = "<center><a href='http://localhost:3000/editdocument/" + vm.materiales[i].id + "'>" + vm.materiales[i].vista_previa + "</a></center>";  
           }
-        }, 2000);
+        }, 300);
       });
 
       vm.darFavorito = function(data){
