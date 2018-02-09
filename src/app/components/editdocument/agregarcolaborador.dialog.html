@@ -10,15 +10,15 @@
 
       <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch  ng-repeat="colaborador in vm.colaboradores ">
         <md-card-title>
-          <md-card-title-media>
-            <div style=" background-color: #999999; margin-right: 10px;" class="md-media-sm card-media"></div>
+          <md-card-title-media style="margin-right: 10px;">
+              <img class="md-media-sm card-media" ng-src="{{colaborador.profesor.url_foto_profesor}}">
           </md-card-title-media>
           <md-card-title-text>
-            <span class="md-headline">Id profesor {{colaborador.id_profesor}}</span>
-            <span class="md-subhead">Profesor de matemáticas</span>
+            <span class="md-headline">{{colaborador.profesor.nombres_profesor}} {{colaborador.profesor.apellidos_profesor}}</span>
+            <span class="md-subhead">{{colaborador.profesor.profesion}}</span>
           </md-card-title-text>
 
-          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)">
+          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)" ng-if="colaborador.profesor.id_usuario != vm.usuario.id">
             <md-icon style="font-size:30px !important;">cancel</md-icon>
           </md-button>
           
@@ -34,11 +34,11 @@
             md-selected-item="vm.selectedItem"
             md-search-text="vm.searchText"
             md-items="item in vm.querySearch(vm.searchText)"
-            md-item-text="item.email"
+            md-item-text="item.usuario.email"
             md-min-length="0"
             placeholder="Correo del nuevo colaborador">
           <md-item-template>
-          	<span>{{item.email}}</span>
+          	<span>{{item.usuario.email}}</span>
           </md-item-template>
           <md-not-found>
             <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.email}}</span>

@@ -989,45 +989,50 @@
   }
 
  
-  function dialogoController($timeout, $q, $mdDialog, ListarusuariosService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService) {
+  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService) {
     var vm = this;
 
     vm.profesores = {};
-    vm.usuarios = {};
     vm.documento=documento;
     vm.colaboradores={};
     vm.usuario={};
     vm.customFullscreen = true;
-    
-    ListarusuariosService.query().$promise.then(function (data) {
-      vm.usuarios = data;
-      vm.usuarios = vm.usuarios.filter(vm.filtro);
-      console.log(vm.usuarios)
+
+
+    PerfilService.get().$promise.then(function (data) {
+        console.log(data);
+        vm.usuario = data; 
+        //console.log(vm.perfil.profesores.url_foto_profesor);
+    });
+
+    ProfesorService.query().$promise.then(function (data) {
+      vm.profesores = data;
+      vm.profesores=vm.profesores.filter(vm.filtro);
+      console.log(vm.profesores);
     });
 
     obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
-        vm.colaboradres=vm.colaboradres;
         console.log(vm.colaboradores);
       });
+
+
 
     vm.actualizarColaboradores=function(){
       obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
-        vm.colaboradres=vm.colaboradres;
-        console.log(vm.colaboradores);
       });
     }
 
-    vm.filtro = function(usuario){
-      return usuario.id != 1;
+    vm.filtro = function(profesor){
+      return profesor.id_usuario != vm.usuario.id;
       
     }
 
     vm.querySearch   = querySearch;
 
     function querySearch (query) {
-      return query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios;
+      return query ? vm.profesores.filter( createFilterFor(query) ) : vm.profesores;
     }
     
     function createFilterFor(query) {
@@ -1035,9 +1040,9 @@
       var lowercaseQuery = query;
       //console.log(lowercaseQuery);
 
-      return function filterFn(usuario) {
+      return function filterFn(profesor) {
         //console.log(usuario.email);
-        return (usuario.email.indexOf(lowercaseQuery) === 0);
+        return (profesor.usuario.email.indexOf(lowercaseQuery) === 0);
       };
     }
 
