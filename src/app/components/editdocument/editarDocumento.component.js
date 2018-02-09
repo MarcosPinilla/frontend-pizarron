@@ -942,7 +942,7 @@
      
     });
 
-     vm.mostrarColaborador = function(ev, usuarios) {
+     vm.mostrarColaborador = function(ev) {
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
@@ -952,7 +952,7 @@
         clickOutsideToClose: true,
         fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
         locals: {
-          usuarios: usuarios
+          documento: vm.documento
         },
       })
       .then(function (answer) {
@@ -995,11 +995,14 @@
   }
 
  
-  function dialogoController($timeout, $q, $mdDialog, ListarusuariosService, $state) {
+  function dialogoController($timeout, $q, $mdDialog, ListarusuariosService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService) {
     var vm = this;
 
     vm.profesores = {};
     vm.usuarios = {};
+    vm.documento=documento;
+    vm.colaboradores={};
+    vm.usuario={};
     vm.customFullscreen = true;
     
     ListarusuariosService.query().$promise.then(function (data) {
@@ -1007,6 +1010,20 @@
       vm.usuarios = vm.usuarios.filter(vm.filtro);
       console.log(vm.usuarios)
     });
+
+    obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
+        vm.colaboradores=data;
+        vm.colaboradres=vm.colaboradres;
+        console.log(vm.colaboradores);
+      });
+
+    vm.actualizarColaboradores=function(){
+      obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
+        vm.colaboradores=data;
+        vm.colaboradres=vm.colaboradres;
+        console.log(vm.colaboradores);
+      });
+    }
 
     vm.filtro = function(usuario){
       return usuario.id != 1;
@@ -1028,6 +1045,22 @@
         //console.log(usuario.email);
         return (usuario.email.indexOf(lowercaseQuery) === 0);
       };
+    }
+
+    vm.agregarColaborador=function(idProfesor){
+      var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
+      AgregarColaboradorService.save(elemento,function(data){
+        console.log(data);
+        vm.actualizarColaboradores();
+      });
+    };
+
+    vm.eliminarColaborador = function(idProfesor){
+      var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
+      eliminarColaboradorMaterialService.delete(elemento,function(data){
+        console.log(data);
+        vm.actualizarColaboradores();
+      });
     }
 
     vm.hide = function () {
