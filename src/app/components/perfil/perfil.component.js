@@ -14,20 +14,33 @@
   	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
   		var vm = this;
       vm.perfil = {};
+      vm.amistad = {};
       vm.isUser = false;
       vm.profesorId = getUrlParameter('id');
       console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
-        //console.log(data);
-        if(data.error)
-          vm.perfil.nombres_profesor = data.mensaje;
-        else
-        vm.perfil = data;
-        vm.isUser = false;
+          //console.log(data);
+          if(data.error) {
+            vm.perfil.nombres_profesor = data.mensaje;
+          }
+          else {
+            vm.perfil = data;
+            vm.isUser = false;
+            /*Obtiene la amistad entre ambos usuarios*/
+            AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+              console.log(data);
+              if(data.error) {
+                vm.amistad = data.mensaje;
+              }else {
+                vm.amistad = data;
+              }
+              
+            });
+          }
         });
-      }else { //SI es el perfil del profesor
+      }else { //Si es el perfil del profesor
         console.log("entre aqui");
         PerfilService.get().$promise.then(function (data) {
               console.log(data.profesor);
