@@ -666,7 +666,6 @@
           img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
-          a._removeCacheCanvas();
           //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
           $scope.$apply(function () {
             vm.figuras = canvas.getObjects().length;
@@ -823,7 +822,13 @@
         documentoTemp.titulo_material=vm.nombreInicial
       }
       
-      var svg = canvas.toSVG();
+      var svg = canvas.toSVG({
+        width: canvas.width / 3,
+        height: canvas.height / 3
+      });
+
+      console.log(canvas.width / 3)
+      console.log(canvas.height / 3)
 
       documentoTemp.contenido_material=canvasAsJson;
       documentoTemp.vista_previa= svg;
@@ -866,10 +871,11 @@
 
         console.log(vm.nuevo.vista_previa);
         var hola = document.getElementById("vista").innerHTML = vm.nuevo.vista_previa;
-        console.log(hola);
+
 
         var vista = document.getElementsByTagName("svg");
-        console.log(vista);
+
+        
       });
 
     }
