@@ -16,6 +16,7 @@
       vm.perfil = {};
       vm.amistad = {};
       vm.isUser = false;
+      vm.isAmigo = false;
       vm.profesorId = getUrlParameter('id');
       console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
@@ -33,10 +34,12 @@
               console.log(data);
               if(data.error) {
                 vm.amistad = data.mensaje;
+                vm.isAmigo = false;
               }else {
                 vm.amistad = data;
+                if(vm.amistad.id_estado_amistad == 1)
+                  vm.isAmigo = true;
               }
-              
             });
           }
         });
@@ -49,10 +52,14 @@
         });
       }
 
-      vm.anadiramigo = function(wea) {
-        var amigo1 = JSON.parse('{"id_amigo": ' + wea + '}');
-        console.log('{"id_amigo": ' + wea + '}');
+      vm.anadiramigo = function(idamigo) {
+        var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
+        console.log('{"id_amigo": ' + idamigo + '}');
         AmigoService.save(amigo1);
+      }
+
+      vm.eliminaramistad = function(id) {
+        AmigoService.delete({id: id});
       }
 
       function getUrlParameter(name) {
