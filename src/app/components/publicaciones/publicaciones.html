@@ -4,14 +4,14 @@
 	<md-card ng-repeat="material in vm.materiales" class="post-card">
 		<md-card-title style="background-color: #5C6BC0; padding: 500">
 			<md-card-title-text style="font-size: 20px; color: #C5CAE9">
-				<span><a href="#">Felipe Acuña</a> publicó <a href="#">{{ material.titulo_material }}</a></span>
+				<span><a href="#">Felipe Acuña</a> publicó <a href="http://localhost:3000/editdocument/{{material.id}}">{{ material.titulo_material }}</a></span>
 			</md-card-title-text>
 		</md-card-title>
 		<div id={{material.id}}>
 			
 		</div>
 		<md-card-actions layout="row" layout-align="end center" style="background-color: #5C6BC0;">
-			<md-button><a href="http://localhost:3000/editdocument/{{material.id}}">Ver documento</a></md-button>
+			<md-button href="http://localhost:3000/editdocument/{{material.id}}">Ver documento</md-button>
 			<md-button class="dashboard-button-fab"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
 			</md-button>
 		</md-card-actions>
