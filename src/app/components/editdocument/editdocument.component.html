@@ -337,7 +337,6 @@
 
 </div>
 
-<button ng-if="vm.documentoCompleto.length === 1" disabled>Anterior</button>
-<button ng-if="vm.documentoCompleto.length > 1" ng-click="vm.paginaAnterior()">Anterior</button>
+<button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</button>
 <button ng-click="vm.nuevaPagina()">Página nueva</button>
 <button ng-disabled="vm.documentoCompleto.length === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</button>
