@@ -77,14 +77,12 @@
       vm.fontTest="";
       vm.fontTest2=0;
       vm.esTexto=true;
-      vm.mensaje="nada";
       vm.cortar = false;
       vm.copiar = false;
       vm.pegar=false;
       vm.enCanvas = false;
       var _clipboard = null;
       var ctrlDown=false;
-      vm.esGrupo=false;
 
 
       //En el futuro debería retornarlo de la base de datos vm.tipoHoja = vm.documento.tipoHoja;
@@ -376,7 +374,8 @@
     vm.eliminar = function() {
       var seleccion = canvas.getActiveObject();
 
-      if (seleccion.type === 'activeSelection') {
+      if(seleccion){
+           if (seleccion.type === 'activeSelection') {
         seleccion.forEachObject(function(obj) {
           canvas.remove(obj);
         });
@@ -419,6 +418,9 @@
 
       }
 
+   
+      }
+
     //Se crea una variable a partir del contenedor del canvas, lo que permitirá
     //reconocer las teclas presionadas en el mismo.
     var canvasWrapper = document.getElementById('todocanvas');
@@ -449,21 +451,27 @@
 
 
     vm.copy = function() {
-      vm.copiar=true;
+      if(canvas.getActiveObject()){
+        vm.copiar=true;
 
-      //Se copia la selección al clipboard
-      canvas.getActiveObject().clone(function(cloned) {
-        _clipboard = cloned;
-      });
+        //Se copia la selección al clipboard
+        canvas.getActiveObject().clone(function(cloned) {
+          _clipboard = cloned;
+        });
 
-      vm.cortar = false;
+        vm.cortar = false;
+      }
+      
     }
 
     //Función para cortar, se llama desde ctrl + x y desde panel de edición
     vm.cut = function() {
-      vm.copiar=false;
+      
       
       var seleccion = canvas.getActiveObject();
+
+      if(seleccion){
+      vm.copiar=false;
       
       seleccion.clone(function(cloned) {
         _clipboard = cloned;
@@ -477,10 +485,13 @@
         }
       });
 
-
       //Se actualiza la variable cortar por true, para saber que al pegar, luego se debe vaciar
       //el portapapeles
       vm.cortar = true;
+
+    }
+
+      
     }
 
     vm.paste = function() {
@@ -494,15 +505,23 @@
             evented: true,
           });
           if (clonedObj.type === 'activeSelection') {
-            // active selection needs a reference to the canvas.
-            clonedObj.canvas = canvas;
-            clonedObj.forEachObject(function(obj) {
-              canvas.add(obj);
-            });
-            // this should solve the unselectability
-            clonedObj.setCoords();
+            if(clonedObj._objects.length+vm.figuras<50){
+              // active selection needs a reference to the canvas.
+              clonedObj.canvas = canvas;
+              clonedObj.forEachObject(function(obj) {
+                canvas.add(obj);
+              });
+              // this should solve the unselectability
+              clonedObj.setCoords();
+            }else{
+              return;
+            }
           } else {
-            canvas.add(clonedObj);
+            if(vm.figuras<50){
+             canvas.add(clonedObj);
+            }else{
+              return;
+            }
           }
           _clipboard.top += 10;
           _clipboard.left += 10;
@@ -986,45 +1005,50 @@
   }
 
  
-  function dialogoController($timeout, $q, $mdDialog, ListarusuariosService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService) {
+  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService) {
     var vm = this;
 
     vm.profesores = {};
-    vm.usuarios = {};
     vm.documento=documento;
     vm.colaboradores={};
     vm.usuario={};
     vm.customFullscreen = true;
-    
-    ListarusuariosService.query().$promise.then(function (data) {
-      vm.usuarios = data;
-      vm.usuarios = vm.usuarios.filter(vm.filtro);
-      console.log(vm.usuarios)
+
+
+    PerfilService.get().$promise.then(function (data) {
+        console.log(data);
+        vm.usuario = data; 
+        //console.log(vm.perfil.profesores.url_foto_profesor);
+    });
+
+    ProfesorService.query().$promise.then(function (data) {
+      vm.profesores = data;
+      vm.profesores=vm.profesores.filter(vm.filtro);
+      console.log(vm.profesores);
     });
 
     obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
-        vm.colaboradres=vm.colaboradres;
         console.log(vm.colaboradores);
       });
+
+
 
     vm.actualizarColaboradores=function(){
       obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
-        vm.colaboradres=vm.colaboradres;
-        console.log(vm.colaboradores);
       });
     }
 
-    vm.filtro = function(usuario){
-      return usuario.id != 1;
+    vm.filtro = function(profesor){
+      return profesor.id_usuario != vm.usuario.id;
       
     }
 
     vm.querySearch   = querySearch;
 
     function querySearch (query) {
-      return query ? vm.usuarios.filter( createFilterFor(query) ) : vm.usuarios;
+      return query ? vm.profesores.filter( createFilterFor(query) ) : vm.profesores;
     }
     
     function createFilterFor(query) {
@@ -1032,9 +1056,9 @@
       var lowercaseQuery = query;
       //console.log(lowercaseQuery);
 
-      return function filterFn(usuario) {
+      return function filterFn(profesor) {
         //console.log(usuario.email);
-        return (usuario.email.indexOf(lowercaseQuery) === 0);
+        return (profesor.usuario.email.indexOf(lowercaseQuery) === 0);
       };
     }
 
