@@ -38,12 +38,22 @@
       vm.nombreInicial=vm.documento.titulo_material;
       console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
-      if (vm.documento.contenido_material !== undefined) {
+      if (vm.documento.contenido_material !== null) {
         vm.cargar();
       } else {
         //Contador de figuras agregadas
         vm.figuras = 0;
-      }
+         //Documento completo sin páginas
+          vm.documentoCompleto = [];
+
+          var json = canvas.toJSON();
+          vm.documentoCompleto.push({
+            id: vm.documentoCompleto.length + 1, 
+            data: json});
+
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+          }
     });
 
     //MENU BAR
@@ -94,7 +104,7 @@
       } else {
         vm.orientacion = '2';
       }
-
+/*
       //Documento completo sin páginas
       vm.documentoCompleto = [];
 
@@ -105,7 +115,7 @@
 
       //Inicia en la página 1
       vm.paginaActual = 1;
-
+*/
       var _config = {
         canvasState             : [],
         currentStateIndex       : -1,
@@ -186,7 +196,7 @@
 
 
       canvas.on('selection:cleared', function(evt) {
-        $scope.$apply(function () {
+        $timeout(function () {
           vm.esTexto = true;
           vm.fontTest = "";
           vm.fontTest2 = 0;
@@ -656,6 +666,14 @@
     }
 
     vm.canvasModifiedCallback = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+
      
         $scope.$apply(function () {
         vm.figuras = canvas.getObjects().length;
@@ -666,9 +684,17 @@
     };
 
     vm.canvasModifiedAdd = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+
       if(vm.pegar){
         vm.pegar=false;
-        $scope.$apply(function () {
+        $timeout(function () {
           vm.figuras = canvas.getObjects().length;
           console.log(vm.figuras);
           vm.pegar=false;
@@ -680,8 +706,20 @@
       
     };
 
+    vm.canvasModified=function(){
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+
+    }
+
     canvas.on('object:removed', vm.canvasModifiedCallback);
     canvas.on('object:added', vm.canvasModifiedAdd);
+    canvas.on('object:modified',vm.canvasModified)
 
       //Subir imágen desde computador
       
@@ -829,18 +867,13 @@
 
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
-      var json = canvas.toJSON();
+      var json = vm.documentoCompleto;
 
       //se comprime el json
       var jsonComprimido = JSONC.compress( json );
       jsonComprimido = JSONC.pack( jsonComprimido, true );
 
       var canvasAsJson = JSON.stringify(jsonComprimido);
-
-      json = {objects: canvasAsJson}
-      console.log(canvasAsJson);
-      vm.documento.contenido_material=json
-    
 
       var documentoTemp={};
       documentoTemp.id=vm.documento.id;
@@ -894,10 +927,19 @@
         vm.nuevo = data;
         var json = JSONC.unpack( vm.nuevo.contenido_material,true );
         json = JSONC.decompress(json);
-        console.log(json.objects.length)
-        canvas.loadFromJSON(json);
+
+         //Documento completo sin páginas
+          vm.documentoCompleto = json;
+
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+
+        json = $filter('filter')(json, {id: vm.paginaActual}, true)[0];
+        console.log(json);
+        canvas.loadFromJSON(json.data); 
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
-        vm.figuras = json.objects.length;
+        //vm.figuras = json.objects.length;
+        vm.figuras=canvas.getObjects().length;
         console.log(vm.figuras);
       });
 
@@ -1016,18 +1058,11 @@
 
     vm.nuevaPagina = function() {
 
-      var json = canvas.toJSON();
-      var editado = {
-        id: vm.paginaActual,
-        data: json
-      }
-
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
-
-      canvas.clear();
+     
+     canvas.clear();
       vm.paginaActual++;
 
-      json = canvas.toJSON();
+      var json = canvas.toJSON();
 
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length + 1, 
@@ -1037,32 +1072,19 @@
     }
 
     vm.paginaAnterior = function() {
-      var json = canvas.toJSON();
-      var editado = {
-        id: vm.paginaActual,
-        data: json
-      }
-
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
-
+     
       canvas.clear();
       vm.paginaActual--;
-      json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
       console.log(json);
       canvas.loadFromJSON(json.data);
     }
 
     vm.paginaSiguiente = function() {
-      var json = canvas.toJSON();
-      var editado = {
-        id: vm.paginaActual,
-        data: json
-      }
-
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+     
       canvas.clear();
       vm.paginaActual++;
-      json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
       console.log(json);
       canvas.loadFromJSON(json.data); 
     }
