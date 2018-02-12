@@ -76,7 +76,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'material',
     isPrivate: true
   })
-  .state('favoritos', {
+  .state('dashboard.favoritos', {
     url: '/favoritos',
     component: 'favoritos',
     isPrivate: true
@@ -123,9 +123,14 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'etiqueta',
     isPrivate: true
   })
-  .state('perfil', {
+  .state('dashboard.perfil', {
     url: '/perfil',
     component: 'perfil',
+    isPrivate: true
+  })
+  .state('dashboard.publicaciones', {
+    url: '/publicaciones',
+    component: 'publicaciones',
     isPrivate: true
   })
   .state('notificaciones', {
@@ -154,7 +159,16 @@ function middlewareConfig($state, CredentialsService, $transitions) {
 
     // Compruebo que quiera entrar a el login cuando ya esta logeado
     if (to === 'login' && CredentialsService.isLogged()) {
-      $state.go('dashboard');
+      $state.go('dashboard.publicaciones');
     }
+
+    if (to === 'landing' && CredentialsService.isLogged()) {
+      $state.go('dashboard.publicaciones');
+    }
+
+    if (to === 'dashboard' && CredentialsService.isLogged()) {
+      $state.go('dashboard.publicaciones');
+    }
+
   });
 }
