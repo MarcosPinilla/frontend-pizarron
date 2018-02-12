@@ -1066,11 +1066,20 @@
     }
 
     vm.agregarColaborador=function(idProfesor){
-      var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
-      AgregarColaboradorService.save(elemento,function(data){
-        console.log(data);
-        vm.actualizarColaboradores();
+      console.log(vm.colaboradores);
+      var colaborador = vm.colaboradores.filter(function(colaborador){
+        return colaborador.id_profesor == idProfesor;
       });
+      if(colaborador.length>0){
+        alert('El colaborador existe');
+      }else{
+         var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
+        AgregarColaboradorService.save(elemento,function(data){
+          console.log(data);
+          vm.actualizarColaboradores();
+        });
+      }
+     
     };
 
     vm.eliminarColaborador = function(idProfesor){
