@@ -867,13 +867,25 @@
 
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
+      $timeout(function(){
       var json = vm.documentoCompleto;
-
+      console.log(json);
+      console.log(vm.documentoCompleto);
       //se comprime el json
-      var jsonComprimido = JSONC.compress( json );
-      jsonComprimido = JSONC.pack( jsonComprimido, true );
 
+      
+
+      /*var jsonComprimido = JSONC.compress( json );
+      console.log(jsonComprimido);
+      jsonComprimido = JSONC.pack( jsonComprimido, true );
+      console.log(jsonComprimido);
       var canvasAsJson = JSON.stringify(jsonComprimido);
+      console.log(canvasAsJson);
+      */
+
+      json = JSON.stringify(json);
+      console.log(json);
+
 
       var documentoTemp={};
       documentoTemp.id=vm.documento.id;
@@ -897,7 +909,8 @@
       //Se vuelve a hacer transparente
       canvas.backgroundColor = 'transparent';
 
-      documentoTemp.contenido_material=canvasAsJson;
+      //documentoTemp.contenido_material=canvasAsJson;
+      documentoTemp.contenido_material = json;
       documentoTemp.vista_previa= svg;
       documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
       documentoTemp.id_asignatura=vm.documento.id_asignatura;
@@ -910,6 +923,9 @@
       //documento.contenido_material = canvasAsJson;
       MaterialService.update({id:vm.documento.id},documentoTemp,function(){
          console.log("Guardado con éxito");
+      });
+
+
       });
       /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
@@ -925,16 +941,18 @@
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
-        var json = JSONC.unpack( vm.nuevo.contenido_material,true );
-        json = JSONC.decompress(json);
+        //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+        //json = JSONC.decompress(json);
 
          //Documento completo sin páginas
-          vm.documentoCompleto = json;
-
+          //vm.documentoCompleto = json;
+          vm.documentoCompleto = angular.fromJson(vm.nuevo.contenido_material);
+          console.log(vm.documentoCompleto);
           //Inicia en la página 1
           vm.paginaActual = 1;
 
-        json = $filter('filter')(json, {id: vm.paginaActual}, true)[0];
+        //json = $filter('filter')(json, {id: vm.paginaActual}, true)[0];
+        var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
         console.log(json);
         canvas.loadFromJSON(json.data); 
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
@@ -1066,13 +1084,12 @@
 
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length + 1, 
-        data: json});
+        objects: json});
 
       console.log(vm.documentoCompleto);
     }
 
     vm.paginaAnterior = function() {
-     
       canvas.clear();
       vm.paginaActual--;
       var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
@@ -1081,12 +1098,11 @@
     }
 
     vm.paginaSiguiente = function() {
-     
       canvas.clear();
       vm.paginaActual++;
       var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
       console.log(json);
-      canvas.loadFromJSON(json.data); 
+      canvas.loadFromJSON(json.data);
     }
   }
 
