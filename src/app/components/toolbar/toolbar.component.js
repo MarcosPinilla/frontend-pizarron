@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$state','$window'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $state) {
+  function toolbarCtrl(CredentialsService, $rootScope, $state, $window) {
     var vm = this;
 
     vm.isinLogged = false;
@@ -39,5 +39,9 @@
       vm.isinLogged = false;
       $state.go('landing');
     }
+
+    vm.doTheBack = function() {
+      $window.history.back()
+    };
   }
 })();

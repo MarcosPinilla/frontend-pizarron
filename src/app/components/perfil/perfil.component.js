@@ -14,35 +14,52 @@
   	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
   		var vm = this;
       vm.perfil = {};
+      vm.amistad = {};
       vm.isUser = false;
-      vm.id = getUrlParameter('id');
-
+      vm.isAmigo = false;
+      vm.profesorId = getUrlParameter('id');
+      console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
-      if(vm.id) {
-        ProfesorService.get({id: vm.id}).$promise.then(function (data) {
-        //console.log(data);
-        if(data.error)
-          vm.perfil.nombres_profesor = data.mensaje;
-        else
-        vm.perfil = data;
-        vm.isUser = false;
+      if(vm.profesorId) {
+        ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
+          //console.log(data);
+          if(data.error) {
+            vm.perfil.nombres_profesor = data.mensaje;
+          }
+          else {
+            vm.perfil = data;
+            vm.isUser = false;
+            /*Obtiene la amistad entre ambos usuarios*/
+            AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+              console.log(data);
+              if(data.error) {
+                vm.amistad = data.mensaje;
+                vm.isAmigo = false;
+              }else {
+                vm.amistad = data;
+                if(vm.amistad.id_estado_amistad == 1)
+                  vm.isAmigo = true;
+              }
+            });
+          }
         });
-      }else { //SI es el perfil del profesor
+      }else { //Si es el perfil del profesor
         console.log("entre aqui");
         PerfilService.get().$promise.then(function (data) {
-              //console.log(data.profesores);
-              vm.perfil = data.profesores;
+              console.log(data.profesor);
+              vm.perfil = data.profesor;
               vm.isUser = true;
         });
       }
 
-      vm.anadiramigo = function(wea) {
-        //console.log(wea);
-        /*var text = '{ "id" :' + wea + '}';
-        var obj = JSON.parse(text);
-        console.log(obj);*/ 
-        //console.log(wea)
-        AmigoService.save(wea);
+      vm.anadiramigo = function(idamigo) {
+        var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
+        console.log('{"id_amigo": ' + idamigo + '}');
+        AmigoService.save(amigo1);
+      }
+
+      vm.eliminaramistad = function(id) {
+        AmigoService.delete({id: id});
       }
 
       function getUrlParameter(name) {

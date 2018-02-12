@@ -1,8 +1,6 @@
-<div class="dashboard" layout="row" layout-wrap>
-	<!-- Left -->
-  	<div flex="20"><my-sidebar></my-sidebar></div>
-  	<!-- Center -->
- 	<div class="perfil-contenedor" flex="60" layout="container" layout-wrap>
+<div class="dashboard" layout="row" layout-wrap flex="100">
+  <!-- Center -->
+ 	<div class="perfil-contenedor" flex="100" layout="container" layout-wrap>
  		<div class="perfil-information row" layout="row" flex="95">
  			<!-- Perfil Imagen -->
  			<div class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
@@ -35,14 +33,33 @@
  			<!-- Perfil Opciones -->
  			<div flex layout="column">
         <!-- Añadir Button -->
-        <div>
-          <md-button ng-if="!vm.isUser" ng-click="vm.anadiramigo(vm.perfil)" class="md-raised perfil-agregar-amigo" style="background-color: #EEEEEE;">
+        <div ng-if="!vm.isUser && !vm.isAmigo">
+          <md-button ng-click="vm.anadiramigo(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
             <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
              Añadir a amigos 
           </md-button>
         </div>
-        <div>
-          a
+        <div ng-if="vm.isAmigo">
+
+          <md-menu md-position-mode="target-right target" md-offset="0 50">
+            <md-button class="md-raised md-primary perfil-button-amigo" ng-mouseenter="$mdMenu.open()">
+              <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_check_white_24px.svg"></md-icon> Amigos
+              <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_arrow_drop_down_white_24px.svg"></md-icon>
+            </md-button>
+            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+              <md-menu-item>
+                <md-button>
+                  Lorem Ipsum
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.eliminaramistad(vm.amistad.id)">
+                  Eliminar de mis amigos
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
         </div>
         <!-- Estadisticas -->
         <div style="background-color: ">Espacio reservado para estadisticas</div>
@@ -153,6 +170,4 @@
  			</div>
  		</div>
  	</div>
-  	<!-- Right -->
-  	<div flex="20"><my-chat></my-chat></div>
 </div>
