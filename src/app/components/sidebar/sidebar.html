@@ -1,9 +1,10 @@
 <div class="sidebar-left hidden" style="height: 100%;">
 	<div class="sidebar-perfil" flex style="height: 14em;">
-		<a href="perfil"><img class="img-circle preview" ng-src="{{ vm.perfil.profesores.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
-		<span><h4>Bienvenido {{ vm.perfil.profesores.nombres_profesor }}!</h4></span>
+		<a ui-sref="dashboard.perfil"><img class="img-circle preview" ng-src="{{ vm.perfil.profesor.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
+		<span><h4>Bienvenido {{ vm.perfil.profesor.nombres_profesor }}!</h4></span>
 	</div>
 	<!-- Buttons -->
+	<br>
 	<div class="sidebar-buttons" layout="row">
 		<div flex="5"></div>
 		<div layout="column" flex="90" flex-offset="5">
@@ -15,7 +16,7 @@
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_folder_white_24px.svg"></md-icon> Mi Material
 			</md-button>
 			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #E91E63">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #E91E63" ui-sref="dashboard.favoritos">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon> Mis Favoritos
 			</md-button>
 			<md-divider class="sidebar-left-divider"></md-divider>
