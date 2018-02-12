@@ -435,7 +435,7 @@ md-list.make-scrollable {
   text-align: center;
 }
 
-.perfil-agregar-amigo {
+.perfil-button-amigo {
   float: right; 
 }
 
@@ -529,7 +529,7 @@ md-list.make-scrollable {
 }
 .card-profesor{
   float: left;
-  width: 32.2%
+  width: 32.2%;
   min-width: 385px;
 }
 .buscador-profes{
