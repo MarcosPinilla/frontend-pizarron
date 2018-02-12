@@ -19,10 +19,7 @@
       vm.materiales.$promise.then(function(data){
         console.log(data);
         vm.materiales = data;
-        vm.materiales[0].autor = "hola";
-        vm.materiales[1].autor = "holaas";
-        vm.materiales[2].autor = "holaasd";
-
+        
         console.log(vm.materiales);
         
         setTimeout(function() {

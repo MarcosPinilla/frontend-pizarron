@@ -23,9 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter'];
 
-  function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService) {
+  function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter) {
 
     var vm = this;
 
@@ -94,6 +94,17 @@
       } else {
         vm.orientacion = '2';
       }
+
+      //Documento completo sin páginas
+      vm.documentoCompleto = [];
+
+      var json = canvas.toJSON();
+      vm.documentoCompleto.push({
+        id: vm.documentoCompleto.length + 1, 
+        data: json});
+
+      //Inicia en la página 1
+      vm.paginaActual = 1;
 
       var _config = {
         canvasState             : [],
@@ -777,6 +788,8 @@
       pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
       pdf.save('test.pdf'); */
 
+      //vm.rotar();
+
       kendo.drawing
         .drawDOM("#canvas", 
         { 
@@ -971,7 +984,88 @@
         vm.status = 'CANCELADO';
       });
     };
+    
+    /* Implementar más tarde, el horizontal aún tiene bugs
+    vm.rotar = function() {
+      $timeout(function() {
+        canvas.discardActiveObject();
+
+        var activeObject = new fabric.ActiveSelection(canvas.getObjects(), { canvas: canvas });
+        canvas.setActiveObject(activeObject);
+
+        if (activeObject != null) {
+            activeObject.rotate(-90);
+
+            canvas.discardActiveObject();
+
+            canvas.renderAll();
+            vm.exportar();
+            
+
+            // En teoría esto de acá debería reestablecer la vista a la normalidad
+            canvas.setActiveObject(activeObject);
+            activeObject.rotate(90);
+
+            canvas.discardActiveObject();
+
+            canvas.renderAll();
+        }  
+      })
       
+    } */
+
+    vm.nuevaPagina = function() {
+
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+
+      canvas.clear();
+      vm.paginaActual++;
+
+      json = canvas.toJSON();
+
+      vm.documentoCompleto.push({
+        id: vm.documentoCompleto.length + 1, 
+        data: json});
+
+      console.log(vm.documentoCompleto);
+    }
+
+    vm.paginaAnterior = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+
+      canvas.clear();
+      vm.paginaActual--;
+      json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      console.log(json);
+      canvas.loadFromJSON(json.data);
+    }
+
+    vm.paginaSiguiente = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+      canvas.clear();
+      vm.paginaActual++;
+      json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      console.log(json);
+      canvas.loadFromJSON(json.data); 
+    }
   }
 
   function configuracionPaginaController($mdDialog, orientacion, tipo) {
