@@ -203,6 +203,11 @@
             <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
               <span>Compartir</span><md-icon>people</md-icon>
             </md-button>
+
+             <span class="contador" style="margin-right: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
+    
+            <span class="contador">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
+  
         </md-menu-bar>
       </div>
     </div>
@@ -229,11 +234,12 @@
         </md-select>
       </md-input-container>
   </div>
+
+  <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</md-button>
+  <md-button ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">Página nueva</md-button>
+  <md-button ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()">Eliminar página</md-button>
+  <md-button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</md-button>
     
-    <h5 style="margin-right: 10px;">Figuras: {{vm.figuras}}/50 <span style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></h5>
-    
-    <h5>Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></h5>
-  
 </div>
   </md-toolbar>
 
@@ -338,6 +344,3 @@
 
 </div>
 
-<button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</button>
-<button ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">Página nueva</button>
-<button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</button>

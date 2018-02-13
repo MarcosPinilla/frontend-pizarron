@@ -55,6 +55,11 @@
   height:360px;
   background: #e6e6e6;
 }
+
+.contador{
+  font-weight: bold;
+  font-size:18px;
+}
 /*
 .page-container {
   padding: 32px; }

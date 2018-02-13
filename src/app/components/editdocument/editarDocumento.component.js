@@ -686,7 +686,14 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
      
         $scope.$apply(function () {
@@ -704,7 +711,13 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
       if(vm.pegar){
         vm.pegar=false;
@@ -727,7 +740,13 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
     }
 
@@ -1095,10 +1114,55 @@
       
     } */
 
+     vm.eliminarPagina = function() {
+      //si es la última página
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
+      vm.paginaAnterior();
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.documentoCompleto.length-1}, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto.splice(idElemento,1);
+
+      
+     }else{
+      vm.paginaSiguiente();
+
+      vm.paginaActual--;
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id--;
+        }
+
+          if(i==vm.documentoCompleto.length-1){
+
+
+            var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+
+            var idElemento = vm.documentoCompleto.indexOf(json);
+
+            vm.documentoCompleto.splice(idElemento,1);
+          }
+           
+        }
+      }
+
+
+     
+
+      console.log(vm.documentoCompleto);
+    }
+
     vm.nuevaPagina = function() {
 
      
      canvas.clear();
+
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
       vm.paginaActual++;
 
       var json = canvas.toJSON();
@@ -1106,6 +1170,33 @@
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length, 
         data: json});
+
+     }else{
+
+
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id++;
+        }
+
+        if(i==vm.documentoCompleto.length-1){
+
+          vm.paginaActual++
+
+           var json = canvas.toJSON();
+            
+            vm.documentoCompleto.push({
+              id: vm.paginaActual, 
+              data: json});
+            break;
+           }
+           
+        }
+      }
+
+
+     
 
       console.log(vm.documentoCompleto);
     }
