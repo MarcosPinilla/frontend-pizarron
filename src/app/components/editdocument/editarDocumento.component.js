@@ -877,14 +877,15 @@
 
       /*var jsonComprimido = JSONC.compress( json );
       console.log(jsonComprimido);
-      jsonComprimido = JSONC.pack( jsonComprimido, true );
+      */
+      var jsonComprimido = JSONC.pack( json);
       console.log(jsonComprimido);
       var canvasAsJson = JSON.stringify(jsonComprimido);
       console.log(canvasAsJson);
-      */
+      
 
-      json = JSON.stringify(json);
-      console.log(json);
+      //json = JSON.stringify(json);
+      //console.log(json);
 
 
       var documentoTemp={};
@@ -909,8 +910,8 @@
       //Se vuelve a hacer transparente
       canvas.backgroundColor = 'transparent';
 
-      //documentoTemp.contenido_material=canvasAsJson;
-      documentoTemp.contenido_material = json;
+      documentoTemp.contenido_material=canvasAsJson;
+      //documentoTemp.contenido_material = json;
       documentoTemp.vista_previa= svg;
       documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
       documentoTemp.id_asignatura=vm.documento.id_asignatura;
@@ -941,12 +942,12 @@
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
-        //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+        var json = JSONC.unpack( vm.nuevo.contenido_material);
         //json = JSONC.decompress(json);
 
          //Documento completo sin páginas
-          //vm.documentoCompleto = json;
-          vm.documentoCompleto = angular.fromJson(vm.nuevo.contenido_material);
+          vm.documentoCompleto = json;
+          //vm.documentoCompleto = angular.fromJson(vm.nuevo.contenido_material);
           console.log(vm.documentoCompleto);
           //Inicia en la página 1
           vm.paginaActual = 1;
