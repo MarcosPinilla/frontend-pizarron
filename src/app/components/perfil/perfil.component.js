@@ -18,7 +18,6 @@
       vm.isUser = false;
       vm.isAmigo = false;
       vm.profesorId = getUrlParameter('id');
-      console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -55,11 +54,28 @@
       vm.anadiramigo = function(idamigo) {
         var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
         console.log('{"id_amigo": ' + idamigo + '}');
-        AmigoService.save(amigo1);
+        AmigoService.save(amigo1).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("El amigo se guardo: " + data.id_estado_amistad);
+          if(data.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });
+
+        /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("EL ESTADO ES!: " + vm.amistad.id_estado_amistad);
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });*/
       }
 
       vm.eliminaramistad = function(id) {
         AmigoService.delete({id: id});
+        AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = false;
+        });
       }
 
       function getUrlParameter(name) {
