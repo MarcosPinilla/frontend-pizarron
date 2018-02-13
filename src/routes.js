@@ -34,7 +34,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component:'documento',
     isPrivate: true
   })
-  .state('profesor', {
+  .state('administrator.profesor', {
     url: '/profesor',
     component: 'profesor',
     isPrivate: true
@@ -56,17 +56,17 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     controllerAs: 'vm',
     templateUrl: 'app/components/editdocument/documentos.html'
   })
-  .state('usuario', {
+  .state('administrator.usuario', {
     url: '/usuario',
     component: 'usuario',
     isPrivate: true
   })
-  .state('establecimiento', {
+  .state('administrator.establecimiento', {
     url: '/establecimiento',
     component: 'establecimiento',
     isPrivate: true
   })
-  .state('asignatura', {
+  .state('administrator.asignatura', {
     url: '/asignatura',
     component: 'asignatura',
     isPrivate: true
@@ -76,12 +76,17 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'material',
     isPrivate: true
   })
+  .state('administrator.material', {
+    url: '/material',
+    component: 'material',
+    isPrivate: true
+  })
   .state('dashboard.favoritos', {
     url: '/favoritos',
     component: 'favoritos',
     isPrivate: true
   })
-  .state('elemento', {
+  .state('administrator.elemento', {
     url: '/elemento',
     component: 'elemento',
     isPrivate: true
@@ -109,6 +114,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   .state('administrator', {
     url: '/administrator',
     component: 'administrator',
+    isPrivate: true
+  })
+  .state('administrator.estadisticas', {
+    url: '/estadisticas',
+    component: 'estadisticas',
     isPrivate: true
   })
   /*

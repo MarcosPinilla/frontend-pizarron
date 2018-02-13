@@ -134,6 +134,13 @@ titular {
   background-color: #E0E0E0; 
 }
 
+.dashboard-adm{
+  position: relative;
+  background-color: #BBDEFB;
+  background-size: all;
+  height: 100%
+}
+
 .titulo {
   color: #7986CB;
   font-size: 2.5em;
@@ -224,6 +231,11 @@ md-list.make-scrollable {
 .center-content {
 }
 
+.buttonadm{
+  float: left;
+  min-width: 32%;
+}
+
 .repository-left {
   background-color: #3f4652; 
   color:#FAFAFA; 
@@ -240,7 +252,14 @@ md-list.make-scrollable {
   height: 100%; 
   position: fixed; 
   left: 0; 
-  width: 200px;
+  min-width: 210px;
+}
+.panelbar-left {
+  background-color: #3da0bd; 
+  color:#FAFAFA; 
+  height: 100%; 
+  position: fixed; 
+  left: 0; 
   min-width: 210px;
 }
 
