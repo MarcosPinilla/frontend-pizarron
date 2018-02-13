@@ -232,7 +232,7 @@
     
     <h5 style="margin-right: 10px;">Figuras: {{vm.figuras}}/50 <span style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></h5>
     
-    <h5>Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length}} (10 máx.) <span style="color:red;" ng-if="vm.documentoCompleto.length === 10"> Límite alcanzado</span></h5>
+    <h5>Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></h5>
   
 </div>
   </md-toolbar>
@@ -339,5 +339,5 @@
 </div>
 
 <button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</button>
-<button ng-disabled="vm.documentoCompleto.length === 10" ng-click="vm.nuevaPagina()">Página nueva</button>
-<button ng-disabled="vm.documentoCompleto.length === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</button>
+<button ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">Página nueva</button>
+<button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</button>

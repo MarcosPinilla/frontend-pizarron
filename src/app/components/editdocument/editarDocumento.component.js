@@ -29,7 +29,7 @@
 
     var vm = this;
 
-    vm.nombreInicial="";
+    vm.nombreInicial = "";
 
     vm.documento = MaterialService.get({id: $stateParams.id});
 
@@ -43,17 +43,25 @@
       } else {
         //Contador de figuras agregadas
         vm.figuras = 0;
-         //Documento completo sin páginas
-          vm.documentoCompleto = [];
+        //Documento completo sin páginas
+        vm.documentoCompleto = [];
 
-          var json = canvas.toJSON();
-          vm.documentoCompleto.push({
-            id: vm.documentoCompleto.length + 1, 
-            data: json});
+        //Se agrega el objeto en donde irán los atributos generales del documento
+        vm.documentoCompleto.push({
+          id: 0,
+          figuras: vm.figuras
+        });
 
-          //Inicia en la página 1
-          vm.paginaActual = 1;
-          }
+        //Se agrega el objeto con la primera página del objeto
+        var json = canvas.toJSON();
+        vm.documentoCompleto.push({
+          id: vm.documentoCompleto.length, 
+          data: json
+        });
+
+        //Inicia en la página 1
+        vm.paginaActual = 1;
+        }
     });
 
     //MENU BAR
@@ -259,7 +267,7 @@
         };
 */
         vm.generarFigura=function() {
-          if(vm.figuras<50){
+          if(vm.figuras < 50){
             var rect = new fabric.Rect({
             top : 100,
             left : 100,
@@ -268,10 +276,11 @@
             fill : 'blue'
           });
 
-            //canvas.add(rect).setActiveObject(rect);
-            canvas.add(rect);
-            vm.figuras = canvas.getObjects().length;
-          }
+          //canvas.add(rect).setActiveObject(rect);
+          canvas.add(rect);
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
+        }
         
          
         };
@@ -282,7 +291,7 @@
         })
 
         vm.generarImagen = function(ruta){
-          if(vm.figuras<50){
+          if(vm.figuras < 50){
             fabric.Image.fromURL(ruta, function(img) {
               //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
               img.src=ruta;
@@ -291,7 +300,8 @@
               canvas.add(img);
               var a = canvas.setActiveObject(img);
                $scope.$apply(function () {
-                vm.figuras = canvas.getObjects().length;
+                //vm.figuras = canvas.getObjects().length;
+                vm.figuras++;
               });
               //canvas.add(oImg);
             }, null, '');
@@ -301,7 +311,7 @@
         }
 
         vm.generarTexto = function() {
-          if(vm.figuras<50){
+          if(vm.figuras < 50){
             var texto = new fabric.Textbox('Escribe aquí', {
               left: 50,
               top: 50,
@@ -324,17 +334,14 @@
             //canvas.getActiveObject().set("fontFamily", 'Lobster');
             canvas.renderAll();
 
-            vm.figuras = canvas.getObjects().length;
+            //vm.figuras = canvas.getObjects().length;
+            vm.figuras++;
           }
-          
-        
-
         } 
 
       vm.generarLinea = function(){
-        if(vm.figuras<50){
+        if(vm.figuras < 50){
            var linea = new fabric.Line([ 250, 125, 250, 175 ], {
-          
             fill: 'red',
             stroke: 'red',
             strokeWidth: 5,
@@ -352,13 +359,14 @@
 
           canvas.add(linea);
 
-          vm.figuras = canvas.getObjects().length;
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
         }
        
       }
 
       vm.generarTriangulo = function(){
-        if(vm.figuras<50){
+        if(vm.figuras < 50){
           var triangle = new fabric.Triangle({
             width: 100, 
             height: 100, 
@@ -367,16 +375,15 @@
             fill: '#cca'
           });
 
-        canvas.add(triangle);
+          canvas.add(triangle);
 
-        vm.figuras = canvas.getObjects().length;
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
         }
-        
-       
       }
 
       vm.generarCirculo = function(){
-        if(vm.figuras<50){
+        if(vm.figuras < 50){
           var circle = new fabric.Circle({
             radius: 50,
             left: 275,
@@ -386,10 +393,9 @@
 
           canvas.add(circle)
 
-          vm.figuras = canvas.getObjects().length;
-      
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
         }
-        
       }
 
     vm.eliminar = function() {
@@ -399,9 +405,11 @@
            if (seleccion.type === 'activeSelection') {
         seleccion.forEachObject(function(obj) {
           canvas.remove(obj);
+          vm.figuras--;
         });
       } else {
         canvas.remove(seleccion);
+        vm.figuras--;
       }
 
       
@@ -465,7 +473,7 @@
         vm.redo();
       }
        $scope.$apply(function () {
-          vm.figuras = canvas.getObjects().length;
+          //vm.figuras = canvas.getObjects().length;
                   
         });
     }, false);
@@ -500,9 +508,11 @@
         if (seleccion.type === 'activeSelection') {
           seleccion.forEachObject(function(obj) {
             canvas.remove(obj);
+            vm.figuras--;
           });
         } else {
           canvas.remove(seleccion);
+          vm.figuras--;
         }
       });
 
@@ -526,11 +536,12 @@
             evented: true,
           });
           if (clonedObj.type === 'activeSelection') {
-            if(clonedObj._objects.length+vm.figuras<50){
+            if(clonedObj._objects.length+vm.figuras <= 50){
               // active selection needs a reference to the canvas.
               clonedObj.canvas = canvas;
               clonedObj.forEachObject(function(obj) {
                 canvas.add(obj);
+                vm.figuras++;
               });
               // this should solve the unselectability
               clonedObj.setCoords();
@@ -538,8 +549,9 @@
               return;
             }
           } else {
-            if(vm.figuras<50){
+            if(vm.figuras < 50){
              canvas.add(clonedObj);
+             vm.figuras++;
             }else{
               return;
             }
@@ -547,10 +559,12 @@
           _clipboard.top += 10;
           _clipboard.left += 10;
 
+          /*
           $scope.$apply(function () {
               vm.figuras = canvas.getObjects().length;
               console.log(vm.figuras);
           });
+          */
 
           canvas.setActiveObject(clonedObj);
           canvas.requestRenderAll();
@@ -672,11 +686,11 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+      vm.documentoCompleto[vm.paginaActual] = editado;
 
      
         $scope.$apply(function () {
-        vm.figuras = canvas.getObjects().length;
+        //vm.figuras = canvas.getObjects().length;
         console.log(vm.figuras);
       }); 
       
@@ -690,12 +704,12 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+      vm.documentoCompleto[vm.paginaActual] = editado;
 
       if(vm.pegar){
         vm.pegar=false;
         $timeout(function () {
-          vm.figuras = canvas.getObjects().length;
+          //vm.figuras = canvas.getObjects().length;
           console.log(vm.figuras);
           vm.pegar=false;
          }); 
@@ -713,7 +727,7 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual - 1] = editado;
+      vm.documentoCompleto[vm.paginaActual] = editado;
 
     }
 
@@ -736,7 +750,8 @@
           var a = canvas.setActiveObject(img);
           //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
           $scope.$apply(function () {
-            vm.figuras = canvas.getObjects().length;
+            //vm.figuras = canvas.getObjects().length;
+            vm.figuras++;
           }); 
         });
         };
@@ -790,7 +805,8 @@
         canvas.add(img);
           
         $scope.$apply(function () {
-            vm.figuras = canvas.getObjects().length;
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
         });
         var a = canvas.setActiveObject(img);
           //canvas.setActiveObject(object);    
@@ -868,65 +884,68 @@
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
       $timeout(function(){
-      var json = vm.documentoCompleto;
-      console.log(json);
-      console.log(vm.documentoCompleto);
-      //se comprime el json
+        var editado = {
+          id: 0,
+          figuras: vm.figuras
+        }
 
-      
+        vm.documentoCompleto[0] = editado;
+        
+        var json = vm.documentoCompleto;
+        console.log(json);
+        console.log(vm.documentoCompleto);
+        //se comprime el json
 
-      /*var jsonComprimido = JSONC.compress( json );
-      console.log(jsonComprimido);
-      */
-      var jsonComprimido = JSONC.pack( json);
-      console.log(jsonComprimido);
-      var canvasAsJson = JSON.stringify(jsonComprimido);
-      console.log(canvasAsJson);
-      
+        /*var jsonComprimido = JSONC.compress( json );
+        console.log(jsonComprimido);
+        */
+        var jsonComprimido = JSONC.pack( json);
+        console.log(jsonComprimido);
+        var canvasAsJson = JSON.stringify(jsonComprimido);
+        console.log(canvasAsJson);
+        
 
-      //json = JSON.stringify(json);
-      //console.log(json);
-
-
-      var documentoTemp={};
-      documentoTemp.id=vm.documento.id;
-      console.log(vm.documento.titulo_material)
-      if(vm.documento.titulo_material!=undefined){
-
-        documentoTemp.titulo_material=vm.documento.titulo_material;
-        vm.nombreInicial=vm.documento.titulo_material;
-      }else{
-        vm.documento.titulo_material=vm.nombreInicial;
-        documentoTemp.titulo_material=vm.nombreInicial
-      }
-      
-      //Se añade color blanco para la vista previa
-      canvas.backgroundColor = 'white';
-      var svg = canvas.toSVG({
-        width: canvas.width / 3,
-        height: canvas.height / 3
-      });
-
-      //Se vuelve a hacer transparente
-      canvas.backgroundColor = 'transparent';
-
-      documentoTemp.contenido_material=canvasAsJson;
-      //documentoTemp.contenido_material = json;
-      documentoTemp.vista_previa= svg;
-      documentoTemp.id_tipo_material=vm.documento.id_tipo_material;
-      documentoTemp.id_asignatura=vm.documento.id_asignatura;
-      documentoTemp.id_nivel=vm.documento.id_nivel;
-      documentoTemp.id_visibilidad=vm.documento.id_visibilidad;
-      
-
-      console.log(documentoTemp)
-
-      //documento.contenido_material = canvasAsJson;
-      MaterialService.update({id:vm.documento.id},documentoTemp,function(){
-         console.log("Guardado con éxito");
-      });
+        //json = JSON.stringify(json);
+        //console.log(json);
 
 
+        var documentoTemp = {};
+        documentoTemp.id = vm.documento.id;
+        console.log(vm.documento.titulo_material)
+        if(vm.documento.titulo_material != undefined){
+
+          documentoTemp.titulo_material = vm.documento.titulo_material;
+          vm.nombreInicial = vm.documento.titulo_material;
+        }else{
+          vm.documento.titulo_material = vm.nombreInicial;
+          documentoTemp.titulo_material = vm.nombreInicial
+        }
+        
+        //Se añade color blanco para la vista previa
+        canvas.backgroundColor = 'white';
+        var svg = canvas.toSVG({
+          width: canvas.width / 3,
+          height: canvas.height / 3
+        });
+
+        //Se vuelve a hacer transparente
+        canvas.backgroundColor = 'transparent';
+
+        documentoTemp.contenido_material=canvasAsJson;
+        //documentoTemp.contenido_material = json;
+        documentoTemp.vista_previa = svg;
+        documentoTemp.id_tipo_material = vm.documento.id_tipo_material;
+        documentoTemp.id_asignatura = vm.documento.id_asignatura;
+        documentoTemp.id_nivel = vm.documento.id_nivel;
+        documentoTemp.id_visibilidad = vm.documento.id_visibilidad;
+        
+
+        console.log(documentoTemp)
+
+        //documento.contenido_material = canvasAsJson;
+        MaterialService.update({id:vm.documento.id},documentoTemp,function(){
+           console.log("Guardado con éxito");
+        });
       });
       /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
@@ -958,7 +977,8 @@
         canvas.loadFromJSON(json.data); 
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
         //vm.figuras = json.objects.length;
-        vm.figuras=canvas.getObjects().length;
+        var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
+        vm.figuras = figurasObtenidas.figuras;
         console.log(vm.figuras);
       });
 
@@ -1084,8 +1104,8 @@
       var json = canvas.toJSON();
 
       vm.documentoCompleto.push({
-        id: vm.documentoCompleto.length + 1, 
-        objects: json});
+        id: vm.documentoCompleto.length, 
+        data: json});
 
       console.log(vm.documentoCompleto);
     }
