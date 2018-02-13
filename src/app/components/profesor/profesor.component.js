@@ -21,6 +21,12 @@
       console.log(vm.people);
     });
 
+    vm.query = {
+      order: 'id',
+      limit: 5,
+      page: 1
+    };
+
     vm.verprofes = function () {
       ProfesorService.query().$promise.then(function (data) {
       vm.people = data;
