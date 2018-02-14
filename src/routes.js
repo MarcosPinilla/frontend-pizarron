@@ -181,6 +181,10 @@ function middlewareConfig($state, CredentialsService, $transitions) {
       $state.go('dashboard.publicaciones');
     }
 
+    if (to === 'administrator' && CredentialsService.isLogged()) {
+      $state.go('administrator.estadisticas');
+    }
+
     if (to === 'dashboard' && CredentialsService.isLogged()) {
       $state.go('dashboard.publicaciones');
     }
