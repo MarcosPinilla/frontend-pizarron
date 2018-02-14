@@ -9,9 +9,11 @@
     	controllerAs: 'vm'
   	});
 
-  	sidebarCtrl.$inject = ['$mdDialog', 'ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService', 'PerfilService', 'MaterialService'];
+  	sidebarCtrl.$inject = ['$mdDialog',  'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
+     'PerfilService', 'MaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  	function sidebarCtrl($mdDialog, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, PerfilService) {
+  	function sidebarCtrl($mdDialog, CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
+      PerfilService, NotificacionesNoLeidasService) {
   		var vm = this;
 
       vm.usuario = localStorage.getItem("user");
@@ -19,11 +21,12 @@
       vm.niveles = {};
       vm.tipo_material = {};
       vm.perfil = {};
+      vm.cantidadNotificaciones = {};
 
       vm.customFullscreen = true;
       
        PerfilService.get().$promise.then(function (data) {
-            console.log(data);
+            console.log(data.id);
             vm.perfil = data;
             //console.log(vm.perfil.profesores.url_foto_profesor);
        });
@@ -40,6 +43,16 @@
       ListartipomaterialService.query().$promise.then(function (data) {
         vm.tipo_material = data;
       });
+
+
+       CantidadNotificaciones.get().$promise.then(function (data) {
+            console.log(data);
+            vm.cantidadNotificaciones = data;
+
+       });
+
+
+
       
       vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({
@@ -63,7 +76,37 @@
           vm.status = 'CANCELADO';
         });
       };
+
+
+        
+
+    vm.showAdvanced = function(ev) {
+
+       //  vm.notificaciones = {};
+
+       // NotificacionesNoLeidasService.get().$promise.then(function (data) {
+       //      console.log(data);
+       //      vm.notificaciones = data;
+
+       // });
+
+        $mdDialog.show({
+          controller: DialogController,
+          controllerAs: 'vm',
+          templateUrl: 'dialog1.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true
+        })
+        .then(function(answer) {
+          vm.status = 'You said the information was "' + answer + '".';
+        }, function() {
+          vm.status = 'You cancelled the dialog.';
+        });
+      };
+
   	}
+
 
     function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService) {
 
@@ -109,4 +152,54 @@
       $mdDialog.hide(answer);
     };
   }
+
+
+  function DialogController($scope, $mdDialog, NotificacionesNoLeidasService, CambiarNotificacionesLeidas, NotificacionesLeidasService) {
+
+
+    var vm = this;
+
+
+    vm.notificaciones = {};
+
+       NotificacionesNoLeidasService.get().$promise.then(function (data) {
+            console.log(data);
+            vm.notificaciones = data;
+
+            CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+                console.log(data);
+
+
+           });
+
+       });
+
+
+    vm.notificacionesLeidas = {};
+
+       NotificacionesLeidasService.get().$promise.then(function (data) {
+            console.log(data);
+            vm.notificacionesLeidas = data;
+
+
+       });
+
+  
+
+
+    vm.hide = function() {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+
+
 })();
