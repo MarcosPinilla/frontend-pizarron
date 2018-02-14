@@ -9,14 +9,29 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['ProfesorService', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
+  	function perfilCtrl(ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
+      vm.mejoresFavoritos = {};
       vm.isUser = false;
       vm.isAmigo = false;
+
+
+
+      vm.mejoresFavoritos = ObtenerMejoresFavoritos.get({id: $stateParams.id});
+
+        vm.mejoresFavoritos.$promise.then(function(data){
+          console.log(data);
+          vm.mejoresFavoritos = data;
+          
+   
+      });
+
+      vm.profesorIdD = $stateParams.id;
+      console.log(vm.profesorIdD );
       vm.profesorId = getUrlParameter('id');
       console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
@@ -51,6 +66,8 @@
               vm.isUser = true;
         });
       }
+
+ 
 
       vm.anadiramigo = function(idamigo) {
         var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');

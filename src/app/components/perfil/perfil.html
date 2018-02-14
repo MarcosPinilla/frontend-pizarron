@@ -66,57 +66,31 @@
       </div>
  		</div>
  		<!-- Valoradas -->
+     
  		<div class="perfil-publicaciones-valoradas" flex="95" layout="column">
  			<div class="titulo-perfil-valoradas">
  				<h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
  			</div>
  			<div layout="row">
  				<!-- Left -->
- 				<div class="perfil-post-left" flex="30" layout="column">
- 					<div class="perfil-post-titulo">1# Guia de Matematicas</div>
+     
+ 				<div class="perfil-post-left" flex="30" layout="column" ng-repeat="mejores in vm.mejoresFavoritos">
+ 					<div class="perfil-post-titulo">{{ mejores.titulo_material }}</div>
  					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 						<a href="material"><img class="preview"  ng-src="{{ mejores.vista_previa }}" class="md-card-image" alt="Washed Out"></a>
  					</div>
  					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
+ 						<md-button class="md-raised">Ver Documento</md-button><br>
+             <p>Cantidad: {{ mejores.cantidad }}</p>
+        		<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+               
  					</div>
  				</div>
+       
  				<div flex="5"></div>
- 				<!-- Center -->
- 				<div class="perfil-post-center" flex="30" layout="column">
- 					<div class="perfil-post-titulo">2# Taller de multiplicaciones</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
- 				<div flex="5"></div>
- 				<!-- Right -->
- 				<div class="perfil-post-right" flex="30" layout="column">
- 					<div class="perfil-post-titulo">3# Prueba de sumas</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
  			</div>
  		</div>
+     
  		<!-- Recientes -->
  		<div class="perfil-publicaciones-recientes" flex="95" layout="column">
  			<div class="titulo-perfil-recientes">
