@@ -349,7 +349,7 @@
           });
 
           linea.setControlsVisibility({
-            bl: true,
+            bl: false,
             br: false,
             tl: false,
             tr: false,
@@ -1115,6 +1115,8 @@
     } */
 
      vm.eliminarPagina = function() {
+      //se restan las figuras de la página eliminada
+      vm.figuras=vm.figuras-canvas.getObjects().length;
       //si es la última página
      if(vm.paginaActual==vm.documentoCompleto.length-1){
 
@@ -1249,15 +1251,16 @@
   }
 
  
-  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService) {
+  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService,AmigoService) {
     var vm = this;
 
     vm.profesores = {};
     vm.documento=documento;
     vm.colaboradores={};
     vm.usuario={};
+    vm.amigosTemp={};
+    vm.amigos=[];
     vm.customFullscreen = true;
-
 
     PerfilService.get().$promise.then(function (data) {
         console.log(data);
@@ -1265,11 +1268,12 @@
         //console.log(vm.perfil.profesores.url_foto_profesor);
     });
 
-    ProfesorService.query().$promise.then(function (data) {
-      vm.profesores = data;
-      vm.profesores=vm.profesores.filter(vm.filtro);
-      console.log(vm.profesores);
+    AmigoService.query().$promise.then(function (data) {
+      vm.amigosTemp = data;
+      vm.amigosTemp = vm.amigosTemp.filter(vm.filtrarAmigos);
+      console.log(vm.amigos);
     });
+
 
     obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
@@ -1284,15 +1288,34 @@
       });
     }
 
-    vm.filtro = function(profesor){
-      return profesor.id_usuario != vm.usuario.id;
+    //función para dejar solo los registros que tengan al usuario logeado
+    vm.filtrarAmigos=function(amigo){
+      if(amigo.id_estado_amistad == 1){
+
+        if(amigo.amigo1.id_usuario == vm.usuario.id){
+          ProfesorService.get({id: amigo.amigo2.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo2.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo2);
+            return amigo.amigo2;
+          });
+          
+        }else{
+           ProfesorService.get({id: amigo.amigo1.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo1.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo1);
+            return amigo.amigo1;
+          });
+        }
+      }
       
     }
 
     vm.querySearch   = querySearch;
 
     function querySearch (query) {
-      return query ? vm.profesores.filter( createFilterFor(query) ) : vm.profesores;
+      return query ? vm.amigos.filter( createFilterFor(query) ) : vm.amigos;
     }
     
     function createFilterFor(query) {
@@ -1300,9 +1323,9 @@
       var lowercaseQuery = query;
       //console.log(lowercaseQuery);
 
-      return function filterFn(profesor) {
+      return function filterFn(amigo) {
         //console.log(usuario.email);
-        return (profesor.usuario.email.indexOf(lowercaseQuery) === 0);
+        return (amigo.email.indexOf(lowercaseQuery) === 0);
       };
     }
 

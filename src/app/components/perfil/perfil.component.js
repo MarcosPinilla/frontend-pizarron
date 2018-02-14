@@ -9,16 +9,30 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['ProfesorService', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
+  	function perfilCtrl(ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
+      vm.mejoresFavoritos = {};
       vm.isUser = false;
       vm.isAmigo = false;
+
+
+
+      vm.mejoresFavoritos = ObtenerMejoresFavoritos.get({id: $stateParams.id});
+
+        vm.mejoresFavoritos.$promise.then(function(data){
+          console.log(data);
+          vm.mejoresFavoritos = data;
+          
+   
+      });
+
+      vm.profesorIdD = $stateParams.id;
+      console.log(vm.profesorIdD );
       vm.profesorId = getUrlParameter('id');
-      console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -52,14 +66,33 @@
         });
       }
 
+ 
+
       vm.anadiramigo = function(idamigo) {
         var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
         console.log('{"id_amigo": ' + idamigo + '}');
-        AmigoService.save(amigo1);
+        AmigoService.save(amigo1).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("El amigo se guardo: " + data.id_estado_amistad);
+          if(data.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });
+
+        /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("EL ESTADO ES!: " + vm.amistad.id_estado_amistad);
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });*/
       }
 
       vm.eliminaramistad = function(id) {
         AmigoService.delete({id: id});
+        AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = false;
+        });
       }
 
       function getUrlParameter(name) {

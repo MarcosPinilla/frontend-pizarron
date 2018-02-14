@@ -16,6 +16,13 @@
 
     vm.usuarios = {};
 
+    vm.query = {
+      order: 'id',
+      limit: 5,
+      page: 1
+    };
+
+
     UsuarioService.query().$promise.then(function (data) {
       vm.usuarios = data;
       console.log(vm.usuarios);
