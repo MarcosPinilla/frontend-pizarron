@@ -23,7 +23,7 @@
 
     AmigoService.query().$promise.then(function (data) {
       vm.amigos = data;
-      console.log(vm.amigos);
+      console.log(data);
     });
 
     vm.eliminaramistad = function(id) {
