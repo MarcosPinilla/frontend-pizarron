@@ -143,6 +143,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'publicaciones',
     isPrivate: true
   })
+  .state('dashboard.amigos', {
+    url: '/amigos',
+    component: 'amigos',
+    isPrivate: true
+  })
   .state('notificaciones', {
     url: '/notificaciones',
     component: 'notificacion',
@@ -174,6 +179,10 @@ function middlewareConfig($state, CredentialsService, $transitions) {
 
     if (to === 'landing' && CredentialsService.isLogged()) {
       $state.go('dashboard.publicaciones');
+    }
+
+    if (to === 'administrator' && CredentialsService.isLogged()) {
+      $state.go('administrator.estadisticas');
     }
 
     if (to === 'dashboard' && CredentialsService.isLogged()) {

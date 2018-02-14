@@ -1,0 +1,25 @@
+<div class="dashboard amigos-contenedor" layout="column" layout-wrap flex>
+	<!-- Center -->
+		<div class="amigos-titulo" flex><h2>Lista de amigos</h2></div>
+		<div class="amigos-lista" layout="column" ng-repeat="amigo in vm.amigos">
+			<div class="amigos-amigo" layout="row" ng-if="amigo.id_estado_amistad == 1 && amigo.amigo1.id != vm.perfil.id">
+				<div flex=10>
+					<a href="http://localhost:3000/dashboard/perfil?id={{amigo.amigo1.id}}"><img class="amigos-amigo-img" ng-src="{{amigo.amigo1.url_foto_profesor}}"></a>
+				</div>
+				<div class="amigos-amigo-texto" flex=70><span>{{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}</span></div>
+				<div class="amigos-amigo-acciones" flex="20">
+					<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+				</div>
+			</div>
+			<div class="amigos-amigo" layout="row" ng-if="amigo.id_estado_amistad == 1 && amigo.amigo2.id != vm.perfil.id">
+				<div flex=10>
+					<a href="http://localhost:3000/dashboard/perfil?id={{amigo.amigo2.id}}"><img class="amigos-amigo-img" ng-src="{{amigo.amigo2.url_foto_profesor}}"></a>
+				</div>
+				<div class="amigos-amigo-texto" flex=70><span>{{amigo.amigo2.nombres_profesor}} {{amigo.amigo2.apellidos_profesor}}</span></div>
+				<div class="amigos-amigo-acciones" flex="20">
+					<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+				</div>
+			</div>
+			<md-divider></md-divider>
+		</div>
+</div>
