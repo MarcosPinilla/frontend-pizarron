@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl(ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
+  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
@@ -58,7 +58,6 @@
           }
         });
       }else { //Si es el perfil del profesor
-        console.log("entre aqui");
         PerfilService.get().$promise.then(function (data) {
               console.log(data.profesor);
               vm.perfil = data.profesor;
@@ -66,7 +65,25 @@
         });
       }
 
- 
+      vm.showEditarPerfil = function(ev, perfil) {
+        $mdDialog.show({
+          controller: dialogoController,
+          controllerAs: 'vm',
+          templateUrl: 'app/components/perfil/editarperfil.dialogo.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: vm.customFullscreen,
+          locals: {
+            perfil: perfil,
+          },
+        })
+        .then(function(answer) {
+          vm.status = 'Perfil: ' + answer + '.';
+        }, function () {
+          vm.status = 'CANCELADO';
+        });
+      };
 
       vm.anadiramigo = function(idamigo) {
         var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
@@ -102,4 +119,34 @@
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
       };
   	}
+
+    function dialogoController($scope, $mdDialog, $state, perfil, ProfesorService) {
+      var vm = this;
+
+      vm.perfil = perfil;
+      console.log("AAAAAAAAAAAAAA");
+      console.log(vm.perfil);
+
+      vm.actualizarprofesor = function (profesor) {
+        console.log("El Id es : " + profesor.id);
+        ProfesorService.update({id: profesor.id}, profesor, function () {
+          $state.go('perfil');
+          vm.hide();
+        }, function () {});
+      };
+ 
+      vm.hide = function() {
+      $mdDialog.hide();
+      };
+
+      vm.cancel = function() {
+      $mdDialog.cancel();
+      };
+
+      vm.answer = function(answer) {
+      $mdDialog.hide(answer);
+      };
+    }
+
+
 })();
