@@ -34,11 +34,11 @@
             md-selected-item="vm.selectedItem"
             md-search-text="vm.searchText"
             md-items="item in vm.querySearch(vm.searchText)"
-            md-item-text="item.usuario.email"
+            md-item-text="item.email"
             md-min-length="0"
             placeholder="Correo del nuevo colaborador">
           <md-item-template>
-          	<span>{{item.usuario.email}}</span>
+          	<span>{{item.email}}</span>
           </md-item-template>
           <md-not-found>
             <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.email}}</span>

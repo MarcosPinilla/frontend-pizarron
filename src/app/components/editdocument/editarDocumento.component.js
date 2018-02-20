@@ -349,7 +349,7 @@
           });
 
           linea.setControlsVisibility({
-            bl: true,
+            bl: false,
             br: false,
             tl: false,
             tr: false,
@@ -686,7 +686,14 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
      
         $scope.$apply(function () {
@@ -704,7 +711,13 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
       if(vm.pegar){
         vm.pegar=false;
@@ -727,7 +740,13 @@
         data: json
       }
 
-      vm.documentoCompleto[vm.paginaActual] = editado;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
 
     }
 
@@ -1095,10 +1114,57 @@
       
     } */
 
+     vm.eliminarPagina = function() {
+      //se restan las figuras de la página eliminada
+      vm.figuras=vm.figuras-canvas.getObjects().length;
+      //si es la última página
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
+      vm.paginaAnterior();
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.documentoCompleto.length-1}, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto.splice(idElemento,1);
+
+      
+     }else{
+      vm.paginaSiguiente();
+
+      vm.paginaActual--;
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id--;
+        }
+
+          if(i==vm.documentoCompleto.length-1){
+
+
+            var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+
+            var idElemento = vm.documentoCompleto.indexOf(json);
+
+            vm.documentoCompleto.splice(idElemento,1);
+          }
+           
+        }
+      }
+
+
+     
+
+      console.log(vm.documentoCompleto);
+    }
+
     vm.nuevaPagina = function() {
 
      
      canvas.clear();
+
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
       vm.paginaActual++;
 
       var json = canvas.toJSON();
@@ -1106,6 +1172,33 @@
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length, 
         data: json});
+
+     }else{
+
+
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id++;
+        }
+
+        if(i==vm.documentoCompleto.length-1){
+
+          vm.paginaActual++
+
+           var json = canvas.toJSON();
+            
+            vm.documentoCompleto.push({
+              id: vm.paginaActual, 
+              data: json});
+            break;
+           }
+           
+        }
+      }
+
+
+     
 
       console.log(vm.documentoCompleto);
     }
@@ -1158,15 +1251,16 @@
   }
 
  
-  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService) {
+  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService,AmigoService) {
     var vm = this;
 
     vm.profesores = {};
     vm.documento=documento;
     vm.colaboradores={};
     vm.usuario={};
+    vm.amigosTemp={};
+    vm.amigos=[];
     vm.customFullscreen = true;
-
 
     PerfilService.get().$promise.then(function (data) {
         console.log(data);
@@ -1174,11 +1268,12 @@
         //console.log(vm.perfil.profesores.url_foto_profesor);
     });
 
-    ProfesorService.query().$promise.then(function (data) {
-      vm.profesores = data;
-      vm.profesores=vm.profesores.filter(vm.filtro);
-      console.log(vm.profesores);
+    AmigoService.query().$promise.then(function (data) {
+      vm.amigosTemp = data;
+      vm.amigosTemp = vm.amigosTemp.filter(vm.filtrarAmigos);
+      console.log(vm.amigos);
     });
+
 
     obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
         vm.colaboradores=data;
@@ -1193,15 +1288,34 @@
       });
     }
 
-    vm.filtro = function(profesor){
-      return profesor.id_usuario != vm.usuario.id;
+    //función para dejar solo los registros que tengan al usuario logeado
+    vm.filtrarAmigos=function(amigo){
+      if(amigo.id_estado_amistad == 1){
+
+        if(amigo.amigo1.id_usuario == vm.usuario.id){
+          ProfesorService.get({id: amigo.amigo2.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo2.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo2);
+            return amigo.amigo2;
+          });
+          
+        }else{
+           ProfesorService.get({id: amigo.amigo1.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo1.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo1);
+            return amigo.amigo1;
+          });
+        }
+      }
       
     }
 
     vm.querySearch   = querySearch;
 
     function querySearch (query) {
-      return query ? vm.profesores.filter( createFilterFor(query) ) : vm.profesores;
+      return query ? vm.amigos.filter( createFilterFor(query) ) : vm.amigos;
     }
     
     function createFilterFor(query) {
@@ -1209,9 +1323,9 @@
       var lowercaseQuery = query;
       //console.log(lowercaseQuery);
 
-      return function filterFn(profesor) {
+      return function filterFn(amigo) {
         //console.log(usuario.email);
-        return (profesor.usuario.email.indexOf(lowercaseQuery) === 0);
+        return (amigo.email.indexOf(lowercaseQuery) === 0);
       };
     }
 
