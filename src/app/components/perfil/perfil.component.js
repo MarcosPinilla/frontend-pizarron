@@ -9,16 +9,30 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['ProfesorService', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl(ProfesorService, PerfilService, AmigoService) {
+  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
+      vm.mejoresFavoritos = {};
       vm.isUser = false;
       vm.isAmigo = false;
+
+
+
+      vm.mejoresFavoritos = ObtenerMejoresFavoritos.get({id: $stateParams.id});
+
+        vm.mejoresFavoritos.$promise.then(function(data){
+          console.log(data);
+          vm.mejoresFavoritos = data;
+          
+   
+      });
+
+      vm.profesorIdD = $stateParams.id;
+      console.log(vm.profesorIdD );
       vm.profesorId = getUrlParameter('id');
-      console.log("DOLPHINS CAN SWIMG!: " + vm.profesorId);
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -44,7 +58,6 @@
           }
         });
       }else { //Si es el perfil del profesor
-        console.log("entre aqui");
         PerfilService.get().$promise.then(function (data) {
               console.log(data.profesor);
               vm.perfil = data.profesor;
@@ -52,14 +65,51 @@
         });
       }
 
+      vm.showEditarPerfil = function(ev, perfil) {
+        $mdDialog.show({
+          controller: dialogoController,
+          controllerAs: 'vm',
+          templateUrl: 'app/components/perfil/editarperfil.dialogo.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: vm.customFullscreen,
+          locals: {
+            perfil: perfil,
+          },
+        })
+        .then(function(answer) {
+          vm.status = 'Perfil: ' + answer + '.';
+        }, function () {
+          vm.status = 'CANCELADO';
+        });
+      };
+
       vm.anadiramigo = function(idamigo) {
         var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
         console.log('{"id_amigo": ' + idamigo + '}');
-        AmigoService.save(amigo1);
+        AmigoService.save(amigo1).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("El amigo se guardo: " + data.id_estado_amistad);
+          if(data.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });
+
+        /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          console.log("EL ESTADO ES!: " + vm.amistad.id_estado_amistad);
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = true;
+        });*/
       }
 
       vm.eliminaramistad = function(id) {
         AmigoService.delete({id: id});
+        AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.isAmigo = false;
+        });
       }
 
       function getUrlParameter(name) {
@@ -69,4 +119,34 @@
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
       };
   	}
+
+    function dialogoController($scope, $mdDialog, $state, perfil, ProfesorService) {
+      var vm = this;
+
+      vm.perfil = perfil;
+      console.log("AAAAAAAAAAAAAA");
+      console.log(vm.perfil);
+
+      vm.actualizarprofesor = function (profesor) {
+        console.log("El Id es : " + profesor.id);
+        ProfesorService.update({id: profesor.id}, profesor, function () {
+          $state.go('perfil');
+          vm.hide();
+        }, function () {});
+      };
+ 
+      vm.hide = function() {
+      $mdDialog.hide();
+      };
+
+      vm.cancel = function() {
+      $mdDialog.cancel();
+      };
+
+      vm.answer = function(answer) {
+      $mdDialog.hide(answer);
+      };
+    }
+
+
 })();

@@ -16,10 +16,7 @@
 		<label>Profesión</label>
 		<input ng-model="vm.profesor.profesion" type="text" required>
 	</md-input-container>
-	<md-input-container class="md-block">
-		<label>Foto</label>
-		<input ng-model="vm.profesor.url_foto_profesor" type="text" required>
-	</md-input-container>
+	<center><label>Foto</label><center><input type="file" fileread="vm.profesor.foto_profesor"></center></center>
 	<md-input-container class="md-block" >
       <label>Sexo</label>
       <md-select ng-model="vm.profesor.id_sexo">

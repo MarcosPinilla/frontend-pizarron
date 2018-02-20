@@ -4,31 +4,17 @@
  		<div class="perfil-information row" layout="row" flex="95">
  			<!-- Perfil Imagen -->
  			<div class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
- 				<div style="height: 10%;"></div>
- 				<div style="height: 80%; overflow: hidden">
+ 				<div style="overflow: hidden">
  					<img class="img-perfil" ng-src= "{{ vm.perfil.url_foto_profesor }}">
  				</div>
- 				<div style="height: 10%"></div>
  			</div>	
  			<!-- Perfil informacion -->	
- 			<div flex style="color: #37474F">
- 				<md-list>
- 					<md-list-item>
- 						<div class="md-list-item-text">
- 							<h3>Nombre: {{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h3>
- 							<p>Cargo: {{ vm.perfil.cargo }}</p>
- 							<h4>Profesión: {{ vm.perfil.profesion }}</h4>
- 						</div>
- 					</md-list-item>
- 				</md-list>
- 				<md-list>
- 					<md-list-item>
- 						<div class="md-list-item-text">
- 							<h3>Establecimiento: {{vm.perfil.establecimientos[0].nombre_establecimiento}} </h3>
- 							<h4>Correo: {{ vm.perfil.usuario.email }}</h4>
- 						</div>
- 					</md-list-item>
- 				</md-list>
+ 			<div class="perfil-datos" flex style="color: #37474F">
+ 					<h2 style="color: #536DFE">{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
+ 					<p>Profesión: {{ vm.perfil.profesion }}</p>
+          <p>Cargo: {{ vm.perfil.cargo }}</p>
+ 					<p>Establecimiento: <a href="#">{{vm.perfil.establecimientos[0].nombre_establecimiento}}</a></p>
+ 					<h4><p>Email: {{ vm.perfil.usuario.email }}</p></h4>
  			</div>
  			<!-- Perfil Opciones -->
  			<div flex layout="column">
@@ -40,7 +26,6 @@
           </md-button>
         </div>
         <div ng-if="vm.isAmigo">
-
           <md-menu md-position-mode="target-right target" md-offset="0 50">
             <md-button class="md-raised md-primary perfil-button-amigo" ng-mouseenter="$mdMenu.open()">
               <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_check_white_24px.svg"></md-icon> Amigos
@@ -59,64 +44,44 @@
               </md-menu-item>
             </md-menu-content>
           </md-menu>
-
+        </div>
+        <div ng-if="vm.isUser">
+          <md-button class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;" ng-click="vm.showEditarPerfil($event, vm.perfil)">
+            <md-icon md-svg-icon="app/resources/icons/ic_mode_edit_black_24px.svg"></md-icon>
+             Editar perfil
+          </md-button>
         </div>
         <!-- Estadisticas -->
         <div style="background-color: ">Espacio reservado para estadisticas</div>
       </div>
  		</div>
+
  		<!-- Valoradas -->
+     
  		<div class="perfil-publicaciones-valoradas" flex="95" layout="column">
  			<div class="titulo-perfil-valoradas">
  				<h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
  			</div>
  			<div layout="row">
  				<!-- Left -->
- 				<div class="perfil-post-left" flex="30" layout="column">
- 					<div class="perfil-post-titulo">1# Guia de Matematicas</div>
+     
+ 				<div class="perfil-post-left" flex="30" layout="column" ng-repeat="mejores in vm.mejoresFavoritos">
+ 					<div class="perfil-post-titulo">{{ mejores.titulo_material }}</div>
  					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+ 						<a href="material"><img class="preview"  ng-src="{{ mejores.vista_previa }}" class="md-card-image" alt="Washed Out"></a>
  					</div>
  					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
+ 						<md-button class="md-raised">Ver Documento</md-button><br>
+             <p>Cantidad: {{ mejores.cantidad }}</p>
+        		<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+               
  					</div>
  				</div>
+       
  				<div flex="5"></div>
- 				<!-- Center -->
- 				<div class="perfil-post-center" flex="30" layout="column">
- 					<div class="perfil-post-titulo">2# Taller de multiplicaciones</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
- 				<div flex="5"></div>
- 				<!-- Right -->
- 				<div class="perfil-post-right" flex="30" layout="column">
- 					<div class="perfil-post-titulo">3# Prueba de sumas</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
  			</div>
  		</div>
+     
  		<!-- Recientes -->
  		<div class="perfil-publicaciones-recientes" flex="95" layout="column">
  			<div class="titulo-perfil-recientes">
