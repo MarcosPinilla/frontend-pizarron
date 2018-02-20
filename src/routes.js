@@ -34,7 +34,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component:'documento',
     isPrivate: true
   })
-  .state('profesor', {
+  .state('administrator.profesor', {
     url: '/profesor',
     component: 'profesor',
     isPrivate: true
@@ -56,17 +56,17 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     controllerAs: 'vm',
     templateUrl: 'app/components/editdocument/documentos.html'
   })
-  .state('usuario', {
+  .state('administrator.usuario', {
     url: '/usuario',
     component: 'usuario',
     isPrivate: true
   })
-  .state('establecimiento', {
+  .state('administrator.establecimiento', {
     url: '/establecimiento',
     component: 'establecimiento',
     isPrivate: true
   })
-  .state('asignatura', {
+  .state('administrator.asignatura', {
     url: '/asignatura',
     component: 'asignatura',
     isPrivate: true
@@ -76,12 +76,17 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'material',
     isPrivate: true
   })
+  .state('administrator.material', {
+    url: '/material',
+    component: 'material',
+    isPrivate: true
+  })
   .state('dashboard.favoritos', {
     url: '/favoritos',
     component: 'favoritos',
     isPrivate: true
   })
-  .state('elemento', {
+  .state('administrator.elemento', {
     url: '/elemento',
     component: 'elemento',
     isPrivate: true
@@ -111,6 +116,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'administrator',
     isPrivate: true
   })
+  .state('administrator.estadisticas', {
+    url: '/estadisticas',
+    component: 'estadisticas',
+    isPrivate: true
+  })
   /*
   .state('repositorio', {
     url: '/repositorio',
@@ -124,13 +134,18 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     isPrivate: true
   })
   .state('dashboard.perfil', {
-    url: '/perfil',
+    url: '/perfil', //'/perfil/:id'
     component: 'perfil',
     isPrivate: true
   })
   .state('dashboard.publicaciones', {
     url: '/publicaciones',
     component: 'publicaciones',
+    isPrivate: true
+  })
+  .state('dashboard.amigos', {
+    url: '/amigos',
+    component: 'amigos',
     isPrivate: true
   })
   .state('notificaciones', {
@@ -164,6 +179,10 @@ function middlewareConfig($state, CredentialsService, $transitions) {
 
     if (to === 'landing' && CredentialsService.isLogged()) {
       $state.go('dashboard.publicaciones');
+    }
+
+    if (to === 'administrator' && CredentialsService.isLogged()) {
+      $state.go('administrator.estadisticas');
     }
 
     if (to === 'dashboard' && CredentialsService.isLogged()) {
