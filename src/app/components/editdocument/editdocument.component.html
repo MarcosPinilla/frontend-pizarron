@@ -212,7 +212,7 @@
       </div>
     </div>
 
-     <div layout="row">
+  <div layout="row">
   <div flex="10">
     <md-input-container style="margin-right: 10px;">
         <label>Fuente</label>
@@ -226,12 +226,19 @@
   </div>
   <div flex="10" >
        <md-input-container style="margin-right: 10px;">
-        <label>Tamaño de fuente</label>
-        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto">
+        <label>Tamaño</label>
+        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto" style="width: 100px;">
           
           <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
           
         </md-select>
+      </md-input-container>
+  </div>
+
+   <div flex="10" >
+       <md-input-container style="margin-right: 10px;">
+        <label>Color</label>
+        <input id="input-color" type="color" ng-model="vm.colorElemento" ng-change="vm.usarColor(vm.colorElemento)" ng-disabled="!vm.colorSeleccionable" style="width: 100px;">
       </md-input-container>
   </div>
 
