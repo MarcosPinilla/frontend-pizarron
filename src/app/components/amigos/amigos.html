@@ -1,4 +1,20 @@
 <div class="dashboard amigos-contenedor" layout="column" layout-wrap flex>
+	<div class="amigos-titulo" flex style="background-color: #FF9800"><h2>Solicitudes de amistad</h2></div>
+	<div class="amigos-lista" layout="column" ng-repeat="amigo in vm.amigos">
+		<div class="amigos-amigo" layout="row" ng-if="amigo.id_estado_amistad == 2">
+			<div flex=10>
+				<a href="http://localhost:3000/dashboard/perfil?id={{amigo.amigo1.id}}"><img class="amigos-amigo-img" ng-src="{{amigo.amigo1.url_foto_profesor}}"></a>
+			</div>
+			<div class="amigos-amigo-texto" flex="55"><span>{{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}</span></div>
+			<div class="amigos-amigo-acciones" flex="35">
+				<md-button class="md-raised md-primary" ng-click="vm.confirmarAmistad(amigo.id)">Confirmar</md-button>
+				<md-button class="md-raised" ng-click="vm.rechazarAmistad(amigo.id)">Rechazar</md-button>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="dashboard amigos-contenedor" layout="column" layout-wrap flex>
 	<!-- Center -->
 		<div class="amigos-titulo" flex><h2>Lista de amigos</h2></div>
 		<div class="amigos-lista" layout="column" ng-repeat="amigo in vm.amigos">

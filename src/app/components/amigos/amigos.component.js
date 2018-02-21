@@ -9,9 +9,9 @@
       controllerAs: 'vm'
     });
 
-  amigosCtrl.$inject = ['AmigoService', 'PerfilService'];
+  amigosCtrl.$inject = ['AmigoService', 'PerfilService', 'SolicitudService'];
 
-  function amigosCtrl(AmigoService, PerfilService) {
+  function amigosCtrl(AmigoService, PerfilService, SolicitudService) {
     var vm = this;
     vm.amigos = {};
     vm.perfil = {};
@@ -32,6 +32,19 @@
         vm.amigos = data;
         console.log(vm.amigos);
       });
+    }
+
+    vm.confirmarAmistad = function($idamistad) {
+      //console.log('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
+      var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
+      console.log(amistad);
+      SolicitudService.save(amistad);
+    }
+
+    vm.rechazarAmistad = function($idamistad) {
+      var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 2 + '}');
+      console.log(amistad);
+      SolicitudService.save(amistad);
     }
   }
   

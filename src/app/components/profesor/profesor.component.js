@@ -146,7 +146,6 @@
 
         vm.actualizarprofesor = function (profesor) {
           ProfesorService.update({id: vm.person.id}, profesor, function () {
-            $state.go('profesor');
             vm.hide();
           }, function () {});
         };
