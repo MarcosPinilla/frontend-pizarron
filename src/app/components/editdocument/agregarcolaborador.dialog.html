@@ -18,7 +18,7 @@
             <span class="md-subhead">{{colaborador.profesor.profesion}}</span>
           </md-card-title-text>
 
-          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)" ng-if="colaborador.profesor.id_usuario != vm.usuario.id">
+          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)" ng-if="colaborador.profesor.id_usuario != vm.usuario.id && !colaborador.autor">
             <md-icon style="font-size:30px !important;">cancel</md-icon>
           </md-button>
           
