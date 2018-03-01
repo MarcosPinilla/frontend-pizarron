@@ -134,7 +134,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     isPrivate: true
   })
   .state('dashboard.perfil', {
-    url: '/perfil', //'/perfil/:id'
+    url: '/perfil/:id',
     component: 'perfil',
     isPrivate: true
   })
