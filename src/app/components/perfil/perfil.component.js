@@ -130,14 +130,12 @@
       vm.perfil = perfil;
       console.log(vm.perfil);
 
-      /***************************** ARREGLAR AQUI! ***********************************/
-      /*vm.actualizarprofesor = function (profesor) {
-        console.log("El Id es : " + profesor.id);
-        ProfesorService.update({id: profesor.id}, profesor, function () {
-          $state.go('perfil');
+      vm.actualizarprofesor = function (profesor) {
+        vm.profesor = profesor;
+        ProfesorService.update({id: vm.profesor.id}, profesor, function () {
           vm.hide();
         }, function () {});
-      };*/
+      };
  
       vm.hide = function() {
       $mdDialog.hide();
