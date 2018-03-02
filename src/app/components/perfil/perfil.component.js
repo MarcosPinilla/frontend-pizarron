@@ -11,7 +11,7 @@
 
   	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService',  'ObtenerMejoresFavoritos',   '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
 
-  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService ) {
+  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, $stateParams, PerfilService, AmigoService) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
@@ -19,7 +19,7 @@
       vm.isUser = false;
       vm.isAmigo = false;
 
-
+      vm.profesorId = $stateParams.id;
 
       vm.mejoresFavoritos = ObtenerMejoresFavoritos.get({id: $stateParams.id});
 
@@ -30,19 +30,23 @@
    
       });
 
-      vm.profesorIdD = $stateParams.id;
-      console.log(vm.profesorIdD );
-      vm.profesorId = getUrlParameter('id');
+      //vm.profesorIdD = $stateParams.id;
+      console.log(vm.profesorId);
+      //vm.profesorId = getUrlParameter('id');
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
-          //console.log(data);
+          console.log(data);
           if(data.error) {
             vm.perfil.nombres_profesor = data.mensaje;
           }
           else {
             vm.perfil = data;
-            vm.isUser = false;
+            /*Si el usuario buscado, es el mismo que el usuario logeado*/
+            if(vm.perfil.usuario.email == localStorage.getItem('user'))
+              vm.isUser = true;
+            else
+              vm.isUser = false;
             /*Obtiene la amistad entre ambos usuarios*/
             AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
               console.log(data);
@@ -57,10 +61,10 @@
             });
           }
         });
-      }else { //Si es el perfil del profesor
+      }else{ //Si la ruta no trae id, entonces es nuestro perfil
         PerfilService.get().$promise.then(function (data) {
-              console.log(data.profesor);
-              vm.perfil = data.profesor;
+              console.log(data);
+              vm.perfil = data;
               vm.isUser = true;
         });
       }
@@ -112,25 +116,23 @@
         });
       }
 
-      function getUrlParameter(name) {
+      /*function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
         var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
         var results = regex.exec(location.search);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-      };
+      };*/
   	}
 
     function dialogoController($scope, $mdDialog, $state, perfil, ProfesorService) {
       var vm = this;
 
       vm.perfil = perfil;
-      console.log("AAAAAAAAAAAAAA");
       console.log(vm.perfil);
 
       vm.actualizarprofesor = function (profesor) {
-        console.log("El Id es : " + profesor.id);
-        ProfesorService.update({id: profesor.id}, profesor, function () {
-          $state.go('perfil');
+        vm.profesor = profesor;
+        ProfesorService.update({id: vm.profesor.id}, profesor, function () {
           vm.hide();
         }, function () {});
       };

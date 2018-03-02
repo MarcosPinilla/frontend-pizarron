@@ -26,7 +26,6 @@
       vm.customFullscreen = true;
       
        PerfilService.get().$promise.then(function (data) {
-            console.log(data.id);
             vm.perfil = data;
             //console.log(vm.perfil.profesores.url_foto_profesor);
        });
