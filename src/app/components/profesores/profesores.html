@@ -21,8 +21,8 @@
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Añadir como amigo</md-button>
-          <md-button>Seguir</md-button>
+          <md-button ui-sref="dashboard.perfil({id:person.id})">Ver perfil</md-button>
+          <md-button ng-click="vm.seguir(person.id)">Seguir</md-button>
         </md-card-actions>
       </md-card>
 	</div>

@@ -22,12 +22,15 @@
       vm.tipo_material = {};
       vm.perfil = {};
       vm.cantidadNotificaciones = {};
+      vm.nombre = null;
 
       vm.customFullscreen = true;
       
        PerfilService.get().$promise.then(function (data) {
-            vm.perfil = data;
-            //console.log(vm.perfil.profesores.url_foto_profesor);
+          vm.perfil = data;
+          vm.nombre = vm.perfil.nombres_profesor;
+          vm.nombre = vm.nombre.split(" ");
+          //console.log(vm.perfil.profesores.url_foto_profesor);
        });
 
       /*Lista las asignaturas*/

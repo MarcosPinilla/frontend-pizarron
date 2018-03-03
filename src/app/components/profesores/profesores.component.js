@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  profesoresCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService', 'UsuarioService', '$state']
+  profesoresCtrl.$inject = ['$mdDialog', 'ProfesorService', 'AmigoService', 'SexoService', 'ComunaService', 'UsuarioService', '$state']
 
-  function profesoresCtrl($mdDialog, ProfesorService, SexoService, ComunaService, UsuarioService, $state) {
+  function profesoresCtrl($mdDialog, ProfesorService, AmigoService, SexoService, ComunaService, UsuarioService, $state) {
     var vm = this;
 
     vm.people = {};
@@ -28,6 +28,18 @@
     });
     }
 
+    /*vm.anadiramigo = function(idamigo) {
+      var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
+      console.log('{"id_amigo": ' + idamigo + '}');
+      AmigoService.save(amigo1).$promise.then(function (data) {
+        vm.amistad = data;
+        console.log("El amigo se guardo: " + data.id_estado_amistad);
+      });
+    }*/
+
+    vm.seguir = function (id) {
+      console.log("Seguir " + id);
+    }
 
     vm.goToPerson = function(person, event) {
       $mdDialog.show({
