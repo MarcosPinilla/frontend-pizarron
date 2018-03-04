@@ -1,7 +1,7 @@
 <div class="sidebar-left hidden" flex="15">
 	<div class="sidebar-perfil" flex="100">
-		<a ui-sref="dashboard.perfil({id:vm.perfil.id})"><img class="img-circle preview" ng-src="{{ vm.perfil.profesor.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
-		<span><h4>Bienvenido {{ vm.perfil.profesor.nombres_profesor }}!</h4></span>
+		<a ui-sref="dashboard.perfil({id:vm.perfil.id})"><img class="img-circle preview" ng-src="{{ vm.perfil.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
+		<span><h4>Bienvenido {{ vm.perfil.nombres_profesor }}!</h4></span>
 
 	   <md-button class="md-primary md-raised" ng-click="vm.showAdvanced($event)"><md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>{{ vm.cantidadNotificaciones.notificaciones }}</md-button>
 
