@@ -342,6 +342,7 @@
           canvas.add(rect);
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
         
          
@@ -398,6 +399,7 @@
 
             //vm.figuras = canvas.getObjects().length;
             vm.figuras++;
+            vm.guardar();
           }
         } 
 
