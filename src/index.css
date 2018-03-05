@@ -347,8 +347,7 @@ md-list.make-scrollable {
 }
 
 .perfil-information {
-  background-color: white; 
-  height: 22em; 
+  background-color: white;  
   border-radius: 8px;
   margin: 1.5em;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
@@ -381,6 +380,14 @@ md-list.make-scrollable {
   );
 }
 
+.perfil-datos {
+  margin-left: 1em;
+}
+
+.perfil-datos a {
+  color: #1E88E5;
+}
+
 .titulo-perfil-valoradas {
   background-color: #E91E63;
   color: #E8EAF6
@@ -396,15 +403,17 @@ md-list.make-scrollable {
 }
 
 .img-perfil {
-  width: 75%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 12.5em;
+  height: 12.5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
   border-radius: 50%;
   /*border-width: 20px;
   border-color: white;
   border-style: solid;*/
-  height: auto;
-  display: block;
 }
 
 .perfil-post-left {
