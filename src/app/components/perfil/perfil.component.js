@@ -9,26 +9,29 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SolicitudService', '$rootScope', '$state'];
 
-  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService) {
+  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService, SolicitudService) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
       vm.mejoresFavoritos = {};
       vm.isUser = false;
-      vm.isAmigo = false;
+      vm.isSolicitado = false;
+      /*
+        0 = No amigo
+        1 = Amigo
+        2 = Amistad pendiente
+      */
+      vm.estadoAmistad = 0;
       vm.isSeguido = false;
 
       vm.profesorId = $stateParams.id;
 
       vm.mejoresFavoritos = ObtenerMejoresFavoritos.get({id: $stateParams.id});
-
         vm.mejoresFavoritos.$promise.then(function(data){
           console.log(data);
           vm.mejoresFavoritos = data;
-          
-   
       });
 
       //vm.profesorIdD = $stateParams.id;
@@ -53,11 +56,13 @@
               console.log(data);
               if(data.error) {
                 vm.amistad = data.mensaje;
-                vm.isAmigo = false;
+                vm.estadoAmistad = 0;
               }else {
                 vm.amistad = data;
-                if(vm.amistad.id_estado_amistad == 1)
-                  vm.isAmigo = true;
+                vm.estadoAmistad = vm.amistad.id_estado_amistad;
+                if(vm.estadoAmistad == 2 && vm.amistad.amigo_2 != vm.perfil.id){
+                  vm.isSolicitado = true;
+                }
               }
             });
           }
@@ -97,7 +102,7 @@
           vm.amistad = data;
           console.log("El amigo se guardo: " + data.id_estado_amistad);
           if(data.id_estado_amistad == 1)
-            vm.isAmigo = true;
+            vm.estadoAmistad = 1;
         });
       };  
 
@@ -109,13 +114,19 @@
         vm.isSeguido=true;
       };
 
-
+      vm.aceptarSolicitud = function($idamistad) {
+        //console.log('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
+        var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
+        console.log(amistad);
+        SolicitudService.save(amistad);
+        vm.isSolicitado = false;
+      }
 
         /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
           vm.amistad = data;
           console.log("EL ESTADO ES!: " + vm.amistad.id_estado_amistad);
           if(vm.amistad.id_estado_amistad == 1)
-            vm.isAmigo = true;
+            vm.estadoAmistad = 1;
         });*/
       
 
@@ -124,7 +135,16 @@
         AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
           vm.amistad = data;
           if(vm.amistad.id_estado_amistad == 1)
-            vm.isAmigo = false;
+            vm.estadoAmistad = 0;
+        });
+      }
+
+      vm.cancelarSolicitud = function(id) {
+        AmigoService.delete({id: id});
+        AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
+          vm.amistad = data;
+          if(vm.amistad.id_estado_amistad == 1)
+            vm.estadoAmistad = 0;
         });
       }
 

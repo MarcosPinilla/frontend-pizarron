@@ -19,7 +19,7 @@
  			<!-- Perfil Opciones -->
  			<div flex layout="column">
         <!-- Añadir Button -->
-        <div ng-if="!vm.isUser && !vm.isAmigo">
+        <div ng-if="!vm.isUser && vm.estadoAmistad == 4 || !vm.isUser && vm.estadoAmistad == 3">
           <md-button ng-click="vm.anadiramigo(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
             <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
              Añadir a amigos 
@@ -31,7 +31,7 @@
              Seguir
           </md-button>
         </div>
-        <div ng-if="vm.isAmigo">
+        <div ng-if="vm.estadoAmistad == 1">
           <md-menu md-position-mode="target-right target" md-offset="0 50">
             <md-button class="md-raised md-primary perfil-button-amigo" ng-mouseenter="$mdMenu.open()">
               <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_check_white_24px.svg"></md-icon> Amigos
@@ -46,6 +46,41 @@
               <md-menu-item>
                 <md-button ng-click="vm.eliminaramistad(vm.amistad.id)">
                   Eliminar de mis amigos
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div ng-if="vm.estadoAmistad == 2 && !vm.isSolicitado">
+          <md-menu md-position-mode="target-right target" md-offset="0 50">
+            <md-button class="md-raised perfil-button-amigo" style="background-color: #1E88E5;" ng-mouseenter="$mdMenu.open()">
+              <span style="color: white">Solicitud enviada</span>
+              <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_arrow_drop_down_white_24px.svg"></md-icon>
+            </md-button>
+            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+              <md-menu-item>
+                <md-button ng-click="vm.cancelarSolicitud(vm.amistad.id)">
+                  Cancelar solicitud
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div ng-if="vm.isSolicitado">
+          <md-menu md-position-mode="target-right target" md-offset="0 50">
+            <md-button class="md-raised perfil-button-amigo" style="background-color: #1E88E5;" ng-mouseenter="$mdMenu.open()">
+              <span style="color: white">Responder Solicitud</span>
+              <md-icon class="button-text" md-svg-icon="app/resources/icons/ic_arrow_drop_down_white_24px.svg"></md-icon>
+            </md-button>
+            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+              <md-menu-item>
+                <md-button ng-click="vm.aceptarSolicitud(vm.amistad.id)">
+                  Aceptar solicitud
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="vm.cancelarSolicitud(vm.amistad.id)">
+                  Rechazar solicitud
                 </md-button>
               </md-menu-item>
             </md-menu-content>
