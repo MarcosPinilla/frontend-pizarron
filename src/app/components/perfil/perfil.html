@@ -19,7 +19,7 @@
  			<!-- Perfil Opciones -->
  			<div flex layout="column">
         <!-- Añadir Button -->
-        <div ng-if="!vm.isUser && vm.estadoAmistad == 4 || !vm.isUser && vm.estadoAmistad == 3">
+        <div ng-if="!vm.isUser && vm.estadoAmistad == 4 || !vm.isUser && vm.estadoAmistad == 3 || !vm.isUser && vm.estadoAmistad == 0">
           <md-button ng-click="vm.anadiramigo(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
             <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
              Añadir a amigos 
