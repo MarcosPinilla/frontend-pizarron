@@ -143,6 +143,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'publicaciones',
     isPrivate: true
   })
+  .state('dashboard.materiales', {
+    url: '/materiales',
+    component: 'materiales',
+    isPrivate: true
+  })
   .state('dashboard.amigos', {
     url: '/amigos',
     component: 'amigos',

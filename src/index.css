@@ -618,3 +618,12 @@ md-list.make-scrollable {
 .buscador-profes{
   background-color: white;
 }
+
+.material-card {
+  max-width: 300px;
+  float: left;
+}
+
+.material-card img{
+  width: 100%;
+}
