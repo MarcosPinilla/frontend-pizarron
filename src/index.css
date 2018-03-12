@@ -697,3 +697,12 @@ md-list-item.md-2-line .md-list-item-text h4 {
 .buscador-profes{
   background-color: white;
 }
+
+.material-card {
+  max-width: 300px;
+  float: left;
+}
+
+.material-card img{
+  width: 100%;
+}
