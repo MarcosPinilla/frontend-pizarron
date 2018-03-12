@@ -210,7 +210,7 @@ md-list.make-scrollable {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 97%;
   height: auto;
    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -587,6 +587,85 @@ md-list.make-scrollable {
 .amigos-amigo {
   color: black;
 }
+
+md-list-item.md-2-line .md-list-item-text h4 {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+.publicacion-comentario {
+  width: 40%;
+}
+
+.material-titulo {
+  margin-left: 1em;
+  margin-top: 0.5em;
+  vertical-align: middle;
+}
+
+.comentario {
+  max-height: 8em;
+  overflow: hidden;
+  background-color: #FAFAFA;
+}
+
+.comentario-nombre {
+  margin-top: 0.5em;
+}
+
+.comentario-nombre a {
+  color: #1E88E5;
+  font-size: 0.9em;
+}
+
+.comentario-foto {
+  margin-top: 0.5em;
+  
+}
+
+.comentario-fecha {
+  padding-left: 0.2em;
+  color: #BDBDBD;
+  font-size: 0.7em;
+}
+
+.comentario-texto {
+  padding-bottom: 0.5em;
+}
+
+.caja-comentario input[type=text] {
+
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+.comentario-button {
+  max-width: 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/*.caja-comentario textarea{
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;   
+  box-sizing: border-box;         
+  border-radius: 20px;
+}*/
 
 /*
 .hover12 figure {
