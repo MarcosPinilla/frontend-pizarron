@@ -8,7 +8,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  margin-top: 4em;
+  /*//margin-top: 4em;*/
 }
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
