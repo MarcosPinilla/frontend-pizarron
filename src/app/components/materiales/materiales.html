@@ -1,0 +1,53 @@
+<div>
+	<h3>Materiales Públicos</h3>
+	<md-divider></md-divider>
+	<br>
+	<div class="div-buscador" flex-offset="30" flex="40">
+		
+		<md-input-container class="buscador-repo" flex="98">
+			<label flex="100">Buscador</label>
+			<input ng-model="buscador" type="text" flex="100">
+		</md-input-container>
+		
+	</div>
+	<br>
+	<div layout="row">
+		<div>
+			<label>Asignatura </label>
+			<select id="input2" class="form-control" ng-model="filter.asignatura.nombre_asignatura">
+	   			<option value="">Todas </option>
+	   			<option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
+	  		</select>
+		</div>
+		
+		<div>
+			<label>Nivel</label>
+			<select id="input2" class="form-control" ng-model="filter.nivel.nombre_nivel">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
+	  		</select>
+		</div>
+
+		<div>
+			<label>Tipo</label>
+			<select id="input2" class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
+	  		</select>
+		</div>
+	</div>
+	<md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador">
+		<md-card-title style="background-color: #5C6BC0">
+			<md-card-title-text style="font-size: 16px; color: #C5CAE9">
+				<span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{ colaboradores.nombres_profesor }}</a><a href="#">{{ material.titulo_material }}</a></span>
+			</md-card-title-text>
+		</md-card-title>
+		<div>
+			<a href="material"><img class="preview" ng-src="{{ material.vista_previa }}" class="md-card-image" alt="Washed Out"></a>
+		</div> 
+		<md-card-actions layout="row" layout-align="end center" style="background-color: #5C6BC0;">
+			<md-button>Ver documento</md-button>
+			<md-button class="dashboard-button-fab" ng-click="vm.darFavorito(material)"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon></md-button>
+		</md-card-actions>
+	</md-card>
+</div>

@@ -208,10 +208,9 @@ md-list.make-scrollable {
 
 .preview { 
   display: block;
-  margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
-  width: 70%;
+  width: 97%;
   height: auto;
    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -347,8 +346,7 @@ md-list.make-scrollable {
 }
 
 .perfil-information {
-  background-color: white; 
-  height: 22em; 
+  background-color: white;  
   border-radius: 8px;
   margin: 1.5em;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
@@ -381,6 +379,14 @@ md-list.make-scrollable {
   );
 }
 
+.perfil-datos {
+  margin-left: 1em;
+}
+
+.perfil-datos a {
+  color: #1E88E5;
+}
+
 .titulo-perfil-valoradas {
   background-color: #E91E63;
   color: #E8EAF6
@@ -396,15 +402,17 @@ md-list.make-scrollable {
 }
 
 .img-perfil {
-  width: 75%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 12.5em;
+  height: 12.5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
   border-radius: 50%;
   /*border-width: 20px;
   border-color: white;
   border-style: solid;*/
-  height: auto;
-  display: block;
 }
 
 .perfil-post-left {
@@ -580,6 +588,85 @@ md-list.make-scrollable {
   color: black;
 }
 
+md-list-item.md-2-line .md-list-item-text h4 {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: unset;
+}
+
+.publicacion-comentario {
+  width: 40%;
+}
+
+.material-titulo {
+  margin-left: 1em;
+  margin-top: 0.5em;
+  vertical-align: middle;
+}
+
+.comentario {
+  max-height: 8em;
+  overflow: hidden;
+  background-color: #FAFAFA;
+}
+
+.comentario-nombre {
+  margin-top: 0.5em;
+}
+
+.comentario-nombre a {
+  color: #1E88E5;
+  font-size: 0.9em;
+}
+
+.comentario-foto {
+  margin-top: 0.5em;
+  
+}
+
+.comentario-fecha {
+  padding-left: 0.2em;
+  color: #BDBDBD;
+  font-size: 0.7em;
+}
+
+.comentario-texto {
+  padding-bottom: 0.5em;
+}
+
+.caja-comentario input[type=text] {
+
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+.comentario-button {
+  max-width: 20px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/*.caja-comentario textarea{
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;   
+  box-sizing: border-box;         
+  border-radius: 20px;
+}*/
+
 /*
 .hover12 figure {
   background-color: #ffffcc;
@@ -609,4 +696,13 @@ md-list.make-scrollable {
 }
 .buscador-profes{
   background-color: white;
+}
+
+.material-card {
+  max-width: 300px;
+  float: left;
+}
+
+.material-card img{
+  width: 100%;
 }
