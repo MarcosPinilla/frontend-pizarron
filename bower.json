@@ -12,7 +12,7 @@
     "angular-chart.js": "^1.1.1",
     "chart.js": "^2.7.1",
     "angular-material-data-table": "^0.10.10",
-    "ng-textarea-enter": "^0.2.2"
+    "ng-textarea-enter": "^0.2.2",
     "pusher-angular": "^1.0.0"
 
   },

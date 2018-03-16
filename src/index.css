@@ -12,7 +12,7 @@ body {
 }
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-  background-color: #5C6BC0;
+  background-color: #6d72ad;
 }
 
 a {
@@ -246,7 +246,7 @@ md-list.make-scrollable {
 }
 
 .sidebar-left {
-  background-color: #3F51B5; 
+  background:rgba(0,0,0,0);
   color:#FAFAFA; 
   height: 100%; 
   position: fixed; 
@@ -279,6 +279,14 @@ md-list.make-scrollable {
 .sidebar-button {
   text-align: left;
   height: 5%;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-bottom: 0.4em;
+}
+
+.sidebar-text {
+  text-transform: uppercase;
+  font-size: 1.2em;
 }
 
 .button-text {
