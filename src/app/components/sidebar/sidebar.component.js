@@ -9,10 +9,10 @@
     	controllerAs: 'vm'
   	});
 
-  	sidebarCtrl.$inject = ['$mdDialog',  'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
+  	sidebarCtrl.$inject = ['$mdDialog', '$pusher', 'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
      'PerfilService', 'MaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  	function sidebarCtrl($mdDialog, CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
+  	function sidebarCtrl($mdDialog, $pusher ,CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
       PerfilService, NotificacionesNoLeidasService) {
   		var vm = this;
 
@@ -52,7 +52,21 @@
             vm.cantidadNotificaciones = data;
 
        });
+//socket 
+       var client = new Pusher('28705022aa554d22c965', {
+          cluster: 'us2',
+          // authEndpoint: "http://example.com/pusher/auth",
+          encrypted: true
+        });
 
+       var pusher = $pusher(client);
+
+       var canal = pusher.subscribe('notificacion');
+
+       canal.bind('NotificacionesEvent',
+        function (data) {
+          console.log(data);
+        });
 
 
       
