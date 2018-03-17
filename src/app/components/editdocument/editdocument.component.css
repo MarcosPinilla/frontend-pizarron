@@ -3,6 +3,16 @@
 @import url(https://fonts.googleapis.com/css?family=Dancing+Script);
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro);
 
+.boton-icono{
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.boton-icono md-icon{
+
+  font-size:30px;
+}
+
 .contenedorDnD {
   width: 700px;
   height: 500px;
@@ -28,7 +38,7 @@
     border: 1px solid transparent;
     border-radius: 2px!important;
     font-size: 20px;
-    height: 30px;
+    height: 10px;
     line-height: 22px;
     margin: 0;
     min-width: 1px;
@@ -60,6 +70,13 @@
   font-weight: bold;
   font-size:18px;
 }
+
+ .dashboard:focus {
+    outline: none;
+    border: 0;
+ }
+
+
 /*
 .page-container {
   padding: 32px; }
@@ -69,17 +86,7 @@
   /*padding: 24px;*/
   /*ax-width: 680px;*/
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
-/*
-.menuBardemoBasicUsage .page h1 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-top: 0;
-  font-weight: normal; }
 
-.menuBardemoBasicUsage .page p {
-  line-height: 1.6rem; }
-
-*/
 
 
 /*

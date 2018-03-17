@@ -10,12 +10,10 @@
       </div>
 </script>
 
-  
+  <!--
   <md-toolbar class="md-menu-toolbar">
     <div layout="row">
-      <md-toolbar-filler layout layout-align="center center">
-      </md-toolbar-filler>
-
+  
       <div>
          <div class="md-toolbar-tools">
           <div>
@@ -200,19 +198,61 @@
               <md-menu-item><md-button ng-click="vm.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item>
             </md-menu-content>
           </md-menu>
-            <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
-              <span style="margin-right: 5px;">Nuevo colaborador</span><md-icon>people</md-icon>
-            </md-button>
-
-             <span class="contador" style="margin-right: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
-    
-            <span class="contador">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
+            
   
         </md-menu-bar>
       </div>
     </div>
 
+
+  </md-toolbar>
+-->
+  
+  <div layout="row" style="margin-top: 80px;">
+
+      <div style="margin-left: 5px;">
+        <md-tooltip>
+          Cambiar título
+        </md-tooltip>
+        <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título">
+      </div>
+
+  </div>
+
   <div layout="row">
+
+    <md-button class="md-icon-button boton-icono" ng-click="vm.guardar()" aria-label="boton guardar">
+      <md-icon>save</md-icon>
+      <md-tooltip>
+          Guardar cambios
+      </md-tooltip>
+    </md-button>
+
+    <md-button class="md-icon-button" ng-click="vm.exportar()" aria-label="boton guardar" style="width:55px; height: 55px;">
+      <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg" style="width:32px; height: 35px;"></md-icon>
+      <md-tooltip>
+          Exportar a PDF
+      </md-tooltip>
+    </md-button>
+
+    <md-button class="md-icon-button boton-icono" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
+      <md-icon>settings</md-icon>
+      <md-tooltip>
+          Configuración de la hoja
+      </md-tooltip>
+    </md-button>
+
+  
+      <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
+        <span style="margin-right: 5px;">Nuevo colaborador</span><md-icon>people</md-icon>
+      </md-button>
+
+      <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
+      
+      <span class="contador" style="margin-right: 10px; margin-top: 10px;">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
+  </div>
+
+    <div layout="row">
   <div flex="10">
     <md-input-container style="margin-right: 10px;">
         <label>Fuente</label>
@@ -246,17 +286,13 @@
   <md-button ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">Página nueva</md-button>
   <md-button ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()">Eliminar página</md-button>
   <md-button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</md-button>
-    
+  
 </div>
-  </md-toolbar>
 
- 
+  <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
 
-  <div id="todocanvas" layout="row">
-
-  <div flex="25" style="background-color: #fafafa;">
+  <div flex="25" >
    
-  <md-content class="page-container">
       <md-card class="page" style="height: 580px;background-color: #f2f2f2;">
 
         <md-content>
@@ -335,18 +371,23 @@
         
       </md-card>
 
-    </md-content>
   
   </div>
 
-  <div flex="75">
-    <md-content class="page-container">
+  <div flex="50">
+    
       <md-card class="page" id="contenedor-canvas" style="width: 794px;">
         <canvas id="canvas" height="1122" width="794">
           
         </canvas>
       </md-card>
-    </md-content>
+
+  </div>
+
+  <div flex="5"></div>
+
+  <div flex="20">
+    <my-chat></my-chat>
   </div>
 
 </div>
