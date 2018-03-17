@@ -24,7 +24,6 @@
 
     AmigoService.query().$promise.then(function (data) {
       vm.amigos = data;
-      //console.log(vm.amigos);
     });
 
     ListarSolicitudService.query().$promise.then(function (data) {

@@ -9,10 +9,10 @@
     	controllerAs: 'vm'
   	});
 
-  	sidebarCtrl.$inject = ['$mdDialog',  'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
+  	sidebarCtrl.$inject = ['$mdDialog', '$pusher', 'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
      'PerfilService', 'MaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  	function sidebarCtrl($mdDialog, CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
+  	function sidebarCtrl($mdDialog, $pusher ,CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
       PerfilService, NotificacionesNoLeidasService) {
   		var vm = this;
 
@@ -22,12 +22,15 @@
       vm.tipo_material = {};
       vm.perfil = {};
       vm.cantidadNotificaciones = {};
+      vm.nombre = null;
 
       vm.customFullscreen = true;
       
        PerfilService.get().$promise.then(function (data) {
-            vm.perfil = data;
-            //console.log(vm.perfil.profesores.url_foto_profesor);
+          vm.perfil = data;
+          vm.nombre = vm.perfil.nombres_profesor;
+          vm.nombre = vm.nombre.split(" ");
+          //console.log(vm.perfil.profesores.url_foto_profesor);
        });
 
       /*Lista las asignaturas*/
@@ -49,7 +52,21 @@
             vm.cantidadNotificaciones = data;
 
        });
+//socket 
+       var client = new Pusher('28705022aa554d22c965', {
+          cluster: 'us2',
+          // authEndpoint: "http://example.com/pusher/auth",
+          encrypted: true
+        });
 
+       var pusher = $pusher(client);
+
+       var canal = pusher.subscribe('notificacion');
+
+       canal.bind('NotificacionesEvent',
+        function (data) {
+          console.log(data);
+        });
 
 
       

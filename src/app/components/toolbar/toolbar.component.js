@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$state','$window'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$state','$window', 'DarFavorito'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $state, $window) {
+  function toolbarCtrl(CredentialsService, $rootScope, $state, $window, DarFavorito) {
     var vm = this;
 
     vm.isinLogged = false;
@@ -43,5 +43,25 @@
     vm.doTheBack = function() {
       $window.history.back()
     };
+
+
+
+    vm.material = {
+        material_id: "2"
+      }
+
+
+      vm.darFavorito = function(data){
+        console.log(data);
+      DarFavorito.save(data,function(res){
+        console.log('entra');
+        $state.go('dashboard');
+      },function(err){
+        console.log(err);
+      });
+
+    };
+
+    
   }
 })();

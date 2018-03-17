@@ -9,37 +9,35 @@
     	controllerAs: 'vm'
   	});
 
-  	publicacionesCtrl.$inject = ['obtenerMaterialProfesor', 'DarFavorito','$state'];
-  	
-    function publicacionesCtrl(obtenerMaterialProfesor, $state) {
+  	publicacionesCtrl.$inject = ['MaterialService', 'ComentarioService', '$state'];
+
+  	function publicacionesCtrl(MaterialService, ComentarioService) {
   		var vm = this;
+      vm.materiales = {};
+      vm.comentarios = {};
+      vm.comentario;
 
-      vm.materiales = obtenerMaterialProfesor.get();
+      var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
+      //console.log(comentario);
 
-      vm.materiales.$promise.then(function(data){
-        console.log(data);
+      MaterialService.query().$promise.then(function (data) {
         vm.materiales = data;
-        
         console.log(vm.materiales);
-        
-        setTimeout(function() {
-          /*for(material in vm.materiales) {
-            document.getElementById(material.id).innerHTML = material.vista_previa;  
-          } */
-          for(let i = 0; i < vm.materiales.length; i++) {
-            document.getElementById(vm.materiales[i].id).innerHTML = "<center><a href='http://localhost:3000/editdocument/" + vm.materiales[i].id + "'>" + vm.materiales[i].vista_previa + "</a></center>";  
-          }
-        }, 300);
+        console.log(vm.materiales.materiales);
       });
 
-      vm.darFavorito = function(data){
-        DarFavorito.save(data,function(res){
-          console.log(res);
-          $state.go('dashboard');
-        },function(err){
-          console.log(err);
-        });
-        console.log(data);
-    };
+      vm.verDocumento = function() {
+        console.log('ver documento!');
+      }
+
+      vm.agregarFavoritos = function() {
+        console.log('Agregado a favoritos');
+      }
+
+      vm.comentar = function(idmaterial, texto) {
+        var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
+        console.log(coment);
+        ComentarioService.save(coment);
+      }
   	}
 })();

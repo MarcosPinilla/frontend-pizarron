@@ -23,9 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService'];
 
-  function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter) {
+  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService) {
 
     var vm = this;
 
@@ -443,6 +443,7 @@
 
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
       }
 
@@ -459,6 +460,7 @@
 
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
       }
 
@@ -1026,9 +1028,15 @@
         console.log(documentoTemp)
 
         //documento.contenido_material = canvasAsJson;
+        /*
         MaterialService.update({id:vm.documento.id},documentoTemp,function(){
            console.log("Guardado con éxito");
         });
+        */
+        ActualizarMaterialService.update({id:vm.documento.id},documentoTemp,function(){
+           console.log("Guardado con éxito");
+        });
+
       });
       /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
@@ -1066,6 +1074,41 @@
       });
 
     }
+
+    // socket al editar el documento 
+
+      var client = new Pusher('28705022aa554d22c965', {
+          cluster: 'us2',
+          // authEndpoint: "http://example.com/pusher/auth",
+          encrypted: true
+        });
+
+       var pusher = $pusher(client);
+
+       var canal = pusher.subscribe('editMaterial');
+
+       canal.bind('EditarMaterialEvent',
+        function (data) {
+          console.log(data);
+          vm.nuevo = data;
+          var json = JSONC.unpack( vm.nuevo.contenido_material);
+          //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+          //json = JSONC.decompress(json);
+          console.log(json)
+
+          //Documento completo sin páginas
+          vm.documentoCompleto = json;
+
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+
+          var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+          canvas.loadFromJSON(json.data); 
+
+          var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
+          vm.figuras = figurasObtenidas.figuras;
+
+        });
     
     vm.configuracionPagina = function(ev) {
       $mdDialog.show({
