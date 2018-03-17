@@ -1,23 +1,33 @@
+@font-face {
+    font-family: 'NeoSansBold'; /*a name to be used later*/
+    src: url('app/resources/fonts/neo_sans_bold.ttf') /*URL to font*/
+}
+
+@font-face {
+    font-family: 'NeoSansLight'; /*a name to be used later*/
+    src: url('app/resources/fonts/NeoSansStd-Light.otf') /*URL to font*/
+}
+
 body {
   /*background-color: azure;*/
   background-color: white;
   color: #7986CB;
-  background-color: #E0E0E0;
   /*background-image: url('app/resources/img/profesor.jpg');*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
+  font-family: 'NeoSansBold';
   /*//margin-top: 4em;*/
 }
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-  background-color: #5C6BC0;
+  background-color: #6d72ad;
 }
 
 a {
     text-decoration: none;
-    color: #E8EAF6;
+    color: #9c9c9c;
 }
 
 .login-div{
@@ -44,11 +54,7 @@ a {
 }
 
 #logo-toolbar {
-  font-family: "Segoe UI";
-  font-weight: bold;
-  font-size: 2em;
-  text-decoration: underline;
-  height: 1em;
+  height: 6em;
 }
 
 .contratar-toolbar {
@@ -80,8 +86,8 @@ titular {
 }
 
 #logo {
-  height: 100%;
-  width: 7.5rem;
+  height: 7rem;
+  width: auto;
 }
 
 .cuadro-blanco {
@@ -131,7 +137,10 @@ titular {
 }
 
 .dashboard {
-  background-color: #E0E0E0; 
+  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
+  background-size: 1200px;
+  background-repeat: repeat;
+  padding-top: 4em;
 }
 
 .dashboard-adm{
@@ -212,7 +221,7 @@ md-list.make-scrollable {
   margin-right: auto;
   width: 97%;
   height: auto;
-   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   /*border-bottom: 2px solid #7f8c8d;*/
 }
@@ -224,7 +233,7 @@ md-list.make-scrollable {
 .post-card {
   margin-top: 30px;
   border-radius: 4px;
-  background-color: #EEEEEE;
+  background-color: #fad98f;
 }
 
 .center-content {
@@ -246,7 +255,7 @@ md-list.make-scrollable {
 }
 
 .sidebar-left {
-  background-color: #3F51B5; 
+  background:rgba(0,0,0,0);
   color:#FAFAFA; 
   height: 100%; 
   position: fixed; 
@@ -265,6 +274,7 @@ md-list.make-scrollable {
 .sidebar-right {
   background-color: #E8EAF6;
   position: fixed;
+  bottom: 0;
   right: 0;
   widows: 200px;
   min-width: 210px;
@@ -279,6 +289,23 @@ md-list.make-scrollable {
 .sidebar-button {
   text-align: left;
   height: 5%;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-bottom: 0.4em;
+}
+
+.sidebar-text-name {
+  color: black;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-family: 'NeoSansBold';
+}
+
+.sidebar-text {
+  color: #9c9c9c;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-family: 'NeoSansLight';
 }
 
 .button-text {
@@ -292,7 +319,7 @@ md-list.make-scrollable {
     margin-top: 2em;
     margin-bottom: 1em;
     border-radius: 50%;
-    width: 80%;
+    width: 50%;
     height: auto;
     display: block;
     margin-left: auto;
@@ -602,6 +629,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
   margin-left: 1em;
   margin-top: 0.5em;
   vertical-align: middle;
+  color: white;
 }
 
 .comentario {

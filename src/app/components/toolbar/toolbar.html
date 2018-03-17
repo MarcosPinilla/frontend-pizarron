@@ -1,5 +1,5 @@
 <div layout="column" >
-  <md-toolbar class="tooolbar" style="position: fixed; top: 0; height: 6%">
+  <md-toolbar class="tooolbar" style="position: fixed; top: 0; max-height: 4%">
     <div class="md-toolbar-tools">
 
       <!--<md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
@@ -8,14 +8,10 @@
 
 
       <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
-      <div flex="" md-truncate>
+      <div flex md-truncate class="">
         <md-button ng-click="vm.gohome()" id="logo-toolbar" aria-label="logo">
-          <img src="app/resources/img/cabecera_logotipo.png" class="md-card-image" id="logo">
+          <img src="app/resources/img/logo-horizontal-03.png" id="logo">
         </md-button>
-        <md-button ng-click="darFavorito(vm.material)">
-        Atras
-        </md-button>
-
       </div>
 
       <md-button ng-if="!vm.isLogged">
