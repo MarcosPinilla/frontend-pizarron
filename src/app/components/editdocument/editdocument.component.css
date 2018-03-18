@@ -23,6 +23,13 @@
 
 }
 
+.contenedor-pagina{
+  background: #bddf8b;
+  padding: 10px 10px 10px 35px;
+  margin-top: 10px;
+  border-radius: 25px;
+}
+
 .panelShapes {
   width: 250px;
   height:500px; 
