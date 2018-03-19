@@ -206,8 +206,8 @@
 
 
   </md-toolbar>
--->
-  
+
+  -->
   <div layout="row" style="margin-top: 65px;">
 
       <div style="margin-left: 5px;margin-top: 10px;">
@@ -221,10 +221,21 @@
 
   <div layout="row">
 
-    <md-button class="md-icon-button boton-icono" ng-click="vm.guardar()" aria-label="boton guardar">
-      <md-icon>save</md-icon>
+    
+
+      
+    <md-button class="md-icon-button" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo" style="width:55px; height: 55px;">
+      <md-icon> undo </md-icon>
       <md-tooltip>
-          Guardar cambios
+          Deshacer
+      </md-tooltip>
+    </md-button>
+  
+
+    <md-button class="md-icon-button boton-icono" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
+      <md-icon>redo</md-icon>
+      <md-tooltip>
+          Rehacer
       </md-tooltip>
     </md-button>
 
