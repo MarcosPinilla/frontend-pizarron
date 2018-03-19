@@ -25,9 +25,11 @@
 
 .contenedor-pagina{
   background: #bddf8b;
-  padding: 10px 10px 10px 35px;
+  padding: 10px 10px 10px 10px;
   margin-top: 10px;
   border-radius: 25px;
+  margin: 0;
+  display: table;
 }
 
 .panelShapes {
