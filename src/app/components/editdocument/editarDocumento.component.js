@@ -23,9 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService'];
 
-  function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter) {
+  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService) {
 
     var vm = this;
 
@@ -94,7 +94,9 @@
 
       vm.fontTest="";
       vm.fontTest2=0;
+      vm.colorElemento="#000000";
       vm.esTexto=true;
+      vm.colorSeleccionable=false;
       vm.cortar = false;
       vm.copiar = false;
       vm.pegar=false;
@@ -151,6 +153,8 @@
           console.log("hola");
         $scope.$apply(function () {
           vm.esTexto = false;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest2 = evt.target.get('fontSize');
           vm.fontTest = evt.target.get('fontFamily');
         }); 
@@ -159,6 +163,8 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest = "";
           vm.fontTest2 = 0;
 
@@ -167,8 +173,29 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = false;
           vm.fontTest = "";
           vm.fontTest2 = 0;
+        });
+      }else if (evt.target.get('type') === 'circle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'triangle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
         });
       }
     });
@@ -180,6 +207,8 @@
           console.log("hola");
         $scope.$apply(function () {
           vm.esTexto = false;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest2 = evt.target.get('fontSize');
           vm.fontTest = evt.target.get('fontFamily');
         }); 
@@ -188,6 +217,8 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest = "";
           vm.fontTest2 = 0;
 
@@ -196,8 +227,29 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = false;
           vm.fontTest = "";
           vm.fontTest2 = 0;
+        });
+      }else if (evt.target.get('type') === 'circle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'triangle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
         });
       }
     });
@@ -206,6 +258,8 @@
       canvas.on('selection:cleared', function(evt) {
         $timeout(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = false;
+          document.getElementById('input-color').value="#000000";
           vm.fontTest = "";
           vm.fontTest2 = 0;
         });
@@ -219,6 +273,7 @@
           // when font is loaded, use it.
           canvas.getActiveObject().set("fontFamily", font);
           canvas.renderAll();
+          canvas.trigger('object:modified', {target: canvas.getActiveObject()});
         }).catch(function(e) {
           console.log(e)
           alert('font loading failed ' + font);
@@ -227,6 +282,13 @@
 
       vm.usarFontSize = function(fontsize) {
         canvas.getActiveObject().set("fontSize", fontsize);
+        canvas.trigger('object:modified', {target: canvas.getActiveObject()});
+        canvas.renderAll();  
+      }
+
+       vm.usarColor = function(color) {
+        canvas.getActiveObject().setColor(color);
+        canvas.trigger('object:modified', {target: canvas.getActiveObject()});
         canvas.renderAll();  
       }
       /*
@@ -273,13 +335,14 @@
             left : 100,
             width : 60,
             height : 70,
-            fill : 'blue'
+            fill : '#0066ff'
           });
 
           //canvas.add(rect).setActiveObject(rect);
           canvas.add(rect);
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
         
          
@@ -336,13 +399,14 @@
 
             //vm.figuras = canvas.getObjects().length;
             vm.figuras++;
+            vm.guardar();
           }
         } 
 
       vm.generarLinea = function(){
         if(vm.figuras < 50){
            var linea = new fabric.Line([ 250, 125, 250, 175 ], {
-            fill: 'red',
+            fill: '#ff1a1a',
             stroke: 'red',
             strokeWidth: 5,
             selectable: true
@@ -372,13 +436,14 @@
             height: 100, 
             left: 50,
             top: 300, 
-            fill: '#cca'
+            fill: '#1aa3ff'
           });
 
           canvas.add(triangle);
 
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
       }
 
@@ -388,13 +453,14 @@
             radius: 50,
             left: 275,
             top: 75,
-            fill: '#aac'
+            fill: '#aa80ff'
           });
 
           canvas.add(circle)
 
           //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
         }
       }
 
@@ -962,9 +1028,15 @@
         console.log(documentoTemp)
 
         //documento.contenido_material = canvasAsJson;
+        /*
         MaterialService.update({id:vm.documento.id},documentoTemp,function(){
            console.log("Guardado con éxito");
         });
+        */
+        ActualizarMaterialService.update({id:vm.documento.id},documentoTemp,function(){
+           console.log("Guardado con éxito");
+        });
+
       });
       /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
@@ -1002,6 +1074,41 @@
       });
 
     }
+
+    // socket al editar el documento 
+
+      var client = new Pusher('28705022aa554d22c965', {
+          cluster: 'us2',
+          // authEndpoint: "http://example.com/pusher/auth",
+          encrypted: true
+        });
+
+       var pusher = $pusher(client);
+
+       var canal = pusher.subscribe('editMaterial');
+
+       canal.bind('EditarMaterialEvent',
+        function (data) {
+          console.log(data);
+          vm.nuevo = data;
+          var json = JSONC.unpack( vm.nuevo.contenido_material);
+          //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+          //json = JSONC.decompress(json);
+          console.log(json)
+
+          //Documento completo sin páginas
+          vm.documentoCompleto = json;
+
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+
+          var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+          canvas.loadFromJSON(json.data); 
+
+          var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
+          vm.figuras = figurasObtenidas.figuras;
+
+        });
     
     vm.configuracionPagina = function(ev) {
       $mdDialog.show({

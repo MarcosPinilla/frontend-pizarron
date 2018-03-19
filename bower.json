@@ -6,14 +6,19 @@
     "angular-ui-router": "1.0.0-beta.3",
     "angular-material": "^1.1.5",
     "angular-resource": "1.6.8",
-    "fabric.js": "fabric#^2.0.0",
+    "fabric.js": "fabric#^2.2.1",
     "jsoncomp": "jsonc#^1.6.1",
     "angular-google-chart": "1.0.0-beta.1",
     "angular-chart.js": "^1.1.1",
     "chart.js": "^2.7.1",
-    "angular-material-data-table": "^0.10.10"
+    "angular-material-data-table": "^0.10.10",
+    "ng-textarea-enter": "^0.2.2",
+    "pusher-angular": "^1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.2"
+  },
+  "resolutions": {
+    "angular": "1.6.9"
   }
 }

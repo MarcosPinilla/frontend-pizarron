@@ -1,7 +1,7 @@
 
 <md-content layout-padding layout-wrap md-theme="app" flex="100" style="width: 700px;">
     <div style="background: rgb(63,81,181); color:white;">
-      <h2>Compartir material</h2>
+      <h2>Colaboradores del material</h2>
     </div>
 
     <h4>Quién tiene acceso...</h4>
@@ -15,12 +15,23 @@
           </md-card-title-media>
           <md-card-title-text>
             <span class="md-headline">{{colaborador.profesor.nombres_profesor}} {{colaborador.profesor.apellidos_profesor}}</span>
-            <span class="md-subhead">{{colaborador.profesor.profesion}}</span>
+            <span class="md-subhead">
+            {{colaborador.profesor.profesion}}
+             <span ng-if="colaborador.autor"> - </span>
+            <span ng-if="colaborador.autor">Autor del documento</span>
+          </span>
+           
           </md-card-title-text>
 
-          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)" ng-if="colaborador.profesor.id_usuario != vm.usuario.id">
+          <md-button class="md-icon-button" aria-label="Custom Icon Button" ng-click="vm.eliminarColaborador(colaborador.id_profesor)" ng-if="colaborador.profesor.id_usuario != vm.usuario.id && !colaborador.autor">
             <md-icon style="font-size:30px !important;">cancel</md-icon>
           </md-button>
+
+           <md-button disabled class="md-icon-button" aria-label="Custom Icon Button" ng-if="colaborador.autor">
+             <md-icon ng-if="colaborador.autor" style="font-size:30px !important;">stars</md-icon>
+          </md-button>
+          
+         
           
         </md-card-title>
       </md-card>
@@ -45,7 +56,7 @@
           </md-not-found>
         </md-autocomplete>
 	    <br>
-	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.agregarColaborador(vm.selectedItem.id)">Agregar Colaborador</md-button></center>
+	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.agregarColaborador(vm.selectedItem.id)">Agregar colaborador</md-button></center>
 	    <br>
     </form>  
 
