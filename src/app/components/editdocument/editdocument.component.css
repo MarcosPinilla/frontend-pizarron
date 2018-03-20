@@ -32,6 +32,10 @@
   display: table;
 }
 
+.contenedor-curvo{
+  border-radius: 25px;
+}
+
 .panelShapes {
   width: 250px;
   height:500px; 

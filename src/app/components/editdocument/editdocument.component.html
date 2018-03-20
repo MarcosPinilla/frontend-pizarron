@@ -304,15 +304,15 @@
 
   <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
 
-  <div flex="25" >
+  <div flex="25">
    
-      <md-card class="page" style="height: 580px;background-color: #f2f2f2;">
+      <md-card class="page contenedor-curvo" style="height: 580px;background-color: #f2f2f2;margin-top: -1px;">
 
-        <md-content>
-          <div layou="row">
+        <md-content class="contenedor-curvo" style="padding-top: 10px;">
+          <div layout="row">
             <div flex="100">
               <input class="ng-hide" id="archivo" multiple type="file" aria-label="asd" />
-              <label for="archivo" class="md-button md-raised md-primary" style="width: 95%;" aria-label="asd">Seleccionar imágen desde equipo</label>
+              <label for="archivo" class="md-button md-raised md-primary contenedor-curvo" style="width: 95%; background-color: #6d72ad;" aria-label="asd">Seleccionar imágen desde equipo</label>
             </div>
            
           </div>
@@ -331,7 +331,7 @@
               </md-input-container>
             </div>
              <div flex="50">
-                  <md-button style="width: 90%;" class="md-raised md-primary" ng-click="vm.subir()">Subir desde url</md-button>
+                  <md-button style="width: 90%; background-color: #6d72ad;" class="md-raised md-primary contenedor-curvo" ng-click="vm.subir()">Subir desde url</md-button>
                 </div>
             </div>        
           </md-content>
