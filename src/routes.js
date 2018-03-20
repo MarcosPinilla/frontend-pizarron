@@ -134,13 +134,18 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     isPrivate: true
   })
   .state('dashboard.perfil', {
-    url: '/perfil', //'/perfil/:id'
+    url: '/perfil/:id',
     component: 'perfil',
     isPrivate: true
   })
   .state('dashboard.publicaciones', {
     url: '/publicaciones',
     component: 'publicaciones',
+    isPrivate: true
+  })
+  .state('dashboard.materiales', {
+    url: '/materiales',
+    component: 'materiales',
     isPrivate: true
   })
   .state('dashboard.amigos', {

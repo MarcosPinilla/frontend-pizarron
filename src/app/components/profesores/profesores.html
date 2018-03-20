@@ -11,7 +11,7 @@
 		<md-card ng-repeat="person in vm.people|filter:buscador" class="card-profesor">
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</span>
+            <span class="md-headline" ui-sref="dashboard.perfil({id:person.id})">{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</span>
             <span class="md-subhead">{{ person.profesion }}</span>
           </md-card-title-text>
           <md-card-title-media>
@@ -21,8 +21,8 @@
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button>Añadir como amigo</md-button>
-          <md-button>Seguir</md-button>
+          <md-button ui-sref="dashboard.perfil({id:person.id})">Ver perfil</md-button>
+          <md-button ng-click="vm.seguir(person.id)">Seguir</md-button>
         </md-card-actions>
       </md-card>
 	</div>

@@ -1,5 +1,5 @@
 angular
-  .module('app', ['ui.router', 'ngMaterial', 'ngResource', 'md.data.table'])
+  .module('app', ['ui.router', 'ngMaterial','pusher-angular', 'ngResource', 'md.data.table' ])
   .config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('app')
       .primaryPalette('green')

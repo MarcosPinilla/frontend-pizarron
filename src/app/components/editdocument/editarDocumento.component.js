@@ -23,9 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService'];
 
-  function editarDocumentoCtrl(MaterialService, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService) {
+  function editarDocumentoCtrl(MaterialService, $pusher , $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService) {
 
     var vm = this;
 
@@ -740,6 +740,29 @@
       });
 
     }
+
+    // socket al editar el documento 
+
+      var client = new Pusher('28705022aa554d22c965', {
+          cluster: 'us2',
+          // authEndpoint: "http://example.com/pusher/auth",
+          encrypted: true
+        });
+
+       var pusher = $pusher(client);
+
+       var canal = pusher.subscribe('editMaterial');
+
+       canal.bind('EditarMaterialEvent',
+        function (data) {
+          console.log(data);
+          vm.nuevo = data;
+          var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+          json = JSONC.decompress(json);
+          console.log(json)
+          canvas.loadFromJSON(json);
+
+        });
     
     vm.configuracionPagina = function(ev) {
       $mdDialog.show({

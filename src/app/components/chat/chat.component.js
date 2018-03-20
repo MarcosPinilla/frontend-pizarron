@@ -9,9 +9,20 @@
     	controllerAs: 'vm'
   	});
 
-  	//chatCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
+  	chatCtrl.$inject = ['NotificacionesNoLeidasService'];
 
-  	function chatCtrl() {
+  	function chatCtrl(NotificacionesNoLeidasService) {
   		var vm = this;
+
+      vm.notificaciones = {};
+
+      NotificacionesNoLeidasService.get().$promise.then(function (data) {
+        console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
+        console.log(data);
+        vm.notificaciones = data;
+        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+          console.log(data);
+        });
+      });
   	}
 })();
