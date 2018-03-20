@@ -287,9 +287,13 @@
       }
 
        vm.usarColor = function(color) {
-        canvas.getActiveObject().setColor(color);
-        canvas.trigger('object:modified', {target: canvas.getActiveObject()});
-        canvas.renderAll();  
+        if(canvas.getActiveObject()){
+           canvas.getActiveObject().setColor(color);
+           canvas.trigger('object:modified', {target: canvas.getActiveObject()});
+           canvas.renderAll(); 
+        }
+
+        
       }
       /*
       //Los bordres no se reescalarán junto con el elemento
@@ -812,6 +816,8 @@
 
       vm.documentoCompleto[idElemento] = editado;
 
+      vm.guardar();
+
       //vm.documentoCompleto[vm.paginaActual] = editado;
 
     }
@@ -1086,12 +1092,13 @@
        var pusher = $pusher(client);
 
        var canal = pusher.subscribe('editMaterial');
-
-       canal.bind('EditarMaterialEvent',
+       
+        canal.bind('EditarMaterialEvent',
         function (data) {
-          console.log(data);
-          vm.nuevo = data;
-          var json = JSONC.unpack( vm.nuevo.contenido_material);
+          console.log(data.Material);
+          vm.nuevo = data.Material;
+          console.log(vm.nuevo);
+          var json = JSONC.unpack( vm.nuevo);
           //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
           //json = JSONC.decompress(json);
           console.log(json)
