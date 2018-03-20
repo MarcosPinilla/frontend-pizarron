@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	chatCtrl.$inject = ['NotificacionesNoLeidasService'];
+  	chatCtrl.$inject = ['NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas'];
 
-  	function chatCtrl(NotificacionesNoLeidasService) {
+  	function chatCtrl(NotificacionesNoLeidasService, CambiarNotificacionesLeidas) {
   		var vm = this;
 
       vm.notificaciones = {};
