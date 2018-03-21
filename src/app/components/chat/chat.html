@@ -1,54 +1,57 @@
-<div class="sidebar-right" style="height: 100%">
-	<md-toolbar layout="row" class="md-hue-3">
-	    <div class="md-toolbar-tools" style="background-color: #bddf8b;">
-	        <span style="color: white">Chat</span>
-	    </div>
-	</md-toolbar>
-
-	<md-content>
-		<md-list flex style="height: 100%">
-			<md-list-item class="md-3-line" ng-click="null">
-			    <img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="md-avatar" alt="{{item.who}}" />
-				    <div class="md-list-item-text" layout="column">
-				        <h3>Jorge Solis</h3>
-				        <h4>Ingeniero Informatico</h4>
-				    </div>
-			</md-list-item>
-			<md-divider class="sidebar-right-divider"></md-divider>
-			<md-list-item class="md-3-line" ng-click="null">
-			    <img ng-src="https://i.imgur.com/kA3SmWq.jpg" class="md-avatar" alt="{{item.who}}" />
-				    <div class="md-list-item-text" layout="column">
-				        <h3>Felipe Acuña</h3>
-				    </div>
-			</md-list-item>
-			<md-divider class="sidebar-right-divider"></md-divider>
-			<md-list-item class="md-3-line" ng-click="null">
-			    <img ng-src="http://i0.kym-cdn.com/entries/icons/facebook/000/016/546/hidethepainharold.jpg" class="md-avatar" alt="{{item.who}}" />
-				    <div class="md-list-item-text" layout="column">
-				        <h3>Marco Pinilla</h3>
-				    </div>
-			</md-list-item>
-			<md-divider class="sidebar-right-divider"></md-divider>
-			<md-list-item class="md-3-line" ng-click="null">
-			    <img ng-src="http://cdn.ebaumsworld.com/mediaFiles/picture/718392/84890874.jpg" class="md-avatar" alt="{{item.who}}" />
-				<div class="md-list-item-text" layout="column">
-				    <h3>Felipe Acuña</h3>
-				</div>
-			</md-list-item>
-			<md-divider class="sidebar-right-divider"></md-divider>
-			<md-list-item class="md-3-line" ng-click="null">
-			    <img ng-src="http://i.imgur.com/x16uR0p.png" class="md-avatar" alt="{{item.who}}" />
-				<div class="md-list-item-text" layout="column">
-				    <h3>Felipe Acuña</h3>
-				</div>
-			</md-list-item>
-			<md-divider class="sidebar-right-divider"></md-divider>
-			<md-list-item class="md-3-line" ng-click="null">
-				<img ng-src="https://pbs.twimg.com/media/C_HiysOXgAAbJtf.jpg" class="md-avatar" alt="{{item.who}}" />
-				<div class="md-list-item-text" layout="column">
-					<h3>Felipe Acuña</h3>
-				</div>
-			</md-list-item>
-		</md-list>
-	</md-content>
+<div class="sidebar-right" layout="column" style="height: 100%">
+	<div id="sidebar-notificacion" flex> 
+		<div class="sidebar-titulo" style="background-color: #f9b985";>
+			<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+			Notificaciones
+		</div>
+		<div id="notificacion">
+			<div class="notificacion" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
+			</div>
+			<div class="notificacion" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
+			</div>
+			<div class="notificacion" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
+			</div>
+		</div>
+	</div>
+	<div id="chat" flex>
+		<div class="sidebar-titulo" style="background-color: #bddf8b;">
+			<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
+		</div>
+		<div id="chat-profesores">
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+			<div class="chat-profesor" layout="row">
+				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
+				<span>Nombre del profe</span>
+			</div>
+		</div>
+	</div>
 </div>
