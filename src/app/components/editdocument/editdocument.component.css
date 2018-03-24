@@ -23,9 +23,25 @@
 
 }
 
+#redo:disabled md-icon{
+  color:rgba(0,0,0,0.38);
+}
+
+#undo:disabled md-icon{
+  color:rgba(0,0,0,0.38);
+}
+
+#redo:enabled md-icon{
+  color:white;
+}
+
+#undo:enabled md-icon{
+  color:white;
+}
+
 .contenedor-pagina{
   background: #bddf8b;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 0px;
   margin-top: 10px;
   border-radius: 25px;
   margin: 0;
