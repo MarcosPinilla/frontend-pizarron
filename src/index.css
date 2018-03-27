@@ -773,6 +773,27 @@ md-list-item.md-2-line .md-list-item-text h4 {
   cursor: pointer;
 }
 
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px; }
+
+.gridListdemoBasicUsage .gray {
+  background: #f5f5f5; }
+
+.gridListdemoBasicUsage .green {
+  background: #b9f6ca; }
+
+.gridListdemoBasicUsage .yellow {
+  background: #ffff8d; }
+
+.gridListdemoBasicUsage .blue {
+  background: #84ffff; }
+
+.gridListdemoBasicUsage .purple {
+  background: #b388ff; }
+
+.gridListdemoBasicUsage .red {
+  background: #ff8a80; }
+
 /*.caja-comentario textarea{
   width: 100%;
   -webkit-box-sizing: border-box;
