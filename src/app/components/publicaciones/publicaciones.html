@@ -34,16 +34,16 @@
 				</div>
 				<md-divider></md-divider>
 			</md-content>
-			<md-content layout="row">
-				<div class="caja-comentario" flex="80">
+			<div layout="row" flex>
+				<div class="caja-comentario" flex="70">
 					 <input type="text" placeholder="Escribe un comentario ..." ng-model="comentario.comentar">
 				</div>
-				<div flex="20">
-					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar)">
+				<div flex="30">
+					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar); comentario.comentar = ''">
 						<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 					</md-button>
 				</div>
-			</md-content>
+			</div>
 			<!--<md-input-container class="md-block" style="background-color: #E8EAF6; margin: 2px 0;">
   				<textarea class="publicacion-comentario" placeholder="Escribe un comentario" ng-keydown="count = count + 1" ng-init="count=0"></textarea>
   			</md-input-container>

@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	chatCtrl.$inject = ['NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas'];
+  	chatCtrl.$inject = ['NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  	function chatCtrl(NotificacionesNoLeidasService, CambiarNotificacionesLeidas) {
+  	function chatCtrl(NotificacionesNoLeidasService, CambiarNotificacionesLeidas, NotificacionesLeidasService) {
   		var vm = this;
 
       vm.notificaciones = {};
@@ -20,9 +20,18 @@
         console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
         console.log(data);
         vm.notificaciones = data;
+
         CambiarNotificacionesLeidas.get().$promise.then(function (data) {
           console.log(data);
         });
       });
+
+      vm.notificacionesLeidas = {};
+
+      NotificacionesLeidasService.get().$promise.then(function (data) {
+        console.log("NOTIFICACIONES LEIDAAAAAAAAAAAS")
+        console.log(data);
+        vm.notificacionesLeidas = data;
+       });
   	}
 })();

@@ -5,17 +5,10 @@
 			Notificaciones
 		</div>
 		<div id="notificacion">
-			<div class="notificacion" layout="row">
+			<div class="notificacion" layout="row" ng-repeat="notificacion in vm.notificacionesLeidas">
 				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
-			</div>
-			<div class="notificacion" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
-			</div>
-			<div class="notificacion" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>
+				<span>{{notificacion.mensaje}}</span>
+				<!--<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>-->
 			</div>
 		</div>
 	</div>
