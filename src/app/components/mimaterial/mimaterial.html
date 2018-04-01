@@ -1,70 +1,52 @@
-AAAAAAAAAA
-<div ng-cloak>
-  <md-grid-list
-        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+<div>
+  <h3>Mis Materiales</h3>
+  <md-divider></md-divider>
+  <br>
+  <div class="div-buscador" flex-offset="30" flex="40">
+    
+    <md-input-container class="buscador-repo" flex="98">
+      <label flex="100">Buscador</label>
+      <input ng-model="buscador" type="text" flex="100">
+    </md-input-container>
+    
+  </div>
+  <br>
+  <div layout="row">
+    <div>
+      <label>Asignatura </label>
+      <select id="input2" class="form-control" ng-model="filter.asignatura.nombre_asignatura">
+          <option value="">Todas </option>
+          <option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
+        </select>
+    </div>
+    
+    <div>
+      <label>Nivel</label>
+      <select id="input2" class="form-control" ng-model="filter.nivel.nombre_nivel">
+          <option value="">Todos </option>
+          <option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
+        </select>
+    </div>
 
-    <md-grid-tile class="gray" style="background-color: red"
-        md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1">
-      <md-grid-tile-footer>
-        <h3>#1: (3r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="green" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#2: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="yellow" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#3: (1r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="blue"
-        md-rowspan="2" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#4: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="red"
-        md-rowspan="2" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#5: (2r x 2c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="green"
-        md-rowspan="2" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="green"
-        md-rowspan="2" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="green"
-        md-rowspan="2" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-    <md-grid-tile class="green"
-        md-rowspan="2" style="background-color: red">
-      <md-grid-tile-footer>
-        <h3>#6: (2r x 1c)</h3>
-      </md-grid-tile-footer>
-    </md-grid-tile>
-
-  </md-grid-list>
+    <div>
+      <label>Tipo</label>
+      <select id="input2" class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
+          <option value="">Todos </option>
+          <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
+        </select>
+    </div>
+  </div>
+  <md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #f9b985">
+    <md-card-title style="background-color: #f9b985; border-radius: 18px;"> 
+      <md-card-title-text class="mimaterial-titulo">
+        <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a><a href="#">{{material.titulo_material}}</a></span>
+      </md-card-title-text>
+    </md-card-title>
+    <div>
+      <a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+    </div> 
+    <md-card-actions layout="row" layout-align="end center" style="color: white;">
+      <md-button>Ver documento</md-button>
+    </md-card-actions>
+  </md-card>
 </div>
