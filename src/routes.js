@@ -153,14 +153,19 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'amigos',
     isPrivate: true
   })
+  .state('dashboard.profesores', {
+    url: '/profesores',
+    component: 'profesores',
+    isPrivate: true
+  })
+  .state('dashboard.mimaterial', {
+    url: '/mimaterial',
+    component: 'mimaterial',
+    isPrivate: true  
+  })
   .state('notificaciones', {
     url: '/notificaciones',
     component: 'notificacion',
-    isPrivate: true
-  })
-  .state('profesores', {
-    url: '/profesores',
-    component: 'profesores',
     isPrivate: true
   });
 
