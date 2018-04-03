@@ -3,7 +3,6 @@
   <md-divider></md-divider>
   <br>
   <div class="div-buscador" flex-offset="30" flex="40">
-    
     <md-input-container class="buscador-repo" flex="98">
       <label flex="100">Buscador</label>
       <input ng-model="buscador" type="text" flex="100">
@@ -11,29 +10,29 @@
     
   </div>
   <br>
-  <div layout="row">
-    <div>
-      <label>Asignatura </label>
-      <select id="input2" class="form-control" ng-model="filter.asignatura.nombre_asignatura">
+  <div class="mimaterial-options" layout="row">
+    <div class="mimaterial-select">
+      <label>Asignatura</label>
+      <select class="form-control" ng-model="filter.asignatura.nombre_asignatura">
           <option value="">Todas </option>
           <option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
-        </select>
+      </select>
     </div>
     
-    <div>
+    <div class="mimaterial-select">
       <label>Nivel</label>
-      <select id="input2" class="form-control" ng-model="filter.nivel.nombre_nivel">
+      <select class="form-control" ng-model="filter.nivel.nombre_nivel">
           <option value="">Todos </option>
           <option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
-        </select>
+      </select>
     </div>
 
-    <div>
+    <div class="mimaterial-select">
       <label>Tipo</label>
-      <select id="input2" class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
+      <select class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
           <option value="">Todos </option>
           <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
-        </select>
+      </select>
     </div>
   </div>
   <md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #f9b985">

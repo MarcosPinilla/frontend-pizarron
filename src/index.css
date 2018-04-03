@@ -27,7 +27,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 a {
     text-decoration: none;
-    color: #9c9c9c;
+    color: white;
 }
 
 .login-div{
@@ -427,7 +427,7 @@ md-list.make-scrollable {
   border: 0 none #fff;
   border-radius: 7px;
   outline: none;
-  box-shadow: 0 0 10px 2px rgba(63,70,82,.67);
+  box-shadow: 0 2px 2px rgba(63,70,82,.67);
   margin-top: 7px;
 }
 
@@ -780,6 +780,21 @@ md-list-item.md-2-line .md-list-item-text h4 {
 .mimaterial-titulo a {
   font-size: 16px
   color: white;
+}
+
+.mimaterial-options {
+  height: 40px;
+  border-radius: 25px;
+  background-color: #fad98f;
+}
+
+.mimaterial-select {
+  margin-top: 10px;
+  color: white;
+}
+
+.mimaterial-select label {
+  margin-left: 4px;
 }
 
 .gridListdemoBasicUsage md-grid-list {
