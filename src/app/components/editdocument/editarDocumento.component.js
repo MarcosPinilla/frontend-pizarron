@@ -137,6 +137,9 @@
         redoButton              : document.getElementById('redo'),
       };
 
+      //_config.redoButton.disabled= "disabled";
+      //_config.undoButton.disabled= "disabled";
+
       vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
       vm.fontsizes = [];
 

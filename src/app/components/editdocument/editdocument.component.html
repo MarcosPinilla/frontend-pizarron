@@ -41,7 +41,7 @@
           Rehacer
       </md-tooltip>
     </md-button>
--->
+
     <md-button class="md-icon-button" ng-click="vm.exportar()" aria-label="boton guardar" style="width:55px; height: 55px;">
       <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg" style="width:32px; height: 35px;"></md-icon>
       <md-tooltip>
@@ -56,7 +56,7 @@
       </md-tooltip>
     </md-button>
 
-  
+  -->
       <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
         <span style="margin-right: 5px;">Nuevo colaborador</span><md-icon>people</md-icon>
       </md-button>
@@ -177,10 +177,16 @@
           </md-tab>
           
         </md-tabs>
-      </md-content>
-        
-      </md-card>
 
+      </md-content>
+  <!--
+          <md-input-container style="position: absolute;
+        bottom: 0;left:30%;">
+        <label>Color</label>
+        <input id="input-color" type="color" ng-model="vm.colorElemento" ng-change="vm.usarColor(vm.colorElemento)" ng-disabled="!vm.colorSeleccionable" style="width: 150px;">
+      </md-input-container>
+      </md-card>
+-->
   
   </div>
 
