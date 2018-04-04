@@ -27,7 +27,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 a {
     text-decoration: none;
-    color: #9c9c9c;
+    color: white;
 }
 
 .login-div{
@@ -219,7 +219,7 @@ md-list.make-scrollable {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 97%;
+  width: 100%;
   height: auto;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -297,6 +297,7 @@ md-list.make-scrollable {
 .notificacion {
   font-size: 14px;
   height: 4em;
+  margin-bottom: 0.5em;
 }
 
 .notificacion span {
@@ -426,7 +427,7 @@ md-list.make-scrollable {
   border: 0 none #fff;
   border-radius: 7px;
   outline: none;
-  box-shadow: 0 0 10px 2px rgba(63,70,82,.67);
+  box-shadow: 0 2px 2px rgba(63,70,82,.67);
   margin-top: 7px;
 }
 
@@ -752,7 +753,9 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 0.5em;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -762,16 +765,59 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .comentario-button {
   max-width: 20px;
-  background-color: #4CAF50;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 1em;
+  background-color: #6d72ad;
   border: none;
   color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
 }
+
+.mimaterial-titulo a {
+  font-size: 16px
+  color: white;
+}
+
+.mimaterial-options {
+  height: 40px;
+  border-radius: 25px;
+  background-color: #fad98f;
+}
+
+.mimaterial-select {
+  margin-top: 10px;
+  color: white;
+}
+
+.mimaterial-select label {
+  margin-left: 4px;
+}
+
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px; }
+
+.gridListdemoBasicUsage .gray {
+  background: #f5f5f5; }
+
+.gridListdemoBasicUsage .green {
+  background: #b9f6ca; }
+
+.gridListdemoBasicUsage .yellow {
+  background: #ffff8d; }
+
+.gridListdemoBasicUsage .blue {
+  background: #84ffff; }
+
+.gridListdemoBasicUsage .purple {
+  background: #b388ff; }
+
+.gridListdemoBasicUsage .red {
+  background: #ff8a80; }
 
 /*.caja-comentario textarea{
   width: 100%;
@@ -807,6 +853,8 @@ md-list-item.md-2-line .md-list-item-text h4 {
   float: left;
   width: 32.2%;
   min-width: 385px;
+  background-color: #fad98f;
+  border-radius: 15px;
 }
 .buscador-profes{
   background-color: white;

@@ -1,3 +1,8 @@
+<center>
+      <h2 class="titulo">Profesores</h2>
+      <br>
+</center>
+<md-divider></md-divider>
 <div flex= "100">
 	<div class="div-buscador" flex-offset="30" flex="40">
 		
@@ -7,12 +12,13 @@
 		</md-input-container>
 		
 	</div>
-	<div>
+	<div flex>
 		<md-card ng-repeat="person in vm.people|filter:buscador" class="card-profesor">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline" ui-sref="dashboard.perfil({id:person.id})">{{ person.nombres_profesor }} {{ person.apellidos_profesor }}</span>
             <span class="md-subhead">{{ person.profesion }}</span>
+            <span class="md-subhead">{{ person.usuario.email }}</span>
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-lg card-media">
