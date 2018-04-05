@@ -9,9 +9,17 @@
     	controllerAs: 'vm'
   	});
 
-  	//chatCtrl.$inject = ['CredentialsService', '$rootScope', '$state'];
+  	chatCtrl.$inject = ['NotificacionesRecientesService'];
 
-  	function chatCtrl() {
+  	function chatCtrl(NotificacionesRecientesService) {
   		var vm = this;
+
+      vm.notificaciones = {};
+
+      NotificacionesRecientesService.query().$promise.then(function (data) {
+        console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
+        console.log(data);
+        vm.notificaciones = data;
+      });
   	}
 })();

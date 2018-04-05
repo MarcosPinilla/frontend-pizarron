@@ -1,23 +1,33 @@
+@font-face {
+    font-family: 'NeoSansBold'; /*a name to be used later*/
+    src: url('app/resources/fonts/neo_sans_bold.ttf') /*URL to font*/
+}
+
+@font-face {
+    font-family: 'NeoSansLight'; /*a name to be used later*/
+    src: url('app/resources/fonts/NeoSansStd-Light.otf') /*URL to font*/
+}
+
 body {
   /*background-color: azure;*/
   background-color: white;
   color: #7986CB;
-  background-color: #E0E0E0;
   /*background-image: url('app/resources/img/profesor.jpg');*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
+  font-family: 'NeoSansBold';
   /*//margin-top: 4em;*/
 }
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-  background-color: #5C6BC0;
+  background-color: #6d72ad;
 }
 
 a {
     text-decoration: none;
-    color: #E8EAF6;
+    color: white;
 }
 
 .login-div{
@@ -44,11 +54,7 @@ a {
 }
 
 #logo-toolbar {
-  font-family: "Segoe UI";
-  font-weight: bold;
-  font-size: 2em;
-  text-decoration: underline;
-  height: 1em;
+  height: 6em;
 }
 
 .contratar-toolbar {
@@ -80,8 +86,8 @@ titular {
 }
 
 #logo {
-  height: 100%;
-  width: 7.5rem;
+  height: 7rem;
+  width: auto;
 }
 
 .cuadro-blanco {
@@ -131,7 +137,10 @@ titular {
 }
 
 .dashboard {
-  background-color: #E0E0E0; 
+  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
+  background-size: 1200px;
+  background-repeat: repeat;
+  padding-top: 4em;
 }
 
 .dashboard-adm{
@@ -210,9 +219,9 @@ md-list.make-scrollable {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 97%;
+  width: 100%;
   height: auto;
-   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   /*border-bottom: 2px solid #7f8c8d;*/
 }
@@ -224,7 +233,7 @@ md-list.make-scrollable {
 .post-card {
   margin-top: 30px;
   border-radius: 4px;
-  background-color: #EEEEEE;
+  background-color: #fad98f;
 }
 
 .center-content {
@@ -246,7 +255,7 @@ md-list.make-scrollable {
 }
 
 .sidebar-left {
-  background-color: #3F51B5; 
+  background:rgba(0,0,0,0);
   color:#FAFAFA; 
   height: 100%; 
   position: fixed; 
@@ -263,11 +272,84 @@ md-list.make-scrollable {
 }
 
 .sidebar-right {
-  background-color: #E8EAF6;
   position: fixed;
   right: 0;
   widows: 200px;
+  min-width: 230px;
+}
+
+#sidebar-notificacion {
+  position: fixed;
   min-width: 210px;
+  height: 17em;
+  top: 5.2em;
+}
+
+#sidebar-notificacion-titulo {
+  background-color: #f9b985;
+  height: 2em;
+}
+
+#notificacion {
+  margin-top: 1em;
+}
+
+.notificacion {
+  font-size: 14px;
+  height: 4em;
+  margin-bottom: 0.5em;
+}
+
+.notificacion span {
+  margin-left: 5px;
+  color: #90908f;
+}
+
+.notificacion a {
+  color: black;
+}
+
+#chat {
+  position: fixed;
+  min-width: 210px;
+  height: 17em;
+  bottom: 1.2em;
+}
+
+#chat-profesores {
+  margin-top: 1em;
+  height: 15.5em;
+  overflow: auto;
+}
+
+.chat-profesor {
+  height: 2em;
+  color: #90908f;
+}
+
+.chat-profesor span {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.chat-avatar {
+  border-radius: 50%;
+  width: 1.6em;
+  height: 1.6em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  margin-left: 0.2em;
+}
+
+#chat-icon {
+  height: 3em; 
+  width: 3em; 
+}
+
+.sidebar-titulo {
+  height: 1.5em;
+  border-radius: 8px;
+  color: white;
 }
 
 .sidebar-buttons {
@@ -279,6 +361,23 @@ md-list.make-scrollable {
 .sidebar-button {
   text-align: left;
   height: 5%;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-bottom: 0.4em;
+}
+
+.sidebar-text-name {
+  color: black;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-family: 'NeoSansBold';
+}
+
+.sidebar-text {
+  color: #9c9c9c;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-family: 'NeoSansLight';
 }
 
 .button-text {
@@ -292,7 +391,7 @@ md-list.make-scrollable {
     margin-top: 2em;
     margin-bottom: 1em;
     border-radius: 50%;
-    width: 80%;
+    width: 50%;
     height: auto;
     display: block;
     margin-left: auto;
@@ -328,7 +427,7 @@ md-list.make-scrollable {
   border: 0 none #fff;
   border-radius: 7px;
   outline: none;
-  box-shadow: 0 0 10px 2px rgba(63,70,82,.67);
+  box-shadow: 0 2px 2px rgba(63,70,82,.67);
   margin-top: 7px;
 }
 
@@ -342,7 +441,7 @@ md-list.make-scrollable {
 }
 
 .perfil-contenedor {
-  background-color: #E0E0E0;
+  background:rgba(0,0,0,0);
 }
 
 .perfil-information {
@@ -356,8 +455,7 @@ md-list.make-scrollable {
   margin-left: 1.5em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+  background:rgba(0,0,0,0);
 
 }
 
@@ -365,22 +463,22 @@ md-list.make-scrollable {
   margin-left: 1.5em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+  background:rgba(0,0,0,0);
 }
 
 .perfil-information-img {
   background: linear-gradient(
     to right, 
-    #5C6BC0 0%, 
-    #5C6BC0 50%, 
-    #E8EAF6 50%, 
-    #E8EAF6 100%
+    #f9b985 0%, 
+    #f9b985 50%, 
+    #FFF8E1 50%, 
+    #FFF8E1 100%
   );
 }
 
 .perfil-datos {
   margin-left: 1em;
+  color: #37474F;
 }
 
 .perfil-datos a {
@@ -388,13 +486,15 @@ md-list.make-scrollable {
 }
 
 .titulo-perfil-valoradas {
-  background-color: #E91E63;
-  color: #E8EAF6
+  background-color: #bddf8b;
+  border-radius: 18px;
+  color: white;
 }
 
 .titulo-perfil-recientes {
-  background-color: #43A047;
-  color: #E8EAF6
+  background-color: #fad98f;
+  border-radius: 18px;
+  color: white;
 }
 
 .texto-titulo-perfil {
@@ -415,29 +515,29 @@ md-list.make-scrollable {
   border-style: solid;*/
 }
 
-.perfil-post-left {
-  background-color: #EEEEEE;
+#perfil-post-left {
+  background-color: #fad98f;
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 1em;
-  border-radius: 4px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 }
 
-.perfil-post-center {
-  background-color: #EEEEEE;
+#perfil-post-center {
+  background-color: #fad98f;
   margin-top: 1em;
   margin-bottom: 1em;
-  border-radius: 4px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 }
 
-.perfil-post-right {
-  background-color: #EEEEEE;
+#perfil-post-right {
+  background-color: #fad98f;
   margin-top: 1em;
   margin-bottom: 1em;
   margin-right: 1em;
-  border-radius: 4px;
+  border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 }
 
@@ -447,18 +547,22 @@ md-list.make-scrollable {
 }
 
 .perfil-post-titulo {
-  background-color: #EC407A;
+  background-color: #bddf8b;
   height: 20%;
   color: #E8EAF6;
-  font-size: 24px; 
+  font-size: 20px; 
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   text-align: center;
 }
 
 .perfil-post-titulo-recientes {
-  background-color: #4CAF50;
+  background-color: #fad98f;
   height: 20%;
-  color: #E8EAF6;
-  font-size: 24px; 
+  color: white;
+  font-size: 20px; 
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   text-align: center;
 }
 
@@ -533,15 +637,25 @@ md-list.make-scrollable {
   margin-bottom: 0.5em;
 }
 
+#amigos {
+
+}
+
 .amigos-contenedor {
-  margin-top: 1.5em;
+  margin-top: 1em;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
+  box-shadow: 0 1px 0px rgba(0,0,0,0.16), 0 2px 2px rgba(0,0,0,0.23);
 }
 
 .amigos-titulo {
+  border-radius: 18px;
+  height: 50px;
   background-color: #5C6BC0;
   color: white;
+}
+
+.amigos-titulo h2 {
+  line-height: 50px;
 }
 
 .amigos-titulo h2 {
@@ -602,6 +716,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
   margin-left: 1em;
   margin-top: 0.5em;
   vertical-align: middle;
+  color: white;
 }
 
 .comentario {
@@ -638,7 +753,9 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 0.5em;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -648,16 +765,59 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .comentario-button {
   max-width: 20px;
-  background-color: #4CAF50;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 1em;
+  background-color: #6d72ad;
   border: none;
   color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   cursor: pointer;
 }
+
+.mimaterial-titulo a {
+  font-size: 16px
+  color: white;
+}
+
+.mimaterial-options {
+  height: 40px;
+  border-radius: 25px;
+  background-color: #fad98f;
+}
+
+.mimaterial-select {
+  margin-top: 10px;
+  color: white;
+}
+
+.mimaterial-select label {
+  margin-left: 4px;
+}
+
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px; }
+
+.gridListdemoBasicUsage .gray {
+  background: #f5f5f5; }
+
+.gridListdemoBasicUsage .green {
+  background: #b9f6ca; }
+
+.gridListdemoBasicUsage .yellow {
+  background: #ffff8d; }
+
+.gridListdemoBasicUsage .blue {
+  background: #84ffff; }
+
+.gridListdemoBasicUsage .purple {
+  background: #b388ff; }
+
+.gridListdemoBasicUsage .red {
+  background: #ff8a80; }
 
 /*.caja-comentario textarea{
   width: 100%;
@@ -693,6 +853,8 @@ md-list-item.md-2-line .md-list-item-text h4 {
   float: left;
   width: 32.2%;
   min-width: 385px;
+  background-color: #fad98f;
+  border-radius: 15px;
 }
 .buscador-profes{
   background-color: white;

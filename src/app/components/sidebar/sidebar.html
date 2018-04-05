@@ -1,3 +1,4 @@
+
 <div class="sidebar-left hidden " flex="15">
 	<div class="sidebar-perfil" flex="100">
 		<a ui-sref="dashboard.perfil({id:vm.perfil.id})"><img class="img-circle preview" ng-src="{{ vm.perfil.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a>
@@ -5,38 +6,41 @@
 
 	   <md-button class="md-primary md-raised" ng-click="vm.showAdvanced($event)"><md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>{{ vm.cantidadNotificaciones.notificaciones }}</md-button>
 
+<!-- <div class="sidebar-left hidden" flex="15">
+	<div class="sidebar-perfil" flex="100" layout="column" flex-offset="10">
+		<div><a ui-sref="dashboard.perfil({id:vm.perfil.id})"><img class="img-circle preview" ng-src="{{ vm.perfil.url_foto_profesor }}" src="app/resources/img/perfil.jpg"></a></div>
+		<div class="sidebar-text-name">{{ vm.nombre[0] }} {{vm.perfil.apellidos_profesor}}</span></div>
+		<div class="sidebar-text">{{vm.perfil.cargo}}</div>
+		<div class="sidebar-text">{{vm.perfil.establecimientos[0].nombre_establecimiento}}</div> -->
+
+
+	   <!--<md-button class="md-primary md-raised" ng-click="vm.showAdvanced($event)"><md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>{{ vm.cantidadNotificaciones.notificaciones }}</md-button>-->
 	 
 	</div>
 	<!-- Buttons -->
 	<br>
 	<div class="sidebar-buttons" layout="row">
-		<div flex="5"></div>
-		<div layout="column" flex="90" flex-offset="5">
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #43A047;" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
+		<div layout="column" flex="90">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #6d72ad;" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_note_add_white_24px.svg"></md-icon> Nuevo Documento
 			</md-button>
-			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #039BE5">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #f9b985" ui-sref="dashboard.mimaterial">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_folder_white_24px.svg"></md-icon> Mi Material
 			</md-button>
-			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #E91E63" ui-sref="dashboard.favoritos">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #bddf8b" ui-sref="dashboard.favoritos">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon> Mis Favoritos
 			</md-button>
-			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #FF9800" ui-sref="dashboard.amigos">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #b0afd0" ui-sref="dashboard.amigos">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_people_white_24px.svg"></md-icon> Mis Amigos
 			</md-button>
-			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #AB47BC" ui-sref="profesores">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #fad98f" ui-sref="dashboard.profesores">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon> Buscar Profesor
 			</md-button>
-			<md-divider class="sidebar-left-divider"></md-divider>
-			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #00ACC1" ui-sref="dashboard.materiales">
+			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #b0afd0" ui-sref="dashboard.materiales">
 				<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon> Buscar Material
 			</md-button>
 		</div>
-		<div flex=5></div>
+		<div flex=10></div>
 	</div>
 
 <!-- dialog -->

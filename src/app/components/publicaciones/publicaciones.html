@@ -4,7 +4,7 @@
 	<div flex="20"></div>
 	<div class="post" layout="column" flex="60" flex-offset="20">
 		<md-card class="post-card" ng-repeat="material in vm.materiales">
-			<md-card-title style="background-color: #5C6BC0">
+			<md-card-title style="background-color: #fad98f; border-radius: 40px;">
 				<md-card-title-text style="font-size: 16px; color: #C5CAE9">
 					<div layout="row">
 						<div><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})"><img class="amigos-amigo-img" src="{{material.colaboradores[0].url_foto_profesor}}"></a></div>
@@ -15,11 +15,12 @@
 			<div>
 				<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
 			</div>
-			<md-card-title layout="row" layout-align="end center" style="background-color: #5C6BC0; height: 4em;">
+			<md-card-title layout="row" layout-align="end center" style="background-color: #fad98f; height: 4em;">
 				<md-button style="color: white;">Ver documento</md-button>
 				<md-button class="dashboard-button-fab"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
 				</md-button>
 			</md-card-title>
+			<md-divider style="height: 1px; background-color: #f4c255"></md-divider>
 			<md-content ng-repeat="comentario in material.comentarios">
 				<div class="comentario" layout="row">
 					<div class="comentario-foto" style="" flex="20">
@@ -34,16 +35,16 @@
 				</div>
 				<md-divider></md-divider>
 			</md-content>
-			<md-content layout="row">
-				<div class="caja-comentario" flex="80">
+			<div layout="row" flex>
+				<div class="caja-comentario" flex="70">
 					 <input type="text" placeholder="Escribe un comentario ..." ng-model="comentario.comentar">
 				</div>
-				<div flex="20">
-					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar)">
+				<div flex="30">
+					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar); comentario.comentar = ''">
 						<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 					</md-button>
 				</div>
-			</md-content>
+			</div>
 			<!--<md-input-container class="md-block" style="background-color: #E8EAF6; margin: 2px 0;">
   				<textarea class="publicacion-comentario" placeholder="Escribe un comentario" ng-keydown="count = count + 1" ng-init="count=0"></textarea>
   			</md-input-container>

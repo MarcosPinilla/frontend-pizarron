@@ -23,21 +23,45 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService'];
 
-  function editarDocumentoCtrl(MaterialService, $pusher , $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService) {
+  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService) {
 
     var vm = this;
+
+    vm.nombreInicial = "";
 
     vm.documento = MaterialService.get({id: $stateParams.id});
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
-      
+      vm.nombreInicial=vm.documento.titulo_material;
+      console.log(vm.documento.contenido_material)
       //Forma de iniciar el editar documento
-      if (vm.documento.contenido_material !== undefined) {
+      if (vm.documento.contenido_material !== null) {
         vm.cargar();
-      }
+      } else {
+        //Contador de figuras agregadas
+        vm.figuras = 0;
+        //Documento completo sin páginas
+        vm.documentoCompleto = [];
+
+        //Se agrega el objeto en donde irán los atributos generales del documento
+        vm.documentoCompleto.push({
+          id: 0,
+          figuras: vm.figuras
+        });
+
+        //Se agrega el objeto con la primera página del objeto
+        var json = canvas.toJSON();
+        vm.documentoCompleto.push({
+          id: vm.documentoCompleto.length, 
+          data: json
+        });
+
+        //Inicia en la página 1
+        vm.paginaActual = 1;
+        }
     });
 
     //MENU BAR
@@ -61,16 +85,24 @@
 
       //var panelcanvas = new fabric.Canvas('panelcanvas');
       var canvas = new fabric.Canvas('canvas');
+     
+      var context = canvas.getContext("2d");
+
+
+      //context.imageSmoothingQuality = "low" || "medium" || "high"
+      context.imageSmoothingQuality = "medium";
+
       vm.fontTest="";
       vm.fontTest2=0;
+      vm.colorElemento="#000000";
       vm.esTexto=true;
-      vm.mensaje="nada";
+      vm.colorSeleccionable=false;
       vm.cortar = false;
       vm.copiar = false;
+      vm.pegar=false;
       vm.enCanvas = false;
       var _clipboard = null;
       var ctrlDown=false;
-      vm.esGrupo=false;
 
 
       //En el futuro debería retornarlo de la base de datos vm.tipoHoja = vm.documento.tipoHoja;
@@ -82,10 +114,18 @@
       } else {
         vm.orientacion = '2';
       }
+/*
+      //Documento completo sin páginas
+      vm.documentoCompleto = [];
 
-      //Contador de figuras agregadas
-      vm.figuras = 0;
+      var json = canvas.toJSON();
+      vm.documentoCompleto.push({
+        id: vm.documentoCompleto.length + 1, 
+        data: json});
 
+      //Inicia en la página 1
+      vm.paginaActual = 1;
+*/
       var _config = {
         canvasState             : [],
         currentStateIndex       : -1,
@@ -98,7 +138,7 @@
       };
 
       vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
-      vm.fontsizes=[];
+      vm.fontsizes = [];
 
       for(var i=0;i<100;i++){
         vm.fontsizes.push(i);
@@ -106,13 +146,15 @@
 
       //Función para detectar click en canvas
       
-      canvas.on('object:selected', function(evt) {
+      canvas.on('selection:updated', function(evt) {
         console.log(evt);
         if(evt.target.get('type') === 'textbox'){
         //vm.esTexto=false;
-
+          console.log("hola");
         $scope.$apply(function () {
           vm.esTexto = false;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest2 = evt.target.get('fontSize');
           vm.fontTest = evt.target.get('fontFamily');
         }); 
@@ -121,6 +163,8 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
           vm.fontTest = "";
           vm.fontTest2 = 0;
 
@@ -129,16 +173,93 @@
         //vm.esTexto=true;
         $scope.$apply(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = false;
           vm.fontTest = "";
           vm.fontTest2 = 0;
+        });
+      }else if (evt.target.get('type') === 'circle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'triangle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }
+    });
+
+      canvas.on('selection:created', function(evt) {
+        console.log(evt);
+        if(evt.target.get('type') === 'textbox'){
+        //vm.esTexto=false;
+          console.log("hola");
+        $scope.$apply(function () {
+          vm.esTexto = false;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest2 = evt.target.get('fontSize');
+          vm.fontTest = evt.target.get('fontFamily');
+        }); 
+
+      }else if (evt.target.get('type') === 'rect'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'image'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = false;
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+        });
+      }else if (evt.target.get('type') === 'circle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
+        });
+      }else if (evt.target.get('type') === 'triangle'){
+        //vm.esTexto=true;
+        $scope.$apply(function () {
+          vm.esTexto = true;
+          vm.colorSeleccionable = true;
+          document.getElementById('input-color').value=evt.target.get('fill');
+          vm.fontTest = "";
+          vm.fontTest2 = 0;
+
         });
       }
     });
 
 
       canvas.on('selection:cleared', function(evt) {
-        $scope.$apply(function () {
+        $timeout(function () {
           vm.esTexto = true;
+          vm.colorSeleccionable = false;
+          document.getElementById('input-color').value="#000000";
           vm.fontTest = "";
           vm.fontTest2 = 0;
         });
@@ -152,6 +273,7 @@
           // when font is loaded, use it.
           canvas.getActiveObject().set("fontFamily", font);
           canvas.renderAll();
+          canvas.trigger('object:modified', {target: canvas.getActiveObject()});
         }).catch(function(e) {
           console.log(e)
           alert('font loading failed ' + font);
@@ -160,100 +282,216 @@
 
       vm.usarFontSize = function(fontsize) {
         canvas.getActiveObject().set("fontSize", fontsize);
+        canvas.trigger('object:modified', {target: canvas.getActiveObject()});
         canvas.renderAll();  
       }
 
-      vm.generarFigura = function() {
+       vm.usarColor = function(color) {
+        if(canvas.getActiveObject()){
+           canvas.getActiveObject().setColor(color);
+           canvas.trigger('object:modified', {target: canvas.getActiveObject()});
+           canvas.renderAll(); 
+        }
+
+        
+      }
+      /*
+      //Los bordres no se reescalarán junto con el elemento
+  canvas.on({
+    'object:scaling': function(e) {
+        var obj = e.target;
+        obj.strokeWidth = obj.strokeWidth / ((obj.scaleX + obj.scaleY) / 2);
+        var activeObject = canvas.getActiveObject();
+        activeObject.set('strokeWidth',obj.strokeWidth);
+    }
+});
+      */
+      //cuando se seleccione un elemento cualquiera en el canvas, este quedará en el frente
+      canvas.on("selection:updated", function (e) {
+          canvas.getActiveObject().bringToFront();
+          canvas.renderAll();    
+      });
+      canvas.on("selection:created", function (e) {
+          canvas.getActiveObject().bringToFront();
+          canvas.renderAll();    
+      })
+      /*
+      //Función que genera un rectángulo sin relleno y con bordes negros
+      vm.generarFiguraBordes=function() {
         var rect = new fabric.Rect({
           top : 100,
           left : 100,
           width : 60,
           height : 70,
-          fill : 'blue'
+          fill : '',
+          stroke : 'black',
+          strokeWidth : 2
         });
 
           //canvas.add(rect).setActiveObject(rect);
           canvas.add(rect);
+        };
+*/
+        vm.generarFigura=function() {
+          if(vm.figuras < 50){
+            var rect = new fabric.Rect({
+            top : 100,
+            left : 100,
+            width : 60,
+            height : 70,
+            fill : '#0066ff'
+          });
 
-          //Aumenta el contador de figuras
+          //canvas.add(rect).setActiveObject(rect);
+          canvas.add(rect);
+          //vm.figuras = canvas.getObjects().length;
           vm.figuras++;
+          vm.guardar();
+        }
+        
+         
         };
 
-        $scope.$on('someEvent', function(event, ruta) {
+        $scope.$on('agregarImagenRepositorio', function(event, ruta) {
           vm.generarImagen(ruta);
+
         })
 
         vm.generarImagen = function(ruta){
-          fabric.Image.fromURL(ruta, function(img) {
-            //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-            img.scaleToWidth(canvas.getWidth());
-            img.scaleToHeight(canvas.getHeight());
-            canvas.add(img).renderAll();
-            var a = canvas.setActiveObject(img);
-              
-            //Aumenta el contador de figuras
-            vm.figuras++;
-
-            //canvas.add(oImg);
-          });
+          if(vm.figuras < 50){
+            fabric.Image.fromURL(ruta, function(img) {
+              //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
+              img.src=ruta;
+              img.scaleToWidth(canvas.getWidth()/4);
+              img.scaleToHeight(canvas.getHeight()/4);
+              canvas.add(img);
+              var a = canvas.setActiveObject(img);
+               $scope.$apply(function () {
+                //vm.figuras = canvas.getObjects().length;
+                vm.figuras++;
+              });
+              //canvas.add(oImg);
+            }, null, '');
+            
+          }
+          
         }
 
         vm.generarTexto = function() {
-          var texto = new fabric.Textbox('Escribe aquí', {
-            left: 50,
-            top: 50,
-            width: 150,
-            fontSize: 20,
-            fontFamily: 'Lobster'
-          });
+          if(vm.figuras < 50){
+            var texto = new fabric.Textbox('Escribe aquí', {
+              left: 50,
+              top: 50,
+              width: 150,
+              fontSize: 20,
+              fontFamily: 'Lobster'
+            });
 
-          canvas.add(texto)
-          //canvas.add(texto).setActiveObject(texto);
-          console.log(texto);
-          //canvas.getActiveObject().set("fontFamily", 'Lobster');
-          canvas.renderAll();
+            texto.setControlsVisibility({
+              bl: false,
+              br: false,
+              mb: false,
+              mt: false,
+              tl: false,
+              tr: false,
+            });
+            canvas.add(texto)
+            //canvas.add(texto).setActiveObject(texto);
+            console.log(texto);
+            //canvas.getActiveObject().set("fontFamily", 'Lobster');
+            canvas.renderAll();
 
-          //Aumenta el contador de figuras
-          vm.figuras++;
+            //vm.figuras = canvas.getObjects().length;
+            vm.figuras++;
+            vm.guardar();
+          }
         } 
 
       vm.generarLinea = function(){
-        var linea = new fabric.Line([ 250, 125, 250, 175 ], {
-        
-          fill: 'red',
-          stroke: 'red',
-          strokeWidth: 5,
-          selectable: true
-        });
+        if(vm.figuras < 50){
+           var linea = new fabric.Line([ 250, 125, 250, 175 ], {
+            fill: '#ff1a1a',
+            stroke: 'red',
+            strokeWidth: 5,
+            selectable: true
+          });
 
-        linea.setControlsVisibility({
-          bl: true,
-          br: false,
-          tl: false,
-          tr: false,
-          mt: false,
-          mb: false,
-      });
+          linea.setControlsVisibility({
+            bl: false,
+            br: false,
+            tl: false,
+            tr: false,
+            mt: false,
+            mb: false,
+          });
 
-        canvas.add(linea);
+          canvas.add(linea);
 
-        //Aumenta el contador de figuras
-        vm.figuras++;
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
+        }
+       
+      }
 
+      vm.generarTriangulo = function(){
+        if(vm.figuras < 50){
+          var triangle = new fabric.Triangle({
+            width: 100, 
+            height: 100, 
+            left: 50,
+            top: 300, 
+            fill: '#1aa3ff'
+          });
+
+          canvas.add(triangle);
+
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
+          vm.guardar();
+        }
+      }
+
+      vm.generarCirculo = function(){
+        if(vm.figuras < 50){
+          var circle = new fabric.Circle({
+            radius: 50,
+            left: 275,
+            top: 75,
+            fill: '#aa80ff'
+          });
+
+          canvas.add(circle)
+
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
+          vm.guardar();
+        }
       }
 
     vm.eliminar = function() {
-      var activeGroup = canvas.getActiveGroup();
-      if (activeGroup) {
+      var seleccion = canvas.getActiveObject();
+
+      if(seleccion){
+           if (seleccion.type === 'activeSelection') {
+        seleccion.forEachObject(function(obj) {
+          canvas.remove(obj);
+          vm.figuras--;
+        });
+      } else {
+        canvas.remove(seleccion);
+        vm.figuras--;
+      }
+
+      
+
+      //var activeGroup = canvas.getActiveGroup();
+      /*
+      if (false) {
         var activeObjects = activeGroup.getObjects();
         for (let i in activeObjects) {
           canvas.remove(activeObjects[i]);
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
-          
+         
         }
         if(vm.esTexto === false){
           $scope.$apply(function () {
@@ -264,7 +502,7 @@
         }
         canvas.discardActiveGroup();
         canvas.renderAll();
-      } else if(canvas.getActiveObject()){
+      } else if(false){
         if(canvas.getActiveObject().get('type') === "textbox"){
             //vm.esTexto=true;
             $scope.$apply(function () {
@@ -275,12 +513,14 @@
           }
           canvas.getActiveObject().remove();
 
-          $scope.$apply(function () {
-            //Baja el contador de figuras
-            vm.figuras--;
-          });
-        }
+        } */
 
+      }
+
+      vm.guardar();
+      
+
+   
       }
 
     //Se crea una variable a partir del contenedor del canvas, lo que permitirá
@@ -293,9 +533,11 @@
       if(key===46){
         vm.eliminar();
       } else if(e.ctrlKey && key === 67) {
-        vm.copy();
+          vm.copy();
       } else if (e.ctrlKey && key === 86) {
+
         vm.paste();
+
       } else if (e.ctrlKey && key === 88) {
         vm.cut();
       } else if (e.ctrlKey && key == 90) {
@@ -303,81 +545,62 @@
       } else if (e.ctrlKey && key == 89) {
         vm.redo();
       }
+       $scope.$apply(function () {
+          //vm.figuras = canvas.getObjects().length;
+                  
+        });
     }, false);
 
 
     vm.copy = function() {
-      vm.copiar=true;
-      var activeGroup = canvas.getActiveGroup();
-      if (activeGroup) {
-        activeGroup.clone(function(cloned) {
-          _clipboard = cloned;
-        });
-        vm.esGrupo = true;
-      } else if(canvas.getActiveObject()){
+      if(canvas.getActiveObject()){
+        vm.copiar=true;
+
+        //Se copia la selección al clipboard
         canvas.getActiveObject().clone(function(cloned) {
           _clipboard = cloned;
         });
-        vm.esGrupo = false;
-      }
 
-      vm.cortar = false;
+        vm.cortar = false;
+      }
+      
     }
 
     //Función para cortar, se llama desde ctrl + x y desde panel de edición
     vm.cut = function() {
+      
+      
+      var seleccion = canvas.getActiveObject();
+
+      if(seleccion){
       vm.copiar=false;
-      //Se obtiene el grupo seleccionado actualmente
-      var activeGroup = canvas.getActiveGroup();
+      
+      seleccion.clone(function(cloned) {
+        _clipboard = cloned;
 
-      if (activeGroup) {
-            //Se clona en el portapapeles
-            activeGroup.clone(function(cloned) {
-              _clipboard = cloned;
-            });
-        //Se remueve cada uno de los objetos 
-        activeGroup.forEachObject(function(o){
-          canvas.remove(o); 
-
-          $scope.$apply(function () {
-            //Baja el contador de figuras
+        if (seleccion.type === 'activeSelection') {
+          seleccion.forEachObject(function(obj) {
+            canvas.remove(obj);
             vm.figuras--;
           });
-        });
-        //Se desactiva el grupo seleccionado y se renderiza
-        canvas.discardActiveGroup().renderAll();
+        } else {
+          canvas.remove(seleccion);
+          vm.figuras--;
+        }
+      });
 
-        //Se actualiza la variable esGrupo a true
-        vm.esGrupo = true;
-      } else if(canvas.getActiveObject()){
-          //Si es un objeto único, se clona en el portapaples
-          canvas.getActiveObject().clone(function(cloned) {
-            _clipboard = cloned;
-
-            //Se elimina el objeto
-            canvas.getActiveObject().remove();
-            
-            $scope.$apply(function () {
-              //Baja el contador de figuras
-              vm.figuras--;
-            });
-        });
-        //Se actualiza la variable esGrupor por false
-        vm.esGrupo = false;
-      }
       //Se actualiza la variable cortar por true, para saber que al pegar, luego se debe vaciar
       //el portapapeles
       vm.cortar = true;
+
+    }
+
+      
     }
 
     vm.paste = function() {
       if(vm.cortar || vm.copiar){
         // clone again, so you can do multiple copies.
-        if(vm.esGrupo){
-          canvas.discardActiveGroup();
-        }else{
-          canvas.discardActiveObject();
-        }
         _clipboard.clone(function(clonedObj) {
           canvas.discardActiveObject();
           clonedObj.set({
@@ -385,43 +608,47 @@
             top: clonedObj.top + 10,
             evented: true,
           });
-          console.log(vm.esGrupo)
-          if (vm.esGrupo) {
-            //clonedObj.canvas = canvas;
-            var arrayObj = clonedObj.getObjects();
-            for (let i in arrayObj) {
-              canvas.add(arrayObj[i]);
-              
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
+          if (clonedObj.type === 'activeSelection') {
+            if(clonedObj._objects.length+vm.figuras <= 50){
+              // active selection needs a reference to the canvas.
+              clonedObj.canvas = canvas;
+              clonedObj.forEachObject(function(obj) {
+                canvas.add(obj);
                 vm.figuras++;
               });
+              // this should solve the unselectability
+              clonedObj.setCoords();
+            }else{
+              return;
             }
-             //clonedObj.setCoords();
-             _clipboard.top += 10;
-             _clipboard.left += 10;
-             canvas.setActiveGroup(clonedObj);
-             canvas.renderAll();
-            } else {
-              canvas.add(clonedObj);
-
-              $scope.$apply(function () {
-                //Aumenta el contador de figuras
-                vm.figuras++;
-              });
-
-              _clipboard.top += 10;
-              _clipboard.left += 10;
-              canvas.setActiveObject(clonedObj);
-              canvas.renderAll();
+          } else {
+            if(vm.figuras < 50){
+             canvas.add(clonedObj);
+             vm.figuras++;
+            }else{
+              return;
             }
+          }
+          _clipboard.top += 10;
+          _clipboard.left += 10;
+
+          /*
+          $scope.$apply(function () {
+              vm.figuras = canvas.getObjects().length;
+              console.log(vm.figuras);
           });
+          */
+
+          canvas.setActiveObject(clonedObj);
+          canvas.requestRenderAll();
+        });  
 
         if(vm.cortar) {
           _clipboard = null;
           vm.cortar = false;
         }
       }
+      vm.pegar=false;
     }
 
     canvas.on('object:modified', function() {
@@ -446,6 +673,7 @@
         } else {
           _config.canvasState.push(canvasAsJson);
         }
+        
         _config.currentStateIndex = _config.canvasState.length-1;
         if((_config.currentStateIndex == _config.canvasState.length-1) && _config.currentStateIndex != -1){
           _config.redoButton.disabled= "disabled";
@@ -469,6 +697,11 @@
                 _config.undoStatus = false;
                 _config.currentStateIndex -= 1;
                 _config.undoButton.removeAttribute("disabled");
+
+                 $scope.$apply(function () {
+                  vm.figuras = canvas.getObjects().length;
+                });
+
                 if(_config.currentStateIndex !== _config.canvasState.length-1){
                   _config.redoButton.removeAttribute('disabled');
                 }
@@ -483,7 +716,9 @@
             }
           }
         }
+        
       }
+      
     }
 
     vm.redo = function() {
@@ -499,6 +734,9 @@
               canvas.renderAll();
               _config.redoStatus = false;
               _config.currentStateIndex += 1;
+               $scope.$apply(function () {
+                vm.figuras = canvas.getObjects().length;
+              });
               if(_config.currentStateIndex != -1) {
                 _config.undoButton.removeAttribute('disabled');
               }
@@ -509,10 +747,90 @@
             });
           }
         }
+      
       }
+     
     }
 
+    vm.canvasModifiedCallback = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
+
+     
+        $scope.$apply(function () {
+        //vm.figuras = canvas.getObjects().length;
+        console.log(vm.figuras);
+      }); 
+      
+      
+    };
+
+    vm.canvasModifiedAdd = function() {
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
+
+      if(vm.pegar){
+        vm.pegar=false;
+        $timeout(function () {
+          //vm.figuras = canvas.getObjects().length;
+          console.log(vm.figuras);
+          vm.pegar=false;
+         }); 
+
+        vm.pegar=false;
+      }
+      
+      
+    };
+
+    vm.canvasModified=function(){
+      var json = canvas.toJSON();
+      var editado = {
+        id: vm.paginaActual,
+        data: json
+      }
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto[idElemento] = editado;
+
+      vm.guardar();
+
+      //vm.documentoCompleto[vm.paginaActual] = editado;
+
+    }
+
+    canvas.on('object:removed', vm.canvasModifiedCallback);
+    canvas.on('object:added', vm.canvasModifiedAdd);
+    canvas.on('object:modified',vm.canvasModified)
+
       //Subir imágen desde computador
+      
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -520,19 +838,22 @@
           var data = f.target.result;                    
           fabric.Image.fromURL(data, function (img) {
           //var oImg = img.set({left: 0, top: 0, angle: 0,width:100, height:100}).scale(0.9);
-          img.scaleToWidth(canvas.width);
-          img.scaleToHeight(canvas.height);
+          img.scaleToWidth(canvas.getWidth()/4);
+          img.scaleToHeight(canvas.getHeight()/4);
           canvas.add(img).renderAll();
           var a = canvas.setActiveObject(img);
-          var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+          //var dataURL = canvas.toDataURL({format: 'png', quality: 0.8});
+          $scope.$apply(function () {
+            //vm.figuras = canvas.getObjects().length;
+            vm.figuras++;
+          }); 
         });
         };
         reader.readAsDataURL(file);
         
-        //Aumenta el contador de figuras
-        vm.figuras++;
+    
       });
-
+      
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
       /*
@@ -548,6 +869,7 @@
     } 
     */
     //delimitación de canvas apra objetos
+    
     canvas.on('object:moving', function (e) {
       var obj = e.target;
            // if object is too big ignore
@@ -570,34 +892,68 @@
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
     vm.subir = function() {
       var URL = document.getElementById("url").value;
-      fabric.util.loadImage(URL, function(img) {
-        var object = new fabric.Image(img);
-        object.scaleToWidth(canvas.getWidth());
-        object.scaleToHeight(canvas.getHeight());
-        canvas.add(object);
-        canvas.renderAll();
+      fabric.Image.fromURL(URL, function(img) {
+        
+        img.scaleToWidth(canvas.getWidth()/4);
+        img.scaleToHeight(canvas.getHeight()/4);
+        canvas.add(img);
+          
+        $scope.$apply(function () {
+          //vm.figuras = canvas.getObjects().length;
+          vm.figuras++;
+        });
+        var a = canvas.setActiveObject(img);
           //canvas.setActiveObject(object);    
-        }, null, {crossOrigin: 'Anonymous'});
+        },{crossOrigin: 'Anonymous'});
       
-      //Aumenta el contador de figuras
-      vm.figuras++;
+     
     }
 
 
     //Lógica para exportar a pdf, utilizando el elemento de canvas
     vm.exportar = function () {
-      html2canvas(document.getElementById('canvas'), {
+      /*html2canvas(document.getElementById('canvas'), {
         onrendered: function (canvas) {
           var data = canvas.toDataURL();
+          console.log(data);
           var docDefinition = {
             content: [{
               image: data,
-              width: 794,
+              width: 500,
             }]
           };
           pdfMake.createPdf(docDefinition).download("test.pdf");
         }
-      });  
+      }); 
+      
+      ////////////////////////////////////////////////////
+
+
+      var imgPdfData = canvas.toDataURL("image/jpeg", 1.0);
+      var pdf=new jsPDF("p", "mm", "a4");
+      var width = pdf.internal.pageSize.width;    
+      var height = pdf.internal.pageSize.height;
+      pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
+      pdf.save('test.pdf'); */
+
+      //vm.rotar();
+
+      kendo.drawing
+        .drawDOM("#canvas", 
+        { 
+            forcePageBreak: ".page-break", 
+            paperSize: "A4",
+            margin: { top: "1cm", bottom: "1cm" },
+            scale: 0.8,
+            height: 500, 
+            template: $("#page-template").html(),
+            keepTogether: ".prevent-split"
+        })
+            .then(function(group){
+            kendo.drawing.pdf.saveAs(group, "Exported_Itinerary.pdf")
+        });
+
+
     };
 
     //Provisorio para tests
@@ -621,19 +977,81 @@
 
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
-      var json = canvas.toJSON();
+      $timeout(function(){
+        var editado = {
+          id: 0,
+          figuras: vm.figuras
+        }
 
-      //se comprime el json
-      var jsonComprimido = JSONC.compress( json );
-      jsonComprimido = JSONC.pack( jsonComprimido, true );
+        vm.documentoCompleto[0] = editado;
+        
+        var json = vm.documentoCompleto;
+        console.log(json);
+        console.log(vm.documentoCompleto);
+        //se comprime el json
 
-      var canvasAsJson = JSON.stringify(jsonComprimido);
+        /*var jsonComprimido = JSONC.compress( json );
+        console.log(jsonComprimido);
+        */
+        var jsonComprimido = JSONC.pack( json);
+        console.log(jsonComprimido);
+        var canvasAsJson = JSON.stringify(jsonComprimido);
+        console.log(canvasAsJson);
+        
 
-      json = {objects: canvasAsJson}
-      //documento.contenido_material = canvasAsJson;
+        //json = JSON.stringify(json);
+        //console.log(json);
+
+
+        var documentoTemp = {};
+        documentoTemp.id = vm.documento.id;
+        console.log(vm.documento.titulo_material)
+        if(vm.documento.titulo_material != undefined){
+
+          documentoTemp.titulo_material = vm.documento.titulo_material;
+          vm.nombreInicial = vm.documento.titulo_material;
+        }else{
+          vm.documento.titulo_material = vm.nombreInicial;
+          documentoTemp.titulo_material = vm.nombreInicial
+        }
+        
+        //Se añade color blanco para la vista previa
+        canvas.backgroundColor = 'white';
+        var svg = canvas.toSVG({
+          width: canvas.width / 3,
+          height: canvas.height / 3
+        });
+
+        //Se vuelve a hacer transparente
+        canvas.backgroundColor = 'transparent';
+
+        documentoTemp.contenido_material=canvasAsJson;
+        //documentoTemp.contenido_material = json;
+        documentoTemp.vista_previa = svg;
+        documentoTemp.id_tipo_material = vm.documento.id_tipo_material;
+        documentoTemp.id_asignatura = vm.documento.id_asignatura;
+        documentoTemp.id_nivel = vm.documento.id_nivel;
+        documentoTemp.id_visibilidad = vm.documento.id_visibilidad;
+        
+
+        console.log(documentoTemp)
+
+        //documento.contenido_material = canvasAsJson;
+        /*
+        MaterialService.update({id:vm.documento.id},documentoTemp,function(){
+           console.log("Guardado con éxito");
+        });
+        */
+        ActualizarMaterialService.update({id:vm.documento.id},documentoTemp,function(){
+           console.log("Guardado con éxito");
+        });
+
+      });
+      /*
       ActualizarContenidoMaterialService.update({id: vm.documento.id}, json, function() {
         console.log("Guardado con éxito");
       });
+      */
     }
 
 
@@ -643,12 +1061,27 @@
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
-        var json = JSONC.unpack( vm.nuevo.contenido_material,true );
-        json = JSONC.decompress(json);
-        console.log(json)
-        canvas.loadFromJSON(json);
+        var json = JSONC.unpack( vm.nuevo.contenido_material);
+        //json = JSONC.decompress(json);
+
+         //Documento completo sin páginas
+          vm.documentoCompleto = json;
+          //vm.documentoCompleto = angular.fromJson(vm.nuevo.contenido_material);
+          console.log(vm.documentoCompleto);
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+
+        //json = $filter('filter')(json, {id: vm.paginaActual}, true)[0];
+        var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+        console.log(json);
+        canvas.loadFromJSON(json.data); 
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
+        //vm.figuras = json.objects.length;
+        var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
+        vm.figuras = figurasObtenidas.figuras;
+        console.log(vm.figuras);
       });
+
     }
 
     // socket al editar el documento 
@@ -662,15 +1095,28 @@
        var pusher = $pusher(client);
 
        var canal = pusher.subscribe('editMaterial');
-
-       canal.bind('EditarMaterialEvent',
+       
+        canal.bind('EditarMaterialEvent',
         function (data) {
-          console.log(data);
-          vm.nuevo = data;
-          var json = JSONC.unpack( vm.nuevo.contenido_material,true );
-          json = JSONC.decompress(json);
+          console.log(data.Material);
+          vm.nuevo = data.Material;
+          console.log(vm.nuevo);
+          var json = JSONC.unpack( vm.nuevo);
+          //var json = JSONC.unpack( vm.nuevo.contenido_material,true );
+          //json = JSONC.decompress(json);
           console.log(json)
-          canvas.loadFromJSON(json);
+
+          //Documento completo sin páginas
+          vm.documentoCompleto = json;
+
+          //Inicia en la página 1
+          vm.paginaActual = 1;
+
+          var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+          canvas.loadFromJSON(json.data); 
+
+          var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
+          vm.figuras = figurasObtenidas.figuras;
 
         });
     
@@ -705,7 +1151,10 @@
       
       //Se valida que no se clickee de nuevo en la opción ya ocupada 
       if ((vm.orientacion === '1' && canvas.height < canvas.width) || (vm.orientacion === '2' && canvas.height > canvas.width)) {
-        canvas.setDimensions({width: canvas.height, height: canvas.width});  
+        canvas.setDimensions({width: canvas.height, height: canvas.width}); 
+        document.getElementById("contenedor-canvas").style.width=document.getElementById("contenedor-canvas").style.height;
+        document.getElementById("contenedor-canvas").style.height=document.getElementById("contenedor-canvas").style.width; 
+
       }
       
     }
@@ -714,8 +1163,177 @@
     vm.tamanoHoja = function(tipo, width, height) {
       vm.tipoHoja = tipo;
       if (canvas.width !== width && canvas.height !== height) {
-        canvas.setDimensions({width: width, height: height});  
+        canvas.setDimensions({width: width, height: height}); 
+        document.getElementById("contenedor-canvas").style.width=width+'px'; 
+        document.getElementById("contenedor-canvas").style.height=height+'px';
       }
+    }
+
+
+    $scope.$watch("vm.figuras",function(numero) {
+     
+      if (numero > 50) {
+
+        setTimeout(function(){
+         vm.eliminar() 
+        }, 100);
+      }
+       
+     
+    });
+
+     vm.mostrarColaborador = function(ev) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/editdocument/agregarcolaborador.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          documento: vm.documento
+        },
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+    
+    /* Implementar más tarde, el horizontal aún tiene bugs
+    vm.rotar = function() {
+      $timeout(function() {
+        canvas.discardActiveObject();
+
+        var activeObject = new fabric.ActiveSelection(canvas.getObjects(), { canvas: canvas });
+        canvas.setActiveObject(activeObject);
+
+        if (activeObject != null) {
+            activeObject.rotate(-90);
+
+            canvas.discardActiveObject();
+
+            canvas.renderAll();
+            vm.exportar();
+            
+
+            // En teoría esto de acá debería reestablecer la vista a la normalidad
+            canvas.setActiveObject(activeObject);
+            activeObject.rotate(90);
+
+            canvas.discardActiveObject();
+
+            canvas.renderAll();
+        }  
+      })
+      
+    } */
+
+     vm.eliminarPagina = function() {
+      //se restan las figuras de la página eliminada
+      vm.figuras=vm.figuras-canvas.getObjects().length;
+      //si es la última página
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
+      vm.paginaAnterior();
+
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.documentoCompleto.length-1}, true)[0];
+
+      var idElemento = vm.documentoCompleto.indexOf(json);
+
+      vm.documentoCompleto.splice(idElemento,1);
+
+      
+     }else{
+      vm.paginaSiguiente();
+
+      vm.paginaActual--;
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id--;
+        }
+
+          if(i==vm.documentoCompleto.length-1){
+
+
+            var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+
+            var idElemento = vm.documentoCompleto.indexOf(json);
+
+            vm.documentoCompleto.splice(idElemento,1);
+          }
+           
+        }
+      }
+
+
+     
+
+      console.log(vm.documentoCompleto);
+    }
+
+    vm.nuevaPagina = function() {
+
+     
+     canvas.clear();
+
+     if(vm.paginaActual==vm.documentoCompleto.length-1){
+
+      vm.paginaActual++;
+
+      var json = canvas.toJSON();
+
+      vm.documentoCompleto.push({
+        id: vm.documentoCompleto.length, 
+        data: json});
+
+     }else{
+
+
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        console.log(vm.documentoCompleto[i].id+'-'+vm.paginaActual)
+        if(vm.documentoCompleto[i].id>vm.paginaActual && vm.documentoCompleto[i].id != 0){
+          vm.documentoCompleto[i].id++;
+        }
+
+        if(i==vm.documentoCompleto.length-1){
+
+          vm.paginaActual++
+
+           var json = canvas.toJSON();
+            
+            vm.documentoCompleto.push({
+              id: vm.paginaActual, 
+              data: json});
+            break;
+           }
+           
+        }
+      }
+
+
+     
+
+      console.log(vm.documentoCompleto);
+    }
+
+    vm.paginaAnterior = function() {
+      canvas.clear();
+      vm.paginaActual--;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      console.log(json);
+      canvas.loadFromJSON(json.data);
+    }
+
+    vm.paginaSiguiente = function() {
+      canvas.clear();
+      vm.paginaActual++;
+      var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
+      console.log(json);
+      canvas.loadFromJSON(json.data);
     }
   }
 
@@ -748,4 +1366,122 @@
       $mdDialog.hide(configuracion);
     };
   }
+
+ 
+  function dialogoController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,obtenerColaboradoresMaterialService,eliminarColaboradorMaterialService,PerfilService,AmigoService) {
+    var vm = this;
+
+    vm.profesores = {};
+    vm.documento=documento;
+    vm.colaboradores={};
+    vm.usuario={};
+    vm.amigosTemp={};
+    vm.amigos=[];
+    vm.customFullscreen = true;
+
+    PerfilService.get().$promise.then(function (data) {
+        console.log(data);
+        vm.usuario = data; 
+        //console.log(vm.perfil.profesores.url_foto_profesor);
+    });
+
+    AmigoService.query().$promise.then(function (data) {
+      vm.amigosTemp = data;
+      vm.amigosTemp = vm.amigosTemp.filter(vm.filtrarAmigos);
+      console.log(vm.amigos);
+    });
+
+
+    obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
+        vm.colaboradores=data;
+        console.log(vm.colaboradores);
+      });
+
+
+
+    vm.actualizarColaboradores=function(){
+      obtenerColaboradoresMaterialService.get({id:vm.documento.id},function(data){
+        vm.colaboradores=data;
+      });
+    }
+
+    //función para dejar solo los registros que tengan al usuario logeado
+    vm.filtrarAmigos=function(amigo){
+      if(amigo.id_estado_amistad == 1){
+
+        if(amigo.amigo1.id_usuario == vm.usuario.id){
+          ProfesorService.get({id: amigo.amigo2.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo2.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo2);
+            return amigo.amigo2;
+          });
+          
+        }else{
+           ProfesorService.get({id: amigo.amigo1.id}).$promise.then(function (data) {
+            var profesor=data;
+            amigo.amigo1.email=profesor.usuario.email;
+            vm.amigos.push(amigo.amigo1);
+            return amigo.amigo1;
+          });
+        }
+      }
+      
+    }
+
+    vm.querySearch   = querySearch;
+
+    function querySearch (query) {
+      return query ? vm.amigos.filter( createFilterFor(query) ) : vm.amigos;
+    }
+    
+    function createFilterFor(query) {
+
+      var lowercaseQuery = query;
+      //console.log(lowercaseQuery);
+
+      return function filterFn(amigo) {
+        //console.log(usuario.email);
+        return (amigo.email.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    vm.agregarColaborador=function(idProfesor){
+      console.log(vm.colaboradores);
+      var colaborador = vm.colaboradores.filter(function(colaborador){
+        return colaborador.id_profesor == idProfesor;
+      });
+      if(colaborador.length>0){
+        alert('El colaborador existe');
+      }else{
+         var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
+        AgregarColaboradorService.save(elemento,function(data){
+          console.log(data);
+          vm.actualizarColaboradores();
+        });
+      }
+     
+    };
+
+    vm.eliminarColaborador = function(idProfesor){
+      var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
+      eliminarColaboradorMaterialService.delete(elemento,function(data){
+        console.log(data);
+        vm.actualizarColaboradores();
+      });
+    }
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
 })();

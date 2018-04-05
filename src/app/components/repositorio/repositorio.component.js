@@ -21,8 +21,8 @@
       console.log(vm.elementos);
     });
 
-    vm.generarImagen=function(ruta) {
-      $rootScope.$broadcast('someEvent', ruta);
+    vm.generarImagen = function(ruta) {
+      $rootScope.$broadcast('agregarImagenRepositorio', ruta);
     }
   }
 })();

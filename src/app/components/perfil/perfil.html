@@ -9,7 +9,7 @@
  				</div>
  			</div>	
  			<!-- Perfil informacion -->	
- 			<div class="perfil-datos" flex style="color: #37474F">
+ 			<div class="perfil-datos" flex>
  					<h2 style="color: #536DFE">{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
  					<p>Profesión: {{ vm.perfil.profesion }}</p>
           <p>Cargo: {{ vm.perfil.cargo }}</p>
@@ -130,7 +130,7 @@
  			</div>
  			<div layout="row">
  				<!-- Left -->
- 				<div class="perfil-post-left" flex="30" layout="column">
+ 				<div id="perfil-post-left" flex="30" layout="column">
  					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
  					<div class="perfil-post-img">
  						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
@@ -139,13 +139,14 @@
  						<md-button class="md-raised">Ver Documento</md-button>
 
  						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
       					</md-button>
  					</div>
  				</div>
+
  				<div flex="5"></div>
  				<!-- Center -->
- 				<div class="perfil-post-center" flex="30" layout="column">
+ 				<div id="perfil-post-center" flex="30" layout="column">
  					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
  					<div class="perfil-post-img">
  						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
@@ -154,13 +155,13 @@
  						<md-button class="md-raised">Ver Documento</md-button>
 
  						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
       					</md-button>
  					</div>
  				</div>
  				<div flex="5"></div>
  				<!-- Right -->
- 				<div class="perfil-post-right" flex="30" layout="column">
+ 				<div id="perfil-post-right" flex="30" layout="column">
  					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
  					<div class="perfil-post-img">
  						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
@@ -169,10 +170,11 @@
  						<md-button class="md-raised">Ver Documento</md-button>
 
  						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
       					</md-button>
  					</div>
  				</div>
+
  			</div>
  		</div>
  	</div>
