@@ -833,7 +833,7 @@
     canvas.on('object:modified',vm.canvasModified)
 
       //Subir imágen desde computador
-      
+      /*
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -855,7 +855,7 @@
         reader.readAsDataURL(file);
         
     
-      });
+      });*/
       
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
@@ -893,6 +893,7 @@
         });
 
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
+    /*
     vm.subir = function() {
       var URL = document.getElementById("url").value;
       fabric.Image.fromURL(URL, function(img) {
@@ -910,7 +911,7 @@
         },{crossOrigin: 'Anonymous'});
       
      
-    }
+    }*/
 
 
     //Lógica para exportar a pdf, utilizando el elemento de canvas

@@ -22,7 +22,24 @@
     background-color: #F0F0F0 !important;
 
 }
+/*Panel izquierdo*/
+.panel-figuras{
+  height: 580px;
+  /*background-color: #f2f2f2;*/
+  margin-top: -1px;
+}
+/*Botones apra generar figuras*/
+.boton-figura{
+  width:80px; height:100px;
+}
 
+.boton-figura md-icon{
+  width: 80px; 
+  height: 80px;
+  font-size:80px;
+}
+
+/*Undo y redo*/
 #redo:disabled md-icon{
   color:rgba(0,0,0,0.38);
 }
@@ -38,7 +55,7 @@
 #undo:enabled md-icon{
   color:white;
 }
-
+/*Contenedor de la página central*/
 .contenedor-pagina{
   background: #bddf8b;
   padding: 10px 10px 10px 0px;
@@ -114,7 +131,8 @@
   /*margin: 0 auto;*/
   /*padding: 24px;*/
   /*ax-width: 680px;*/
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); 
+}
 
 
 
