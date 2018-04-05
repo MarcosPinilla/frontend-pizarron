@@ -39,6 +39,21 @@
   font-size:80px;
 }
 
+/*Botones páginas*/
+.boton-pagina{
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0px 0px 0px 0px !important;
+  margin-bottom: 10px !important;
+}
+
+.boton-pagina md-icon{
+  color:white;
+  font-size: 48px !important;
+  height: 48px !important;
+  width: 48px !important;
+}
+
 /*Undo y redo*/
 #redo:disabled md-icon{
   color:rgba(0,0,0,0.38);
