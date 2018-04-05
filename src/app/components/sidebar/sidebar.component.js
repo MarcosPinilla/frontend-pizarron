@@ -9,12 +9,13 @@
     	controllerAs: 'vm'
   	});
 
-  	sidebarCtrl.$inject = ['$mdDialog', '$pusher', 'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
+  	sidebarCtrl.$inject = ['$mdDialog', '$pusher','$mdToast', 'CantidadNotificaciones','ListarasignaturasService', 'ListarnivelesService', 'ListartipomaterialService',
      'PerfilService', 'MaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  	function sidebarCtrl($mdDialog, $pusher ,CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
-      PerfilService, NotificacionesNoLeidasService) {
+  	function sidebarCtrl($mdDialog, $pusher ,$mdToast, CantidadNotificaciones, ListarasignaturasService, ListarnivelesService, ListartipomaterialService, 
+      PerfilService, NotificacionesNoLeidasService ) {
   		var vm = this;
+
 
       vm.usuario = localStorage.getItem("user");
       vm.asignaturas = {};
@@ -68,6 +69,25 @@
           console.log(data);
         });
 
+
+       //comentario 
+
+       var pusherComentario = $pusher(client);
+       var canalComentario = pusherComentario.subscribe('comentario');
+
+        canalComentario.bind('ComentarioEvent',
+        function (data) {
+          console.log(data);
+
+              var pinTo = "bottom left";
+
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent(data.comentario)
+                .position(pinTo)
+                .hideDelay(3000)
+            );
+        });
 
       
       vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
@@ -216,6 +236,11 @@
     };
   }
 
-
+// .controller('ToastCtrl', function( $mdToast) {
+//   var vm = this;
+//   vm.closeToast = function() {
+//     $mdToast.hide();
+//   };
+// });
 
 })();
