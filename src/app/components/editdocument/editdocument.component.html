@@ -23,12 +23,6 @@
   </div>
 
   <div layout="row">
-
-
-      <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
-        <span style="margin-right: 5px;">Nuevo colaborador</span><md-icon>people</md-icon>
-      </md-button>
-
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
       
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
@@ -156,7 +150,7 @@
   <div flex="55" class="contenedor-pagina">
 
      <div layout="row">
-      <div flex="50" style="text-align: left;">
+      <div flex="60" style="text-align: left;">
 
         <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
           <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
@@ -189,12 +183,21 @@
             </md-tooltip>
           </md-button>
 
-            <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
-            <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg"></md-icon>
+          <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
+            <md-icon md-svg-icon="app/resources/icons/ICONOS-18.svg"></md-icon>
             <md-tooltip>
                 Exportar a PDF
             </md-tooltip>
           </md-button>
+          
+          <md-button class="md-icon-button boton-pagina" ng-click="vm.mostrarColaborador()">
+            <md-icon md-svg-icon="app/resources/icons/ICONOS-13.svg"></md-icon>
+            <md-tooltip>
+                Añadir colaborador
+            </md-tooltip>
+          </md-button>          
+
+
 
             <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
 
@@ -210,7 +213,7 @@
 
 
     </div>
-    <div flex="50" style="text-align: right;">
+    <div flex="40" style="text-align: right;">
        <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior
           <md-tooltip>
                   Página anterior

@@ -374,7 +374,7 @@
                 vm.figuras++;
               });
               //canvas.add(oImg);
-            }, null, '');
+            }, null, { crossOrigin: 'anonymous'});
             
           }
           
