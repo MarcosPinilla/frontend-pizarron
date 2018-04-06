@@ -9,20 +9,17 @@
     	controllerAs: 'vm'
   	});
 
-  	chatCtrl.$inject = ['NotificacionesNoLeidasService'];
+  	chatCtrl.$inject = ['NotificacionesRecientesService'];
 
-  	function chatCtrl(NotificacionesNoLeidasService) {
+  	function chatCtrl(NotificacionesRecientesService) {
   		var vm = this;
 
       vm.notificaciones = {};
 
-      NotificacionesNoLeidasService.get().$promise.then(function (data) {
+      NotificacionesRecientesService.query().$promise.then(function (data) {
         console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
         console.log(data);
         vm.notificaciones = data;
-        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
-          console.log(data);
-        });
       });
   	}
 })();
