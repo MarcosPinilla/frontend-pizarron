@@ -44,8 +44,8 @@
   width: 48px !important;
   height: 48px !important;
   padding: 0px 0px 0px 0px !important;
-  margin-bottom: 10px !important;
-}
+  /*margin-bottom: 10px !important;
+*/}
 
 .boton-pagina md-icon{
   color:white;
