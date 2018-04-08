@@ -1,22 +1,28 @@
-<div flex="100" class="login-div" scroll="no">
-	<md-content md-theme="app" style="vertical-align: center; padding-top: 25px; background: rgba(255, 255, 255, .7);" flex-offset="25" flex="50">
+<div flex="100" class="login-div">
+	<md-content md-theme="app" style="position:relative; vertical-align: center; background: rgba(0, 0, 0,0);overflow: auto;" flex-offset="25" flex="50">
 		<center class="titulo">
-	  		INICIAR SESIÓN
-	  		<img class="userLogin" class="md-avatar">
+	  		<img class="userLogin" class="md-avatar" src="app/resources/img/logovertical.png" >
 		</center>
 		<form ng-submit="vm.login(vm.credentials)" >
 	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
-	  		<md-input-container class="md-block" flex-offset="25" flex="50">
-	    		<label>Email</label>
-	    		<input ng-model="vm.credentials.email" type="text" required>
-	  		</md-input-container>
-	  		<md-input-container class="md-block" flex-offset="25" flex="50">
-	    		<label>Contraseña</label>
-	    		<input ng-model="vm.credentials.password" type="password" required>
-	  		</md-input-container>
-	  		<center><md-button type="submit" class="md-raised md-warn login-button">Iniciar Sesión</md-button></center>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Email</label>
+		    		<input ng-model="vm.credentials.email" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Contraseña</label>
+		    		<input ng-model="vm.credentials.password" type="password" required>
+		  		</md-input-container>
+	  		</div>
+	  		<center><md-button type="submit" class="login-button">Iniciar Sesión</md-button></center>
 	  		<br>
 	  		<center><a ng-model="vm.correo.email" ng-click="vm.showPrompt($event, vm.correo)" style="color: red;">Recuperar Contraseña</a></center>
+	  		<br>
+	  		<center><md-button ui-sref="" class="login-button2">Hola, Soy Nueva</md-button></center>
 	  		<br>
 	  		<center><p>{{vm.message}}<p></center>
 	  		<br>
