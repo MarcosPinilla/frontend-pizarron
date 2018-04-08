@@ -258,9 +258,9 @@ md-list.make-scrollable {
   background:rgba(0,0,0,0);
   color:#FAFAFA; 
   height: 100%; 
-  position: fixed; 
-  left: 0; 
-  min-width: 210px;
+  /*position: fixed; 
+  left: 0; */
+  min-width: 100%;
 }
 .panelbar-left {
   background-color: #3da0bd; 
@@ -272,8 +272,8 @@ md-list.make-scrollable {
 }
 
 .sidebar-right {
-  position: fixed;
-  right: 0;
+  /*position: fixed;
+  right: 0;*/
   widows: 200px;
   min-width: 230px;
 }
@@ -354,29 +354,61 @@ md-list.make-scrollable {
 
 .sidebar-buttons {
   display: block;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .sidebar-button {
-  text-align: left;
+  text-align: right;
   height: 5%;
+  font-size: 13px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   margin-bottom: 0.4em;
 }
 
+.sidebar-button span {
+  margin-right: 10px;
+}
+
+.sidebar-links {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  
+}
+
+.sidebar-links-top {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-top: 0.4em;
+  
+}
+
+.sidebar-links-bottom {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-bottom: 0.4em;
+  
+}
+
 .sidebar-text-name {
   color: black;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 15px;
   font-family: 'NeoSansBold';
 }
 
 .sidebar-text {
   color: #9c9c9c;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 15px;
   font-family: 'NeoSansLight';
 }
 
@@ -779,7 +811,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 }
 
 .mimaterial-titulo a {
-  font-size: 16px
+  font-size: 16px;
   color: white;
 }
 
