@@ -167,6 +167,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     url: '/notificaciones',
     component: 'notificacion',
     isPrivate: true
+  })
+  .state('register', {
+    url: '/register',
+    component: 'register',
+    isPrivate: false
   });
 
   $httpProvider.interceptors.push('InterceptorApi');
@@ -198,7 +203,7 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     if (to === 'dashboard' && !CredentialsService.isLogged()) {
       $state.go('login');
     }
-    
+
     if (to === 'dashboard.publicaciones' && !CredentialsService.isLogged()) {
       $state.go('login');
     }

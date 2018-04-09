@@ -15,6 +15,7 @@
     var vm = this;
 
     vm.isinLogged = false;
+    vm.noelLogin = false;
 
     vm.iralogin = function () {
       $state.go('login');
@@ -24,6 +25,7 @@
     vm.logout = function () {
       CredentialsService.clearCredentials();
       vm.isLogged = false;
+      vm.noelLogin = false;
       $state.go('login');
     };
 
@@ -33,6 +35,10 @@
 
     $rootScope.$on('isinLogin', function () {
       vm.isinLogged = true;
+    });
+
+    $rootScope.$on('noestoy', function () {
+      vm.noelLogin = true;
     });
 
     vm.gohome = function () {

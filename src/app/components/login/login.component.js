@@ -32,6 +32,7 @@
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
           $rootScope.$emit('isLogin');
+          $rootScope.$emit('noestoy');
           $state.go('dashboard');
           /*UsuarioService.query().$promise.then(function (data) {
             console.log(JSON.stringify(data.user));

@@ -18,11 +18,12 @@
 		    		<input ng-model="vm.credentials.password" type="password" required>
 		  		</md-input-container>
 	  		</div>
+	  		<br>
 	  		<center><md-button type="submit" class="login-button">Iniciar Sesión</md-button></center>
 	  		<br>
 	  		<center><a ng-model="vm.correo.email" ng-click="vm.showPrompt($event, vm.correo)" style="color: red;">Recuperar Contraseña</a></center>
 	  		<br>
-	  		<center><md-button ui-sref="" class="login-button2">Hola, Soy Nueva</md-button></center>
+	  		<center><md-button ui-sref="register" class="login-button2">Hola, Soy Nueva</md-button></center>
 	  		<br>
 	  		<center><p>{{vm.message}}<p></center>
 	  		<br>
