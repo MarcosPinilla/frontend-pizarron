@@ -1,13 +1,6 @@
-<div layout="column" ng-if="!vm.isinLogged"">
+<!--<div layout="column" ng-if="!vm.isinLogged">
   <md-toolbar class="tooolbar" style="position: fixed; top: 0; max-height: 4%">
     <div class="md-toolbar-tools">
-
-      <!--<md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-        <md-icon md-svg-icon="app/resources/icons/menu1.svg"></md-icon>
-      </md-button>-->
-
-
-      <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
       <div flex md-truncate class="">
         <md-button ng-click="vm.gohome()" id="logo-toolbar" aria-label="logo">
           <img src="app/resources/img/logo-horizontal-03.png" id="logo">
@@ -33,10 +26,6 @@
       <md-button ng-if="!vm.isLogged && !vm.isinLogged" class="contratar-toolbar md-raised md-warn">
         CONTRATAR
       </md-button>
-
-   <!--    <md-button ng-if="vm.isLogged" class="md-icon-button" arial-label="xd">
-        <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-      </md-button> -->
       <md-divider ng-if="vm.isLogged" class="vertical-divider"></md-divider>
       <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
         <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
@@ -47,4 +36,35 @@
       </md-button>
     </div>
   </md-toolbar>
+</div>-->
+
+<div class="toolbar" layout="row">
+  <div flex="30" style="height: 100%">
+    <md-button ng-click="vm.gohome()" aria-label="logo">
+      <img src="app/resources/img/logo-toolbar.png" id="logo-toolbar">
+    </md-button>
+  </div>
+  <div flex="5"></div>
+  <div flex="30">Buscador</div>
+  <div flex="5"></div>
+  <div flex="30" id="toolbar-icons">
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-07.svg"></md-icon>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-05.svg"></md-icon>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.favoritos">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-16.svg"></md-icon>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.mimaterial">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-08.svg"></md-icon>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.materiales">
+        <md-icon md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.amigos">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-06.svg"></md-icon>
+    </md-button>
+  </div>
 </div>

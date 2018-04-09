@@ -45,6 +45,22 @@ a {
     display: none; 
 }
 
+.toolbar {
+  position: fixed; 
+  top: 0; 
+  color: white;
+  background-color: #6d72ad;
+  height: 7%;
+  width: 100%;
+}
+
+#toolbar-icons {
+  position: fixed;
+  right: 0;
+  margin-top: 1.2%;
+  margin-right: 3%;
+}
+
 .view-toolbar {
   height: 20%;
 }
@@ -58,7 +74,8 @@ a {
 }
 
 #logo-toolbar {
-  height: 6em;
+  height: 3em;
+  width: auto;
 }
 
 .contratar-toolbar {
@@ -295,9 +312,9 @@ md-list.make-scrollable {
   background:rgba(0,0,0,0);
   color:#FAFAFA; 
   height: 100%; 
-  /*position: fixed; 
-  left: 0; */
-  min-width: 100%;
+  position: fixed; 
+  /*left: 0;*/
+  min-width: 25%;
 }
 .panelbar-left {
   background-color: #3da0bd; 
@@ -309,8 +326,8 @@ md-list.make-scrollable {
 }
 
 .sidebar-right {
-  /*position: fixed;
-  right: 0;*/
+  position: fixed;
+  /*right: 0;*/
   widows: 200px;
   min-width: 230px;
 }
@@ -460,7 +477,7 @@ md-list.make-scrollable {
     margin-top: 2em;
     margin-bottom: 1em;
     border-radius: 50%;
-    width: 50%;
+    width: 100px;
     height: auto;
     display: block;
     margin-left: auto;
