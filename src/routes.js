@@ -167,6 +167,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     url: '/notificaciones',
     component: 'notificacion',
     isPrivate: true
+  })
+  .state('register', {
+    url: '/register',
+    component: 'register',
+    isPrivate: false
   });
 
   $httpProvider.interceptors.push('InterceptorApi');
@@ -179,7 +184,7 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     var to = trans.$to().name;
     // Compruebo si esta logeado para acceder a rutas protegidas, si no esta logeado se va a la pestaña login
     if (isPrivate && !CredentialsService.isLogged()) {
-      $state.go('landing');
+      $state.go('login');
     }
 
     // Compruebo que quiera entrar a el login cuando ya esta logeado
@@ -193,6 +198,14 @@ function middlewareConfig($state, CredentialsService, $transitions) {
 
     if (to === 'administrator' && CredentialsService.isLogged()) {
       $state.go('administrator.estadisticas');
+    }
+
+    if (to === 'dashboard' && !CredentialsService.isLogged()) {
+      $state.go('login');
+    }
+
+    if (to === 'dashboard.publicaciones' && !CredentialsService.isLogged()) {
+      $state.go('login');
     }
 
     if (to === 'dashboard' && CredentialsService.isLogged()) {
