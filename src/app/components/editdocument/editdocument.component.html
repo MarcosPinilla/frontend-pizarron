@@ -20,14 +20,15 @@
         <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título">
       </div>
 
-  </div>
 
-  <div layout="row">
+    <div>
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
       
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
+    </div>
+      
   </div>
-
+<!--
   <div layout="row">
   <div flex="10">
     <md-input-container style="margin-right: 10px;">
@@ -59,15 +60,16 @@
   </div>
 
 
-</div>
+</div>-->
 
   <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
 
   <div flex="25">
    
-      <md-card class="page contenedor-curvo panel-figuras">
+     <div class="sidebar-left" layout="column" style="height: 100%">
+        <md-card class="page contenedor-curvo panel-figuras">
 
-        <md-content class="contenedor-curvo" style="padding-top: 10px;">
+        <md-content class="contenedor-curvo" style=" background-color: white;">
           <!--
           <div layout="row">
             <div flex="100">
@@ -104,7 +106,7 @@
           
           <md-tab label="Figuras">
          
-            <div layout="row" style="background-color: white;">
+            <div layout="row" >
               <div flex=50>
                <md-button  class="boton-figura" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
                 
@@ -121,7 +123,7 @@
 
             </div>
 
-            <div layout="row" style="background-color: white;">
+            <div layout="row" >
               <div flex=50>
                <md-button class="boton-figura" aria-label="Generar triangulo" ng-click="vm.generarTriangulo()">
               <md-icon md-svg-icon="app/resources/fabric/triangulo.svg"></md-icon>
@@ -142,7 +144,40 @@
 
         </md-tabs>
 
+
+    <div layout="row" style="margin-top: 20%;">
+       <md-input-container style="margin-right: 10px;">
+        <label>Fuente</label>
+        <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
+          
+          <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
+          
+        </md-select>
+      </md-input-container>
+    
+       <md-input-container style="margin-right: 10px;">
+        <label>Tamaño</label>
+        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto" style="width: 100px;">
+          
+          <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
+          
+        </md-select>
+      </md-input-container>
+
+       <md-input-container style="margin-right: 10px;">
+        <label>Color</label>
+        <input id="input-color" type="color" ng-model="vm.colorElemento" ng-change="vm.usarColor(vm.colorElemento)" ng-disabled="!vm.colorSeleccionable" style="width: 100px;">
+      </md-input-container>
+
+    </div>
+
+    
+
+
+
       </md-content>
+    </md-card>
+     </div>
   
   </div>
 
