@@ -1,4 +1,5 @@
 <!--<div layout="column" ng-if="!vm.isinLogged">
+<div layout="column" ng-if="vm.noelLogin && !isinLogged">
   <md-toolbar class="tooolbar" style="position: fixed; top: 0; max-height: 4%">
     <div class="md-toolbar-tools">
       <div flex md-truncate class="">
@@ -38,7 +39,7 @@
   </md-toolbar>
 </div>-->
 
-<div class="toolbar" layout="row">
+<div class="toolbar" layout="row" ng-if="vm.noelLogin && !isinLogged">
   <div flex="30" style="height: 100%">
     <md-button ng-click="vm.gohome()" aria-label="logo">
       <img src="app/resources/img/logo-toolbar.png" id="logo-toolbar">

@@ -20,15 +20,18 @@
     vm.tipo_material = {};
 
     vm.isinLogged = false;
+    vm.noelLogin = false;
 
     vm.iralogin = function () {
       $state.go('login');
     };
 
     vm.isLogged = CredentialsService.isLogged();
+    
     vm.logout = function () {
       CredentialsService.clearCredentials();
       vm.isLogged = false;
+      vm.noelLogin = false;
       $state.go('login');
     };
 
@@ -40,7 +43,6 @@
       vm.isinLogged = true;
     });
 
-    /*Lista las asignaturas*/
     ListarasignaturasService.query().$promise.then(function (data) {
       vm.asignaturas = data;
     });
@@ -51,16 +53,19 @@
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
+      $rootScope.$on('noestoy', function () {
+        vm.noelLogin = true;
+      });
     });
 
-    vm.gohome = function () {
+    /*vm.gohome = function () {
       vm.isinLogged = false;
       $state.go('landing');
-    }
+    };
 
     vm.doTheBack = function() {
       $window.history.back()
-    };
+    };*/
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({
@@ -95,14 +100,8 @@
       vm.material = {};
       vm.material_id = '';
 
-      /*console.log(vm.usuario);
-      console.log(vm.asignaturas);
-      console.log(vm.niveles);
-      console.log(vm.tipo_materiales);*/
-
       vm.crearmaterial = function (material) {
         if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
-          //console.log(material);
           MaterialService.save(material, function (res){
             console.log(res);
             vm.material_id = res.id;
@@ -111,8 +110,6 @@
           },function (err) {
             console.log(err);
           });
-       
-          //$state.go('editdocument');
         }
       };     
 
@@ -129,12 +126,12 @@
       };
     }
 
-    vm.material = {
-      material_id: "2"
-    }
+      /*vm.material = {
+        material_id: "2"
+      };*/
 
 
-      vm.darFavorito = function(data){
+     /* vm.darFavorito = function(data){
         console.log(data);
       DarFavorito.save(data,function(res){
         console.log('entra');
@@ -142,9 +139,6 @@
       },function(err){
         console.log(err);
       });
-
-    };
-
-    
-  }
+*/
+    }
 })();

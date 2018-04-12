@@ -1,0 +1,82 @@
+<div flex="100" class="register-div">
+	<md-content md-theme="app" style="position:relative; vertical-align: center; background: rgba(0, 0, 0,0);overflow: auto;" flex-offset="25" flex="50">
+		<center class="titulo">
+	  		<img class="userRegister" class="md-avatar" src="app/resources/img/logovertical.png" >
+		</center>
+		<form ng-submit="vm.login(vm.modelo)" >
+	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Email</label>
+		    		<input ng-model="vm.modelo.email" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Contraseña</label>
+		    		<input ng-model="vm.modelo.password" type="password" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Repetir Contraseña</label>
+		    		<input ng-model="vm.modelo.passwordC" type="password" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Nombres</label>
+		    		<input ng-model="vm.modelo.nombres_profesor" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Apellidos</label>
+		    		<input ng-model="vm.modelo.apellidos_profesor" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Profesión</label>
+		    		<input ng-model="vm.modelo.profesion" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+		    		<label>Cargo</label>
+		    		<input ng-model="vm.modelo.cargo" type="text" required>
+		  		</md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" >
+			      <label>Sexo</label>
+			      <md-select ng-model="vm.modelo.id_sexo">
+			        <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
+			          {{ sexo.desc_sexo }}
+			        </md-option>
+			      </md-select>
+			    </md-input-container>
+	  		</div>
+	  		<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block">
+			      <label>Comuna</label>
+			      <md-select ng-model="vm.modelo.id_comuna">
+			        <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
+			          {{ comuna.nombre_comuna }}
+			        </md-option>
+			      </md-select>
+			    </md-input-container>
+	  		</div>
+	  		<br>
+	  		<div class="divLogin" flex-offset="20" flex="60">
+	  			<label flex="90" flex-offset="5">Foto</label><input class="inputLogin" type="file" fileread="vm.modelo.foto_profesor" flex="90" flex-offset="5">
+	  		</div>
+	  		<br>
+	  		<center><md-button type="submit" class="login-button">Registrarse</md-button></center>
+	  		<br>
+	  		<center><p>{{vm.message}}<p></center>
+	  		<br>
+		</form>       
+	</md-content>
+</div>
