@@ -26,13 +26,13 @@
 			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #6d72ad;">
 				<span></md-icon> SITIOS DE INTERÉS</span>
 			</md-button>
-			<a class="sidebar-links-top" href="#">CHILE CRECE CONTIGO</a>
-			<a class="sidebar-links" href="#">MINEDUC</a>
-			<a class="sidebar-links" href="#">CPIP</a>
+			<a class="sidebar-links-top" href="http://www.crececontigo.gob.cl">CHILE CRECE CONTIGO</a>
+			<a class="sidebar-links" href="https://www.mineduc.cl">MINEDUC</a>
+			<a class="sidebar-links" href="http://www.cpeip.cl">CPEIP</a>
 			<a class="sidebar-links" href="#">ESTADO DOCENTE PUC</a>
-			<a class="sidebar-links" href="#">INTEGRA</a>
-			<a class="sidebar-links" href="#">SUB SECRETARIA ED. PARVULOS</a>
-			<a class="sidebar-links-bottom" href="#">DERECHO DE LOS NIÑOS</a>
+			<a class="sidebar-links" href="http://www.integra.cl">INTEGRA</a>
+			<a class="sidebar-links" href="https://www.mineduc.cl/ministerio/subsecretaria-educacion-parvularia">SUB SECRETARIA ED. PARVULOS</a>
+			<a class="sidebar-links-bottom" href="http://unicef.cl/web/convencion-sobre-los-derechos-del-nino">DERECHO DE LOS NIÑOS</a>
 			<md-button class="dashboard-button sidebar-button" flex="100" style="background-color: #f9b985;">
 				<span> DOCUMENTOS ORIENTADORES</span>
 			</md-button>
@@ -52,67 +52,4 @@
 		</div>
 		<div flex=10></div>
 	</div>
-
-<!-- dialog -->
-	<script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Notificaciones">
-
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Notificaciones</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="vm.cancel()">
-          <md-icon md-svg-src="" aria-label="Close dialog"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-
-    <md-dialog-content>
-      <div class="">
-      <div flex-gt-sm="100" flex>
-
-			    <md-content>
-			      <md-list flex>
-			        <md-subheader class="md-no-sticky">NUEVAS</md-subheader>
-			        <md-list-item class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
-			          <img class="md-avatar" ng-src="{{ item.profesor.url_foto_profesor }}"  alt="" />
-			          <div class="md-list-item-text" layout="column">
-			             <h3>{{ item.mensaje }} <strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong> </h3>
-			            <h4>{{ prueba }}</h4>
-			            <p>{{ item.created_at }}</p>
-			          </div>
-			        </md-list-item>
-			  
-
-			      </md-list>
-			    </md-content>
-			  </div>
-
-  				<md-divider></md-divider>
-	    <md-content>
-			      <md-list flex>
-			        <md-subheader class="md-no-sticky">ANTERIORES</md-subheader>
-			        <md-list-item class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
-			          <img ng-src="{{ item.profesor.url_foto_profesor }}" class="md-avatar" alt="" />
-			          <div class="md-list-item-text" layout="column">
-			            <h3>{{ item.mensaje }} <strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong> </h3>
-			            <h4>{{ prueba }}</h4>
-			            <p>{{ item.created_at }}</p>
-			          </div>
-			        </md-list-item>
-			  
-
-			      </md-list>
-			    </md-content>
-  
-      </div>
-    </md-dialog-content>
-
-   <!--  <md-dialog-actions layout="row">
-      
-    </md-dialog-actions> -->
-
-</md-dialog>
-</script>
-
-
 </div>
