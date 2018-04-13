@@ -17,34 +17,68 @@
 			<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
 		</div>
 		<div id="chat-profesores">
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
-			<div class="chat-profesor" layout="row">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>Nombre del profe</span>
-			</div>
+			<!-- div class="chat-profesor" layout="row" ng-repeat="amigo in vm.amigos">
+				<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
+				<span>{{ amigo.amigo2.nombres_profesor }}</span>
+			</div> -->
+				<md-list flex>
+        <md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.showAdvanced($event, amigo)">
+          <div class="md-list-item-text" layout="row">
+            <img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
+						<span>{{ amigo.amigo2.nombres_profesor }}</span>
+          </div>
+        </md-list-item>
+        <md-divider ></md-divider>
+        </md-list>
 		</div>
+
 	</div>
+
+
+	<!-- dialog -->
+	<script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Notificaciones">
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <small>{{ vm.amigo.amigo2.nombres_profesor }}</small>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="" aria-label="Close dialog">x</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="">
+      <div flex-gt-sm="100" flex>
+			    <md-content>
+			      <md-list flex>
+<!-- 			        <md-list-item class="md-1-line" ng-repeat="item in vm.notificaciones" ng-click="null">
+									<div class="md-list-item-text" layout="row">
+										<span>asda</span>
+				          </div>
+			        </md-list-item> -->
+			        <ul>
+			        	<p ng-repeat="item in vm.mensajes" >{{ item }}</p>
+			        </ul>
+			        <md-divider ></md-divider>
+			      </md-list>
+			    </md-content>
+			    <md-input-container md-no-float class="md-block">
+          <button> </button>
+          		<form ng-submit="vm.chatEnv(vm.message)" >
+					  		<input ng-model="vm.message.message" placeholder="Escribe un mensaje ...">
+					  		<md-button type="submit" class="md-raised md-warn ">Enviar</md-button>
+						</form> 
+        </md-input-container>
+			  </div>
+      </div>
+    </md-dialog-content>
+
+   <!--  <md-dialog-actions layout="row">
+      
+    </md-dialog-actions> -->
+
+</md-dialog>
+</script>
 </div>

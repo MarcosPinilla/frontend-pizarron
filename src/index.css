@@ -36,9 +36,50 @@ a {
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  padding-top: 100px;
+  width: 100%;
   height: 100%; 
   overflow: hidden;
+}
+
+.register-div{
+  background-image: url('app/resources/img/fondoregister.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+}
+
+.login-div::-webkit-scrollbar { 
+    display: none; 
+}
+
+.toolbar {
+  position: fixed; 
+  top: 0; 
+  color: white;
+  background-color: #6d72ad;
+  height: 7%;
+  width: 100%;
+  z-index: 2;
+}
+
+#toolbar-notifications {
+  margin-top: 1.2%;
+  margin-right: 3%;
+}
+
+#toolbar-icons {
+  position: fixed;
+  right: 0;
+  margin-top: 1.2%;
+  margin-right: 3%;
+}
+
+.register-div::-webkit-scrollbar { 
+    display: none; 
 }
 
 .view-toolbar {
@@ -54,7 +95,8 @@ a {
 }
 
 #logo-toolbar {
-  height: 6em;
+  height: 3em;
+  width: auto;
 }
 
 .contratar-toolbar {
@@ -62,9 +104,47 @@ a {
   font-weight: bold;
 }
 
-.login-button {
-  background-color: #e89a1f;
-  font-weight: bold;
+.login-button{
+  background-color : #6d72ad;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  font-size: 20px;
+}
+.login-button2{
+  background-color : #b0afd0;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  font-size: 10px;
+}
+
+.userLogin {
+  width: 95%;
+}
+
+.userRegister {
+  width: 50%;
+}
+
+.inputLogin{
+}
+.divLogin{
+  height: 40px;
+  background-color: white;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  
 }
 
 #icono {
@@ -259,8 +339,8 @@ md-list.make-scrollable {
   color:#FAFAFA; 
   height: 100%; 
   position: fixed; 
-  left: 0; 
-  min-width: 210px;
+  /*left: 0;*/
+  min-width: 25%;
 }
 .panelbar-left {
   background-color: #3da0bd; 
@@ -273,7 +353,7 @@ md-list.make-scrollable {
 
 .sidebar-right {
   position: fixed;
-  right: 0;
+  /*right: 0;*/
   widows: 200px;
   min-width: 230px;
 }
@@ -354,29 +434,61 @@ md-list.make-scrollable {
 
 .sidebar-buttons {
   display: block;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .sidebar-button {
-  text-align: left;
+  text-align: right;
   height: 5%;
+  font-size: 13px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   margin-bottom: 0.4em;
 }
 
+.sidebar-button span {
+  margin-right: 10px;
+}
+
+.sidebar-links {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  
+}
+
+.sidebar-links-top {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-top: 0.4em;
+  
+}
+
+.sidebar-links-bottom {
+  color: #9e9e9e;
+  text-align: right;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-bottom: 0.4em;
+  
+}
+
 .sidebar-text-name {
   color: black;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 15px;
   font-family: 'NeoSansBold';
 }
 
 .sidebar-text {
   color: #9c9c9c;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 15px;
   font-family: 'NeoSansLight';
 }
 
@@ -391,7 +503,7 @@ md-list.make-scrollable {
     margin-top: 2em;
     margin-bottom: 1em;
     border-radius: 50%;
-    width: 50%;
+    width: 100px;
     height: auto;
     display: block;
     margin-left: auto;
@@ -779,7 +891,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 }
 
 .mimaterial-titulo a {
-  font-size: 16px
+  font-size: 16px;
   color: white;
 }
 

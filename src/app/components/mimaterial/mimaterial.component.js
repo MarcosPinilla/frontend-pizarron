@@ -11,7 +11,7 @@
 
   mimaterialCtrl.$inject = ['ObtenerMiMaterialService', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService'];
 
-  function mimaterialCtrl(ObtenerMiMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService) {
+  function mimaterialCtrl(ObtenerMiMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, $state) {
     var vm = this;
     vm.materiales = {};
 
@@ -30,6 +30,13 @@
     ObtenerMiMaterialService.query().$promise.then(function (data) {
       vm.materiales = data;
     });
+
+    vm.goMaterial = function (material) { 
+       
+        $state.go('editdocument', {id: material.id});
+ 
+
+    };  
 
   }
 })();
