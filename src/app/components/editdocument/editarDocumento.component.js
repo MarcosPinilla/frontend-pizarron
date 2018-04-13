@@ -29,6 +29,8 @@
 
     var vm = this;
 
+    vm.indexTabs=0;
+
     vm.nombreInicial = "";
 
     vm.documento = MaterialService.get({id: $stateParams.id});

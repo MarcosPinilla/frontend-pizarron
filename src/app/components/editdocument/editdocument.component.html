@@ -21,7 +21,7 @@
       </div>
 
 
-    <div>
+    <div style="margin:auto;width: 50%;">
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
       
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
@@ -61,14 +61,20 @@
 
 
 </div>-->
-
   <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
-
   <div flex="25">
-   
      <div class="sidebar-left" layout="column" style="height: 100%">
+      <div layout="row">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Generar figura" ng-click="vm.indexTabs = 0">
+              <img src="app/resources/icons/ICONOS-25.svg">
+            </md-button>
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Generar figura" ng-click="vm.indexTabs = 1">
+              <img src="app/resources/icons/ICONOS-28.svg">
+            </md-button>
+           
+          </div>
         <md-card class="page contenedor-curvo panel-figuras">
-
+      
         <md-content class="contenedor-curvo" style=" background-color: white;">
           <!--
           <div layout="row">
@@ -98,15 +104,23 @@
             </div>        
           </md-content>
           -->
-        <md-tabs md-dynamic-height md-border-bottom>
-
-          <md-tab label="Elementos">
-            <repositorio></repositorio>
-          </md-tab>
           
-          <md-tab label="Figuras">
-         
-            <div layout="row" >
+        <md-tabs md-dynamic-height md-border-bottom md-selected="vm.indexTabs">
+          
+          <md-tab>
+            
+            <md-tab-body>
+              <repositorio></repositorio>
+            </md-tab-body>
+            
+          </md-tab>
+
+        
+          <md-tab >
+             
+
+             <md-tab-body>
+                 <div layout="row" >
               <div flex=50>
                <md-button  class="boton-figura" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
                 
@@ -138,14 +152,21 @@
             </div>
 
             </div>
+             </md-tab-body>
+           
              
           </md-tab>
-
+          <!--
+          <md-tab>
+             <md-tab-label><span style="color:white;">Importar</span></md-tab-label>
+            <repositorio></repositorio>
+          </md-tab>
+-->
 
         </md-tabs>
 
 
-    <div layout="row" style="margin-top: 20%;">
+    <div layout="row">
        <md-input-container style="margin-right: 10px;">
         <label>Fuente</label>
         <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
