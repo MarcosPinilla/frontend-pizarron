@@ -30,6 +30,21 @@ a {
     color: white;
 }
 
+.newdocument {
+}
+
+#newdocument-title {
+  color: white;
+  background-color: #bddf8b;
+  text-align: center;
+}
+
+md-dialog {
+  border-radius: 18px;
+  width: 300px;
+
+}
+
 .login-div{
   background-image: url('app/resources/img/login-background.jpg');
   background-repeat: no-repeat;
@@ -427,9 +442,15 @@ md-list.make-scrollable {
 }
 
 .sidebar-titulo {
-  height: 1.5em;
-  border-radius: 8px;
+  height: 30px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
   color: white;
+}
+
+.sidebar-titulo-content {
+  padding-top: 3px;
+  padding-left: 3px;
 }
 
 .sidebar-buttons {

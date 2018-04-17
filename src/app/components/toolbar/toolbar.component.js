@@ -32,6 +32,11 @@
     
     vm.logout = function () {
       CredentialsService.clearCredentials();
+      vm.isinLogin = true;
+      vm.isnotinLogin = false;
+      console.log("STARCRAFT");
+      console.log(vm.isinLogin);
+      console.log(vm.isnotinLogin);
       $state.go('login');
     };
 

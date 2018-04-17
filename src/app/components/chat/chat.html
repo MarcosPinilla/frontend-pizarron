@@ -1,8 +1,10 @@
 <div class="sidebar-right" layout="column" style="height: 100%">
 	<div id="sidebar-notificacion" flex> 
 		<div class="sidebar-titulo" style="background-color: #f9b985";>
-			<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-			Notificaciones
+			<div class="sidebar-titulo-content">
+				<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+				Notificaciones
+			</div>
 		</div>
 		<div id="notificacion">
 			<div class="notificacion" layout="row" ng-repeat="notificacion in vm.notificaciones">
@@ -14,7 +16,9 @@
 	</div>
 	<div id="chat" flex>
 		<div class="sidebar-titulo" style="background-color: #bddf8b;">
-			<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
+			<div class="sidebar-titulo-content">
+				<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
+			</div>
 		</div>
 		<div id="chat-profesores">
 			<!-- div class="chat-profesor" layout="row" ng-repeat="amigo in vm.amigos">
