@@ -21,8 +21,8 @@
     vm.niveles = {};
     vm.tipo_material = {};
 
-    vm.isinLogged = false;
-    vm.noelLogin = false;
+    vm.isinLogin = false;
+    vm.isnotinLogin = false;
 
     vm.iralogin = function () {
       $state.go('login');
@@ -40,11 +40,11 @@
     });
 
     $rootScope.$on('isinLogin', function () {
-      vm.isinLogged = true;
+      vm.isinLogin = true;
     });
 
-    $rootScope.$on('noestoy', function () {
-      vm.noelLogin = true;
+    $rootScope.$on('isnotinLogin', function () {
+      vm.isnotinLogin = true;
     });
 
     ListarasignaturasService.query().$promise.then(function (data) {
