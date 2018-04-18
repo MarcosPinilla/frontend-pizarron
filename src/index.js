@@ -11,4 +11,4 @@ angular
     $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark().primaryPalette('deep-purple');
     $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark().primaryPalette('blue');
   })
-  .constant('API', 'http://localhost:8000/api/');
+  .constant('API', 'http://69.164.202.85:8500/api/');
