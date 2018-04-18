@@ -44,15 +44,12 @@
       <img src="app/resources/img/logo-toolbar.png" id="logo-toolbar">
     </md-button>
   </div>
-  <div flex="5"></div>
   <div flex="30">Buscador</div>
-  <div flex="5" id="toolbar-notifications">
+  <div flex="40" id="toolbar-icons">
     <md-button class="md-icon-button" ng-click="vm.showAdvanced($event)">
       <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       {{ vm.cantidadNotificaciones.notificaciones }}
-    </md-button></div>
-  <div flex="30" id="toolbar-icons">
-    
+    </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-07.svg"></md-icon>
     </md-button>
@@ -100,7 +97,7 @@
               <md-list-item class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
                 <img class="md-avatar" ng-src="{{ item.profesor.url_foto_profesor }}"  alt="" />
                 <div class="md-list-item-text" layout="column">
-                   <h3>{{ item.mensaje }} <strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong> </h3>
+                   <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
                   <h4>{{ prueba }}</h4>
                   <p>{{ item.created_at }}</p>
                 </div>
@@ -118,7 +115,7 @@
               <md-list-item class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
                 <img ng-src="{{ item.profesor.url_foto_profesor }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text" layout="column">
-                  <h3>{{ item.mensaje }} <strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong> </h3>
+                  <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
                   <h4>{{ prueba }}</h4>
                   <p>{{ item.created_at }}</p>
                 </div>
