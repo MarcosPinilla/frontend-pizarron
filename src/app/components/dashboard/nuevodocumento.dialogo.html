@@ -1,12 +1,8 @@
-<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 65px;padding-right: 65px ">
+<div id="newdocument-title">
+	<h2><strong>Nuevo Documento</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<form>
-	<md-toolbar>
-      <div class="md-toolbar-tools">
-        <h1><strong>Nuevo Documento</strong></h1>
-        <span flex></span>
-      </div>
-    </md-toolbar>
-    <br>
 	<md-input-container class="md-block" flex="100">
 	    <label>Titulo del Documento</label>
 	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.material.titulo_material">

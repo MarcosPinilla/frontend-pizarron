@@ -21,8 +21,8 @@
     vm.niveles = {};
     vm.tipo_material = {};
 
-    vm.isinLogged = false;
-    vm.noelLogin = false;
+    vm.isinLogin = false;
+    vm.isnotinLogin = false;
 
     vm.iralogin = function () {
       $state.go('login');
@@ -32,6 +32,11 @@
     
     vm.logout = function () {
       CredentialsService.clearCredentials();
+      vm.isinLogin = true;
+      vm.isnotinLogin = false;
+      console.log("STARCRAFT");
+      console.log(vm.isinLogin);
+      console.log(vm.isnotinLogin);
       $state.go('login');
     };
 
@@ -40,11 +45,11 @@
     });
 
     $rootScope.$on('isinLogin', function () {
-      vm.isinLogged = true;
+      vm.isinLogin = true;
     });
 
-    $rootScope.$on('noestoy', function () {
-      vm.noelLogin = true;
+    $rootScope.$on('isnotinLogin', function () {
+      vm.isnotinLogin = true;
     });
 
     ListarasignaturasService.query().$promise.then(function (data) {
