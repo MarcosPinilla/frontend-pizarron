@@ -1,11 +1,10 @@
-<md-content layout-padding layout-wrap md-theme="app" flex="100" style="padding-left: 100px;padding-right: 100px ">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h1><strong>Configuración de la hoja</strong></h1>
-      <span flex></span>
-    </div>
-  </md-toolbar>
+<div style="background: #6d72ad; color:white;text-align: center;">
+      <h3>Configuración de la hoja</h3>
+</div>
 
+
+<md-content layout-padding layout-wrap md-theme="app" flex="100">
+  
   <md-input-container class="md-block" flex="100">
     <span>Orientación</span>
     <br>
@@ -24,5 +23,5 @@
       </md-select>
   </md-input-container>
 
-    <center><md-button class="md-raised md-primary" ng-click="vm.answer()" md-theme="dark-green" aria-label="addasignatura">Guardar</md-button></center>
+    <center><md-button class="md-raised md-warn login-button" ng-click="vm.answer()"  aria-label="addasignatura">Guardar</md-button></center>
 </md-content>
