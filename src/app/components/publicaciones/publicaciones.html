@@ -5,20 +5,21 @@
 <div>
 	<div flex="20"></div>
 	<div class="post" layout="column" flex="60" flex-offset="20">
-		<md-card class="post-card" ng-repeat="material in vm.materiales">
+		<md-card class="post-card" ng-repeat="material in vm.materiales | orderBy: '-id'">
 			<md-card-title style="background-color: #fad98f; border-radius: 40px;">
 				<md-card-title-text style="font-size: 16px; color: #C5CAE9">
 					<div layout="row">
 						<div><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})"><img class="amigos-amigo-img" src="{{material.colaboradores[0].url_foto_profesor}}"></a></div>
-						<div class="material-titulo"><span><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}</a> publico <a href="#">{{material.titulo_material}}</a></span></div>
+						<div class="material-titulo"><span><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}</a> publicó <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span></div>
 					</div>
 				</md-card-title-text>
 			</md-card-title>
-			<div>
-				<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
+
+			<div id={{material.id}}>
 			</div>
+
 			<md-card-title layout="row" layout-align="end center" style="background-color: #fad98f; height: 4em;">
-				<md-button style="color: white;">Ver documento</md-button>
+				<md-button style="color: white;" ui-sref="editdocument({id:material.id})">Ver documento</md-button>
 				<md-button class="dashboard-button-fab"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
 				</md-button>
 			</md-card-title>

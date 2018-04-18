@@ -24,6 +24,12 @@
         vm.materiales = data;
         console.log(vm.materiales);
         console.log(vm.materiales.materiales);
+
+        setTimeout(function() {
+          for(let i = 0; i < vm.materiales.length; i++) {
+            document.getElementById(vm.materiales[i].id).innerHTML = "<center><a ui-sref='editdocument({id:" + vm.materiales[i].id + "})'>" + vm.materiales[i].vista_previa + "</a></center>";  
+          }
+        }, 300);
       });
 
       vm.verDocumento = function() {
