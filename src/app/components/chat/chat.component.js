@@ -9,27 +9,17 @@
     	controllerAs: 'vm'
   	});
 
-  	chatCtrl.$inject = ['$mdDialog','NotificacionesRecientesService', 'AmigoService', 'ChatService', '$pusher'];
+  	chatCtrl.$inject = ['$mdDialog', 'AmigoService', 'ChatService', '$pusher'];
 
-  	function chatCtrl($mdDialog, NotificacionesRecientesService, AmigoService, ChatService) {
+  	function chatCtrl($mdDialog, AmigoService, ChatService) {
   		var vm = this;
 
       vm.notificaciones = {};
        vm.amigos = {};
 
-      NotificacionesRecientesService.query().$promise.then(function (data) {
-        console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
-        console.log(data);
-        vm.notificaciones = data;
-      });
-
       AmigoService.query().$promise.then(function (data) {
         vm.amigos = data;
       });
-
-
-
-
 
       vm.showAdvanced = function(ev, amigo) {
 

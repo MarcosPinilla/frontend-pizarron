@@ -34,7 +34,6 @@
       CredentialsService.clearCredentials();
       vm.isinLogin = true;
       vm.isnotinLogin = false;
-      console.log("STARCRAFT");
       console.log(vm.isinLogin);
       console.log(vm.isnotinLogin);
       $state.go('login');
@@ -63,10 +62,6 @@
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
     });
-
-    console.log("RIPPPPPED!");
-    console.log(vm.noelLogin);
-    console.log(vm.isinLogged);
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({
