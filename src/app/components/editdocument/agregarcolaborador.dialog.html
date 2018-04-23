@@ -1,21 +1,21 @@
 
-<md-content layout-padding layout-wrap md-theme="app" flex="100" style="width: 700px;">
-    <div style="background: rgb(63,81,181); color:white;">
-      <h2>Colaboradores del material</h2>
-    </div>
-
+<div style="background: #6d72ad; color:white;text-align: center;">
+      <h3>Colaboradores del material</h3>
+</div>
+<md-content layout-padding layout-wrap md-theme="app" flex="100" style="width: 600px;">
+   
     <h4>Quién tiene acceso...</h4>
     <div class="contenedor-colaboradores">
       
 
-      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch  ng-repeat="colaborador in vm.colaboradores ">
+      <md-card style="border-radius: 15px;"  md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch  ng-repeat="colaborador in vm.colaboradores ">
         <md-card-title>
           <md-card-title-media style="margin-right: 10px;">
-              <img class="md-media-sm card-media" ng-src="{{colaborador.profesor.url_foto_profesor}}">
+              <img style="border-radius: 50%;" class="md-media-sm card-media foto-colaborador" ng-src="{{colaborador.profesor.url_foto_profesor}}">
           </md-card-title-media>
           <md-card-title-text>
-            <span class="md-headline">{{colaborador.profesor.nombres_profesor}} {{colaborador.profesor.apellidos_profesor}}</span>
-            <span class="md-subhead">
+            <span class="md-headline"  style="font-size:18px;">{{colaborador.profesor.nombres_profesor}} {{colaborador.profesor.apellidos_profesor}}</span>
+            <span class="md-subhead" >
             {{colaborador.profesor.profesion}}
              <span ng-if="colaborador.autor"> - </span>
             <span ng-if="colaborador.autor">Autor del documento</span>
@@ -56,7 +56,7 @@
           </md-not-found>
         </md-autocomplete>
 	    <br>
-	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.agregarColaborador(vm.selectedItem.id)">Agregar colaborador</md-button></center>
+	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.agregarColaborador(vm.selectedItem.id)">Agregar colaborador</md-button ></center>
 	    <br>
     </form>  
 

@@ -1,15 +1,12 @@
 <div class="sidebar-right" layout="column" style="height: 100%">
 	<div id="sidebar-notificacion" flex> 
 		<div class="sidebar-titulo" style="background-color: #f9b985";>
-			<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-			Notificaciones
+			<div class="sidebar-titulo-content">
+				<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+				Noticias
+			</div>
 		</div>
 		<div id="notificacion">
-			<div class="notificacion" layout="row" ng-repeat="notificacion in vm.notificaciones">
-				<img ng-src="https://memegenerator.net/img/images/600x600/71408652/double-entendre.jpg" class="chat-avatar">
-				<span>{{notificacion.mensaje}}</span>
-				<!--<span><a href="">{Nombre Completo}</a> ha aceptado tu solicitud de amistad.</span>-->
-			</div>
 		</div>
 	</div>
 				<md-card style="z-index: 999; position: fixed; height: 20em; bottom: 0em; right: 250px; width: 16em; margin: 0; max-height: 20em" ng-if="vm.chatCreado">
@@ -58,7 +55,9 @@
 	<div id="chat"  flex>
 		<md-button ng-click="vm.activarChatGrupal()">Chat Grupal</md-button>
 		<div class="sidebar-titulo" style="background-color: #bddf8b;">
-			<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
+			<div class="sidebar-titulo-content">
+				<img ng-src="app/resources/icons/CHAT-03.png" class="icon-img" id="chat-icon">
+			</div>
 		</div>
 		<div id="chat-profesores" ng-if="vm.visibleChat">
 			<!-- div class="chat-profesor" layout="row" ng-repeat="amigo in vm.amigos">

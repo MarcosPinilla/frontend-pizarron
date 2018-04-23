@@ -29,6 +29,8 @@
 
     var vm = this;
 
+    vm.indexTabs=0;
+
     vm.nombreInicial = "";
 
     vm.documento = MaterialService.get({id: $stateParams.id});
@@ -136,6 +138,9 @@
         undoButton              : document.getElementById('undo'),
         redoButton              : document.getElementById('redo'),
       };
+
+      //_config.redoButton.disabled= "disabled";
+      //_config.undoButton.disabled= "disabled";
 
       vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
       vm.fontsizes = [];
@@ -371,7 +376,7 @@
                 vm.figuras++;
               });
               //canvas.add(oImg);
-            }, null, '');
+            }, null, { crossOrigin: 'anonymous'});
             
           }
           
@@ -830,7 +835,7 @@
     canvas.on('object:modified',vm.canvasModified)
 
       //Subir imágen desde computador
-      
+      /*
       document.getElementById('archivo').addEventListener("change", function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
@@ -852,7 +857,7 @@
         reader.readAsDataURL(file);
         
     
-      });
+      });*/
       
 
       //Subir imágen desde URL (MUESTRA LA IMAGEN PERO NO ESTÁ CORRECTO)
@@ -890,6 +895,7 @@
         });
 
     //DEBERIA DESHABILITAR EL CORS PERO AUN ASI DA PROBLEMAS 
+    /*
     vm.subir = function() {
       var URL = document.getElementById("url").value;
       fabric.Image.fromURL(URL, function(img) {
@@ -907,7 +913,7 @@
         },{crossOrigin: 'Anonymous'});
       
      
-    }
+    }*/
 
 
     //Lógica para exportar a pdf, utilizando el elemento de canvas

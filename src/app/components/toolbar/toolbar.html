@@ -1,50 +1,119 @@
-<div layout="column" ng-if="vm.noelLogin && !isinLogged">
-  <md-toolbar class="tooolbar" style="position: fixed; top: 0; max-height: 4%">
-    <div class="md-toolbar-tools">
+<div class="toolbar" layout="row" ng-if="!vm.isinLogin || vm.isnotinLogin">
+  <div flex="30" style="height: 100%">
+    <md-button aria-label="logo" ui-sref="dashboard">
+      <img src="app/resources/img/logo-toolbar.png" id="logo-toolbar">
+    </md-button>
+  </div>
+  <div flex="30">
+    <md-input-container id="toolbar-buscador">
+      <input ng-model=""  type="text" placeholder="Buscar profesores">
+    </md-input-container>
+  </div>
+  <div flex="40" id="toolbar-icons">
+    <md-button class="md-icon-button" ng-click="vm.showAdvanced($event)">
+      <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+      {{ vm.cantidadNotificaciones.notificaciones }}
+      <md-tooltip md-direction="bottom">
+        Notificaciones
+      </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-07.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Home
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-05.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Crear Material
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.favoritos">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-16.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Favoritos
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.mimaterial">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-08.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Mi Material
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.materiales">
+        <md-icon md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Buscar Materiales
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.amigos">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-06.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Mis Amigos
+        </md-tooltip>
+    </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.logout()">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-22.svg"></md-icon>
+        <md-tooltip md-direction="left">
+          Cerrar Sesión
+        </md-tooltip>
+    </md-button>
+  </div>
+</div>
 
-      <!--<md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
-        <md-icon md-svg-icon="app/resources/icons/menu1.svg"></md-icon>
-      </md-button>-->
+<!-- dialog -->
+  <script type="text/ng-template" id="dialog2.tmpl.html"><md-dialog aria-label="Notificaciones">
 
-
-      <!-- h2 flex md-truncate><logo-toolbar>pizarrón del profe</logo-toolbar></h2 -->
-      <div flex md-truncate class="">
-        <md-button ng-click="vm.gohome()" id="logo-toolbar" aria-label="logo">
-          <img src="app/resources/img/logo-horizontal-03.png" id="logo">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Notificaciones</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="" aria-label="Close dialog"></md-icon>
         </md-button>
       </div>
+    </md-toolbar>
 
-      <md-button ng-if="!vm.isLogged">
-        NOSOTROS
-      </md-button>
+    <md-dialog-content>
+      <div class="">
+      <div flex-gt-sm="100" flex>
 
-      <md-button ng-if="!vm.isLogged">
-        TESTIMONIOS
-      </md-button>
+          <md-content>
+            <md-list flex>
+              <md-subheader class="md-no-sticky">NUEVAS</md-subheader>
+              <md-list-item class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
+                <img class="md-avatar" ng-src="{{ item.profesor.url_foto_profesor }}"  alt="" />
+                <div class="md-list-item-text" layout="column">
+                   <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
+                  <h4>{{ prueba }}</h4>
+                  <p>{{ item.created_at }}</p>
+                </div>
+              </md-list-item>
+        
 
-      <md-button ng-if="!vm.isLogged">
-        CONTACTO
-      </md-button>
+            </md-list>
+          </md-content>
+        </div>
 
-      <md-button ng-if="!vm.isLogged && !vm.isinLogged" ui-sref="login">
-        INICIAR SESIÓN
-      </md-button>
+          <md-divider></md-divider>
+      <md-content>
+            <md-list flex>
+              <md-subheader class="md-no-sticky">ANTERIORES</md-subheader>
+              <md-list-item class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
+                <img ng-src="{{ item.profesor.url_foto_profesor }}" class="md-avatar" alt="" />
+                <div class="md-list-item-text" layout="column">
+                  <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
+                  <h4>{{ prueba }}</h4>
+                  <p>{{ item.created_at }}</p>
+                </div>
+              </md-list-item>
+        
 
-      <md-button ng-if="!vm.isLogged && !vm.isinLogged" class="contratar-toolbar md-raised md-warn">
-        CONTRATAR
-      </md-button>
-
-   <!--    <md-button ng-if="vm.isLogged" class="md-icon-button" arial-label="xd">
-        <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-      </md-button> -->
-      <md-divider ng-if="vm.isLogged" class="vertical-divider"></md-divider>
-      <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite">
-        <md-icon md-svg-icon="app/resources/icons/config.svg"></md-icon>
-      </md-button>
-
-      <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
-        CERRAR SESIÓN
-      </md-button>
-    </div>
-  </md-toolbar>
-</div>
+            </md-list>
+          </md-content>
+  
+      </div>
+    </md-dialog-content>
+</md-dialog>
+</script>

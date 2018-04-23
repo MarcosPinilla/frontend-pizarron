@@ -1,27 +1,27 @@
-<h3>Recientes</h3>
-<md-divider></md-divider>
+<center>
+	<h2>Publicaciones Recientes</h2>
+	<md-divider style="width: 400px;"></md-divider>
+</center>
 <div>
 	<div flex="20"></div>
 	<div class="post" layout="column" flex="60" flex-offset="20">
-		<md-card class="post-card" ng-repeat="material in vm.materiales">
-			<md-card-title style="background-color: #fad98f; border-radius: 40px;">
-				<md-card-title-text style="font-size: 16px; color: #C5CAE9">
-					<div layout="row">
-						<div><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})"><img class="amigos-amigo-img" src="{{material.colaboradores[0].url_foto_profesor}}"></a></div>
-						<div class="material-titulo"><span><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}</a> publico <a href="#">{{material.titulo_material}}</a></span></div>
-					</div>
-				</md-card-title-text>
-			</md-card-title>
-			<div>
-				<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
-			</div>
-			<md-card-title layout="row" layout-align="end center" style="background-color: #fad98f; height: 4em;">
-				<md-button style="color: white;">Ver documento</md-button>
-				<md-button class="dashboard-button-fab"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
-				</md-button>
-			</md-card-title>
-			<md-divider style="height: 1px; background-color: #f4c255"></md-divider>
-			<md-content ng-repeat="comentario in material.comentarios">
+		<md-card class="post-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #fad98f">
+		    <md-card-title style="background-color: #fad98f; border-radius: 18px;"> 
+		      <md-card-title-text class="mimaterial-titulo">
+		      	<div layout="row">
+					<div><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})"><img class="publicacion-img" src="{{material.colaboradores[0].url_foto_profesor}}"></a></div>
+						<div class="material-titulo"><span><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}</a> publicó <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span></div>
+				</div>
+		      </md-card-title-text>
+		    </md-card-title>
+		    <div>
+		      <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="Previsualización no encontrada"></a>
+		      <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
+		    </div> 
+		    <md-card-actions layout="row" layout-align="end center" style="color: white;">
+		      <md-button ng-click="vm.goMaterial(material)">Ver documento</md-button>
+		    </md-card-actions>
+		    <md-content ng-repeat="comentario in material.comentarios">
 				<div class="comentario" layout="row">
 					<div class="comentario-foto" style="" flex="20">
 						<img class="amigos-amigo-img" src="{{comentario.profesor.url_foto_profesor}}">
@@ -45,14 +45,7 @@
 					</md-button>
 				</div>
 			</div>
-			<!--<md-input-container class="md-block" style="background-color: #E8EAF6; margin: 2px 0;">
-  				<textarea class="publicacion-comentario" placeholder="Escribe un comentario" ng-keydown="count = count + 1" ng-init="count=0"></textarea>
-  			</md-input-container>
-  			<div>
-  				<h1>{{count}}</h1>
-  			</div>-->
-		</md-card>
+  		</md-card>
 	</div>
 	<div flex="20"></div>
 </div>
-

@@ -23,6 +23,51 @@
 
 }
 
+md-tabs-canvas {
+  display: none !important;
+}
+
+
+/*
+ .md-tab:first-child{background: #ffcc99; } 
+ .md-tab:nth-child(2){background: #bddf8b; } 
+ .md-tab:nth-child(3){background: #adadeb; } 
+  */
+
+/*Panel izquierdo*/
+.panel-figuras{
+  height: 500px;
+  /*background-color: #f2f2f2;*/
+  margin-top: -1px;
+  width: 100%;
+}
+/*Botones apra generar figuras*/
+.boton-figura{
+  width:80px; height:100px;
+}
+
+.boton-figura md-icon{
+  width: 80px; 
+  height: 80px;
+  font-size:80px;
+}
+
+/*Botones páginas*/
+.boton-pagina{
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0px 0px 0px 0px !important;
+  /*margin-bottom: 10px !important;
+*/}
+
+.boton-pagina md-icon{
+  color:white;
+  font-size: 48px !important;
+  height: 48px !important;
+  width: 48px !important;
+}
+
+/*Undo y redo*/
 #redo:disabled md-icon{
   color:rgba(0,0,0,0.38);
 }
@@ -38,14 +83,16 @@
 #undo:enabled md-icon{
   color:white;
 }
-
+/*Contenedor de la página central*/
 .contenedor-pagina{
   background: #bddf8b;
-  padding: 10px 10px 10px 0px;
+ padding: 10px 10px 10px 10px;
   margin-top: 10px;
   border-radius: 25px;
   margin: 0;
   display: table;
+  transform: scale(0.8);
+  transform-origin: top left;
 }
 
 .contenedor-curvo{
@@ -91,8 +138,16 @@
 
 .contenedor-colaboradores{
   overflow-y: scroll; 
-  height:360px;
+  height:210px;
   background: #e6e6e6;
+}
+
+.foto-colaborador{
+  width: auto;
+  height: auto;  
+  display: block;
+  max-width:60px;
+  max-height:60px;
 }
 
 .contador{
@@ -114,7 +169,8 @@
   /*margin: 0 auto;*/
   /*padding: 24px;*/
   /*ax-width: 680px;*/
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); }
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25); 
+}
 
 
 

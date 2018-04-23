@@ -9,9 +9,11 @@
     	controllerAs: 'vm'
   	});
 
+
   	chatCtrl.$inject = ['$mdDialog','NotificacionesRecientesService', 'CredentialsService', 'AmigoService','PerfilService', 'MessageService', 'GrupoService', '$pusher'];
 
   	function chatCtrl($mdDialog, NotificacionesRecientesService, CredentialsService, AmigoService, PerfilService, MessageService, GrupoService, $pusher, $scope ) {
+
   		var vm = this;
 
       vm.notificaciones = {};
@@ -24,15 +26,10 @@
       vm.token = CredentialsService.getToken();
       console.log(vm.token);
 
-      NotificacionesRecientesService.query().$promise.then(function (data) {
-        console.log("NOTIFICACIONEEEEEEEEEEEEEEES!");
-        console.log(data);
-        vm.notificaciones = data;
-      });
-
       AmigoService.query().$promise.then(function (data) {
         vm.amigos = data;
       });
+
 
        PerfilService.get().$promise.then(function (data) {
            vm.usuarioID = data.id;
@@ -173,9 +170,6 @@
             console.log(error);
           });
         };
-
-
-
 
 
 

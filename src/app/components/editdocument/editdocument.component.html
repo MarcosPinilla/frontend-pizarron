@@ -20,52 +20,15 @@
         <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título">
       </div>
 
-  </div>
 
-  <div layout="row">
-
-    
-<!--
-      
-    <md-button class="md-icon-button" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo" style="width:55px; height: 55px;">
-      <md-icon> undo </md-icon>
-      <md-tooltip>
-          Deshacer
-      </md-tooltip>
-    </md-button>
-  
-
-    <md-button class="md-icon-button boton-icono" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
-      <md-icon>redo</md-icon>
-      <md-tooltip>
-          Rehacer
-      </md-tooltip>
-    </md-button>
--->
-    <md-button class="md-icon-button" ng-click="vm.exportar()" aria-label="boton guardar" style="width:55px; height: 55px;">
-      <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg" style="width:32px; height: 35px;"></md-icon>
-      <md-tooltip>
-          Exportar a PDF
-      </md-tooltip>
-    </md-button>
-
-    <md-button class="md-icon-button boton-icono" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
-      <md-icon>settings</md-icon>
-      <md-tooltip>
-          Configuración de la hoja
-      </md-tooltip>
-    </md-button>
-
-  
-      <md-button style="background:#4d79ff;" class="md-raised md-primary" ng-click="vm.mostrarColaborador()">
-        <span style="margin-right: 5px;">Nuevo colaborador</span><md-icon>people</md-icon>
-      </md-button>
-
+    <div style="margin:auto;width: 50%;">
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
       
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Página: {{vm.paginaActual}}/{{vm.documentoCompleto.length - 1}} (10 máx.) <span class="contador" style="color:red;" ng-if="vm.documentoCompleto.length - 1 === 10"> Límite alcanzado</span></span>
+    </div>
+      
   </div>
-
+<!--
   <div layout="row">
   <div flex="10">
     <md-input-container style="margin-right: 10px;">
@@ -97,15 +60,40 @@
   </div>
 
 
-</div>
-
+</div>-->
   <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
-
   <div flex="25">
-   
-      <md-card class="page contenedor-curvo" style="height: 580px;background-color: #f2f2f2;margin-top: -1px;">
+     <div class="sidebar-left" layout="column" style="height: 100%">
+      <div layout="row">
+          <div flex="25">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
+              <img src="app/resources/icons/ICONOS-25.svg">
+            </md-button>
+          </div>
 
-        <md-content class="contenedor-curvo" style="padding-top: 10px;">
+          <div flex="25">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab figuras" ng-click="vm.indexTabs = 1">
+              <img src="app/resources/icons/ICONOS-28.svg">
+            </md-button>
+          </div>
+
+          <div flex="25">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+              <img src="app/resources/icons/ICONOS-26.svg">
+            </md-button>
+          </div>
+
+          <div flex="25">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+              <img src="app/resources/icons/ICONOS-27.svg">
+            </md-button>
+           </div>
+        </div>
+
+        <md-card class="page contenedor-curvo panel-figuras">
+      
+        <md-content class="contenedor-curvo" style=" background-color: white;">
+          <!--
           <div layout="row">
             <div flex="100">
               <input class="ng-hide" id="archivo" multiple type="file" aria-label="asd" />
@@ -132,90 +120,119 @@
                 </div>
             </div>        
           </md-content>
+          -->
           
-        <md-tabs md-dynamic-height md-border-bottom>
-          <md-tab label="Figuras">
-         
-            <div layout="row" style="background-color: #F0F0F0;">
+        <md-tabs md-dynamic-height md-border-bottom md-selected="vm.indexTabs">
+          
+          <md-tab>
+            
+            <md-tab-body>
+              <repositorio></repositorio>
+            </md-tab-body>
+            
+          </md-tab>
+
+        
+          <md-tab >
+             
+
+             <md-tab-body>
+                 <div layout="row" >
               <div flex=50>
-               <md-button  style="width:80px; height:100px;" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
+               <md-button  class="boton-figura" aria-label="Generar cuadro de texto" ng-click="vm.generarTexto()">
                 
-              <md-icon md-svg-icon="app/resources/fabric/textbox.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+              <md-icon md-svg-icon="app/resources/fabric/textbox.svg"></md-icon>
               </md-button>
             </div>
 
          
             <div flex=50>
-             <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarFigura()">
-              <md-icon md-svg-icon="app/resources/fabric/rect.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+             <md-button  class="boton-figura" aria-label="Generar figura" ng-click="vm.generarFigura()">
+              <md-icon md-svg-icon="app/resources/fabric/rect.svg"></md-icon>
             </md-button>
             </div>
 
             </div>
 
-            <div layout="row" style="background-color: #F0F0F0;">
+            <div layout="row" >
               <div flex=50>
-               <md-button  style="width:80px; height:100px;" aria-label="Generar triangulo" ng-click="vm.generarTriangulo()">
-              <md-icon md-svg-icon="app/resources/fabric/triangulo.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+               <md-button class="boton-figura" aria-label="Generar triangulo" ng-click="vm.generarTriangulo()">
+              <md-icon md-svg-icon="app/resources/fabric/triangulo.svg"></md-icon>
               </md-button>
             </div>
 
          
             <div flex=50>
-             <md-button  style="width:80px; height:100px;" aria-label="Generar figura" ng-click="vm.generarCirculo()">
-              <md-icon md-svg-icon="app/resources/fabric/circulo.svg" style="width: 80px; height: 80px;font-size:80px;"></md-icon>
+             <md-button  class="boton-figura" aria-label="Generar figura" ng-click="vm.generarCirculo()">
+              <md-icon md-svg-icon="app/resources/fabric/circulo.svg"></md-icon>
             </md-button>
             </div>
 
             </div>
+             </md-tab-body>
+           
              
           </md-tab>
-
-
-          <md-tab label="Elementos">
+          <!--
+          <md-tab>
+             <md-tab-label><span style="color:white;">Importar</span></md-tab-label>
             <repositorio></repositorio>
           </md-tab>
-          
-        </md-tabs>
-      </md-content>
-        
-      </md-card>
+-->
 
+        </md-tabs>
+
+
+    <div layout="row">
+       <md-input-container style="margin-right: 10px;">
+        <label>Fuente</label>
+        <md-select ng-model="vm.fontTest" ng-disabled="vm.esTexto">
+          
+          <md-option ng-repeat="font in vm.fonts" value="{{font}}" ng-click="vm.usarFont(font)">{{font}}</md-option>
+          
+        </md-select>
+      </md-input-container>
+    
+       <md-input-container style="margin-right: 10px;">
+        <label>Tamaño</label>
+        <md-select ng-model="vm.fontTest2"  ng-disabled="vm.esTexto" style="width: 100px;">
+          
+          <md-option ng-repeat="fontsize in vm.fontsizes" value="{{fontsize}}" ng-click="vm.usarFontSize(fontsize)">{{fontsize}}</md-option>
+          
+        </md-select>
+      </md-input-container>
+
+       <md-input-container style="margin-right: 10px;">
+        <label>Color</label>
+        <input id="input-color" type="color" ng-model="vm.colorElemento" ng-change="vm.usarColor(vm.colorElemento)" ng-disabled="!vm.colorSeleccionable" style="width: 100px;">
+      </md-input-container>
+
+    </div>
+
+    
+
+
+
+      </md-content>
+    </md-card>
+     </div>
   
   </div>
+<div flex="5"></div>
+  <div flex="55">
+  <div class="contenedor-pagina">
+     <div layout="row">
+      <div flex="60" style="text-align: left;">
 
-  <div flex="55" class="contenedor-pagina">
+        <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
+          <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
+            <md-tooltip>
+                Añadir nueva página
+            </md-tooltip>
+        </md-button>
 
-
-  <md-button class="md-icon-button" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
-    <md-icon md-svg-icon="app/resources/icons/add.svg"></md-icon>
-      <md-tooltip>
-          Añadir nueva página
-      </md-tooltip>
-  </md-button>
-
-  <div style="width: 68%;display: inline-block;"></div>
-
-
-   <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</md-button>
-
-  <md-button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</md-button>
-<!--
-  <md-button class="md-icon-button" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()">
-
-     <md-icon ng-if="vm.documentoCompleto.length-1 === 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:rgba(0,0,0,0.38);"></md-icon>
-
-    <md-icon ng-if="vm.documentoCompleto.length-1 != 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:white;"></md-icon>
-      <md-tooltip>
-          Eliminar página
-      </md-tooltip>
-  </md-button>
--->
-      <div layout="row" layout-wrap>
-        <div flex="5">
-           <div layout="column" layout-align="center start">
-
-            <md-button class="md-icon-button" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo">
+        
+         <md-button class="md-icon-button boton-pagina" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo">
               <md-icon> undo </md-icon>
               <md-tooltip>
                   Deshacer
@@ -223,7 +240,7 @@
             </md-button>
           
 
-            <md-button class="md-icon-button" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
+            <md-button class="md-icon-button boton-pagina" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
               <md-icon>redo</md-icon>
               <md-tooltip>
                   Rehacer
@@ -231,25 +248,122 @@
             </md-button>
              
             
-           <md-button class="md-icon-button" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
+           <md-button class="md-icon-button boton-pagina" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
             <md-icon style="color:white;">settings</md-icon>
             <md-tooltip>
                 Configuración de la hoja
             </md-tooltip>
           </md-button>
 
-            <md-button class="md-icon-button" ng-click="vm.exportar()" aria-label="boton guardar">
-            <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg" style="color:white;"></md-icon>
+          <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
+            <md-icon md-svg-icon="app/resources/icons/ICONOS-18.svg"></md-icon>
+            <md-tooltip>
+                Exportar a PDF
+            </md-tooltip>
+          </md-button>
+          
+          <md-button class="md-icon-button boton-pagina" ng-click="vm.mostrarColaborador()">
+            <md-icon md-svg-icon="app/resources/icons/ICONOS-13.svg"></md-icon>
+            <md-tooltip>
+                Añadir colaborador
+            </md-tooltip>
+          </md-button>          
+
+
+
+            <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
+
+             <md-icon ng-if="vm.documentoCompleto.length-1 === 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:rgba(0,0,0,0.38);"></md-icon>
+
+            <md-icon ng-if="vm.documentoCompleto.length-1 != 1" md-svg-icon="app/resources/icons/ICONOS-20.svg"></md-icon>
+              <md-tooltip>
+                  Eliminar página
+              </md-tooltip>
+          </md-button>
+
+
+
+
+    </div>
+    <div flex="40" style="text-align: right;">
+       <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior
+          <md-tooltip>
+                  Página anterior
+          </md-tooltip>
+       </md-button>
+
+        <md-button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente
+          <md-tooltip>
+                  Página siguiente
+          </md-tooltip>
+        </md-button>
+    </div>
+  </div>
+  
+       <md-card class="page" id="contenedor-canvas" style="width: 794px;">
+            <canvas id="canvas" height="1122" width="794">
+              
+            </canvas>
+          </md-card>
+
+</div>
+<!--
+    <div layout="row">
+      <div flex="50" style="text-align: left;">
+
+        <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
+          <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
+            <md-tooltip>
+                Añadir nueva página
+            </md-tooltip>
+        </md-button>
+    </div>
+    <div flex="50" style="text-align: right;">
+       <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior</md-button>
+
+        <md-button ng-disabled="vm.documentoCompleto.length - 1 === vm.paginaActual" ng-click="vm.paginaSiguiente()">Siguiente</md-button>
+    </div>
+  </div>
+  
+      <div layout="row">
+        <div flex="8" style="text-align: left;">
+           <div layout="column" layout-align="center start">
+
+            <md-button class="md-icon-button boton-pagina" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo">
+              <md-icon> undo </md-icon>
+              <md-tooltip>
+                  Deshacer
+              </md-tooltip>
+            </md-button>
+          
+
+            <md-button class="md-icon-button boton-pagina" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
+              <md-icon>redo</md-icon>
+              <md-tooltip>
+                  Rehacer
+              </md-tooltip>
+            </md-button>
+             
+            
+           <md-button class="md-icon-button boton-pagina" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
+            <md-icon style="color:white;">settings</md-icon>
+            <md-tooltip>
+                Configuración de la hoja
+            </md-tooltip>
+          </md-button>
+
+            <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
+            <md-icon md-svg-icon="app/resources/icons/file-pdf-box.svg"></md-icon>
             <md-tooltip>
                 Exportar a PDF
             </md-tooltip>
           </md-button>
 
-            <md-button class="md-icon-button" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()">
+            <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
 
              <md-icon ng-if="vm.documentoCompleto.length-1 === 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:rgba(0,0,0,0.38);"></md-icon>
 
-            <md-icon ng-if="vm.documentoCompleto.length-1 != 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:white;"></md-icon>
+            <md-icon ng-if="vm.documentoCompleto.length-1 != 1" md-svg-icon="app/resources/icons/ICONOS-20.svg"></md-icon>
               <md-tooltip>
                   Eliminar página
               </md-tooltip>
@@ -260,7 +374,7 @@
           </div>
         </div>
 
-        <div flex=95>
+        <div flex="92" style="text-align: right;">
           <md-card class="page" id="contenedor-canvas" style="width: 794px;">
             <canvas id="canvas" height="1122" width="794">
               
@@ -270,14 +384,13 @@
       </div>
 
      
-    
+    -->
       
 
   </div>
 
 
-
-  <div flex="10">
+  <div flex="15">
     <my-chat></my-chat>
   </div>
 

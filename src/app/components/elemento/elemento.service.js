@@ -9,8 +9,11 @@
 
   function elementoService ($resource, API) {
     return $resource(API + 'elementos/:id', {id: '@id'}, {
-      update: {
-        method: 'PUT'
+      get: {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+        }
       }
     });
   }
