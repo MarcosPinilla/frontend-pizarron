@@ -22,13 +22,20 @@
       vm.visibleChatGrupal = false;
       vm.mensajes = [];
       vm.idGrupo = 0;
-      vm.chatCreado = false;
+      vm.selected = [];
       vm.token = CredentialsService.getToken();
+      vm.chats = [];
       console.log(vm.token);
 
       AmigoService.query().$promise.then(function (data) {
         vm.amigos = data;
       });
+
+      vm.toggle = function (item) {
+        console.log(item);
+        vm.selected.push(item);
+      };
+
 
 
        PerfilService.get().$promise.then(function (data) {
@@ -61,9 +68,12 @@
                   console.log(data);
                   vm.datosGrupo = data;
                   console.log(vm.datosGrupo.group.id);
-                  vm.chatCreado = true;
                   vm.idGrupo = data.group.id;
+                  data.chatCerrado = true;
+                  data.chatMinimizado = false;
+                  vm.chats.push(data);
 
+                  console.log(vm.chats);
 
                   var client = new Pusher('28705022aa554d22c965', {
                           cluster: 'us2',
@@ -124,16 +134,24 @@
             "usuario" : [id]
           }
         }else {
-          vm.grupo = {
+          vm.grupo = { 
            "name" : "nombre grupo",
-            "usuario" : ['1']
+            "usuario" : vm.selected
           }
+          console.log(vm.grupo); 
         }
         console.log(id);
         
 
-        vm.cerrarChat = function () {
-          vm.chatCreado = false;
+        vm.cerrarChat = function (id) {
+          console.log(id);
+          console.log(vm.chats.length);
+          for (var i = 0; i < vm.chats.length ; i++) {
+              if (vm.chats[i].group.id == id) {
+                console.log(vm.chats[i].chatCerrado);
+                vm.chats[i].chatCerrado = false;
+              }
+          }
         }
 
       GrupoService.save(vm.grupo,function(data){

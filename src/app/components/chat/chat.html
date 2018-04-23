@@ -1,4 +1,4 @@
-<div class="sidebar-right" layout="column" style="height: 100%">
+<div class="sidebar-right" layout="column" style="height: 100%;position: fixed;right: 0px">
 	<div id="sidebar-notificacion" flex> 
 		<div class="sidebar-titulo" style="background-color: #f9b985";>
 			<div class="sidebar-titulo-content">
@@ -8,15 +8,17 @@
 		</div>
 		<div id="notificacion">
 		</div>
-	</div>
-				<md-card style="z-index: 999; position: fixed; height: 20em; bottom: 0em; right: 250px; width: 16em; margin: 0; max-height: 20em" ng-if="vm.chatCreado">
+	</div>	
+
+				<div ng-repeat="chat in vm.chats">
+				<md-card style="z-index: 999; position: fixed; height: 20em; bottom: 0em; width: 16em; margin: 0; max-height: 20em; float: left;" ng-if="chat.chatCerrado" >
         <md-card-header style="background-color: blue; color: white; padding: 0px !important">
          <div layout="row" layout-xs="column" style="width: 16em">
 					  <div flex=80>
-					    <p>nombres</p>
+					    <p>{{chat.group.id}}</p>
 					  </div>
 					  <div flex=20>
-					     <md-button class="md-icon-button" aria-label="More" ng-click="vm.cerrarChat()">
+					     <md-button class="md-icon-button" aria-label="More" ng-click="vm.cerrarChat(chat.group.id)">
 					        <md-icon md-svg-icon="../../resources/img/cancel-music.png"></md-icon>
 					      </md-button>
 					  </div>
@@ -52,6 +54,7 @@
 					  </div>
 
       </md-card>
+      </div>
 	<div id="chat"  flex>
 		<md-button ng-click="vm.activarChatGrupal()">Chat Grupal</md-button>
 		<div class="sidebar-titulo" style="background-color: #bddf8b;">
@@ -79,7 +82,7 @@
 				
 				<md-list flex>
         <md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" >
-        	<md-checkbox ng-model="ctrl.disableParentScroll"> </md-checkbox>
+        	<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo.amigo_2)"> </md-checkbox>
           <div class="md-list-item-text" layout="row">
             <img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
 						<span>{{ amigo.amigo2.nombres_profesor }}</span>
