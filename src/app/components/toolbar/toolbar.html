@@ -4,32 +4,60 @@
       <img src="app/resources/img/logo-toolbar.png" id="logo-toolbar">
     </md-button>
   </div>
-  <div flex="30">Buscador</div>
+  <div flex="30">
+    <md-input-container id="toolbar-buscador">
+      <input ng-model=""  type="text" placeholder="Buscar profesores">
+    </md-input-container>
+  </div>
   <div flex="40" id="toolbar-icons">
     <md-button class="md-icon-button" ng-click="vm.showAdvanced($event)">
       <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       {{ vm.cantidadNotificaciones.notificaciones }}
+      <md-tooltip md-direction="bottom">
+        Notificaciones
+      </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-07.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Home
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.showNewDocument($event, vm.usuario, vm.asignaturas, vm.niveles, vm.tipo_material)">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-05.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Crear Material
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.favoritos">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-16.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Favoritos
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.mimaterial">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-08.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Mi Material
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.materiales">
         <md-icon md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Buscar Materiales
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.amigos">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-06.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Mis Amigos
+        </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.logout()">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-22.svg"></md-icon>
+        <md-tooltip md-direction="left">
+          Cerrar Sesión
+        </md-tooltip>
     </md-button>
   </div>
 </div>
@@ -87,10 +115,5 @@
   
       </div>
     </md-dialog-content>
-
-   <!--  <md-dialog-actions layout="row">
-      
-    </md-dialog-actions> -->
-
 </md-dialog>
 </script>
