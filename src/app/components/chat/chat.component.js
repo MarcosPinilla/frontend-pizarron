@@ -17,7 +17,7 @@
   var vm = this;
 
   vm.notificaciones = {};
-  vm.amigos = {};
+  vm.amigos =[];
   vm.visibleChat = true;
   vm.visibleChatGrupal = false;
   vm.mensajes = [];
@@ -28,6 +28,7 @@
   console.log(vm.token);
 
   AmigoService.query().$promise.then(function (data) {
+    console.log(data);
     vm.amigos = data;
   });
 
@@ -75,7 +76,7 @@
                     for (var i = 0; i < data.users.length; i++) {
                       console.log(vm.usuarioID);
                       console.log(data.users[i].id);
-                      if (vm.usuarioID == data.users[i].id) {
+                      if (vm.usuarioID != data.users[i].id) {
                         console.log(data.users[i].nombres_profesor);
                         data.nombreChat = data.users[i].nombres_profesor;
                       }

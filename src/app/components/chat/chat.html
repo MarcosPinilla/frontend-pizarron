@@ -83,7 +83,8 @@
 					<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo.amigo_2)"> </md-checkbox>
 					<div class="md-list-item-text" layout="row">
 						<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
-						<span>{{ amigo.amigo2.nombres_profesor }}</span>
+						<span ng-if="vm.usuarioID == amigo.amigo1.id ">{{ amigo.amigo2.nombres_profesor }}</span>
+						<span ng-if="vm.usuarioID == amigo.amigo2.id ">{{ amigo.amigo1.nombres_profesor }}</span>
 					</div>
 
 				</md-list-item>
