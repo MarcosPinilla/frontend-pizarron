@@ -10,51 +10,49 @@
 		</div>
 	</div>	
 
-				<div ng-repeat="chat in vm.chats">
-				<md-card style="z-index: 999; position: fixed; height: 20em; bottom: 0em; width: 16em; margin: 0; max-height: 20em; float: left;" ng-if="chat.chatCerrado" >
-        <md-card-header style="background-color: blue; color: white; padding: 0px !important">
-         <div layout="row" layout-xs="column" style="width: 16em">
-					  <div flex=80>
-					    <p>{{chat.group.id}}</p>
-					  </div>
-					  <div flex=20>
-					     <md-button class="md-icon-button" aria-label="More" ng-click="vm.cerrarChat(chat.group.id)">
-					        <md-icon md-svg-icon="../../resources/img/cancel-music.png"></md-icon>
-					      </md-button>
-					  </div>
+<!-- espacio para el chat  -->
+	<div  style="z-index: 999; position: fixed;  bottom: 0em;  margin: 0; right: 250px">
+		<!-- estructura del chat -->
+		<md-card ng-repeat="chat in vm.chats" style=" height: 20em; bottom: 0em; width: 16em; margin: 0; max-height: 20em; float: left; margin-left: 10px" ng-if="chat.chatCerrado" >
+			<md-card-header style="background-color: #6d72ad; color: white; padding: 0px !important">
+				<div layout="row" layout-xs="column" style="width: 16em">
+					<div flex=80>
+						<p style="padding-left: 10px">{{chat.nombreChat}}</p>
 					</div>
-        </md-card-header>
-
-           <div flex-gt-sm="100" flex>
-					    <md-content style="height: 100%">
-					      <md-list flex>
-					        <ul style="padding-left: 10px">
-					        	<p ng-repeat="item in vm.mensajes" >{{ item }}</p>
-					        </ul>
-
-					      </md-list>
-					    </md-content>
-					    <md-input-container md-no-float class="md-block" style="bottom: 0em !important; margin: 0 !important; position: fixed; border-top-width: 10px; border-top-color: #CC0000">
-		          		<form ng-submit="vm.chatEnv(vm.message)" >
-		          			<div layout="row" layout-xs="column">
-										  <div flex=80>
-										    <input ng-model="vm.message.message" placeholder="Escribe un mensaje ..." style="border-width: 0 0 0 0 !important">
-										  </div>
-										  <div flex=20>
-										     <md-button class="md-fab md-mini md-primary" aria-label="" type="submit" >
-								          <md-icon md-svg-src="../../resources/img/send-button.png" ></md-icon>
-								        </md-button>
-										  </div>
-										</div>
-							  		
-							  		
-								</form> 
-		        </md-input-container>
-		        
-					  </div>
-
-      </md-card>
-      </div>
+					<div flex=20>
+						<md-button class="md-icon-button" aria-label="More" ng-click="vm.cerrarChat(chat.group.id)">
+							<md-icon md-svg-icon="../../resources/img/cancel-music.png"></md-icon>
+						</md-button>
+					</div>
+				</div>
+			</md-card-header>
+			<div flex-gt-sm="100" flex>
+				<md-content style="height: 100%">
+					<md-list flex>
+						<ul style="padding: 10px;width: auto; ">
+							<p ng-if="vm.usuarioID != item.usuario_id" style="background-color: #6d72ad; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto;" ng-repeat="item in vm.mensajes track by $index" >{{ item }}</p>
+							<p ng-if="vm.usuarioID == item.usuario_id" style="background-color: #29487d; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto; text-align: right;" ng-repeat="item in vm.mensajes track by $index" >{{ item }}</p>
+						</ul>
+					</md-list>
+				</md-content>
+				<md-input-container md-no-float class="md-block" style="bottom: 0em !important; margin: 0 !important; position: fixed; border-top-width: 10px; border-top-color: #CC0000">
+					<form ng-submit="vm.chatEnv(vm.message)" >
+						<div layout="row" layout-xs="column">
+							<div flex=80>
+								<input ng-model="vm.message.message" placeholder="Escribe un mensaje ..." style="border-width: 0 0 0 0 !important">
+							</div>
+							<div flex=20>
+								<md-button class="md-fab md-mini md-primary" aria-label="" type="submit" >
+									<md-icon md-svg-src="../../resources/img/send-button.png" ></md-icon>
+								</md-button>
+							</div>
+						</div>
+					</form> 
+				</md-input-container>
+			</div>
+		</md-card>
+	</div>
+	<!-- barra lateral con los amigos para seleccion de chat -->
 	<div id="chat"  flex>
 		<md-button ng-click="vm.activarChatGrupal()">Chat Grupal</md-button>
 		<div class="sidebar-titulo" style="background-color: #bddf8b;">
@@ -68,35 +66,35 @@
 				<span>{{ amigo.amigo2.nombres_profesor }}</span>
 			</div> -->
 
-				<md-list flex>
-        <md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.amigo2.id)">
-          <div class="md-list-item-text" layout="row">
-            <img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
+			<md-list flex>
+				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.amigo2.id)">
+					<div class="md-list-item-text" layout="row">
+						<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
 						<span>{{ amigo.amigo2.nombres_profesor }}</span>
-          </div>
-        </md-list-item>
-        <md-divider ></md-divider>
-        </md-list>
+					</div>
+				</md-list-item>
+				<md-divider ></md-divider>
+			</md-list>
 		</div>
 		<div ng-if="vm.visibleChatGrupal">
-				
-				<md-list flex>
-        <md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" >
-        	<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo.amigo_2)"> </md-checkbox>
-          <div class="md-list-item-text" layout="row">
-            <img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
+
+			<md-list flex>
+				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" >
+					<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo.amigo_2)"> </md-checkbox>
+					<div class="md-list-item-text" layout="row">
+						<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
 						<span>{{ amigo.amigo2.nombres_profesor }}</span>
-          </div>
+					</div>
 
-        </md-list-item>
-        <md-divider ></md-divider>
-        </md-list>
-            
-        <md-button ng-click="vm.crearChatGrupal()">Crear </md-button>
-		 </div>
+				</md-list-item>
+				<md-divider ></md-divider>
+			</md-list>
+
+			<md-button ng-click="vm.crearChatGrupal()">Crear </md-button>
+		</div>
 
 
-       
+
 
 
 	</div>
