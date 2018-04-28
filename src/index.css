@@ -31,15 +31,20 @@ a {
     color: white;
 }
 
-#newdocument-title {
+#editarperfil-title {
+  color: white;
+  background-color: #fad98f;
+  text-align: center;
+}
+
+#addprofesor-title {
   color: white;
   background-color: #bddf8b;
   text-align: center;
 }
 
-#editarperfil-title {
+.modal-title {
   color: white;
-  background-color: #fad98f;
   text-align: center;
 }
 
