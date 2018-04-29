@@ -3,7 +3,7 @@
 		<center class="titulo">
 	  		<img class="userRegister" class="md-avatar" src="app/resources/img/logovertical.png" >
 		</center>
-		<form ng-submit="vm.login(vm.modelo)" >
+		<form ng-submit="vm.register(vm.modelo)" >
 	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
 	  		<div class="divLogin" flex-offset="25" flex="50">
 
@@ -57,13 +57,23 @@
 			        </md-option>
 			      </md-select>
 			    </md-input-container>
+				</div>
+				<div class="divLogin" flex-offset="25" flex="50">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+			      <label>Región</label>
+			      <md-select ng-model="vm.regionId" ng-change="vm.cargarComuna(vm.regionId)">
+			        <md-option ng-repeat="region in vm.regiones" value="{{ region.id }}">
+			          {{ region.nombre_region }}
+			        </md-option>
+			      </md-select>
+			    </md-input-container>
 	  		</div>
 	  		<div class="divLogin" flex-offset="25" flex="50">
 	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
 			      <label>Comuna</label>
 			      <md-select ng-model="vm.modelo.id_comuna">
 			        <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
-			          {{ comuna.nombre_comuna }}
+			          {{ comuna.nombre }}
 			        </md-option>
 			      </md-select>
 			    </md-input-container>
