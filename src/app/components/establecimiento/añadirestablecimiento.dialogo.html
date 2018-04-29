@@ -1,5 +1,7 @@
-<div style="padding-left: 200px; padding-right: 200px;">
-	<h2 class="tituloDialogo"><strong>Añadir establecimiento:</strong></h2>
+<div class="modal-title" style="background-color: #bddf8b;">
+	<h2><strong>Añadir Establecimiento</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<md-input-container class="md-block">
 		<label>Nombre</label>
 		<input ng-model="vm.newestablecimiento.nombre_establecimiento" type="text" required>
@@ -19,5 +21,6 @@
           {{ tipo.nombre_tipo_establecimiento }}
         </md-option>
       </md-select>
-	<center><md-button class="md-raised md-primary" ng-click="vm.anadirestablecimiento(vm.newestablecimiento)" md-theme="dark-green" aria-label="addprofe">añadir establecimiento</md-button></center>
-</div>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirestablecimiento(vm.newestablecimiento)" md-theme="dark-green" aria-label="addprofe">Crear establecimiento</md-button></center>
+</md-content>

@@ -1,5 +1,7 @@
-<div style="padding-left: 200px; padding-right: 200px;">
-	<h2 class="tituloDialogo"><strong>Añadir asignatura:</strong></h2>
+<div class="modal-title" style="background-color: #bddf8b;">
+  <h2><strong>Añadir Asignatura</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<md-input-container class="md-block">
 		<label>Nombre asignatura</label>
 		<input ng-model="vm.asignatura.nombre_asignatura" type="text" required>
@@ -8,5 +10,5 @@
 		<label>Descripción</label>
 		<input ng-model="vm.asignatura.descripcion_asignatura" type="text" required>
 	</md-input-container>
-	<center><md-button class="md-raised md-primary" ng-click="vm.anadirasignatura(vm.asignatura)" md-theme="dark-green" aria-label="addasignatura">añadir asignatura</md-button></center>
-</div>
+	<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirasignatura(vm.asignatura)" md-theme="dark-green" aria-label="addasignatura">Crear asignatura</md-button></center>
+</md-content>

@@ -254,7 +254,7 @@ function dialogoController($mdDialog, NoticiaService) {
     console.log(vm.tipo_materiales);*/
 
     vm.crearNoticia = function () {
-      console.log('entra ala funcion');
+      console.log('entra a la funcion');
       if(vm.noticia.titulo != null && vm.noticia.contenido != null) {
         NoticiaService.save(vm.noticia);
         $mdDialog.hide();

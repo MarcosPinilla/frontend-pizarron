@@ -56,6 +56,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     controllerAs: 'vm',
     templateUrl: 'app/components/editdocument/documentos.html'
   })
+  .state('obtenerNoticiasProfesor', {
+    url: '/obtenerNoticiasProfesor',
+    component: 'noticia',
+    isPrivate: true
+  })
   .state('administrator.usuario', {
     url: '/usuario',
     component: 'usuario',
@@ -161,6 +166,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   .state('dashboard.mimaterial', {
     url: '/mimaterial',
     component: 'mimaterial',
+    isPrivate: true  
+  })
+  .state('dashboard.misnoticias', {
+    url: '/misnoticias',
+    component: 'noticia',
     isPrivate: true  
   })
   .state('notificaciones', {

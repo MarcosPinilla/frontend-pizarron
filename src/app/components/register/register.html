@@ -1,5 +1,5 @@
-<div flex="100" class="register-div">
-	<md-content md-theme="app" style="position:relative; vertical-align: center; background: rgba(0, 0, 0,0);overflow: auto;" flex-offset="25" flex="50">
+<div flex="100" class="register-div"  style="position:relative; vertical-align: center;overflow: auto;" scroll=no>
+	<md-content md-theme="app" style="position:relative; vertical-align: center; background: rgba(0, 0, 0,0);overflow: hidden;" flex-offset="25" flex="50">
 		<center class="titulo">
 	  		<img class="userRegister" class="md-avatar" src="app/resources/img/logovertical.png" >
 		</center>
@@ -49,8 +49,8 @@
 		  		</md-input-container>
 	  		</div>
 	  		<div class="divLogin" flex-offset="25" flex="50">
-	  			<md-input-container class="md-block inputLogin" >
-			      <label>Sexo</label>
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90" >
+			      <label>Género</label>
 			      <md-select ng-model="vm.modelo.id_sexo">
 			        <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
 			          {{ sexo.desc_sexo }}
@@ -59,7 +59,7 @@
 			    </md-input-container>
 	  		</div>
 	  		<div class="divLogin" flex-offset="25" flex="50">
-	  			<md-input-container class="md-block">
+	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
 			      <label>Comuna</label>
 			      <md-select ng-model="vm.modelo.id_comuna">
 			        <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
