@@ -4,9 +4,21 @@
 			<div class="sidebar-titulo-content">
 				<md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
 				Noticias
+				
+				<md-button  class="md-icon-button md-primary boton-nueva-noticia"  aria-label="crear noticia" ng-click="vm.nuevaNoticia()">
+	              <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
+	              	<md-tooltip md-direction="bottom">
+			          Agregar noticia
+			        </md-tooltip>
+	            </md-button>
 			</div>
 		</div>
-		<div id="notificacion">
+		<div style="overflow:scroll; overflow-x:hidden; height:90%;" id="notificacion">
+			<div style="margin-bottom: 5px;" ng-repeat="noticia in vm.noticias">
+				<span><h4 class="noticia-titulo">{{noticia.titulo}}</h4></span>
+				<span><h5 class="noticia-autor">{{noticia.fecha | date : 'dd-MM-yyyy'}} - {{noticia.profesor.nombres_profesor}} {{noticia.profesor.apellidos_profesor}}</h5></span>
+				<span class="noticia-contenido">{{noticia.contenido}}</span>
+			</div>
 		</div>
 	</div>	
 

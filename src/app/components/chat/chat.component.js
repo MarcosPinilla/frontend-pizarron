@@ -10,9 +10,9 @@
  });
 
 
- chatCtrl.$inject = ['$mdDialog','NotificacionesRecientesService', 'CredentialsService', 'AmigoService','PerfilService', 'MessageService', 'GrupoService', '$pusher'];
+ chatCtrl.$inject = ['$mdDialog', 'ListarNoticiasService', 'NoticiaService', 'NotificacionesRecientesService', 'CredentialsService', 'AmigoService','PerfilService', 'MessageService', 'GrupoService', '$pusher'];
 
- function chatCtrl($mdDialog, NotificacionesRecientesService, CredentialsService, AmigoService, PerfilService, MessageService, GrupoService, $pusher, $scope ) {
+ function chatCtrl($mdDialog, ListarNoticiasService, NoticiaService, NotificacionesRecientesService, CredentialsService, AmigoService, PerfilService, MessageService, GrupoService, $pusher, $scope ) {
 
   var vm = this;
 
@@ -25,7 +25,32 @@
   vm.selected = [];
   vm.token = CredentialsService.getToken();
   vm.chats = [];
+  vm.noticias = [];
   console.log(vm.token);
+
+  ListarNoticiasService.query().$promise.then(function(data){
+    vm.noticias=data;
+    console.log(vm.noticias);
+  });
+
+   vm.nuevaNoticia = function(ev) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/chat/nuevaNoticia.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+        },
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
 
   AmigoService.query().$promise.then(function (data) {
     console.log(data);
@@ -36,7 +61,6 @@
     console.log(item);
     vm.selected.push(item);
   };
-
 
 
   PerfilService.get().$promise.then(function (data) {
@@ -218,7 +242,37 @@ vm.chatEnv = function (message){
 
 }
 
+function dialogoController($mdDialog, NoticiaService) {
 
+    var vm = this;
+    
+    vm.noticia={};
+
+    /*console.log(vm.usuario);
+    console.log(vm.asignaturas);
+    console.log(vm.niveles);
+    console.log(vm.tipo_materiales);*/
+
+    vm.crearNoticia = function () {
+      console.log('entra ala funcion');
+      if(vm.noticia.titulo != null && vm.noticia.contenido != null) {
+        NoticiaService.save(vm.noticia);
+        $mdDialog.hide();
+      }
+    };     
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
 
 
   })();

@@ -1,0 +1,35 @@
+<div id="newdocument-title">
+	<h2><strong>Nueva noticia</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+	<form>
+	<md-input-container class="md-block" flex="100">
+	    <label>Título de la noticia</label>
+	    <input type="text" required md-no-asterisk name="titulo" md-maxlength="50" ng-model="vm.noticia.titulo">
+	    <div ng-messages="form.titulo.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+	</md-input-container>
+	<!--
+	<md-input-container class="md-block" flex="100">
+	    <label>Contenido</label>
+	    <input type="text" required md-no-asterisk name="contenido" ng-model="vm.noticia.contenido">
+	    <div ng-messages="form.contenido.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+	</md-input-container>-->
+	 <md-input-container class="md-block" flex="100">
+          <label>Contenido</label>
+          <textarea name="contenido" ng-model="vm.noticia.contenido" md-maxlength="150" rows="3" md-select-on-focus required></textarea>
+          <div ng-messages="form.contenido.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+     </md-input-container>
+
+	<br>
+	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.crearNoticia()">Crear noticia</md-button></center>
+	<!-- ng-click="vm.crearmaterial(vm.material)" -->
+	<!--ui-sref="editdocument" -->
+	<br>
+	</form>
+</md-content>
