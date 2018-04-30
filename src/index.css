@@ -501,7 +501,7 @@ md-list.make-scrollable {
   -moz-transition: all 200ms ease-in;
   -moz-transform: scale(1.5);
   transition: all 200ms ease-in;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .sidebar-links-top {
@@ -522,7 +522,7 @@ md-list.make-scrollable {
   -moz-transition: all 200ms ease-in;
   -moz-transform: scale(1.5);
   transition: all 200ms ease-in;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .sidebar-links-bottom {
@@ -543,7 +543,7 @@ md-list.make-scrollable {
   -moz-transition: all 200ms ease-in;
   -moz-transform: scale(1.5);
   transition: all 200ms ease-in;
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .sidebar-text-name {
