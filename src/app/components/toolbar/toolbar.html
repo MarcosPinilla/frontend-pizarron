@@ -47,6 +47,12 @@
           Buscar Materiales
         </md-tooltip>
     </md-button>
+    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.misnoticias">
+      <md-icon style="color:white;" md-svg-icon="app/resources/icons/reader.svg"></md-icon>
+      <md-tooltip md-direction="bottom">
+        Mis Noticias
+      </md-tooltip>
+    </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.amigos">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-06.svg"></md-icon>
         <md-tooltip md-direction="bottom">
