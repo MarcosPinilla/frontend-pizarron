@@ -31,6 +31,7 @@
         if(data.token) {
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
+          CredentialsService.setRol(data.rol);
           $rootScope.$emit('isLogin');
           $rootScope.$emit('isnotinLogin');
           $state.go('dashboard');

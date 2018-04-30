@@ -22,13 +22,29 @@
       return localStorage.getItem('user');
     };
 
+    this.setRol = function (rol) {
+      localStorage.setItem('rol', rol);
+    };
+
+    this.getRol = function () {
+      return localStorage.getItem('rol');
+    };
+
     this.clearCredentials = function () {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('rol');
     };
 
     this.isLogged = function () {
-      if (this.getToken() && this.getUser()) {
+      if (this.getToken() && this.getUser() && this.getRol()) {
+        return true;
+      }
+      return false;
+    };
+
+    this.isAdmin = function () {
+      if (1 == this.getRol()) {
         return true;
       }
       return false;
