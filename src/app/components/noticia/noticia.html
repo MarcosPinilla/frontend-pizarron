@@ -13,18 +13,18 @@
       <table md-table md-row-select multiple md-progress="promise">
         <thead md-head md-order="query.order" md-on-reorder="getDesserts">
           <tr md-row>
-            <th md-column md-numeric>Fecha</th>
-            <th md-column md-numeric>Título</th>
-            <th md-column md-numeric>Contenido</th>
+            <th md-column md-numeric><span style="float: left;">Fecha</span></th>
+            <th md-column md-numeric><span style="float: left;">Título</span></th>
+            <th md-column md-numeric><span style="float: left;">Contenido</span></th>
             <th md-column md-numeric></th>
             <th md-column md-numeric></th>
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="noticia in vm.noticias | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
-            <td md-cell>{{ noticia.fecha }}</td>
-            <td md-cell>{{ noticia.titulo }}</td>
-            <td md-cell>{{ noticia.contenido }}</td>
+            <td md-cell><span class="text-justify" style="float: left;">{{ noticia.fecha }}</span></td>
+            <td md-cell><span class="text-justify" style="float: left;">{{ noticia.titulo }}</span></td>
+            <td md-cell><span class="text-justify" style="float: left;">{{ noticia.contenido }}</span></td>
             <td md-cell>
               <md-button class="md-icon-button" ng-click="vm.actualizarNoticia(noticia)" style="margin-right: -40px;">
                 <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>

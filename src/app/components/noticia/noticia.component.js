@@ -32,7 +32,7 @@
       $state.go('obtenerNoticiasProfesor');
 
     }
-   
+
     vm.nuevaNoticia = function(ev) {
       $mdDialog.show({
         controller: dialogoController,
@@ -63,7 +63,12 @@
         console.log(vm.noticias);
       });
     };
-
+    vm.removing=function(){
+      alert("saliendo")
+    }
+    vm.showing = function(){
+      alert("entrando")
+    }
     vm.actualizarNoticia = function (noticia, event) {
       $mdDialog.show({
         controller: dialogoController,
@@ -81,10 +86,11 @@
         vm.status = 'Documento:  ' + answer + '.';
         ListarNoticiasProfesorService.query().$promise.then(function (data) {
           vm.noticias = data;
-          console.log(vm.noticias);
         });
-      }, function () {
-        vm.status = 'CANCELADO';
+      }).finally(function () {
+         ListarNoticiasProfesorService.query().$promise.then(function (data) {
+          vm.noticias = data;
+        });
       });
     };
 
