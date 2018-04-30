@@ -13,10 +13,9 @@ body {
   background-color: white;
   color: #7986CB;
   /*background-image: url('app/resources/img/profesor.jpg');*/
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
+  background-size: 2000px;
+  background-repeat: repeat;
   font-family: 'NeoSansBold';
   min-width: 1300;
   /*//margin-top: 4em;*/
@@ -242,9 +241,6 @@ titular {
 }
 
 .dashboard {
-  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
-  background-size: 1200px;
-  background-repeat: repeat;
   padding-top: 4em;
 }
 
@@ -828,8 +824,20 @@ md-list.make-scrollable {
   margin-bottom: 0.5em;
 }
 
-#amigos {
+.amigos-img {
+  padding-right: 20px;
+}
 
+.amigos-nombre {
+  color: #B0AFD0;
+}
+
+md-content .amigos-card {
+  border-style: solid;
+  border-color: #B0AFD0;
+  border-radius: 50px;
+  border-width: 2px;
+  box-shadow: none;
 }
 
 .amigos-contenedor {
