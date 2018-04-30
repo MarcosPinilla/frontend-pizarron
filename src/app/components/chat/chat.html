@@ -16,7 +16,8 @@
 		<div style="overflow:scroll; overflow-x:hidden; height:90%;" id="notificacion">
 			<div style="margin-bottom: 5px;" ng-repeat="noticia in vm.noticias">
 				<span><h4 class="noticia-titulo">{{noticia.titulo}}</h4></span>
-				<span><h5 class="noticia-autor">{{noticia.fecha | date : 'dd-MM-yyyy'}} - {{noticia.profesor.nombres_profesor}} {{noticia.profesor.apellidos_profesor}}</h5></span>
+				<span><h5 class="noticia-autor">{{noticia.fecha | date : 'dd-MM-yyyy'}} - <a ui-sref="dashboard.perfil({id:noticia.profesor.id})"><h5 class="noticia-autor" id="perfil-autor" style="display: inline;">{{noticia.profesor.nombres_profesor}} {{noticia.profesor.apellidos_profesor}}</h5></a></h5></span>
+				
 				<span class="noticia-contenido">{{noticia.contenido}}</span>
 			</div>
 		</div>

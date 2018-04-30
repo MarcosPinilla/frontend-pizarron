@@ -70,6 +70,10 @@ a {
   height: 30px !important;
 }
 
+#perfil-autor:hover{
+   text-decoration: underline;
+}
+
 #editarperfil-title {
   color: white;
   background-color: #fad98f;
