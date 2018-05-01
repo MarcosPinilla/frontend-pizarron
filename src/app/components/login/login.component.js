@@ -18,10 +18,15 @@
 
     vm.isLanding = false;
     vm.loginError = false;
+    vm.registerComplete = false;
     vm.messageCode = null;
     vm.message = null;
     vm.credentials = {};
     var user = {};
+
+    $rootScope.$on('registerComplete', function () {
+      vm.registerComplete = true;
+    });
 
 
     vm.status = '  ';
@@ -31,8 +36,14 @@
         if(data.token) {
           CredentialsService.setToken(data.token);
           CredentialsService.setUser(data.email);
+          CredentialsService.setRol(data.rol);
           $rootScope.$emit('isLogin');
           $rootScope.$emit('isnotinLogin');
+          if(data.rol == 1){
+            $rootScope.$emit('isAdmin');
+          }else{
+            $rootScope.$emit('isnotAdmin');
+          }
           $state.go('dashboard');
           /*UsuarioService.query().$promise.then(function (data) {
             console.log(JSON.stringify(data.user));

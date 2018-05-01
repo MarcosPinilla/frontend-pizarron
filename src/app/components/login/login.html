@@ -4,16 +4,17 @@
 	  		<img class="userLogin" class="md-avatar" src="app/resources/img/logovertical.png" >
 		</center>
 		<form ng-submit="vm.login(vm.credentials)" >
-	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+			<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+			<center><span ng-if="vm.registerComplete" style="color: green">Usuario Registrado!</span></center>
 	  		<div class="divLogin" flex-offset="25" flex="50">
 
-	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+	  			<md-input-container class="md-block inputLogin2" flex-offset="5" flex="90">
 		    		<label>Email</label>
 		    		<input ng-model="vm.credentials.email" type="text" required>
 		  		</md-input-container>
 	  		</div>
 	  		<div class="divLogin" flex-offset="25" flex="50">
-	  			<md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+	  			<md-input-container class="md-block inputLogin2" flex-offset="5" flex="90">
 		    		<label>Contraseña</label>
 		    		<input ng-model="vm.credentials.password" type="password" required>
 		  		</md-input-container>

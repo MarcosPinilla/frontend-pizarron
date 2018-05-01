@@ -42,41 +42,54 @@
 			</div>
 	</div>
 </div>-->
-<h2 class="titulo">Solicitudes</h2>
-<div ng-repeat="solicitud in vm.solicitudes">
-	<md-card flex="100" layout-wrap>
+<h2 class="titulo" style="color: #B0AFD0;">Solicitudes</h2>
+<md-content layout-xs="row" layout="column" ng-repeat="solicitud in vm.solicitudes">
+	<md-card class="amigos-card" flex-xs flex-gt-xs="50" layout="row">
 		<md-card-title>
-			<md-card-title-media>
+			<md-card-title-media class="amigos-img">
 				<a ui-sref="dashboard.perfil({id:solicitud.amigo1.id})"><img class="amigos-amigo-img" ng-src="{{solicitud.amigo1.url_foto_profesor}}"></a>
 			</md-card-title-media>
 			<md-card-title-text>
-				<span class="md-headline">{{solicitud.amigo1.nombres_profesor}} {{solicitud.amigo1.apellidos_profesor}}</span>
+				<span class="md-headline amigos-nombre">{{solicitud.amigo1.nombres_profesor}} {{solicitud.amigo1.apellidos_profesor}}</span>
 			</md-card-title-text>
 		</md-card-title>
+		<md-card-actions layout="row" layout-align="start center" style="padding-right: 20px;">
+			<md-button class="md-raised md-primary" style="background-color: rgb(244,67,54)" ng-click="vm.confirmarAmistad(solicitud.id)">Confirmar</md-button>
+			<md-button class="md-raised" ng-click="vm.rechazarAmistad(solicitud.id)">Rechazar</md-button>
+		</md-card-actions>
 	</md-card>
-
-</div>
-<h2 class="titulo">Amigos</h2>
-<div ng-repeat="amigo in vm.amigos">
-	<md-card flex="50" layout-wrap ng-if="amigo.id_estado_amistad == 1 && amigo.amigo1.id != vm.perfil.id">
+</md-content>
+<h2 class="titulo" style="color: #B0AFD0;">Amigos</h2>
+<md-content layout-xs="row" layout="column" ng-repeat="amigo in vm.amigos">
+	<md-card class="amigos-card" flex-xs flex-gt-xs="50" layout="row" ng-if="amigo.id_estado_amistad == 1 && amigo.amigo1.id != vm.perfil.id">
 		<md-card-title>
-			<md-card-title-media>
+			<md-card-title-media class="amigos-img">
 				<a ui-sref="dashboard.perfil({id:amigo.amigo1.id})"><img class="amigos-amigo-img" ng-src="{{amigo.amigo1.url_foto_profesor}}"></a>
 			</md-card-title-media>
 			<md-card-title-text>
-				<span class="md-headline">{{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}</span>
+				<span class="md-headline amigos-nombre">{{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}</span>
 			</md-card-title-text>
 		</md-card-title>
+		<md-card-actions layout="row" layout-align="start center">
+			<md-button>
+				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+			</md-button>
+		</md-card-actions>
 	</md-card>
-	<md-card flex="50" layout-wrap ng-if="amigo.id_estado_amistad == 1 && amigo.amigo2.id != vm.perfil.id">
+	<md-card class="amigos-card" flex-xs flex-gt-xs="50" layout="row" ng-if="amigo.id_estado_amistad == 1 && amigo.amigo2.id != vm.perfil.id">
 		<md-card-title>
-			<md-card-title-media>
+			<md-card-title-media class="amigos-img">
 				<a ui-sref="dashboard.perfil({id:amigo.amigo2.id})"><img class="amigos-amigo-img" ng-src="{{amigo.amigo2.url_foto_profesor}}"></a>
 			</md-card-title-media>
 			<md-card-title-text>
-				<span class="md-headline">{{amigo.amigo2.nombres_profesor}} {{amigo.amigo2.apellidos_profesor}}</span>
+				<span class="md-headline amigos-nombre">{{amigo.amigo2.nombres_profesor}} {{amigo.amigo2.apellidos_profesor}}</span>
 			</md-card-title-text>
 		</md-card-title>
+		<md-card-actions layout="row" layout-align="start center">
+			<md-button>
+				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+			</md-button>
+		</md-card-actions>
 	</md-card>
-</div>
+</md-content>
 </div>

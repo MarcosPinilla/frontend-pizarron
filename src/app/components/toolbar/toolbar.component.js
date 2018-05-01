@@ -21,8 +21,11 @@
     vm.niveles = {};
     vm.tipo_material = {};
 
+    vm.isinRegister = false;
     vm.isinLogin = false;
     vm.isnotinLogin = false;
+    vm.isadmin = false;
+    vm.isnotadmin = false;
 
     vm.iralogin = function () {
       $state.go('login');
@@ -39,7 +42,11 @@
       $state.go('login');
     };
 
-     $rootScope.$on('isLogin', function () {
+    $rootScope.$on('isinRegister', function () {
+      vm.isinRegister = true;
+    });
+
+    $rootScope.$on('isLogin', function () {
       vm.isLogged = true;
     });
 
@@ -50,6 +57,20 @@
     $rootScope.$on('isnotinLogin', function () {
       vm.isnotinLogin = true;
     });
+
+    $rootScope.$on('isAdmin', function() {
+      vm.isadmin = true;
+    });
+
+    $rootScope.$on('isnotAdmin', function() {
+      vm.isnotadmin = true;
+    });
+
+    if(CredentialsService.getRol() == 1){
+      vm.isadmin = true;
+    }else{
+      vm.isadmin = false;
+    }
 
     ListarasignaturasService.query().$promise.then(function (data) {
       vm.asignaturas = data;
