@@ -21,6 +21,7 @@
     vm.niveles = {};
     vm.tipo_material = {};
 
+    vm.isinRegister = false;
     vm.isinLogin = false;
     vm.isnotinLogin = false;
     vm.isadmin = false;
@@ -41,7 +42,11 @@
       $state.go('login');
     };
 
-     $rootScope.$on('isLogin', function () {
+    $rootScope.$on('isinRegister', function () {
+      vm.isinRegister = true;
+    });
+
+    $rootScope.$on('isLogin', function () {
       vm.isLogged = true;
     });
 

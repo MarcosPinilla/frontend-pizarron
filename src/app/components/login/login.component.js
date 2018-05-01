@@ -18,10 +18,15 @@
 
     vm.isLanding = false;
     vm.loginError = false;
+    vm.registerComplete = false;
     vm.messageCode = null;
     vm.message = null;
     vm.credentials = {};
     var user = {};
+
+    $rootScope.$on('registerComplete', function () {
+      vm.registerComplete = true;
+    });
 
 
     vm.status = '  ';

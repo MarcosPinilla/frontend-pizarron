@@ -4,7 +4,8 @@
 	  		<img class="userLogin" class="md-avatar" src="app/resources/img/logovertical.png" >
 		</center>
 		<form ng-submit="vm.login(vm.credentials)" >
-	  		<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+			<center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+			<center><span ng-if="vm.registerComplete" style="color: green">Usuario Registrado!</span></center>
 	  		<div class="divLogin" flex-offset="25" flex="50">
 
 	  			<md-input-container class="md-block inputLogin2" flex-offset="5" flex="90">

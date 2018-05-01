@@ -14,7 +14,7 @@
   function registerCtrl(UsuarioService, SexoService, ComunaService, RegionService, RegisterService, $state, $rootScope, $mdDialog, $stateParams) {
     var vm = this;
 
-    $rootScope.$emit('isinRegister'); 
+    $rootScope.$emit('isinLogin'); 
 
     var user = {};
     vm.sexos ={};
@@ -48,6 +48,8 @@
     
     vm.register = function(modelo) {
       RegisterService.save(modelo);
+      $rootScope.$emit('registerCompletee'); 
+      $state.go('login');
     }
 
   }
