@@ -34,6 +34,7 @@
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('rol');
+      localStorage= null;
     };
 
     this.isLogged = function () {

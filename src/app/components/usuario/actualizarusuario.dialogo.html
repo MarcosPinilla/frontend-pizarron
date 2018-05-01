@@ -1,6 +1,7 @@
-<div style="padding-left: 100px; padding-right: 100px;">
-	<h2><strong>Editar información del usuario:</strong></h2>
-	<md-divider></md-divider>
+<div class="modal-title" style="background-color: #bddf8b;">
+  <h2><strong>Editar información del usuario:</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<md-input-container class="md-block">
 		<label>Email</label>
 		<input ng-model="vm.upusuario.email" type="text" required>
@@ -26,4 +27,4 @@
       </md-select>
     </md-input-container>
 	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarusuario(vm.upusuario)" md-theme="dark-green" aria-label="addusuario">actualizar usuario</md-button></center>
-</div>
+</md-content>

@@ -294,9 +294,9 @@ titular {
 
 .dashboard-adm{
   position: relative;
-  background-color: #BBDEFB;
   background-size: all;
-  height: 100%
+  height: 100%;
+  padding-top: 4em;
 }
 
 .titulo {
@@ -306,6 +306,12 @@ titular {
 
 .buttoncrudadd{
   float: right;
+  background-color: #bddf8b;
+  color: white;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .modal-image{
@@ -391,6 +397,12 @@ md-list.make-scrollable {
 .buttonadm{
   float: left;
   min-width: 32%;
+  background-color: #bddf8b;
+  color: white;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .repository-left {

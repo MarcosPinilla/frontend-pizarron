@@ -1,8 +1,10 @@
-<div style="padding-left: 100px; padding-right: 100px;">
-	<h2><strong>Información del Usuario:</strong></h2>
+<div class="modal-title" style="background-color: #bddf8b;">
+	<h2><strong>Información del Usuario</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<p><strong>Email: </strong>{{ vm.person.email }}</p>
 	<p><strong>Rol: </strong>{{ vm.person.rol.nombre_rol }} - <i>{{vm.person.rol.descripcion_rol }}</i></p>
 	<p><strong>Contrato: </strong>{{ vm.person.contrato.suscripcion.nombre_suscripcion}}</p>
 	<p><strong>Vencimiento: </strong>{{ vm.person.contrato.fecha_fin }}</p>
-	<p><strong>Profesor: </strong>{{ vm.person.profesores.nombres_profesor }} {{ vm.person.profesores.apellidos_profesor }}</p>
-</div>
+	<p><strong>Profesor: </strong>{{ vm.person.profesor.nombres_profesor }} {{ vm.person.profesor.apellidos_profesor }}</p>
+</md-content>

@@ -5,7 +5,7 @@
     </center>
     <md-divider></md-divider>
     <md-content layout-padding layout-wrap>
-        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirusuario()" md-theme="dark-green" aria-label="addprofe">añadir usuario</md-button>
+        <md-button class="buttoncrudadd noright" ng-click="vm.anadirusuario()" md-theme="dark-green" aria-label="addprofe">añadir usuario</md-button>
     </md-content>
     <md-table-container>
       <table md-table md-row-select multiple md-progress="promise">
@@ -19,10 +19,10 @@
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="usuario in vm.usuarios|orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit" ng-click="vm.goToPerson(usuario, $event)" >
-            <td md-cell>{{ usuario.id }}</td>
-            <td md-cell>{{ usuario.email }}</td>
-            <td md-cell>{{ usuario.rol.nombre_rol }}</td>
+          <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="usuario in vm.usuarios|orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit"  >
+            <td md-cell ng-click="vm.goToPerson(usuario, $event)">{{ usuario.id }}</td>
+            <td md-cell ng-click="vm.goToPerson(usuario, $event)">{{ usuario.email }}</td>
+            <td md-cell ng-click="vm.goToPerson(usuario, $event)">{{ usuario.rol.nombre_rol }}</td>
             <td md-cell>
               <md-button class="md-icon-button" ng-click="vm.actualizarusuario(usuario)" style="margin-right: -40px;">
                 <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
