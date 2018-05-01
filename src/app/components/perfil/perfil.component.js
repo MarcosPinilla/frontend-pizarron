@@ -9,13 +9,14 @@
     	controllerAs: 'vm'
   	});
 
-  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SolicitudService', '$rootScope', '$state'];
+  	perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SolicitudService', 'MaterialRecientelService','$rootScope', '$state'];
 
-  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService, SolicitudService) {
+  	function perfilCtrl($mdDialog, ProfesorService,  ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService, SolicitudService, MaterialRecientelService) {
   		var vm = this;
       vm.perfil = {};
       vm.amistad = {};
       vm.mejoresFavoritos = {};
+      vm.materialreciente = {};
       vm.isUser = false;
       vm.isSolicitado = false;
       /*
@@ -34,9 +35,7 @@
           vm.mejoresFavoritos = data;
       });
 
-      //vm.profesorIdD = $stateParams.id;
       console.log(vm.profesorId);
-      //vm.profesorId = getUrlParameter('id');
       //Si intentamos buscar un perfil
       if(vm.profesorId) {
         ProfesorService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -74,6 +73,13 @@
               vm.isUser = true;
         });
       }
+
+      MaterialRecientelService.get({id: vm.profesorId}).$promise.then(function (data) {
+        console.log(vm.profesorId);
+        console.log("WWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        console.log(data);
+        vm.materialreciente = data;
+      });
 
       vm.showEditarPerfil = function(ev, perfil) {
         $mdDialog.show({

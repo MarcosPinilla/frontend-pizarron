@@ -3,21 +3,21 @@
  	<div class="perfil-contenedor" flex="100" layout="container" layout-wrap>
  		<div class="perfil-information row" layout="row" flex="95">
  			<!-- Perfil Imagen -->
- 			<div class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
- 				<div style="overflow: hidden">
- 					<img class="img-perfil" ng-src= "{{ vm.perfil.url_foto_profesor }}">
+ 			<div flex="40" class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
+ 				<div>
+ 					<img class="img-perfil" style="border-color: #f9b985; border-style: solid; border-width: 4px;" ng-src= "{{ vm.perfil.url_foto_profesor }}">
  				</div>
  			</div>	
  			<!-- Perfil informacion -->	
- 			<div class="perfil-datos" flex>
- 					<h2 style="color: #536DFE">{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
+ 			<div class="perfil-datos" flex="30">
+ 					<h2>{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
  					<p>Profesión: {{ vm.perfil.profesion }}</p>
           <p>Cargo: {{ vm.perfil.cargo }}</p>
  					<p>Establecimiento: <a href="#">{{vm.perfil.establecimientos[0].nombre_establecimiento}}</a></p>
  					<h4><p>Email: {{ vm.perfil.usuario.email }}</p></h4>
  			</div>
  			<!-- Perfil Opciones -->
- 			<div flex layout="column">
+ 			<div flex="30" layout="column">
         <!-- Añadir Button -->
         <div ng-if="!vm.isUser && vm.estadoAmistad == 4 || !vm.isUser && vm.estadoAmistad == 3 || !vm.isUser && vm.estadoAmistad == 0">
           <md-button ng-click="vm.anadiramigo(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
@@ -128,54 +128,22 @@
  			<div class="titulo-perfil-recientes">
  				<h2 class="texto-titulo-perfil">Las más recientes</h2>
  			</div>
- 			<div layout="row">
- 				<!-- Left -->
- 				<div id="perfil-post-left" flex="30" layout="column">
- 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
-
- 				<div flex="5"></div>
- 				<!-- Center -->
- 				<div id="perfil-post-center" flex="30" layout="column">
- 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
- 				<div flex="5"></div>
- 				<!-- Right -->
- 				<div id="perfil-post-right" flex="30" layout="column">
- 					<div class="perfil-post-titulo-recientes">Guia de Matematicas</div>
- 					<div class="perfil-post-img">
- 						<a href="material"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image" alt="Washed Out"></a>
- 					</div>
- 					<div>
- 						<md-button class="md-raised">Ver Documento</md-button>
-
- 						<md-button class="md-icon-button" aria-label="Favorite" style="float: right;">
-        					<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
-      					</md-button>
- 					</div>
- 				</div>
-
- 			</div>
+ 			<md-content  layout="row">
+        <md-card class="post-card material-card" style="background-color: #fad98f" ng-repeat="material in vm.materialreciente">
+          <md-card-title style="background-color: #fad98f; border-radius: 18px;"> 
+            <md-card-title-text class="mimaterial-titulo">
+              <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a><a href="#">{{material.titulo_material}}</a></span>
+            </md-card-title-text>
+          </md-card-title>
+          <div>
+            <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa"></a>
+            <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
+          </div> 
+          <md-card-actions layout="row" layout-align="end center" style="color: white;">
+            <md-button ng-click="vm.goMaterial(material)">Ver documento</md-button>
+          </md-card-actions>
+        </md-card>
+ 			</md-content >
  		</div>
  	</div>
 </div>

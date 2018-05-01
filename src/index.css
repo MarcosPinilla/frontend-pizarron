@@ -30,49 +30,6 @@ a {
     color: white;
 }
 
-.noticia-titulo{
-  font-size: 15px;
-  color: grey;
-  margin: 0 0 0 0;
-  display:block;
-  width:220px;
-  word-wrap:break-word;
-}
-
-.noticia-autor{
-  margin: 0 0 0 0;
-  font-size: 10px; 
-  color:black;
-  display:block;
-  width:220px;
-  word-wrap:break-word;
-}
-
-.noticia-contenido{
-  font-size: 12px;
-  text-align: justify;
-  text-justify: inter-word;
-  display:block;
-  width:220px;
-  word-wrap:break-word;
-}
-
-.text-justify{
-  text-align: justify;
-  text-justify: inter-word;
-}
-
-.boton-nueva-noticia{
-  padding: 0 0 0 0 !important;
-  margin: -5px 0 0 100px !important;
-  width: 30px !important;
-  height: 30px !important;
-}
-
-#perfil-autor:hover{
-   text-decoration: underline;
-}
-
 #editarperfil-title {
   color: white;
   background-color: #fad98f;
@@ -201,12 +158,7 @@ md-dialog {
   width: 50%;
 }
 
-.inputLogin2{
-  
-}
-
 .inputLogin{
-  margin-top: -0.25vh;
 }
 
 .divLogin{
@@ -680,8 +632,11 @@ md-list.make-scrollable {
 }
 
 .perfil-information {
-  background-color: white;  
-  border-radius: 8px;
+  background-color: white;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #f9b985; 
+  border-radius: 18px;
   margin: 1.5em;
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 }
@@ -706,8 +661,8 @@ md-list.make-scrollable {
     to right, 
     #f9b985 0%, 
     #f9b985 50%, 
-    #FFF8E1 50%, 
-    #FFF8E1 100%
+    white 50%, 
+    white 100%
   );
 }
 
@@ -717,7 +672,11 @@ md-list.make-scrollable {
 }
 
 .perfil-datos a {
-  color: #1E88E5;
+  color: #37474F;
+}
+
+.perfil-datos h2 {
+  color: #37474F;
 }
 
 .titulo-perfil-valoradas {
