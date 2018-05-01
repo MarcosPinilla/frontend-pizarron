@@ -34,6 +34,11 @@
           CredentialsService.setRol(data.rol);
           $rootScope.$emit('isLogin');
           $rootScope.$emit('isnotinLogin');
+          if(data.rol == 1){
+            $rootScope.$emit('isAdmin');
+          }else{
+            $rootScope.$emit('isnotAdmin');
+          }
           $state.go('dashboard');
           /*UsuarioService.query().$promise.then(function (data) {
             console.log(JSON.stringify(data.user));
