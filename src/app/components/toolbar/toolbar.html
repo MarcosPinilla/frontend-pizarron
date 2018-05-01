@@ -53,7 +53,7 @@
           Mis Amigos
         </md-tooltip>
     </md-button>
-    <md-button ng-if="vm.isadmin || !vm.isnotadmin" class="md-icon-button" aria-label="Favorite" ui-sref="administrator">
+    <md-button ng-if="vm.isadmin && !vm.isnotadmin" class="md-icon-button" aria-label="Favorite" ui-sref="administrator">
       <md-icon md-svg-icon="app/resources/icons/configuracion.svg"></md-icon>
       <md-tooltip md-direction="bottom">
         Administrador
