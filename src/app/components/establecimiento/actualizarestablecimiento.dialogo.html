@@ -1,6 +1,7 @@
-<div style="padding-left: 100px; padding-right: 100px;">
-	<h2 class="tituloDialogo"><strong>Editar información del establecimiento:</strong></h2>
-	<md-divider></md-divider>
+<div class="modal-title" style="background-color: #bddf8b;">
+	<h2><strong>Editar Información del Establecimiento</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<md-input-container class="md-block">
 		<label>Nombre</label>
 		<input ng-model="vm.upestablecimiento.nombre_establecimiento" type="text" required>
@@ -22,4 +23,5 @@
       </md-select>
     </md-input-container>
 	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarestablecimiento(vm.upestablecimiento)" md-theme="dark-green" aria-label="addprofe">actualizar establecimiento</md-button></center>
-</div>
+</md-content>
+			

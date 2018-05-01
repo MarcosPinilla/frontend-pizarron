@@ -12,7 +12,10 @@
   	estadisticasCtrl.$inject = ['ProfesorService', 'UsuarioService', 'MaterialService', 'ElementoService', 'AsignaturaService', 'EstablecimientoService'];
 
   	function estadisticasCtrl(ProfesorService, UsuarioService, MaterialService, ElementoService, AsignaturaService, EstablecimientoService) {
-  		var vm = this;
+      var vm = this;
+      
+      vm.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+      vm.data = [300, 500, 100];
 
       vm.usuarios={};
 
