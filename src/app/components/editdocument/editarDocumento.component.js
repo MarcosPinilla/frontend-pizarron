@@ -1457,8 +1457,13 @@
         return colaborador.id_profesor == idProfesor;
       });
       if(colaborador.length>0){
-        alert('El colaborador existe');
+
+        document.getElementById("mensaje-error").innerHTML="";
+        document.getElementById("mensaje-error").append("Ingrese un colaborador que no haya sido agregado");
+             
+        //alert('El colaborador existe');
       }else{
+        document.getElementById("mensaje-error").innerHTML="";
          var elemento={id_material:vm.documento.id,id_profesor:idProfesor};
         AgregarColaboradorService.save(elemento,function(data){
           console.log(data);
