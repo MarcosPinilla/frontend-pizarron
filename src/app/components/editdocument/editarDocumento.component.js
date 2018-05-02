@@ -364,20 +364,20 @@
 
         vm.generarImagen = function(ruta){
           if(vm.figuras < 50){
-            fabric.Image.fromURL(ruta, function(img) {
-              //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-              img.src=ruta;
-              img.scaleToWidth(canvas.getWidth()/4);
-              img.scaleToHeight(canvas.getHeight()/4);
-              canvas.add(img);
-              var a = canvas.setActiveObject(img);
-               $scope.$apply(function () {
-                //vm.figuras = canvas.getObjects().length;
-                vm.figuras++;
-              });
-              //canvas.add(oImg);
-            }, null, { crossOrigin: 'anonymous'});
-            
+            fabric.Image.fromURL(response, function(img) {
+                  //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
+                  img.src=ruta;
+                  img.crossOrigin = 'anonymous';
+                  img.scaleToWidth(canvas.getWidth()/4);
+                  img.scaleToHeight(canvas.getHeight()/4);
+                  canvas.add(img);
+                  var a = canvas.setActiveObject(img);
+                   $scope.$apply(function () {
+                    //vm.figuras = canvas.getObjects().length;
+                    vm.figuras++;
+                  });
+                  //canvas.add(oImg);
+                }, { crossOrigin: 'anonymous'});
           }
           
         }
