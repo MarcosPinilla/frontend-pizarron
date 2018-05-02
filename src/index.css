@@ -201,7 +201,12 @@ md-dialog {
   width: 50%;
 }
 
+.inputLogin2{
+  
+}
+
 .inputLogin{
+  margin-top: -0.25vh;
 }
 
 .divLogin{
