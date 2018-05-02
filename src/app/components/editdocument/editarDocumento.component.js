@@ -364,9 +364,8 @@
 
         vm.generarImagen = function(ruta){
           if(vm.figuras < 50){
-            fabric.Image.fromURL(response, function(img) {
+            fabric.Image.fromURL(ruta, function(img) {
                   //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
-                  img.src=ruta;
                   img.crossOrigin = 'anonymous';
                   img.scaleToWidth(canvas.getWidth()/4);
                   img.scaleToHeight(canvas.getHeight()/4);
