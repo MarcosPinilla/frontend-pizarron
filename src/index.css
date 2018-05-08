@@ -386,6 +386,7 @@ md-list.make-scrollable {
 }
 
 .post-card {
+  /*width: 300px;*/
   margin-top: 30px;
   border-radius: 4px;
   background-color: #fad98f;
@@ -997,6 +998,16 @@ md-list-item.md-2-line .md-list-item-text h4 {
   color: white;
 }
 
+.sin-comentario {
+  color: white;
+  background-color: #fad98f;
+}
+
+.comentario-divider {
+  margin-left: 3%;
+  width: 94%;
+}
+
 .comentario {
   max-height: 8em;
   overflow: hidden;
@@ -1045,7 +1056,6 @@ md-list-item.md-2-line .md-list-item-text h4 {
   max-width: 20px;
   height: 40px;
   margin-top: 10px;
-  margin-left: 1em;
   background-color: #6d72ad;
   border: none;
   color: white;

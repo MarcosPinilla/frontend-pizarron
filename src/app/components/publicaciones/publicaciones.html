@@ -18,10 +18,22 @@
 		      <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="Previsualización no encontrada"></a>
 		      <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
 		    </div> 
-		    <md-card-actions layout="row" layout-align="end center" style="color: white;">
-		      <md-button ng-click="vm.goMaterial(material)">Ver documento</md-button>
+		    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
+		    	<md-button ng-click="vm.darFavorito(material)">
+		    		<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
+		    		Favoritos
+		    	</md-button>
+		      	<md-button ng-click="vm.goMaterial(material)">
+		      		<md-icon md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+		      		Ver documento
+		      	</md-button>
 		    </md-card-actions>
-		    <md-content ng-repeat="comentario in material.comentarios">
+		    <md-content class="sin-comentario" ng-if="material.comentarios.length <= 0">
+		    	<md-divider class="comentario-divider"></md-divider>
+		    	<center><h4>Este material aun no tiene comentarios</h4></center>
+		    	<md-divider class="comentario-divider"></md-divider>
+		    </md-content>
+		    <md-content ng-if="material.comentarios.length > 0" ng-repeat="comentario in material.comentarios">
 				<div class="comentario" layout="row">
 					<div class="comentario-foto" style="" flex="20">
 						<img class="amigos-amigo-img" src="{{comentario.profesor.url_foto_profesor}}">
@@ -33,17 +45,19 @@
 						</div>
 					</div>
 				</div>
-				<md-divider></md-divider>
 			</md-content>
 			<div layout="row" flex>
+				<div flex="5"></div>
 				<div class="caja-comentario" flex="70">
-					 <input type="text" placeholder="Escribe un comentario ..." ng-model="comentario.comentar">
+					 <input type="text" placeholder="Escribe un comentario..." ng-model="comentario.comentar">
 				</div>
-				<div flex="30">
+				<div flex="5"></div>
+				<div flex="25">
 					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar); comentario.comentar = ''">
 						<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 					</md-button>
 				</div>
+				<div flex="5"></div>
 			</div>
   		</md-card>
 	</div>
