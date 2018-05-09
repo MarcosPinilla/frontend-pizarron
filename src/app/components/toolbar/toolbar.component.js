@@ -10,16 +10,18 @@
   });
 
   toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'ListarasignaturasService', 'ListarnivelesService',
-   'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
+   'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService', 'BuscarNombreProfesorService'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, ListarasignaturasService, ListarnivelesService,
-   ListartipomaterialService, NotificacionesNoLeidasService) {
+   ListartipomaterialService, NotificacionesNoLeidasService, BuscarNombreProfesorService) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
     vm.asignaturas = {};
     vm.niveles = {};
     vm.tipo_material = {};
+    vm.profesores = {};
+    vm.nombre_profesor = null;
 
     vm.isinRegister = false;
     vm.isinLogin = false;
@@ -83,6 +85,15 @@
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
     });
+
+    vm.buscarProfesor = function () {
+      BuscarNombreProfesorService.query({id: "Jorge"}).$promise.then(function (data) {
+        vm.profesores = data;
+        console.log(data);
+      });
+      console.log("WATASHIWAX! " + vm.nombre_profesor);
+      //console.log(vm.profesores);
+    };
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({
