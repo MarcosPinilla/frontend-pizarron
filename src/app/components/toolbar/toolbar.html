@@ -6,7 +6,17 @@
   </div>
   <div flex="30">
     <md-input-container id="toolbar-buscador">
-      <input ng-model="vm.nombre_profesor"  type="text" placeholder="Buscar profesores" ng-click="vm.buscarProfesor()">
+      <md-autocomplete
+      md-no-cache="true"
+      md-selected-item="vm.selected_profesor"
+      md-selected-item-change="vm.irPerfil()"
+      md-search-text="vm.nombre_profesor"
+      md-search-text-change="vm.buscarProfesor()"
+      md-items="profesor in vm.profesores" 
+      md-item-text="profesor.nombres_profesor"
+      placeholder="Buscar profesores">
+        <span>{{profesor.nombres_profesor}} {{profesor.apellidos_profesor}}</span>
+      </md-autocomplete>
     </md-input-container>
   </div>
   <div flex="40" id="toolbar-icons">

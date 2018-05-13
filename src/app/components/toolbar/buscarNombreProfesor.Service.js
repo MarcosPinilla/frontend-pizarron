@@ -8,7 +8,7 @@
   buscarNombreProfesorService.$inject = ['$resource', 'API'];
 
   function buscarNombreProfesorService($resource, API) {
-    return $resource(API + 'buscarProfesorPorNombre/:id', {id: '@id'}, {
+    return $resource(API + 'buscarProfesorPorNombre/:nombre', {nombre: '@nombre'}, {
       get: {
         isArray: true
       }

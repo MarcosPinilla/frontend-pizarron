@@ -231,12 +231,6 @@ md-dialog {
   margin-left: 10em;
 }
 
-titular {
-  font-size: 5em;
-  margin-top: 10em;
-  background: rgba(255, 255, 255, .7)
-}
-
 #logo {
   height: 7rem;
   width: auto;
@@ -656,8 +650,17 @@ md-list.make-scrollable {
   position: relative;
   width: 100%;
   height: 35px;
+  border-radius: 100px; 
+}
+
+#toolbar-buscador md-autocomplete {
+  width: 100%;
+  height: 35px;
   border-radius: 100px;
-  
+}
+
+#toolbar-buscador md-autocomplete-wrap {
+  box-shadow: none;
 }
 
 .buscador-repo{

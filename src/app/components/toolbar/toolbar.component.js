@@ -9,11 +9,11 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'ListarasignaturasService', 'ListarnivelesService',
-   'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService', 'BuscarNombreProfesorService'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
+   'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, ListarasignaturasService, ListarnivelesService,
-   ListartipomaterialService, NotificacionesNoLeidasService, BuscarNombreProfesorService) {
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
+   ListartipomaterialService, NotificacionesNoLeidasService) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -22,6 +22,7 @@
     vm.tipo_material = {};
     vm.profesores = {};
     vm.nombre_profesor = null;
+    vm.selected_profesor = null;
 
     vm.isinRegister = false;
     vm.isinLogin = false;
@@ -86,13 +87,20 @@
       vm.tipo_material = data;
     });
 
-    vm.buscarProfesor = function () {
-      BuscarNombreProfesorService.query({id: "Jorge"}).$promise.then(function (data) {
+    BuscarNombreProfesorService.query({nombre: "Ma"}).$promise.then(function (data) {
         vm.profesores = data;
-        console.log(data);
+        
       });
-      console.log("WATASHIWAX! " + vm.nombre_profesor);
-      //console.log(vm.profesores);
+    vm.buscarProfesor = function () {
+      BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
+        vm.profesores = data;
+        console.log(vm.profesores);
+      });
+    };
+
+    vm.irPerfil = function () {
+      console.log("SELECCIONADOx!!!");
+      $state.go('dashboard.perfil', {id: vm.selected_profesor.id});
     };
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
