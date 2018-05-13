@@ -9,10 +9,10 @@
     controllerAs: 'vm'
   });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'ListarasignaturasService', 'ListarnivelesService',
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
    'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, ListarasignaturasService, ListarnivelesService,
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
    ListartipomaterialService, NotificacionesNoLeidasService) {
     var vm = this;
 
@@ -20,6 +20,9 @@
     vm.asignaturas = {};
     vm.niveles = {};
     vm.tipo_material = {};
+    vm.profesores = {};
+    vm.nombre_profesor = null;
+    vm.selected_profesor = null;
 
     vm.isinRegister = false;
     vm.isinLogin = false;
@@ -83,6 +86,22 @@
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
     });
+
+    BuscarNombreProfesorService.query({nombre: "Ma"}).$promise.then(function (data) {
+        vm.profesores = data;
+        
+      });
+    vm.buscarProfesor = function () {
+      BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
+        vm.profesores = data;
+        console.log(vm.profesores);
+      });
+    };
+
+    vm.irPerfil = function () {
+      console.log("SELECCIONADOx!!!");
+      $state.go('dashboard.perfil', {id: vm.selected_profesor.id});
+    };
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
         $mdDialog.show({

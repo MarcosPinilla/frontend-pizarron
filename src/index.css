@@ -232,12 +232,6 @@ md-dialog {
   margin-left: 10em;
 }
 
-titular {
-  font-size: 5em;
-  margin-top: 10em;
-  background: rgba(255, 255, 255, .7)
-}
-
 #logo {
   height: 7rem;
   width: auto;
@@ -387,6 +381,7 @@ md-list.make-scrollable {
 }
 
 .post-card {
+  /*width: 300px;*/
   margin-top: 30px;
   border-radius: 4px;
   background-color: #fad98f;
@@ -656,8 +651,17 @@ md-list.make-scrollable {
   position: relative;
   width: 100%;
   height: 35px;
+  border-radius: 100px; 
+}
+
+#toolbar-buscador md-autocomplete {
+  width: 100%;
+  height: 35px;
   border-radius: 100px;
-  
+}
+
+#toolbar-buscador md-autocomplete-wrap {
+  box-shadow: none;
 }
 
 .buscador-repo{
@@ -998,6 +1002,16 @@ md-list-item.md-2-line .md-list-item-text h4 {
   color: white;
 }
 
+.sin-comentario {
+  color: white;
+  background-color: #fad98f;
+}
+
+.comentario-divider {
+  margin-left: 3%;
+  width: 94%;
+}
+
 .comentario {
   max-height: 8em;
   overflow: hidden;
@@ -1046,7 +1060,6 @@ md-list-item.md-2-line .md-list-item-text h4 {
   max-width: 20px;
   height: 40px;
   margin-top: 10px;
-  margin-left: 1em;
   background-color: #6d72ad;
   border: none;
   color: white;

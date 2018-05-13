@@ -75,9 +75,6 @@
       }
 
       MaterialRecientelService.get({id: vm.profesorId}).$promise.then(function (data) {
-        console.log(vm.profesorId);
-        console.log("WWEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-        console.log(data);
         vm.materialreciente = data;
       });
 
