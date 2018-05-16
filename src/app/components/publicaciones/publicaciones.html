@@ -19,11 +19,11 @@
 		      <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
 		    </div> 
 		    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
-		    	<md-button ng-click="vm.darFavorito(material)">
+		    	<md-button ng-click="vm.darFavorito(material.id)">
 		    		<md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon>
 		    		Favoritos
 		    	</md-button>
-		      	<md-button ng-click="vm.goMaterial(material)">
+		      	<md-button ng-click="vm.goMaterial(material.id)">
 		      		<md-icon md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
 		      		Ver documento
 		      	</md-button>

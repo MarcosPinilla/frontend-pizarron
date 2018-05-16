@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	publicacionesCtrl.$inject = ['MaterialService', 'ComentarioService', '$state'];
+  	publicacionesCtrl.$inject = ['MaterialService', 'DarFavorito', 'ComentarioService', '$state'];
 
-  	function publicacionesCtrl(MaterialService, ComentarioService) {
+  	function publicacionesCtrl(MaterialService, DarFavorito, ComentarioService, $state) {
   		var vm = this;
       vm.materiales = {};
       vm.comentarios = {};
@@ -25,6 +25,17 @@
         console.log(vm.materiales);
         console.log(vm.materiales.materiales);
       });
+
+      vm.darFavorito = function(id_material) {
+        DarFavorito.save({material_id: id_material}).$promise.then(function (data) {
+          console.log("se le dio laik a: ");
+          console.log(data);
+        });
+      }
+
+      vm.goMaterial = function(id_material) {
+        $state.go('editdocument', {id: id_material});
+      }
 
       vm.verDocumento = function() {
         console.log('ver documento!');
