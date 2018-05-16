@@ -18,7 +18,6 @@
 
     ObtenerFavoritosProfesor.query().$promise.then(function (data) {
       vm.favoritos = data;
-      console.log("FAVORITOOOOS");
       console.log(vm.favoritos);
       vm.imagePath = data.vista_previa;
     });
