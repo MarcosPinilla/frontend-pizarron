@@ -74,6 +74,10 @@ a {
    text-decoration: underline;
 }
 
+.underline-link:hover{
+  text-decoration: underline;
+}
+
 #editarperfil-title {
   color: white;
   background-color: #fad98f;
