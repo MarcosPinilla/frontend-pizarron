@@ -1187,6 +1187,8 @@
      
     });
 
+    //Dialog para añadir nuevo colaborador a la edición del material
+
      vm.mostrarColaborador = function(ev) {
       $mdDialog.show({
         controller: dialogoController,
@@ -1207,6 +1209,28 @@
       });
     };
     
+    //Dialog para compartir material con seguidores
+
+      vm.mostrarCompartirMaterial = function(ev) {
+      $mdDialog.show({
+        controller: compartirMaterialController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/editdocument/compartirmaterial.dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          documento: vm.documento
+        },
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+
     /* Implementar más tarde, el horizontal aún tiene bugs
     vm.rotar = function() {
       $timeout(function() {
@@ -1479,6 +1503,68 @@
         console.log(data);
         vm.actualizarColaboradores();
       });
+    }
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+    function compartirMaterialController($timeout, $q, $mdDialog,ProfesorService, $state,AgregarColaboradorService,documento,PerfilService,obtenerSeguidoresProfesorService,compartirMaterialService) {
+    var vm = this;
+
+    vm.documento=documento;
+    vm.seguidores={};
+    vm.usuario={};
+    vm.customFullscreen = true;
+
+    PerfilService.get().$promise.then(function (data) {
+        console.log(data);
+        vm.usuario = data; 
+    });
+
+  
+
+    obtenerSeguidoresProfesorService.query().$promise.then(function(data){
+        vm.seguidores=data;
+        console.log(vm.seguidores);
+      });
+
+
+    vm.querySearch   = querySearch;
+
+    function querySearch (query) {
+      return query ? vm.seguidores.filter( createFilterFor(query) ) : vm.seguidores;
+    }
+    
+    function createFilterFor(query) {
+
+      var lowercaseQuery = query;
+      //console.log(lowercaseQuery);
+
+      return function filterFn(seguidor) {
+        //console.log(usuario.email);
+        return (seguidor.nombres_profesor.indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    vm.compartirMaterial=function(idSeguidor){
+      var elemento= {id_seguidor:idSeguidor,id_material:vm.documento.id};
+      compartirMaterialService.save(elemento,function(data){
+        vm.hide();
+      });
+    }
+
+    vm.obtenerNombre = function(profesor){
+      return profesor.nombres_profesor +" "+ profesor.apellidos_profesor;
     }
 
     vm.hide = function () {
