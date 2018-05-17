@@ -236,8 +236,26 @@ vm.chatEnv = function (message){
   });
 };
 
+//socket noticia
+
+var client = new Pusher('28705022aa554d22c965', {
+        cluster: 'us2',
+                key: '6af7dc41d3b9a2f104d8',
+                encrypted: true
+              });
+
+                 var pusher = $pusher(client);
+
+          var canal3 = pusher.subscribe('noticia');
 
 
+            canal3.bind('NoticiaEvent',
+              function (data) {
+                console.log(data);
+               
+                vm.noticias=data.noticias;
+
+              });
 
 
 }
