@@ -1547,12 +1547,13 @@
     
     function createFilterFor(query) {
 
-      var lowercaseQuery = query;
+      var lowercaseQuery = angular.lowercase(query);
       //console.log(lowercaseQuery);
 
       return function filterFn(seguidor) {
-        //console.log(usuario.email);
-        return (seguidor.nombres_profesor.indexOf(lowercaseQuery) === 0);
+  
+        var nombre=angular.lowercase(seguidor.nombres_profesor+" "+seguidor.apellidos_profesor);
+        return (nombre.indexOf(lowercaseQuery) === 0);
       };
     }
 
