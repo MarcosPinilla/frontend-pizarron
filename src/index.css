@@ -1186,3 +1186,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .virtualRepeatdemoInfiniteScroll .md-virtual-repeat-container .md-virtual-repeat-offsetter div {
   padding-left: 16px; }
+
+.imageDataTable{
+  height: 5px;
+}

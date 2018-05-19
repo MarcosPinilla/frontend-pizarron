@@ -20,5 +20,12 @@
       vm.materiales = data;
       console.log(vm.materiales);
     });
+
+    vm.query = {
+      order: 'id',
+      limit: 5,
+      page: 1
+    };
+    
   }
 })();

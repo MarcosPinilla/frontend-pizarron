@@ -1,26 +1,41 @@
-<div flex-offset="20" flex="60" style="background-color: white">
+<div flex="90" flex-offset="5" flex-md="90" flex-offset-md="5" flex-xs="90" flex-offset-xs="5" class="fond" style="margin-bottom: 20px;background-color: white;" >
+  <center>
+    <h2 class="titulo">Establecimientos</h2>
+    <br>
+  </center>
+  <md-divider></md-divider>
   <md-content layout-padding layout-wrap>
-    <center>
-      <h2 class="titulo">Establecimientos</h2>
-      <br>
-    </center>
-    <md-divider></md-divider>
-    <md-content layout-padding layout-wrap>
-        <md-button class="buttoncrudadd noright" ng-click="vm.anadirestablecimiento()" md-theme="dark-green" aria-label="addprofe">añadir establecimiento</md-button>
-    </md-content>
-    <md-list ng-cloak>
-      <md-subheader class="md-no-sticky">Nombre</md-subheader>
-      <md-list-item ng-repeat="establecimiento in vm.establecimientos" ng-click="vm.goToEstablecimiento(establecimiento, $event)" class="noright listaObjetos">
-        <img alt="{{ establecimiento.nombre_establecimiento }}" ng-src="{{ establecimiento.url_foto_establecimiento }}" class="md-avatar" />
-        <p>{{ establecimiento.nombre_establecimiento }}</p>
-        <md-icon md-svg-icon="app/resources/icons/editar.svg" ng-click="vm.actualizarestablecimiento(establecimiento)" aria-label="borrar profe" class="md-secondary md-hue-3" style="padding-right: 10px;"></md-icon>
-        <md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminarestablecimiento(establecimiento.id)" aria-label="borrar profe" class="md-secondary md-hue-3" > </md-icon>
-      
-        <!--<md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
-        <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
-      </md-list-item>
-    </md-list>  
-    
-
+      <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirestablecimiento()"  md-theme="dark-green" aria-label="addprofe">añadir establecimiento</md-button>
   </md-content>
-</div> 
+  <md-table-container>
+    <table md-table md-row-select multiple md-progress="promise">
+      <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+        <tr md-row>
+          <th md-column md-numeric>Id</th>
+          <th md-column md-numeric>Logo</th>
+          <th md-column md-numeric>Nombre</th>
+          <th md-column md-numeric></th>
+          <th md-column md-numeric></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="establecimiento in vm.establecimientos|orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit" ng-click="vm.goToPerson(person, $event)" >
+          <td md-cell ng-click="vm.goToEstablecimiento(establecimiento, $event)">{{ establecimiento.id }}</td>
+          <td md-cell ng-click="vm.goToEstablecimiento(establecimiento, $event)"><img ng-src="{{ establecimiento.url_foto_establecimiento }}" class="md-avatar " style="height: 45px;" /></td>
+          <td md-cell ng-click="vm.goToEstablecimiento(establecimiento, $event)">{{ establecimiento.nombre_establecimiento }}</td>
+          <td md-cell>
+            <md-button class="md-icon-button" ng-click="vm.actualizarestablecimiento(establecimiento)" style="margin-right: -40px;">
+              <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
+            </md-button>
+          </td>
+          <td md-cell>
+            <md-button class="md-icon-button" ng-click="vm.eliminarestablecimiento(establecimiento.id)" style="margin-right: -25px;">
+              <md-icon  md-svg-icon="app/resources/icons/basurero.svg"></md-icon>
+            </md-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+  <md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{vm.people.length}}" md-page-select></md-table-pagination>
+</div>
