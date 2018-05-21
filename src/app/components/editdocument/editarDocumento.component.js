@@ -363,20 +363,39 @@
         })
 
         vm.generarImagen = function(ruta){
+          console.log(ruta);
+          var cadena = ruta.split(".");
+          var extension = cadena[cadena.length-1]
+          console.log(extension);
           if(vm.figuras < 50){
-            fabric.Image.fromURL(ruta, function(img) {
+            if (extension === "svg") {
+
+              fabric.loadSVGFromURL(ruta, function(objects, options) {
+                var obj = fabric.util.groupSVGElements(objects, options);
+                canvas.add(obj).renderAll();
+                canvas.setActiveObject(obj);
+                $scope.$apply(function () {
+                    //vm.figuras = canvas.getObjects().length;
+                    vm.figuras++;
+                });
+              });
+
+            } else if (extension === "png" || extension === "jpg") {
+              fabric.Image.fromURL(ruta, function(img) {
                   //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
                   img.crossOrigin = 'anonymous';
                   img.scaleToWidth(canvas.getWidth()/4);
                   img.scaleToHeight(canvas.getHeight()/4);
                   canvas.add(img);
                   var a = canvas.setActiveObject(img);
-                   $scope.$apply(function () {
+                  $scope.$apply(function () {
                     //vm.figuras = canvas.getObjects().length;
                     vm.figuras++;
                   });
                   //canvas.add(oImg);
-                }, { crossOrigin: 'anonymous'});
+                }, { crossOrigin: 'anonymous'});  
+            }
+            
           }
           
         }
@@ -915,49 +934,163 @@
     }*/
 
 
+    vm.test = function(pagina) {
+      var paginas = [];
+      for (var i = 1; i <= 3; i++) {
+        canvas.clear();
+        var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
+        console.log(json);
+        canvas.loadFromJSON(json.data);
+        
+        console.log("HOLA");
+        setTimeout(function(){
+          console.log("asdf");
+          var dataUrl = canvas.toDataURL();
+          paginas.push(dataUrl);
+          console.log("CHAO");        
+        }, 1000);  
+      }
+
+      return paginas;
+    }
+
+    vm.sleep = function(milliseconds) {
+      var start = new Date().getTime();
+      for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+          break;
+        }
+      }
+    }
+
+
+    vm.clear = function() {
+      canvas.clear();
+    }
+    vm.limpiar = function(iter) {
+      $scope.$apply(function () {
+        var json = $filter('filter')(vm.documentoCompleto, {id: iter}, true)[0];
+        //vm.sleep(3000);
+
+        console.log(iter);
+        console.log(json);
+        canvas.loadFromJSON(json.data);
+        //canvas.renderAll();
+        let dataUrl = canvas.toDataURL();
+        console.log(dataUrl);
+        return dataUrl;    
+      }); 
+
+      
+    }
     //Lógica para exportar a pdf, utilizando el elemento de canvas
     vm.exportar = function () {
-      /*html2canvas(document.getElementById('canvas'), {
-        onrendered: function (canvas) {
-          var data = canvas.toDataURL();
-          console.log(data);
-          var docDefinition = {
-            content: [{
-              image: data,
-              width: 500,
-            }]
-          };
-          pdfMake.createPdf(docDefinition).download("test.pdf");
-        }
-      }); 
+
+      var paginaImpresion = vm.paginaActual;
+      console.log(vm.paginaActual);
+      console.log(vm.documentoCompleto);
+      var paginas = [];
+
+      canvas.clear();
+      vm.sleep(3000);  
+      var json = $filter('filter')(vm.documentoCompleto, {id: 1}, true)[0];
+      vm.sleep(3000);  
+      canvas.loadFromJSON(json.data);
+      //canvas.renderAll();
+      vm.sleep(3000);  
+      let dataUrl = canvas.toDataURL();
+      vm.sleep(3000);  
+      paginas.push(dataUrl);
       
-      ////////////////////////////////////////////////////
+
+      vm.sleep(3000);  
+      canvas.clear();
+      vm.sleep(3000);  
+      json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
+      vm.sleep(3000);  
+      canvas.loadFromJSON(json.data);
+      //canvas.renderAll();
+      vm.sleep(3000);  
+      let dataUrl2 = canvas.toDataURL();
+      vm.sleep(3000);  
+      paginas.push(dataUrl2);
 
 
-      var imgPdfData = canvas.toDataURL("image/jpeg", 1.0);
-      var pdf=new jsPDF("p", "mm", "a4");
-      var width = pdf.internal.pageSize.width;    
-      var height = pdf.internal.pageSize.height;
-      pdf.addImage(imgPdfData, 'png', 5, 5,width-10,height-10);
-      pdf.save('test.pdf'); */
+      /*
+      $timeout(function(){
+        for (var i = 1; i <= 3; i++) {
+          /*
+          //vm.sleep(3000);
+          var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
+          //vm.sleep(3000);
+          console.log(json);
+          canvas.loadFromJSON(json.data);
+          
+          //vm.sleep(1000);
+          
+          console.log("HOLA");
+          
+          
+          console.log("asdf");
+          vm.clear();
+          var data = vm.limpiar(i);
+          paginas.push(data);
+          console.log("CHAO");        
+          
+          //vm.sleep(3000);
+          //canvas.clear();
+          vm.sleep(3000);        
+        }
 
-      //vm.rotar();
+      console.log(paginas);
 
-      kendo.drawing
-        .drawDOM("#canvas", 
-        { 
-            forcePageBreak: ".page-break", 
-            paperSize: "A4",
-            margin: { top: "1cm", bottom: "1cm" },
-            scale: 0.8,
-            height: 500, 
-            template: $("#page-template").html(),
-            keepTogether: ".prevent-split"
-        })
-            .then(function(group){
-            kendo.drawing.pdf.saveAs(group, "Exported_Itinerary.pdf")
-        });
+      });*/
 
+
+      
+      
+       
+      
+      
+      /*
+
+      var dataUrl = canvas.toDataURL();
+      console.log(dataUrl);
+      
+      canvas.clear();
+      var json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
+      console.log(json);
+      canvas.loadFromJSON(json.data);
+
+      
+
+      /*
+      canvas.clear();
+      var json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
+      //console.log(json);
+      canvas.loadFromJSON(json.data);
+      var dataUrl3 = canvas.toDataURL();
+      */
+      setTimeout(function(){
+        //var dataUrl2 = canvas.toDataURL(); 
+        //console.log(dataUrl2);
+        var windowContent = '<!DOCTYPE html>';
+        windowContent += '<html>'
+        windowContent += '<head><title></title></head>';
+        windowContent += '<body>'
+        for (var i = 0; i < paginas.length; i++) {
+          //console.log(paginas[i]);
+          //console.log(i);
+          windowContent += '<img src="' + paginas[i] + '" onload=window.print();window.close();>';
+        }
+        //windowContent += '<img src="' + dataUrl + '" onload=window.print();window.close();>';
+        //windowContent += '<img src="' + dataUrl2 + '" onload=window.print();window.close();>';
+        windowContent += '</body>';
+        windowContent += '</html>';
+        var printWin = window.open('', '', 'width=680,height=520');
+        printWin.document.open();
+        printWin.document.write(windowContent);  
+      }, 9000);
 
     };
 
