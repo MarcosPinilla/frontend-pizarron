@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  materialesCtrl.$inject = ['PublicMaterialService','AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'DarFavorito'];
+  materialesCtrl.$inject = ['PublicMaterialService','AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'DarFavorito', '$state'];
 
-  function materialesCtrl(PublicMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, DarFavorito) {
+  function materialesCtrl(PublicMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, DarFavorito, $state) {
     var vm = this;
 
     vm.materiales = {};
@@ -44,6 +44,10 @@
       vm.tipo = data;
       console.log(vm.tipo);
     });
+
+    vm.goMaterial = function (material) { 
+        $state.go('editdocument', {id: material.id});
+    };  
 
     vm.darFavorito = function(data){
       DarFavorito.save(data,function(res){

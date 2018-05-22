@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  favoritosCtrl.$inject = ['ObtenerFavoritosProfesor', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService'];
+  favoritosCtrl.$inject = ['ObtenerFavoritosProfesor', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
 
-  function favoritosCtrl(ObtenerFavoritosProfesor, AsignaturaService, ListarnivelesService, ListartipomaterialService) {
+  function favoritosCtrl(ObtenerFavoritosProfesor, AsignaturaService, ListarnivelesService, ListartipomaterialService, $state) {
     var vm = this;
 
     vm.favoritos = {};
@@ -41,5 +41,9 @@
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo = data;
     });
+
+    vm.goMaterial = function(id_material) {
+      $state.go('editdocument', {id: id_material});
+    }
   }
 })();

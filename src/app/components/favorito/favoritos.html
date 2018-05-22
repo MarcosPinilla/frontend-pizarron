@@ -50,7 +50,7 @@
       </a>
     </div> 
     <md-card-actions layout="row" layout-align="end center" style="color: white;">
-      <md-button>Ver documento</md-button>
+      <md-button ng-click="vm.goMaterial(favorito.id)">Ver documento</md-button>
       <md-button ng-if="favorito.esFavorito == true" ng-click="vm.darFavorito(material)">
         <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
         </md-button>
