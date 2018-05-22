@@ -934,165 +934,55 @@
     }*/
 
 
-    vm.test = function(pagina) {
-      var paginas = [];
-      for (var i = 1; i <= 3; i++) {
-        canvas.clear();
-        var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
-        console.log(json);
-        canvas.loadFromJSON(json.data);
-        
-        console.log("HOLA");
-        setTimeout(function(){
-          console.log("asdf");
-          var dataUrl = canvas.toDataURL();
-          paginas.push(dataUrl);
-          console.log("CHAO");        
-        }, 1000);  
-      }
-
-      return paginas;
-    }
-
-    vm.sleep = function(milliseconds) {
-      var start = new Date().getTime();
-      for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds){
-          break;
-        }
-      }
-    }
-
-
-    vm.clear = function() {
-      canvas.clear();
-    }
-    vm.limpiar = function(iter) {
-      $scope.$apply(function () {
-        var json = $filter('filter')(vm.documentoCompleto, {id: iter}, true)[0];
-        //vm.sleep(3000);
-
-        console.log(iter);
-        console.log(json);
-        canvas.loadFromJSON(json.data);
-        //canvas.renderAll();
-        let dataUrl = canvas.toDataURL();
-        console.log(dataUrl);
-        return dataUrl;    
-      }); 
-
-      
-    }
-    //Lógica para exportar a pdf, utilizando el elemento de canvas
+    //Lógica para imprimir utilizando el canvas
     vm.exportar = function () {
 
-      var paginaImpresion = vm.paginaActual;
-      console.log(vm.paginaActual);
-      console.log(vm.documentoCompleto);
+      //Se inicializa el arreglo con las páginas a imprimir
       var paginas = [];
-
-      canvas.clear();
-      vm.sleep(3000);  
-      var json = $filter('filter')(vm.documentoCompleto, {id: 1}, true)[0];
-      vm.sleep(3000);  
-      canvas.loadFromJSON(json.data);
-      //canvas.renderAll();
-      vm.sleep(3000);  
-      let dataUrl = canvas.toDataURL();
-      vm.sleep(3000);  
-      paginas.push(dataUrl);
       
+      //Se itera entre todas las páginas creadas
+      for (var i = 1; i <= vm.documentoCompleto.length - 1; i++) {
+        
+        //Se crea nuevo canvas, para no modificar el de la edición
+        var impresion = new fabric.Canvas('c');
 
-      vm.sleep(3000);  
-      canvas.clear();
-      vm.sleep(3000);  
-      json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
-      vm.sleep(3000);  
-      canvas.loadFromJSON(json.data);
-      //canvas.renderAll();
-      vm.sleep(3000);  
-      let dataUrl2 = canvas.toDataURL();
-      vm.sleep(3000);  
-      paginas.push(dataUrl2);
+        //Se cambia el tamaño (Validar)
+        impresion.setHeight(1122);
+        impresion.setWidth(794);
 
+        //Se obtiene la página de la iteración
+        var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
 
-      /*
-      $timeout(function(){
-        for (var i = 1; i <= 3; i++) {
-          /*
-          //vm.sleep(3000);
-          var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
-          //vm.sleep(3000);
-          console.log(json);
-          canvas.loadFromJSON(json.data);
-          
-          //vm.sleep(1000);
-          
-          console.log("HOLA");
-          
-          
-          console.log("asdf");
-          vm.clear();
-          var data = vm.limpiar(i);
-          paginas.push(data);
-          console.log("CHAO");        
-          
-          //vm.sleep(3000);
-          //canvas.clear();
-          vm.sleep(3000);        
-        }
+        //Se carga la página al canvas
+        impresion.loadFromJSON(json.data);
+        
+        //Se pasa el canvas a imágen
+        let dataUrl = impresion.toDataURL();
+        
+        //Se añade al arreglo
+        paginas.push(dataUrl);
+  
+      }
 
-      console.log(paginas);
-
-      });*/
-
-
+      //Se crea la estructura para imprimir
+      var windowContent = '<!DOCTYPE html>';
+      windowContent += '<html>'
+      windowContent += '<head><title></title></head>';
+      windowContent += '<body>'
       
+      //Mediante una iteración se agregan las páginas a imprimir
+      for (var i = 0; i < paginas.length; i++) {
+        windowContent += '<img src="' + paginas[i] + '" onload=window.print();window.close();>';
+      }
+      windowContent += '</body>';
+      windowContent += '</html>';
       
-       
+      //Se abre el dialogo para imprimir
+      var printWin = window.open('', '', 'width=680,height=520');
+      printWin.document.open();
+      printWin.document.write(windowContent);
       
-      
-      /*
-
-      var dataUrl = canvas.toDataURL();
-      console.log(dataUrl);
-      
-      canvas.clear();
-      var json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
-      console.log(json);
-      canvas.loadFromJSON(json.data);
-
-      
-
-      /*
-      canvas.clear();
-      var json = $filter('filter')(vm.documentoCompleto, {id: 2}, true)[0];
-      //console.log(json);
-      canvas.loadFromJSON(json.data);
-      var dataUrl3 = canvas.toDataURL();
-      */
-      setTimeout(function(){
-        //var dataUrl2 = canvas.toDataURL(); 
-        //console.log(dataUrl2);
-        var windowContent = '<!DOCTYPE html>';
-        windowContent += '<html>'
-        windowContent += '<head><title></title></head>';
-        windowContent += '<body>'
-        for (var i = 0; i < paginas.length; i++) {
-          //console.log(paginas[i]);
-          //console.log(i);
-          windowContent += '<img src="' + paginas[i] + '" onload=window.print();window.close();>';
-        }
-        //windowContent += '<img src="' + dataUrl + '" onload=window.print();window.close();>';
-        //windowContent += '<img src="' + dataUrl2 + '" onload=window.print();window.close();>';
-        windowContent += '</body>';
-        windowContent += '</html>';
-        var printWin = window.open('', '', 'width=680,height=520');
-        printWin.document.open();
-        printWin.document.write(windowContent);  
-      }, 9000);
-
-    };
+    }
 
     //Provisorio para tests
     vm.obtener = function() {
