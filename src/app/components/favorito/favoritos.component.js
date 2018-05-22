@@ -22,6 +22,12 @@
       for(var x = 0; x < vm.favoritos.length; x++){
         vm.favoritos[x].esFavorito = true;
       }
+      console.log(vm.favoritos);
+      setTimeout(function() {
+        for(let i = 0; i < vm.favoritos.length; i++) {
+          document.getElementById(vm.favoritos[i].id).innerHTML = vm.favoritos[i].vista_previa;  
+        }
+      }, 300);
     });
 
     AsignaturaService.query().$promise.then(function (data) {

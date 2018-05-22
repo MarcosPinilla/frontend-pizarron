@@ -29,6 +29,11 @@
 
     ObtenerMiMaterialService.query().$promise.then(function (data) {
       vm.materiales = data;
+      setTimeout(function() {
+        for(let i = 0; i < vm.materiales.length; i++) {
+          document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;  
+        }
+      }, 300);
     });
 
     vm.goMaterial = function (material) { 

@@ -46,7 +46,9 @@
 			</md-card-title-text>
 		</md-card-title>
 		<div>
-			<a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="Previsualización no encontrada"></a>
+			<a ui-sref='editdocument({id: material.id})'>
+				<div class="preview md-card-image" id={{material.id}}>
+			</a>
 		</div> 
 		<md-card-actions layout="row" layout-align="end center" style="background-color: #6d72ad;">
 			<md-button>Ver documento</md-button>

@@ -20,6 +20,12 @@
       console.log(vm.asignaturas);
     });
 
+    vm.query = {
+      order: 'id',
+      limit: 5,
+      page: 1
+    };
+
     vm.verasignaturas = function () {
       AsignaturaService.query().$promise.then(function (data) {
       vm.asignaturas = data;

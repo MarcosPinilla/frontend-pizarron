@@ -49,6 +49,7 @@ a {
 }
 
 .noticia-contenido{
+  margin-bottom: 5px;
   font-size: 12px;
   text-align: justify;
   text-justify: inter-word;
@@ -71,6 +72,10 @@ a {
 
 #perfil-autor:hover{
    text-decoration: underline;
+}
+
+.underline-link:hover{
+  text-decoration: underline;
 }
 
 #editarperfil-title {
@@ -373,6 +378,11 @@ md-list.make-scrollable {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   /*border-bottom: 2px solid #7f8c8d;*/
+}
+
+.preview svg {
+  width: 100%;
+  height: auto;
 }
 
 .preview:hover {
@@ -1193,3 +1203,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .virtualRepeatdemoInfiniteScroll .md-virtual-repeat-container .md-virtual-repeat-offsetter div {
   padding-left: 16px; }
+
+.imageDataTable{
+  height: 5px;
+}

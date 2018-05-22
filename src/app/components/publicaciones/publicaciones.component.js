@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	publicacionesCtrl.$inject = ['MaterialService', 'DarFavorito', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state'];
+  	publicacionesCtrl.$inject = ['MaterialService', 'CredentialsService','DarFavorito', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state', '$pusher'];
 
-  	function publicacionesCtrl(MaterialService, DarFavorito, ComentarioService, ObtenerFavoritosAnalogosService, $state) {
+  	function publicacionesCtrl(MaterialService, CredentialsService, DarFavorito, ComentarioService, ObtenerFavoritosAnalogosService, $state, $pusher) {
   		var vm = this;
       vm.materiales = {};
       vm.comentarios = {};
@@ -24,6 +24,13 @@
         vm.materiales = data;
         console.log(vm.materiales);
         console.log(vm.materiales.materiales);
+        
+        setTimeout(function() {
+          for(let i = 0; i < vm.materiales.length; i++) {
+            document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;  
+          }
+        }, 300);
+
         ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
           vm.favoritos = data;
           console.log("ESTOS SON LOS FAVORITOS!!!")
@@ -70,5 +77,52 @@
         console.log(coment);
         ComentarioService.save(coment);
       }
+
+
+      vm.token = CredentialsService.getToken();
+
+
+      var client = new Pusher('28705022aa554d22c965', {
+        cluster: 'us2',
+                key: '6af7dc41d3b9a2f104d8',
+                encrypted: true
+              });
+
+      var pusher = $pusher(client);
+
+      var canal2 = pusher.subscribe('comentario');
+
+
+      canal2.bind('ComentarioEvent',
+        function (data) {
+          
+          MaterialService.query().$promise.then(function (data) {
+        vm.materiales = data;
+        console.log(vm.materiales);
+        console.log(vm.materiales.materiales);
+        ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
+          vm.favoritos = data;
+          console.log("ESTOS SON LOS FAVORITOS!!!")
+          console.log(vm.favoritos);
+
+          vm.idfavoritos = vm.favoritos.map(function(i){return i.id_material;});
+
+          if(vm.idfavoritos.length > 0)
+          {
+            for(var x = 0; vm.materiales.length; x++)
+            {
+              //if(!vm.materiales.hasOwnProperty(x)) continue;
+              console.log(vm.idfavoritos);
+              vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
+              console.log(vm.materiales[x]);
+             
+            }
+          }
+        });
+      });
+
+
+        });
+
   	}
 })();      

@@ -15,8 +15,9 @@
 		      </md-card-title-text>
 		    </md-card-title>
 		    <div>
-		      <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="Previsualización no encontrada"></a>
-		      <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
+		      <a ui-sref='editdocument({id: material.id})'>
+		      	<div class="preview md-card-image" id={{material.id}}>
+		      </a>
 		    </div> 
 		    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
 		    	<md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
