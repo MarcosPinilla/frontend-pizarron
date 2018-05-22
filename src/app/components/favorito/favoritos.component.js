@@ -19,7 +19,11 @@
     ObtenerFavoritosProfesor.query().$promise.then(function (data) {
       vm.favoritos = data;
       console.log(vm.favoritos);
-      vm.imagePath = data.vista_previa;
+      setTimeout(function() {
+        for(let i = 0; i < vm.favoritos.length; i++) {
+          document.getElementById(vm.favoritos[i].id).innerHTML = vm.favoritos[i].vista_previa;  
+        }
+      }, 300);
     });
 
     AsignaturaService.query().$promise.then(function (data) {
