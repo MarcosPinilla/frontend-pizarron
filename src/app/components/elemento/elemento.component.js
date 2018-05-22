@@ -122,8 +122,7 @@
     
 
     vm.newelemento={
-      id_tipo_elemento: 1,
-      etiquetas: vm.etiquetas
+      id_tipo_elemento: 1
     };
 
     ElementoService.query().$promise.then(function (data) {
@@ -136,8 +135,7 @@
 
     vm.anadirelemento = function () {
       ElementoService.save(vm.newelemento);
-      vm.etiquetas=[];
-      $state.go('elemento');
+      $state.go('administrator.elemento');
       vm.hide();
     };
 
