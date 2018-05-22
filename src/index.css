@@ -720,6 +720,18 @@ md-list.make-scrollable {
   background:rgba(0,0,0,0);
 }
 
+md-icon svg {
+  fill: inherit;
+}
+
+.corazon-vacio {
+  fill: white;
+}
+
+.corazon-rojo {
+  fill: #EF5350;
+}
+
 .perfil-information-img {
   background: linear-gradient(
     to right, 
