@@ -44,6 +44,12 @@
       console.log(vm.elementos);
     });
 
+    vm.query = {
+      order: 'name',
+      limit: 5,
+      page: 1
+    };
+
     vm.goToElemento = function(elemento, event) {
       $mdDialog.show({
         controller: dialogoController,
