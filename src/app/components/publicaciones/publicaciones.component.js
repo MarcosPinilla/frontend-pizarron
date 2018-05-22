@@ -58,25 +58,25 @@
         DarFavorito.save({material_id: material.id}).$promise.then(function (data) {
           material.esFavorito = !material.esFavorito;
         });
-      }
+      };
 
       vm.goMaterial = function(id_material) {
         $state.go('editdocument', {id: id_material});
-      }
+      };
 
       vm.verDocumento = function() {
         console.log('ver documento!');
-      }
+      };
 
       vm.agregarFavoritos = function() {
         console.log('Agregado a favoritos');
-      }
+      };
 
       vm.comentar = function(idmaterial, texto) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
         console.log(coment);
         ComentarioService.save(coment);
-      }
+      };
 
 
       vm.token = CredentialsService.getToken();
