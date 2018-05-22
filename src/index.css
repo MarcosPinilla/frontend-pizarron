@@ -49,6 +49,7 @@ a {
 }
 
 .noticia-contenido{
+  margin-bottom: 5px;
   font-size: 12px;
   text-align: justify;
   text-justify: inter-word;
@@ -71,6 +72,10 @@ a {
 
 #perfil-autor:hover{
    text-decoration: underline;
+}
+
+.underline-link:hover{
+  text-decoration: underline;
 }
 
 #editarperfil-title {

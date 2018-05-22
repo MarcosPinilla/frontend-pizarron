@@ -104,7 +104,7 @@
           <md-content>
             <md-list flex>
               <md-subheader class="md-no-sticky">NUEVAS</md-subheader>
-              <md-list-item class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
+              <md-list-item ng-href="{{item.enlace}}" class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
                 <img class="md-avatar" ng-src="{{ item.profesor.url_foto_profesor }}"  alt="" />
                 <div class="md-list-item-text" layout="column">
                    <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
@@ -122,7 +122,7 @@
       <md-content>
             <md-list flex>
               <md-subheader class="md-no-sticky">ANTERIORES</md-subheader>
-              <md-list-item class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
+              <md-list-item ng-href="{{item.enlace}}" class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
                 <img ng-src="{{ item.profesor.url_foto_profesor }}" class="md-avatar" alt="" />
                 <div class="md-list-item-text" layout="column">
                   <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
