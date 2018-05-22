@@ -25,6 +25,19 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   background-color: #6d72ad;
 }
 
+#toolbar-speed-dial {
+  background-color: none;
+  top: 0px;
+  right: 0px;
+  max-height: 40px;
+  max-width: 40px;
+}
+
+#speed-dial-button {
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -147,6 +160,7 @@ md-dialog {
   position: fixed;
   right: 0;
   margin-top: 13px;
+  margin-right: 42px;
 }
 
 .register-div::-webkit-scrollbar { 
