@@ -9,16 +9,23 @@
     controllerAs: 'vm'
   });
 
-  repositorioCtrl.$inject = ['ElementoService', '$rootScope', '$state'];
+  repositorioCtrl.$inject = ['ElementoService', 'EtiquetaService', '$rootScope', '$state'];
 
-  function repositorioCtrl(ElementoService, $rootScope, $state) {
+  function repositorioCtrl(ElementoService, EtiquetaService, $rootScope, $state) {
     var vm = this;
 
-    vm.elementos=[];
+    vm.elementos = [];
+    vm.etiquetas = [];
+    vm.searchText;
 
     ElementoService.query().$promise.then(function (data) {
       vm.elementos = data;
       console.log(vm.elementos);
+    });
+
+    EtiquetaService.query().$promise.then(function(data) {
+      vm.etiquetas = data;
+      console.log(vm.etiquetas)
     });
 
     vm.generarImagen = function(ruta) {
