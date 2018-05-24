@@ -372,8 +372,8 @@
 
               fabric.loadSVGFromURL(ruta, function(objects, options) {
                 var obj = fabric.util.groupSVGElements(objects, options);
-                canvas.add(obj).renderAll();
-                canvas.setActiveObject(obj);
+                canvas.add(obj);
+                var a = canvas.setActiveObject(obj);
                 $scope.$apply(function () {
                     //vm.figuras = canvas.getObjects().length;
                     vm.figuras++;
