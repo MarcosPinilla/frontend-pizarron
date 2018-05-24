@@ -83,6 +83,22 @@ md-tabs-canvas {
 #undo:enabled md-icon{
   color:white;
 }
+
+#back:enabled md-icon{
+  color:black !important;
+}
+
+#next:enabled md-icon{
+  color:black !important;
+}
+
+#back:disabled md-icon{
+  color:grey !important;
+}
+
+#next:disabled md-icon{
+  color:grey !important;
+}
 /*Contenedor de la página central*/
 .contenedor-pagina{
   background: #bddf8b;
