@@ -51,8 +51,17 @@
 			</a>
 		</div> 
 		<md-card-actions layout="row" layout-align="end center" style="background-color: #6d72ad;">
-			<md-button>Ver documento</md-button>
-			<md-button class="dashboard-button-fab" ng-click="vm.darFavorito(material)"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon></md-button>
+			<md-button ng-click="vm.goMaterial(material)">
+				<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+				Ver documento
+			</md-button>
+			<md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
+		    	<md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+		    </md-button>
+		    <md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
+		    	<md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+		    </md-button>
+			<!--<md-button class="dashboard-button-fab" ng-click="vm.darFavorito(material)"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon></md-button>-->
 		</md-card-actions>
 	</md-card>
 </div>

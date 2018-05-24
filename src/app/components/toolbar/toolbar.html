@@ -21,7 +21,7 @@
   </div>
   <div flex="40" id="toolbar-icons">
     <md-button class="md-icon-button" ng-click="vm.showAdvanced($event)">
-      <md-icon md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+      <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       {{ vm.cantidadNotificaciones.notificaciones }}
       <md-tooltip md-direction="bottom">
         Notificaciones
@@ -52,7 +52,7 @@
         </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.materiales">
-        <md-icon md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon>
+        <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_search_white_24px.svg"></md-icon>
         <md-tooltip md-direction="bottom">
           Buscar Materiales
         </md-tooltip>
@@ -69,18 +69,29 @@
           Mis Amigos
         </md-tooltip>
     </md-button>
-    <md-button ng-if="vm.isadmin && !vm.isnotadmin" class="md-icon-button" aria-label="Favorite" ui-sref="administrator">
-      <md-icon md-svg-icon="app/resources/icons/configuracion.svg"></md-icon>
-      <md-tooltip md-direction="bottom">
-        Administrador
-      </md-tooltip>
-  </md-button>
-    <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ng-click="vm.logout()">
+  </div>
+  <div>
+    <md-fab-speed-dial id="toolbar-speed-dial" class="md-scale md-fab-top-right" md-open="false" md-direction="down" ng-class="md-fling">
+    <md-fab-trigger>
+      <md-button id="speed-dial-button" aria-label="menu" class="md-fab md-warn">
         <md-icon md-svg-icon="app/resources/icons/ICONOS-22.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button ng-if="vm.isadmin && !vm.isnotadmin" class="md-fab md-raised md-mini" aria-label="Favorite" ui-sref="administrator">
+        <md-icon md-svg-icon="app/resources/icons/baseline-settings-20px.svg"></md-icon>
+        <md-tooltip md-direction="left">
+          Administrador
+        </md-tooltip>
+      </md-button>
+      <md-button ng-if="vm.isLogged" class="md-fab md-raised md-mini" aria-label="Favorite" ng-click="vm.logout()">
+        <md-icon md-svg-icon="app/resources/icons/baseline-exit_to_app-24px.svg"></md-icon>
         <md-tooltip md-direction="left">
           Cerrar Sesión
         </md-tooltip>
-    </md-button>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
   </div>
 </div>
 

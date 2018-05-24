@@ -14,7 +14,7 @@
           <th md-column md-numeric md-order-by="id">Id</th>
           <th md-column md-numeric>Elemento</th>
           <th md-column md-numeric md-order-by="descripcion_elemento">Nombre</th>
-          <th md-column md-numeric md-order-by="etiqueta_elemento">Etiqueta</th>
+          <th md-column md-numeric md-order-by="etiqueta">Etiqueta</th>
           <th md-column md-numeric></th>
           <th md-column md-numeric></th>
         </tr>
@@ -24,7 +24,7 @@
           <td md-cell ng-click="vm.goToElemento(elemento, $event)">{{ elemento.id }}</td>
           <td md-cell ng-click="vm.goToElemento(elemento, $event)"><img ng-src="{{ elemento.contenido_elemento }}" class="md-avatar " style="height: 45px;" /></td>
           <td md-cell ng-click="vm.goToElemento(elemento, $event)">{{ elemento.descripcion_elemento }}</td>
-          <td md-cell ng-click="vm.goToElemento(elemento, $event)"><p ng-repeat="etiqueta in elemento.etiquetas">{{ etiqueta.nombre_etiqueta }}</p></td>
+          <td md-cell ng-click="vm.goToElemento(elemento, $event)">{{ elemento.etiqueta }}</td>
           <td md-cell>
             <md-button ng-disabled="true" class="md-icon-button" ng-click="vm.actualizarprofesor(person)" style="margin-right: -40px;">
               <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
