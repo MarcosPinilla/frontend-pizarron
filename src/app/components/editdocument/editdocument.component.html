@@ -66,8 +66,14 @@
      <div class="sidebar-left" layout="column" style="height: 100%">
       <div layout="row">
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
-              <img src="app/resources/icons/ICONOS-25.svg">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+              <img src="app/resources/icons/ICONOS-26.svg">
+            </md-button>
+          </div>
+
+          <div flex="25">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+              <img src="app/resources/icons/ICONOS-27.svg">
             </md-button>
           </div>
 
@@ -78,14 +84,8 @@
           </div>
 
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
-              <img src="app/resources/icons/ICONOS-26.svg">
-            </md-button>
-          </div>
-
-          <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
-              <img src="app/resources/icons/ICONOS-27.svg">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
+              <img src="app/resources/icons/ICONOS-25.svg">
             </md-button>
            </div>
         </div>
@@ -222,7 +222,7 @@
   <div flex="55">
   <div class="contenedor-pagina">
      <div layout="row">
-      <div flex="60" style="text-align: left;">
+      <div flex="70" style="text-align: left;">
 
         <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
           <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
@@ -256,9 +256,9 @@
           </md-button>
 
           <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
-            <md-icon md-svg-icon="app/resources/icons/ICONOS-18.svg"></md-icon>
+            <md-icon md-svg-icon="app/resources/icons/ICONOS-17.svg"></md-icon>
             <md-tooltip>
-                Exportar a PDF
+                Imprimir documento
             </md-tooltip>
           </md-button>
           
@@ -269,7 +269,12 @@
             </md-tooltip>
           </md-button>          
 
-
+          <md-button class="md-icon-button boton-pagina" aria-label="Compartir" ng-click="vm.mostrarCompartirMaterial()">
+          <md-icon style=" font-size: 42px !important;height: 42px !important;width: 42px !important;" md-svg-icon="app/resources/icons/share-symbol.svg"></md-icon>
+            <md-tooltip md-direction="bottom">
+              Compartir a un seguidor
+            </md-tooltip>
+          </md-button>
 
             <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
 
@@ -282,10 +287,8 @@
           </md-button>
 
 
-
-
     </div>
-    <div flex="40" style="text-align: right;">
+    <div flex="30" style="text-align: right;">
        <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior
           <md-tooltip>
                   Página anterior

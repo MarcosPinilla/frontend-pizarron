@@ -1,0 +1,43 @@
+
+<div style="background: #6d72ad; color:white;text-align: center;">
+      <h3>Compatir material</h3>
+</div>
+<md-content layout-padding layout-wrap md-theme="app" flex="100" style="width: 600px;">
+   
+    <h4>Seguidores...</h4>
+
+    <form ng-cloack>
+    
+	    <md-autocomplete style="width:100%;"
+            md-selected-item="vm.selectedItem"
+            md-search-text="vm.searchText"
+            md-items="item in vm.querySearch(vm.searchText)"
+            md-item-text="vm.obtenerNombre(item)"
+            md-min-length="0"
+            placeholder="Ingrese nombre">
+          <md-item-template>
+            <div layout="row">
+              <div flex="10">
+                  <img style="margin-left: 0px;margin-top:10px;margin-right: 5px;" ng-src="item.url_foto_profesor">
+              </div>
+              <div flex="90">
+                <span>{{item.nombres_profesor}} {{item.apellidos_profesor}}</span>
+              </div>
+            </div>
+          
+          </md-item-template>
+          <md-not-found>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.nombres_profesor}} {{item.apellidos_profesor}}</span>
+          </md-not-found>
+        </md-autocomplete>
+	    <br>
+	    <center><md-button ng-disabled="!vm.selectedItem" class="md-raised md-warn login-button" ng-click="vm.compartirMaterial(vm.selectedItem.id)">Compartir material</md-button ></center>
+       <div style="text-align: center;">
+        <span id="mensaje-error" style="color:red;font-size: 15px;"></span>
+      </div>
+	    <br>
+    </form>  
+
+</md-content>
+
+

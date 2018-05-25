@@ -45,11 +45,22 @@
       </md-card-title-text>
     </md-card-title>
     <div>
-      <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa"></a>
+      <a ui-sref='editdocument({id: material.id})'>
+        <div class="preview md-card-image" id={{material.id}}>
+      </a>
       <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
     </div> 
     <md-card-actions layout="row" layout-align="end center" style="color: white;">
-      <md-button ng-click="vm.goMaterial(material)">Ver documento</md-button>
+      <md-button ng-click="vm.goMaterial(material)">
+        <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+        Ver documento
+      </md-button>
+      <md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
+        <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+      </md-button>
+      <md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
+        <md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+      </md-button>
     </md-card-actions>
   </md-card>
 </div>

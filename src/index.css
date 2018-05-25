@@ -25,6 +25,19 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   background-color: #6d72ad;
 }
 
+#toolbar-speed-dial {
+  background-color: none;
+  top: 0px;
+  right: 0px;
+  max-height: 40px;
+  max-width: 40px;
+}
+
+#speed-dial-button {
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -49,6 +62,7 @@ a {
 }
 
 .noticia-contenido{
+  margin-bottom: 5px;
   font-size: 12px;
   text-align: justify;
   text-justify: inter-word;
@@ -71,6 +85,10 @@ a {
 
 #perfil-autor:hover{
    text-decoration: underline;
+}
+
+.underline-link:hover{
+  text-decoration: underline;
 }
 
 #editarperfil-title {
@@ -142,6 +160,7 @@ md-dialog {
   position: fixed;
   right: 0;
   margin-top: 13px;
+  margin-right: 42px;
 }
 
 .register-div::-webkit-scrollbar { 
@@ -373,6 +392,11 @@ md-list.make-scrollable {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   /*border-bottom: 2px solid #7f8c8d;*/
+}
+
+.preview svg {
+  width: 100%;
+  height: auto;
 }
 
 .preview:hover {
@@ -718,6 +742,18 @@ md-list.make-scrollable {
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   background:rgba(0,0,0,0);
+}
+
+md-icon svg {
+  fill: inherit;
+}
+
+.corazon-vacio {
+  fill: white;
+}
+
+.corazon-rojo {
+  fill: #EF5350;
 }
 
 .perfil-information-img {
@@ -1181,3 +1217,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .virtualRepeatdemoInfiniteScroll .md-virtual-repeat-container .md-virtual-repeat-offsetter div {
   padding-left: 16px; }
+
+.imageDataTable{
+  height: 5px;
+}
