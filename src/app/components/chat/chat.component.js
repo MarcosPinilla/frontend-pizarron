@@ -26,6 +26,9 @@
   vm.token = CredentialsService.getToken();
   vm.chats = [];
   vm.noticias = [];
+  vm.usuarioID = 0;
+  vm.conversaciones = [];
+  vm.inputVacio = '';
   console.log(vm.token);
 
   ListarNoticiasService.query().$promise.then(function(data){
@@ -52,14 +55,29 @@
       });
     };
 
+  PerfilService.get().$promise.then(function (data) {
+   vm.usuarioID = data.id; 
+   });
+
   AmigoService.query().$promise.then(function (data) {
     console.log(data);
-    vm.amigos = data;
+    console.log(vm.usuarioID);
+
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].amigo_1 != vm.usuarioID) {
+          vm.amigos.push(data[i].amigo1);
+        }else {
+          vm.amigos.push(data[i].amigo2);
+        }
+    }
+
+    console.log(vm.amigos);
+
   });
 
   vm.toggle = function (item) {
     console.log(item);
-    vm.selected.push(item);
+    vm.selected.push(item.id);
   };
 
 
@@ -92,6 +110,8 @@
                 function (data) {
                   console.log(data);
                   vm.datosGrupo = data;
+                  vm.conversaciones.push(data.group);
+                  console.log(vm.conversaciones);
                   console.log(vm.datosGrupo.group.id);
                   vm.idGrupo = data.group.id;
                   data.chatCerrado = true;
@@ -106,17 +126,19 @@
                       }
                     }
 
-                  if (vm.chats.length == 0) {
-                    vm.chats.push(data);
-                  }else{
-                    for (var i = 0; i < vm.chats.length; i++) {
-                    if (vm.chats[i].group.id == data.group.id) {
-                      vm.chats[i] = data;
-                    }else{
+                  
+                    if (vm.chats.length == 0) {
                       vm.chats.push(data);
+                    }else{
+                      for (var i = 0; i < vm.chats.length; i++) {
+                        if (vm.chats[i].group.id != data.group.id) {
+                          vm.chats.push(data);
+                          //vm.chats[i] = data;
+                        }
+                      }
                     }
-                  }
-                  }
+                  
+                    
 
                   
 
@@ -147,6 +169,7 @@
                       console.log(data);
                       if (data.usuario_id != vm.usuarioID) {
                         vm.mensajes.push(data.message);
+                          vm.chats[data.index].conversations = data.grupo;
                       }
 
                       console.log(vm.mensajes);
@@ -155,8 +178,6 @@
                     });
 
                 });
-
-
 
             });
 
@@ -190,23 +211,12 @@
        console.log(id);
 
 
-       vm.cerrarChat = function (id) {
-        console.log(id);
-        console.log(vm.chats.length);
-        for (var i = 0; i < vm.chats.length ; i++) {
-          if (vm.chats[i].group.id == id) {
-            console.log(vm.chats[i].chatCerrado);
-            vm.chats[i].chatCerrado = false;
-          }
-        }
-      }
-
       GrupoService.save(vm.grupo,function(data){
 
         console.log(vm.grupo);
         console.log(data);
         vm.idGrupo = data.id;
-
+        vm.selected = [];
 
       },function(err){
         console.log(err);
@@ -215,7 +225,17 @@
 
     }
 
-
+       vm.cerrarChat = function (id) {
+        console.log(id);
+        console.log(vm.chats.length);
+        for (var i = 0; i < vm.chats.length ; i++) {
+          if (vm.chats[i].group.id == id) {
+            console.log(vm.chats[i].chatCerrado);
+            vm.chats[i].chatCerrado = false;
+            vm.chats.splice(i, 1);
+          }
+        }
+      }
 
 
 
@@ -224,13 +244,18 @@
 
 
 
-vm.chatEnv = function (message){
+vm.chatEnv = function (message, index){
 
   vm.mensajes.push(message.message);
   message.group_id =  vm.idGrupo;
+  message.inde = index;
   console.log(message);
+  console.log(index);
   MessageService.save(message, function (data) {
     console.log(data);
+    console.log(vm.chats[index].conversations);
+    vm.chats[index].conversations = data.conversations;
+      console.log(vm.chats[index].conversations);
   }, function (error) {
     console.log(error);
   });

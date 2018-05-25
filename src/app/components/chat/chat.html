@@ -41,33 +41,33 @@
 <!-- espacio para el chat  -->
 	<div  style="z-index: 999; position: fixed;  bottom: 0em;  margin: 0; right: 250px">
 		<!-- estructura del chat -->
-		<md-card ng-repeat="chat in vm.chats" style=" height: 20em; bottom: 0em; width: 16em; margin: 0; max-height: 20em; float: left; margin-left: 10px" ng-if="chat.chatCerrado" >
-			<md-card-header style="background-color: #6d72ad; color: white; padding: 0px !important">
+		<md-card ng-repeat="chat in vm.chats track by $index" style=" height: 20em; bottom: 0em; width: 16em; margin: 0; max-height: 20em; float: left; margin-left: 10px" ng-if="chat.chatCerrado" >
+			<md-card-header style="background-color: #6d72ad; color: white; padding: 0px !important; height: 2em">
 				<div layout="row" layout-xs="column" style="width: 16em">
 					<div flex=80>
-						<p style="padding-left: 10px">{{chat.nombreChat}}</p>
+						<p style="padding-left: 10px; font-size: 12px;">{{chat.nombreChat}}</p>
 					</div>
 					<div flex=20>
 						<md-button class="md-icon-button" aria-label="More" ng-click="vm.cerrarChat(chat.group.id)">
-							<md-icon md-svg-icon="../../resources/img/cancel-music.png"></md-icon>
+							x
 						</md-button>
 					</div>
 				</div>
 			</md-card-header>
 			<div flex-gt-sm="100" flex>
-				<md-content style="height: 100%">
+				<md-content style="height: 15em">
 					<md-list flex>
-						<ul style="padding: 10px;width: auto; ">
-							<p ng-if="vm.usuarioID != item.usuario_id" style="background-color: #6d72ad; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto;" ng-repeat="item in vm.mensajes track by $index" >{{ item }}</p>
-							<p ng-if="vm.usuarioID == item.usuario_id" style="background-color: #29487d; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto; text-align: right;" ng-repeat="item in vm.mensajes track by $index" >{{ item }}</p>
+						<ul style="padding-left:  10px;padding-right: 10px;width: auto; " ng-repeat="item in chat.conversations " >
+							<p ng-if="vm.usuarioID != item.usuario_id" style="background-color: #6d72ad; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto;"  >{{ item.message }}</p>
+							<p ng-if="vm.usuarioID == item.usuario_id" style="background-color: #29487d; color: white; padding: 13px; border-radius: 15px; font-size: 10px; background-size: auto;width: auto; text-align: right;"  >{{ item.message }}</p>
 						</ul>
 					</md-list>
 				</md-content>
-				<md-input-container md-no-float class="md-block" style="bottom: 0em !important; margin: 0 !important; position: fixed; border-top-width: 10px; border-top-color: #CC0000">
-					<form ng-submit="vm.chatEnv(vm.message)" >
-						<div layout="row" layout-xs="column">
+				<md-input-container md-no-float class="md-block" style="bottom: 0em !important; margin: 0 !important; position: fixed; border-top-width: 10px; border-top-color: #CC0000; height: 3em; width: 16em	;">
+					<form ng-submit="vm.chatEnv(vm.message, $index)" >
+						<div layout="row" layout-xs="column" style="border-top: 1px solid #BDBDBD;">
 							<div flex=80>
-								<input ng-model="vm.message.message" placeholder="Escribe un mensaje ..." style="border-width: 0 0 0 0 !important">
+								<input type="text" ng-model="vm.message.message" placeholder="Escribe un mensaje ..." ng-value="vm.inputVacio" style="border-width: 0 0 0 0 !important; padding: 0px; margin-top: 0.7em;">
 							</div>
 							<div flex=20>
 								<md-button class="md-fab md-mini md-primary" aria-label="" type="submit" >
@@ -95,10 +95,10 @@
 			</div> -->
 
 			<md-list flex>
-				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.amigo2.id)">
+				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.id)">
 					<div class="md-list-item-text" layout="row">
-						<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
-						<span>{{ amigo.amigo2.nombres_profesor }}</span>
+						<img ng-src="{{amigo.url_foto_profesor}}" class="chat-avatar">
+						<span>{{ amigo.nombres_profesor }}</span>
 					</div>
 				</md-list-item>
 				<md-divider ></md-divider>
@@ -108,11 +108,10 @@
 
 			<md-list flex>
 				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" >
-					<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo.amigo_2)"> </md-checkbox>
+					<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo)"> </md-checkbox>
 					<div class="md-list-item-text" layout="row">
-						<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">
-						<span ng-if="vm.usuarioID == amigo.amigo1.id ">{{ amigo.amigo2.nombres_profesor }}</span>
-						<span ng-if="vm.usuarioID == amigo.amigo2.id ">{{ amigo.amigo1.nombres_profesor }}</span>
+						<img ng-src="{{amigo.url_foto_profesor}}" class="chat-avatar">
+						<span >{{ amigo.nombres_profesor }}</span>
 					</div>
 
 				</md-list-item>
