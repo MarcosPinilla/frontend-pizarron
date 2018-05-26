@@ -23,10 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService'];
 
-  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService) {
-
+  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService) {
     var vm = this;
 
     vm.indexTabs=0;
@@ -34,6 +33,14 @@
     vm.nombreInicial = "";
 
     vm.documento = MaterialService.get({id: $stateParams.id});
+
+    validarColaboradorService.query({id: $stateParams.id}).$promise.then(function(data){
+        if(data.length!=0){
+          vm.esColaborador=true;
+        }else{
+          vm.esColaborador=false;
+        }
+      });
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
@@ -1103,13 +1110,26 @@
         var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
         console.log(json);
         canvas.loadFromJSON(json.data); 
+        
+
+        setTimeout(function(){
+          if(!vm.esColaborador){
+            canvas.selection = false;
+          canvas.forEachObject(function(o) {
+            o.selectable = false;
+        });
+        }
+
+        }, 200);
+         
         //canvas.loadFromJSON(vm.nuevo.contenido_material);
         //vm.figuras = json.objects.length;
         var figurasObtenidas = $filter('filter')(vm.documentoCompleto, {id: 0}, true)[0];
         vm.figuras = figurasObtenidas.figuras;
         console.log(vm.figuras);
-      });
 
+      });
+       
     }
 
     // socket al editar el documento 
