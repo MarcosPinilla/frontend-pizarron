@@ -10,12 +10,8 @@
 
 body {
   /*background-color: azure;*/
-  background-color: white;
   color: #7986CB;
   /*background-image: url('app/resources/img/profesor.jpg');*/
-  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
-  background-size: 2000px;
-  background-repeat: repeat;
   font-family: 'NeoSansBold';
   min-width: 1300;
   /*//margin-top: 4em;*/
@@ -303,6 +299,9 @@ md-dialog {
 
 .dashboard {
   padding-top: 4em;
+  background-image: url('app/resources/img/fondos/fondo-chicos-02.png');
+  background-size: 2000px;
+  background-repeat: repeat;
 }
 
 .dashboard-adm{

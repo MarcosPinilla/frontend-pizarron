@@ -41,7 +41,8 @@
   <md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #f9b985">
     <md-card-title style="background-color: #f9b985; border-radius: 18px;"> 
       <md-card-title-text class="mimaterial-titulo">
-        <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a><a href="#">{{material.titulo_material}}</a></span>
+        <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
+        <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span>
       </md-card-title-text>
     </md-card-title>
     <div>

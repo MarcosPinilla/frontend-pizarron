@@ -36,15 +36,14 @@
 
           vm.idfavoritos = vm.favoritos.map(function(i){return i.id_material;});
 
-          if(vm.idfavoritos.length > 0)
-          {
-            for(var x = 0; x < vm.materiales.length; x++)
-            {
-              //if(!vm.materiales.hasOwnProperty(x)) continue;
+          for(var x = 0; x < vm.materiales.length; x++) {
+            //if(!vm.materiales.hasOwnProperty(x)) continue;
+            if(vm.idfavoritos.length > 0) {
               console.log(vm.idfavoritos);
               vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
               console.log(vm.materiales[x]);
-             
+            }else {
+              vm.materiales[x].esFavorito = false;
             }
           }
         });
