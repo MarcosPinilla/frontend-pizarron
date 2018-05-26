@@ -41,7 +41,7 @@
   <md-card class="post-card material-card" ng-repeat="favorito in vm.favoritos|filter: filter |filter: buscador" style="background-color: #bddf8b">
     <md-card-title style="background-color: #bddf8b; border-radius: 18px;"> 
       <md-card-title-text class="mimaterial-titulo">
-        <span><a href="#">{{favorito.titulo_material}}</a></span>
+        <span><a ui-sref="editdocument({id:favorito.id})">{{favorito.titulo_material}}</a></span>
       </md-card-title-text>
     </md-card-title>
     <div>
@@ -49,7 +49,7 @@
         <div class="preview md-card-image" id={{favorito.id}}>
       </a>
     </div> 
-    <md-card-actions layout="row" layout-align="end center" style="color: white;">
+    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
       <md-button ng-click="vm.goMaterial(favorito.id)">
         <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
         Ver documento
