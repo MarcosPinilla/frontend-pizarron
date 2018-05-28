@@ -15,6 +15,12 @@
     var vm = this;
     vm.establecimientos = {};
 
+    vm.query = {
+      order: 'name',
+      limit: 5,
+      page: 1
+    };
+
     EstablecimientoService.query().$promise.then(function (data) {
       vm.establecimientos = data;
       console.log(vm.establecimientos);

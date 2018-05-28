@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	estadisticasCtrl.$inject = ['ProfesorService', 'UsuarioService', 'MaterialService', 'ElementoService', 'AsignaturaService', 'EstablecimientoService'];
+  	estadisticasCtrl.$inject = ['ProfesorService', 'UsuarioService', 'MaterialService', 'ElementoService', 'AsignaturaService', 'EstablecimientoService', 'EtiquetaService'];
 
-  	function estadisticasCtrl(ProfesorService, UsuarioService, MaterialService, ElementoService, AsignaturaService, EstablecimientoService) {
+  	function estadisticasCtrl(ProfesorService, UsuarioService, MaterialService, ElementoService, AsignaturaService, EstablecimientoService, EtiquetaService) {
       var vm = this;
       
       vm.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
@@ -30,6 +30,10 @@
 
       MaterialService.query().$promise.then(function (data) {
       vm.materiales = data;
+      });
+
+      EtiquetaService.query().$promise.then(function (data) {
+      vm.etiquetas = data;
       });
 
       ElementoService.query().$promise.then(function (data) {
