@@ -100,25 +100,14 @@
         vm.materiales = data;
         console.log(vm.materiales);
         console.log(vm.materiales.materiales);
-        ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
-          vm.favoritos = data;
-          console.log("ESTOS SON LOS FAVORITOS!!!")
-          console.log(vm.favoritos);
 
-          vm.idfavoritos = vm.favoritos.map(function(i){return i.id_material;});
-
-          if(vm.idfavoritos.length > 0)
-          {
-            for(var x = 0; vm.materiales.length; x++)
-            {
-              //if(!vm.materiales.hasOwnProperty(x)) continue;
-              console.log(vm.idfavoritos);
-              vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
-              console.log(vm.materiales[x]);
-             
-            }
+                
+        setTimeout(function() {
+          for(let i = 0; i < vm.materiales.length; i++) {
+            document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;  
           }
-        });
+        }, 300);
+
       });
 
 
