@@ -14,12 +14,11 @@
   <div layout="row" style="margin-top: 65px;">
 
       <div style="margin-left: 5px;margin-top: 10px;">
-        <md-tooltip>
+        <md-tooltip ng-if="vm.esColaborador===true">
           Cambiar título
         </md-tooltip>
-        <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título">
+        <input class="input-titulo" ng-model="vm.documento.titulo_material" required placeholder="Documento sin título" ng-disabled="vm.esColaborador===false">
       </div>
-
 
     <div style="margin:auto;width: 50%;">
       <span class="contador" style="margin-right: 10px; margin-top: 10px;">Figuras: {{vm.figuras}}/50 <span class="contador" style="color:red;" ng-if="vm.figuras>=50"> Límite alcanzado</span></span>
@@ -30,7 +29,7 @@
   </div>
 
   <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
-  <div flex="25">
+  <div flex="25" ng-if="vm.esColaborador===true">
      <div class="sidebar-left" layout="column" style="height: 100%">
       <div layout="row">
           <div flex="25">
@@ -186,14 +185,15 @@
      </div>
   
   </div>
+  
 <div flex="5">
 </div>
   <div flex="55">
-    <div class="contenedor-pagina">
+    <div class="contenedor-pagina" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
      <div layout="row">
       <div flex="70" style="text-align: left;">
 
-        <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
+        <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
           <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
             <md-tooltip>
                 Añadir nueva página
@@ -201,7 +201,7 @@
         </md-button>
 
         
-         <md-button class="md-icon-button boton-pagina" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo">
+         <md-button class="md-icon-button boton-pagina" id="undo" ng-click="vm.undo('undo', $event)" aria-label="boton undo" ng-show="vm.esColaborador===true">
               <md-icon> undo </md-icon>
               <md-tooltip>
                   Deshacer
@@ -209,7 +209,7 @@
             </md-button>
           
 
-            <md-button class="md-icon-button boton-pagina" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo">
+            <md-button class="md-icon-button boton-pagina" id="redo" ng-click="vm.redo('redo', $event)" aria-label="boton redo" ng-show="vm.esColaborador===true"> 
               <md-icon>redo</md-icon>
               <md-tooltip>
                   Rehacer
@@ -217,21 +217,21 @@
             </md-button>
              
             
-           <md-button class="md-icon-button boton-pagina" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
+           <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-click="vm.configuracionPagina()" aria-label="boton guardar">
             <md-icon style="color:white;">settings</md-icon>
             <md-tooltip>
                 Configuración de la hoja
             </md-tooltip>
           </md-button>
 
-          <md-button class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
+          <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-click="vm.exportar()" aria-label="boton guardar">
             <md-icon md-svg-icon="app/resources/icons/ICONOS-17.svg"></md-icon>
             <md-tooltip>
                 Imprimir documento
             </md-tooltip>
           </md-button>
           
-          <md-button class="md-icon-button boton-pagina" ng-click="vm.mostrarColaborador()">
+          <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-click="vm.mostrarColaborador()">
             <md-icon md-svg-icon="app/resources/icons/ICONOS-13.svg"></md-icon>
             <md-tooltip>
                 Añadir colaborador
@@ -245,7 +245,7 @@
             </md-tooltip>
           </md-button>
 
-            <md-button class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
+            <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length-1 === 1" ng-click="vm.eliminarPagina()" style="height: 55px !important;">
 
              <md-icon ng-if="vm.documentoCompleto.length-1 === 1" md-svg-icon="app/resources/icons/basurero.svg" style="color:rgba(0,0,0,0.38);"></md-icon>
 
