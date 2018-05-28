@@ -52,6 +52,10 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   height: 750px;
 }
 
+#modalEditarPer {
+  height: 750px;
+}
+
 #speed-dial-button {
   background-color: rgba(0,0,0,0);
   box-shadow: none;
