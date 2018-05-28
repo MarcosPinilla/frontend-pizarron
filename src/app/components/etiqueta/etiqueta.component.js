@@ -17,6 +17,12 @@
     
     vm.etiquetas={};
 
+    vm.query = {
+      order: 'name',
+      limit: 5,
+      page: 1
+    };
+
     EtiquetaService.query().$promise.then(function (data) {
       vm.etiquetas = data;
       console.log(vm.etiquetas);

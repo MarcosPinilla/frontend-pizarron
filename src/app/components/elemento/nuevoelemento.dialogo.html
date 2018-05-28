@@ -14,7 +14,11 @@
 		<center><center><input type="file" fileread="vm.newelemento.contenido_archivo"></center></center>
 		<md-input-container class="md-block">
 			<label>Etiqueta</label>
-			<input ng-model="vm.newelemento.etiqueta" type="text" required>
+			<md-select ng-model="vm.newelemento.id_etiqueta">
+				<md-option ng-repeat="etiqueta in vm.etiquetas" ng-value="etiqueta.id">
+				{{ etiqueta.nombre_etiqueta }}
+				</md-option>
+			</md-select>
 		</md-input-container>
 		<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">Crear elemento</md-button></center>
 	</md-content>

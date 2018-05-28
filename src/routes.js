@@ -133,7 +133,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     isPrivate: true    
   })
   */
-  .state('etiqueta', {
+  .state('administrator.etiqueta', {
     url: '/etiqueta',
     component: 'etiqueta',
     isPrivate: true

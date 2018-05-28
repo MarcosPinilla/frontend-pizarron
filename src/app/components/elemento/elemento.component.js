@@ -111,15 +111,18 @@
     };
   }
 
-  function dialogoController($mdDialog, elemento, ElementoService, $state) {
+  function dialogoController($mdDialog, elemento, ElementoService, $state, EtiquetaService) {
     var vm = this;
     vm.elemento = elemento;
     
     vm.upelemento = {};
     vm.elementos = {};
-
-    vm.etiquetas=[];
     
+    vm.etiquetas={};
+
+    EtiquetaService.query().$promise.then(function (data) {
+      vm.etiquetas = data;
+    });
 
     vm.newelemento={
       id_tipo_elemento: 1
@@ -128,10 +131,6 @@
     ElementoService.query().$promise.then(function (data) {
       vm.elementos = data;
     });
-
-    vm.anadiretiqueta = function (etiqueta) {
-      vm.etiquetas.push(etiqueta);
-    }
 
     vm.anadirelemento = function () {
       ElementoService.save(vm.newelemento);
