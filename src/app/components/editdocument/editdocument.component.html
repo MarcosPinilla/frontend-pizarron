@@ -186,10 +186,10 @@
   
   </div>
   
-<div flex="5">
+<div flex="5" ng-class="{'flex-10' : vm.esColaborador===false }">
 </div>
-  <div flex="55">
-    <div class="contenedor-pagina" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
+  <div flex="55" ng-class="{'flex-80' : vm.esColaborador===false}">
+    <div class="contenedor-pagina" style="margin:0 auto !important" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
      <div layout="row">
       <div flex="70" style="text-align: left;">
 
