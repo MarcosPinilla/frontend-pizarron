@@ -14,16 +14,52 @@
 </div>
  -->
  <md-content layout-gt-sm="row" layout-padding style="background-color: white;">
+	<md-input-container flex="100">
+ 		<md-autocomplete
+ 		  md-no-cache="false"
+          md-search-text="vm.searchText"
+          md-items="etiqueta in vm.etiquetas"
+          md-item-text="etiqueta.nombre_etiqueta"
+          placeholder="Buscar por etiqueta"
+          md-min-length="0"
+          md-search-text-change="vm.searchTextChange(vm.searchText)">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{etiqueta.nombre_etiqueta}}</span>
+        </md-item-template>
+        <md-not-found>
+          No existen coincidencias con "{{vm.searchText}}"
+        </md-not-found>
+      </md-autocomplete>
+	</md-input-container>
 
+      	<!--
 		<md-input-container flex="100">
 			<label>Buscador</label>
 			<input ng-model="buscador" type="text">
 		</md-input-container>
-		
+		-->
+</md-content>
+<md-content layout-gt-sm="row" layout-padding style="background-color: white;">
+	<md-input-container flex="100">
+ 		<md-autocomplete
+          md-search-text="vm.searchText"
+          md-items="elemento in vm.elementos"
+          md-item-text="elemento.descripcion_elemento"
+          placeholder="Buscar por elemento"
+          md-min-length="0"
+          md-search-text-change="vm.searchTextChange(vm.searchText)">
+        <md-item-template>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{elemento.descripcion_elemento}}</span>
+        </md-item-template>
+        <md-not-found>
+          No existen coincidencias con "{{vm.searchText}}"
+        </md-not-found>
+      </md-autocomplete>
+	</md-input-container>
 </md-content>
 <div style="overflow-y: scroll;background-color: white;height: 240px;">
 	
-		<div ng-repeat="elemento in vm.elementos|filter:buscador" class="hover12">
+		<div ng-repeat="elemento in vm.elementos|filter:vm.searchText" class="hover12">
 			<!--
 			<md-button aria-label="name" ng-click="vm.generarImagen(elemento.contenido_elemento)">
 				<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
