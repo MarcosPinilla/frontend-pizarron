@@ -38,7 +38,7 @@
       </select>
     </div>
   </div>
-  <md-card class="post-card material-card" ng-repeat="favorito in vm.favoritos|filter: filter |filter: buscador" style="background-color: #bddf8b">
+  <md-card class="post-card material-card" ng-repeat="favorito in vm.favoritos |filter: filter |filter: buscador" style="background-color: #bddf8b">
     <md-card-title style="background-color: #bddf8b; border-radius: 18px;"> 
       <md-card-title-text class="mimaterial-titulo">
         <span><a ui-sref="editdocument({id:favorito.id})">{{favorito.titulo_material}}</a></span>

@@ -83,6 +83,22 @@ md-tabs-canvas {
 #undo:enabled md-icon{
   color:white;
 }
+
+#back:enabled md-icon{
+  color:black !important;
+}
+
+#next:enabled md-icon{
+  color:black !important;
+}
+
+#back:disabled md-icon{
+  color:grey !important;
+}
+
+#next:disabled md-icon{
+  color:grey !important;
+}
 /*Contenedor de la página central*/
 .contenedor-pagina{
   background: #bddf8b;
@@ -91,7 +107,7 @@ md-tabs-canvas {
   border-radius: 25px;
   margin: 0;
   display: table;
-  transform: scale(0.8);
+  transform: scale(0.75);
   transform-origin: top left;
 }
 

@@ -10,10 +10,8 @@
 		<label>Descripción</label>
 		<input ng-model="vm.upestablecimiento.desc_establecimiento" type="text" required>
 	</md-input-container>
-	<md-input-container class="md-block">
-		<label>Foto</label>
-		<input ng-model="vm.upestablecimiento.url_foto_establecimiento" type="text" required>
-	</md-input-container>
+	<label for="fotoEstablecimiento">Foto</label>
+	<center><input id="fotoEstablecimiento" type="file" fileread="vm.upestablecimiento.url_foto_establecimiento"></center>
 	<md-input-container class="md-block" >
       <label>Tipo Establecimiento</label>
       <md-select ng-model="vm.upestablecimiento.id_tipo_establecimiento">
