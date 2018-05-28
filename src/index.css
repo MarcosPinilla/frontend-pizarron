@@ -29,6 +29,29 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   max-width: 40px;
 }
 
+/*** MODALS ***/
+
+#modalNuevodoc {
+}
+
+#modalNuevoele {
+}
+
+#modalEditarUsu {
+}
+
+#modalEditarAsi {
+  height: 400px;
+}
+
+#modalEditarEst {
+  height: 550px;
+}
+
+#modalEditarProf {
+  height: 750px;
+}
+
 #speed-dial-button {
   background-color: rgba(0,0,0,0);
   box-shadow: none;
@@ -106,7 +129,7 @@ a {
 
 md-dialog {
   border-radius: 18px;
-  width: 300px;
+  width: 400px;
 
 }
 
