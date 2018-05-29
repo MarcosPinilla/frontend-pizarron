@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	publicacionesCtrl.$inject = ['MaterialService', 'CredentialsService','DarFavorito', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state', '$pusher'];
+  	publicacionesCtrl.$inject = ['MaterialService', 'CredentialsService','DarFavorito', 'ComentarioService', 'ObtenerFavoritosAnalogosService', 'CompartirmaterialService', '$state', '$pusher', '$mdDialog', 'BuscarNombreProfesorService'];
 
-  	function publicacionesCtrl(MaterialService, CredentialsService, DarFavorito, ComentarioService, ObtenerFavoritosAnalogosService, $state, $pusher) {
+  	function publicacionesCtrl(MaterialService, CredentialsService, DarFavorito, ComentarioService, ObtenerFavoritosAnalogosService, CompartirmaterialService, $state, $pusher, $mdDialog, BuscarNombreProfesorService) {
   		var vm = this;
       vm.materiales = {};
       vm.comentarios = {};
@@ -78,6 +78,50 @@
         ComentarioService.save(coment);
       };
 
+      vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
+        $mdDialog.show({
+          controller: dialogoController,
+          controllerAs: 'vm',
+          templateUrl: 'app/components/publicaciones/compartirmaterial.dialogo.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose: true,
+          fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+          locals: {
+            idmaterial: idmaterial,
+          },
+        })
+        .then(function (answer) {
+          vm.status = 'Documento:  ' + answer + '.';
+        }, function () {
+          vm.status = 'CANCELADO';
+        });
+      };
+
+      function dialogoController($mdDialog, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
+        var vm = this;
+        vm.profesores = {};
+        vm.nombre_profesor = null;
+        vm.selected_profesor = null;
+
+        vm.compartirMaterial = function(profesorid) {
+          if(vm.selected_profesor == null) {
+            console.log("No se ha seleccionado profesor");
+            return;
+          }
+          console.log(profesorid);
+          console.log(idmaterial);
+          var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
+          CompartirmaterialService.save(compartir);
+        };
+
+        vm.buscarProfesor = function () {
+          BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
+          vm.profesores = data;
+        });
+    };
+
+      };
 
       vm.token = CredentialsService.getToken();
 
