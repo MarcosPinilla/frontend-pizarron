@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	publicacionesCtrl.$inject = ['$mdDialog', 'MaterialService', 'CredentialsService','DarFavorito', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state', '$pusher', '$filter', 'ObtenerContenidoMaterialService', 'BuscarNombreProfesorService'];
+  	publicacionesCtrl.$inject = ['$mdDialog', 'MaterialService', 'CredentialsService','DarFavorito', 'CompartirmaterialService', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state', '$pusher', 'BuscarNombreProfesorService', '$filter', 'ObtenerContenidoMaterialService'];
 
-  	function publicacionesCtrl($mdDialog, MaterialService, CredentialsService, DarFavorito, ComentarioService, ObtenerFavoritosAnalogosService, $state, $pusher, BuscarNombreProfesorService) {
+  	function publicacionesCtrl($mdDialog, MaterialService, CredentialsService, DarFavorito, ComentarioService, CompartirmaterialService, ObtenerFavoritosAnalogosService, $state, $pusher, BuscarNombreProfesorService) {
   		var vm = this;
       vm.materiales = {};
       vm.comentarios = {};
@@ -160,7 +160,7 @@
 
     vm.imprimirDocumento = function (material, event) {
       $mdDialog.show({
-        controller: dialogoController,
+        controller: dialogoImprimirController,
         controllerAs: 'vm',
         templateUrl: 'app/components/publicaciones/imprimir.dialogo.html',
         parent: angular.element(document.body),
@@ -182,7 +182,7 @@
   	}
 
 
-  function dialogoController($filter, $mdDialog, material, MaterialService, $state, ObtenerContenidoMaterialService) {
+  function dialogoImprimirController($filter, $mdDialog, material, MaterialService, $state, ObtenerContenidoMaterialService) {
     var vm = this;
     vm.material = material;
 
