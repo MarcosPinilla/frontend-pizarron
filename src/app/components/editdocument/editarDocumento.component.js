@@ -45,7 +45,8 @@
     vm.documento.$promise.then(function(data){
       vm.documento = data;
       vm.nombreInicial=vm.documento.titulo_material;
-      console.log(vm.documento.contenido_material)
+      console.log(vm.documento.contenido_material);
+      console.log(vm.documento);
       //Forma de iniciar el editar documento
       if (vm.documento.contenido_material !== null) {
         vm.cargar();
@@ -1050,19 +1051,27 @@
           documentoTemp.titulo_material = vm.nombreInicial
         }
         
-        //Se añade color blanco para la vista previa
-        canvas.backgroundColor = 'white';
-        var svg = canvas.toSVG({
-          width: canvas.width / 3,
-          height: canvas.height / 3
-        });
+        if (vm.paginaActual === 1) {
+          //Se añade color blanco para la vista previa
+          canvas.backgroundColor = 'white';
+          var svg = canvas.toSVG({
+            width: canvas.width / 3,
+            height: canvas.height / 3
+          });
 
-        //Se vuelve a hacer transparente
-        canvas.backgroundColor = 'transparent';
-
+          //Se vuelve a hacer transparente
+          canvas.backgroundColor = 'transparent';
+          
+          documentoTemp.vista_previa = svg;
+        } else if (vm.paginaActual > 1 && vm.paginaActual <= 10){
+          console.log(vm.paginaActual);
+          console.log(vm.documento.vista_previa);
+          documentoTemp.vista_previa = vm.documento.vista_previa;
+        }
+        console.log(vm.documento.vista_previa);
         documentoTemp.contenido_material=canvasAsJson;
         //documentoTemp.contenido_material = json;
-        documentoTemp.vista_previa = svg;
+        
         documentoTemp.id_tipo_material = vm.documento.id_tipo_material;
         documentoTemp.id_asignatura = vm.documento.id_asignatura;
         documentoTemp.id_nivel = vm.documento.id_nivel;
@@ -1093,6 +1102,7 @@
     //Método para cargar el documento ya guardado en la base de datos
     vm.cargar = function() {
       //documento.contenido_material = canvasAsJson;
+      console.log(vm.documento)
       ObtenerContenidoMaterialService.get({id: vm.documento.id}, function(data) {
         console.log("Obtenido con éxito");
         vm.nuevo = data;
