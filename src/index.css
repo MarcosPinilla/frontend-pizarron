@@ -755,6 +755,10 @@ md-list.make-scrollable {
   box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.23);
 }
 
+.perfil-publicaciones {
+  background-color: transparent;
+}
+
 .perfil-publicaciones-valoradas {
   margin-left: 1.5em;
   margin-right: 1.5em;
@@ -805,16 +809,26 @@ md-icon svg {
   color: #37474F;
 }
 
-.titulo-perfil-valoradas {
+#titulo-perfil-valoradas {
   background-color: #bddf8b;
   border-radius: 18px;
   color: white;
+  height: 70px;
 }
 
-.titulo-perfil-recientes {
+#titulo-perfil-valoradas h2 {
+  padding-top: 20px;
+}
+
+#titulo-perfil-recientes {
   background-color: #fad98f;
   border-radius: 18px;
   color: white;
+  height: 70px;
+}
+
+#titulo-perfil-recientes h2 {
+  padding-top: 20px;
 }
 
 .texto-titulo-perfil {
@@ -1214,7 +1228,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 }
 
 .material-card {
-  max-width: 300px;
+  width: 285px;
   float: left;
 }
 
