@@ -11,7 +11,7 @@
 
   	publicacionesCtrl.$inject = ['$mdDialog', 'MaterialService', 'CredentialsService','DarFavorito', 'CompartirmaterialService', 'ComentarioService', 'ObtenerFavoritosAnalogosService', '$state', '$pusher', 'BuscarNombreProfesorService', '$filter', 'ObtenerContenidoMaterialService'];
 
-  	function publicacionesCtrl($mdDialog, MaterialService, CredentialsService, DarFavorito, ComentarioService, CompartirmaterialService, ObtenerFavoritosAnalogosService, $state, $pusher, BuscarNombreProfesorService) {
+  	function publicacionesCtrl($mdDialog, MaterialService, CredentialsService, DarFavorito, CompartirmaterialService, ComentarioService, ObtenerFavoritosAnalogosService, $state, $pusher, BuscarNombreProfesorService, $filter, ObtenerContenidoMaterialService) {
   		var vm = this;
       vm.materiales = {};
       vm.comentarios = {};
@@ -74,7 +74,6 @@
 
       vm.comentar = function(idmaterial, texto) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
-        console.log(coment);
         ComentarioService.save(coment);
       };
 
@@ -104,7 +103,7 @@
         vm.nombre_profesor = null;
         vm.selected_profesor = null;
 
-        vm.compartirMaterial = function(profesorid) {
+        /*vm.compartirMaterial = function(profesorid) {
           if(vm.selected_profesor == null) {
             console.log("No se ha seleccionado profesor");
             return;
@@ -113,7 +112,7 @@
           console.log(idmaterial);
           var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
           CompartirmaterialService.save(compartir);
-        };
+        };*/
 
         vm.buscarProfesor = function () {
           BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {

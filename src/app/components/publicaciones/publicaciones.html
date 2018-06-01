@@ -22,22 +22,33 @@
 		    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
 		    	<md-button ng-click="vm.goMaterial(material.id)">
 		      		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
-		      		Ver documento
+		      		<md-tooltip md-direction="bottom">
+          				Ver Documento
+        			</md-tooltip>
 		      	</md-button>
 		      	<md-button ng-click="vm.imprimirDocumento(material.id)">
 		      		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ICONOS-17.svg"></md-icon>
-		      		Imprimir
+		      		<md-tooltip md-direction="bottom">
+          				Imprimir
+        			</md-tooltip>
 		      	</md-button>
 		    	<md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
 		    		<md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
-		    		Favoritos
+		    		<md-tooltip md-direction="bottom">
+          				Favoritos
+        			</md-tooltip>
 		    	</md-button>
 		    	<md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
 		    		<md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-		    		Favoritos
+		    		<md-tooltip md-direction="bottom">
+          				Favoritos
+        			</md-tooltip>
 		    	</md-button>
 		    	<md-button ng-click="vm.showNewDocument($event, material.id)">
 		    		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/share-symbol.svg"></md-icon>
+		    		<md-tooltip md-direction="bottom">
+          				Compartir
+        			</md-tooltip>
 		    	</md-button>
 		    </md-card-actions>
 		    <md-content class="sin-comentario" ng-if="material.comentarios.length <= 0">
