@@ -3,8 +3,7 @@
 		<h2><strong>Compartir Material</strong></h2>
 	</div>
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
-		<md-input-container class="toolbar-buscador">
-	    	<md-autocomplete
+	    	<md-autocomplete style="width:95%;"
 	      	md-no-cache="true"
 	      	md-selected-item="vm.selected_profesor"
 	      	md-selected-item-change="vm.irPerfil()"
@@ -15,11 +14,13 @@
 	      	placeholder="Buscar profesores">
 	        	<span>{{profesor.nombres_profesor}} {{profesor.apellidos_profesor}}</span>
 	      	</md-autocomplete>
-	    </md-input-container>
 		<br>
-		<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.compartirMaterial(vm.selected_profesor.id)">Compartir Material</md-button></center>
-		<!-- ng-click="vm.crearmaterial(vm.material)" -->
-		<!--ui-sref="editdocument" -->
+		<center>
+			<md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.compartirMaterial(vm.selected_profesor.id)">Compartir Material</md-button>
+		</center>
 		<br>
 	</md-content>
+	<div class="modal-footer">
+		<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Listo!</md-button></center>
+	</div>
 </md-dialog>

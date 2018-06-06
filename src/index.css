@@ -41,11 +41,11 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 #modalEditarAsi {
-  height: 400px;
+  min-height: 480px;
 }
 
 #modalEditarEst {
-  height: 550px;
+  min-height: 600px;
 }
 
 #modalEditarProf {
@@ -53,11 +53,15 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 #modalEditarPer {
-  height: 750px;
+  min-height: 650px;
 }
 
 #modalCompartirMat {
   min-height: 250px;
+}
+
+#modalImprimir {
+
 }
 
 #speed-dial-button {
@@ -128,6 +132,15 @@ a {
   color: white;
   background-color: #bddf8b;
   text-align: center;
+}
+
+.modal-footer {
+  background-color: #bddf8b;
+  min-height: 70px;
+}
+
+.modal-footer .button-footer {
+  margin-top: 15px;
 }
 
 .modal-title {
@@ -1233,6 +1246,7 @@ md-list-item.md-2-line .md-list-item-text h4 {
 
 .material-card {
   width: 285px;
+  height: 514px;
   float: left;
 }
 

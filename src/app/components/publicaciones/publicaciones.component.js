@@ -114,6 +114,18 @@
           CompartirmaterialService.save(compartir);
         };*/
 
+        vm.hide = function () {
+          $mdDialog.hide();
+        };
+
+        vm.cancel = function () {
+          $mdDialog.cancel();
+        };
+
+        vm.answer = function (answer) {
+          $mdDialog.hide(answer);
+        };
+
         vm.buscarProfesor = function () {
           BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
           vm.profesores = data;

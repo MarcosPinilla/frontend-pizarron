@@ -1,6 +1,6 @@
 <md-dialog id="modalEditarAsi">
 	<div class="modal-title" style="background-color: #bddf8b;">
-		<h2><strong>Editar información de la asignatura</strong></h2>
+		<h2><strong>Editar Información de la Asignatura</strong></h2>
 	</div>
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 		<md-input-container class="md-block">
@@ -11,6 +11,9 @@
 			<label>Descripción</label>
 			<input ng-model="vm.upasignatura.descripcion_asignatura" type="text" required>
 		</md-input-container>
-		<center><md-button class="md-raised md-primary" ng-click="vm.actualizarasignatura(vm.upasignatura)" md-theme="dark-green" aria-label="editasignatura">actualizar asignatura</md-button></center>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.actualizarasignatura(vm.upasignatura)" md-theme="dark-green" aria-label="editasignatura">Actualizar Asignatura</md-button></center>
 	</md-content>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
 </md-dialog>

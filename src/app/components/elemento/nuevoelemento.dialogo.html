@@ -1,27 +1,29 @@
 <md-dialog id="modalNuevoele">
 	<div class="modal-title" style="background-color: #bddf8b;">
-		<h2><strong>Añadir elemento</strong></h2>
+		<h2><strong>Añadir Elemento</strong></h2>
 	</div>
-	<div>
-		<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
-			<md-input-container class="md-block">
-				<label>Nombre de Archivo</label>
-				<input ng-model="vm.newelemento.nombre_archivo" type="text" required>
-			</md-input-container>
-			<md-input-container class="md-block">
-				<label>Descripción</label>
-				<input ng-model="vm.newelemento.descripcion_elemento" type="text" required>
-			</md-input-container>
-			<center><center><input type="file" fileread="vm.newelemento.contenido_archivo"></center></center>
-			<md-input-container class="md-block">
-				<label>Etiqueta</label>
-				<md-select ng-model="vm.newelemento.id_etiqueta">
-					<md-option ng-repeat="etiqueta in vm.etiquetas" ng-value="etiqueta.id">
-					{{ etiqueta.nombre_etiqueta }}
-					</md-option>
-				</md-select>
-			</md-input-container>
-			<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">Crear elemento</md-button></center>
-		</md-content>
-	</div>
+	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+		<md-input-container class="md-block">
+			<label>Nombre de Archivo</label>
+			<input ng-model="vm.newelemento.nombre_archivo" type="text" required>
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Descripción</label>
+			<input ng-model="vm.newelemento.descripcion_elemento" type="text" required>
+		</md-input-container>
+		<center><center><input type="file" fileread="vm.newelemento.contenido_archivo"></center></center>
+		<md-input-container class="md-block">
+			<label>Etiqueta</label>
+			<md-select ng-model="vm.newelemento.id_etiqueta">
+				<md-option ng-repeat="etiqueta in vm.etiquetas" ng-value="etiqueta.id">
+				{{ etiqueta.nombre_etiqueta }}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">Crear Elemento</md-button></center>
+		<br>
+	</md-content>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
 </md-dialog>
