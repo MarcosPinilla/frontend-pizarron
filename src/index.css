@@ -109,7 +109,14 @@ a {
 
 .boton-nueva-noticia{
   padding: 0 0 0 0 !important;
-  margin: -5px 0 0 100px !important;
+  margin: -5px 0 0 0px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.boton-historial-aviso{
+  padding: 0 0 0 0 !important;
+  margin: -5px 0 0 70px !important;
   width: 30px !important;
   height: 30px !important;
 }
