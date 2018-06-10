@@ -1,40 +1,49 @@
-<div id="editarperfil-title">
-	<h2><strong>Editar perfil</strong></h2>
-</div>
-<md-content layout-padding layout-wrap md-theme="app" flex="100">
-	<form>
-	<md-input-container class="md-block" flex="100">
-	    <label>Nombre</label>
-	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.nombres_profesor">
-	    <div ng-messages="form.titulo.$error">
-        	<div ng-message="required">Este campo es requerido.</div>
-    	</div>
-	</md-input-container>
-	<md-input-container class="md-block" flex="100">
-	    <label>Apellidos</label>
-	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.apellidos_profesor">
-	    <div ng-messages="form.titulo.$error">
-        	<div ng-message="required">Este campo es requerido.</div>
-    	</div>
-	</md-input-container>
-	<md-input-container class="md-block" flex="100">
-	    <label>Profesion</label>
-	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.profesion">
-	    <div ng-messages="form.titulo.$error">
-        	<div ng-message="required">Este campo es requerido.</div>
-    	</div>
-	</md-input-container>
-	<md-input-container class="md-block" flex="100">
-	    <label>Cargo</label>
-	    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.cargo">
-	    <div ng-messages="form.titulo.$error">
-        	<div ng-message="required">Este campo es requerido.</div>
-    	</div>
-	</md-input-container>
-	<br>
-	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.actualizarprofesor(vm.perfil)">Guardar Cambios</md-button></center>
-	<!-- ng-click="vm.crearmaterial(vm.material)" -->
-	<!--ui-sref="editdocument" -->
-	<br>
-	</form>
-</md-content>
+<md-dialog id="modalEditarPer">
+	<div id="editarperfil-title">
+		<h2><strong>Editar Perfil</strong></h2>
+	</div>
+	<md-content layout-padding layout-wrap md-theme="app" flex="100">
+		<form>
+		<md-input-container class="md-block" flex="100">
+		    <label>Nombre</label>
+		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.nombres_profesor">
+		    <div ng-messages="form.titulo.$error">
+	        	<div ng-message="required">Este campo es requerido.</div>
+	    	</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex="100">
+		    <label>Apellidos</label>
+		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.apellidos_profesor">
+		    <div ng-messages="form.titulo.$error">
+	        	<div ng-message="required">Este campo es requerido.</div>
+	    	</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex="100">
+		    <label>Profesión</label>
+		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.profesion">
+		    <div ng-messages="form.titulo.$error">
+	        	<div ng-message="required">Este campo es requerido.</div>
+	    	</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex="100">
+		    <label>Cargo</label>
+		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.cargo">
+		    <div ng-messages="form.titulo.$error">
+	        	<div ng-message="required">Este campo es requerido.</div>
+	    	</div>
+		</md-input-container>
+		<md-input-container class="md-block" flex="100">
+			<label for="fotoProfesor">Foto</label>
+			<br>
+			<input id="fotoProfesor" type="file" fileread="vm.perfil.url_foto_profesor">
+		</md-input-container>
+		<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.actualizarprofesor(vm.perfil)">Guardar cambios</md-button></center>
+		<!-- ng-click="vm.crearmaterial(vm.material)" -->
+		<!--ui-sref="editdocument" -->
+		<br>
+		</form>
+	</md-content>
+	<div class="modal-footer" style="background-color: #fad98f;">
+		<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+	</div>
+</md-dialog>

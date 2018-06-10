@@ -180,7 +180,6 @@
 
     function DialogController($scope, $mdDialog, NotificacionesNoLeidasService, CambiarNotificacionesLeidas, NotificacionesLeidasService) {
     var vm = this;
-    console.log("ORETE RA I NEEE!");
     vm.notificaciones = {};
 
        NotificacionesNoLeidasService.get().$promise.then(function (data) {

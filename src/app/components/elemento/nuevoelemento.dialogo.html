@@ -1,7 +1,7 @@
-<div class="modal-title" style="background-color: #bddf8b;">
-	<h2><strong>Añadir elemento</strong></h2>
-</div>
-<div>
+<md-dialog id="modalNuevoele">
+	<div class="modal-title" style="background-color: #bddf8b;">
+		<h2><strong>Añadir Elemento</strong></h2>
+	</div>
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 		<md-input-container class="md-block">
 			<label>Nombre de Archivo</label>
@@ -20,6 +20,10 @@
 				</md-option>
 			</md-select>
 		</md-input-container>
-		<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">Crear elemento</md-button></center>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirelemento()" md-theme="dark-green" aria-label="addprofe">Crear Elemento</md-button></center>
+		<br>
 	</md-content>
-</div>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
+</md-dialog>

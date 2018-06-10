@@ -1,16 +1,3 @@
-<script type="x/kendo-template" id="page-template">
-     <div class="page-template">
-            <div class="header">
-
-            </div>
-            <div class="footer" style="text-align: center">
-
-                <h2> #:pageNum# </h2>
-            </div>
-      </div>
-</script>
-
- 
   <div layout="row" style="margin-top: 65px;">
 
       <div style="margin-left: 5px;margin-top: 10px;">
@@ -186,10 +173,10 @@
   
   </div>
   
-<div flex="5">
+<div flex="5" ng-class="{'flex-10' : vm.esColaborador===false }">
 </div>
-  <div flex="55">
-    <div class="contenedor-pagina" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
+  <div flex="55" ng-class="{'flex-80' : vm.esColaborador===false}">
+    <div class="contenedor-pagina" style="margin:0 auto !important" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
      <div layout="row">
       <div flex="70" style="text-align: left;">
 

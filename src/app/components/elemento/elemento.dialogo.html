@@ -5,4 +5,6 @@
 	<center flex="100"><img alt="{{ vm.elemento.nombre_archivo }}" ng-src="{{ vm.elemento.contenido_elemento }}" class="modal-image"/></center>
 	<p><strong>Descripción: </strong>{{ vm.elemento.descripcion_elemento }}</p>
 </md-content>
-		
+<div class="modal-footer">
+    <center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ </div>

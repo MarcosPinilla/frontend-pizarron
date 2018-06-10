@@ -10,8 +10,12 @@
   function comentarioService ($resource, API) {
     return $resource(API + 'comentarios/:id', {id: '@id'}, {
       update: {
-        method: 'PUT'
-      }
+        method: 'PUT',
+      },
+      save: {
+        method:'POST',
+        isArray: true,
+      },
     });
   }
 })();

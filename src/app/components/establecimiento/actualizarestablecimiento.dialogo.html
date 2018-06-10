@@ -1,25 +1,29 @@
-<div class="modal-title" style="background-color: #bddf8b;">
-	<h2><strong>Editar Información del Establecimiento</strong></h2>
-</div>
-<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
-	<md-input-container class="md-block">
-		<label>Nombre</label>
-		<input ng-model="vm.upestablecimiento.nombre_establecimiento" type="text" required>
-	</md-input-container>
-	<md-input-container class="md-block">
-		<label>Descripción</label>
-		<input ng-model="vm.upestablecimiento.desc_establecimiento" type="text" required>
-	</md-input-container>
-	<label for="fotoEstablecimiento">Foto</label>
-	<center><input id="fotoEstablecimiento" type="file" fileread="vm.upestablecimiento.url_foto_establecimiento"></center>
-	<md-input-container class="md-block" >
-      <label>Tipo Establecimiento</label>
-      <md-select ng-model="vm.upestablecimiento.id_tipo_establecimiento">
-        <md-option ng-repeat="tipo in vm.tipoestablecimientos" value="{{ tipo.id }}">
-          {{ tipo.nombre_tipo_establecimiento }}
-        </md-option>
-      </md-select>
-    </md-input-container>
-	<center><md-button class="md-raised md-primary" ng-click="vm.actualizarestablecimiento(vm.upestablecimiento)" md-theme="dark-green" aria-label="addprofe">actualizar establecimiento</md-button></center>
-</md-content>
-			
+<md-dialog id="modalEditarEst">
+	<div class="modal-title" style="background-color: #bddf8b;">
+		<h2><strong>Editar Información del Establecimiento</strong></h2>
+	</div>
+	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+		<md-input-container class="md-block">
+			<label>Nombre</label>
+			<input ng-model="vm.upestablecimiento.nombre_establecimiento" type="text" required>
+		</md-input-container>
+		<md-input-container class="md-block">
+			<label>Descripción</label>
+			<input ng-model="vm.upestablecimiento.desc_establecimiento" type="text" required>
+		</md-input-container>
+		<label for="fotoEstablecimiento">Foto</label>
+		<center><input id="fotoEstablecimiento" type="file" fileread="vm.upestablecimiento.url_foto_establecimiento"></center>
+		<md-input-container class="md-block" >
+	      <label>Tipo Establecimiento</label>
+	      <md-select ng-model="vm.upestablecimiento.id_tipo_establecimiento">
+	        <md-option ng-repeat="tipo in vm.tipoestablecimientos" value="{{ tipo.id }}">
+	          {{ tipo.nombre_tipo_establecimiento }}
+	        </md-option>
+	      </md-select>
+	    </md-input-container>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.actualizarestablecimiento(vm.upestablecimiento)" md-theme="dark-green" aria-label="addprofe">Actualizar Establecimiento</md-button></center>
+	</md-content>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
+</md-dialog>

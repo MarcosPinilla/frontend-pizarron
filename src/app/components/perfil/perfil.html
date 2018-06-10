@@ -1,23 +1,23 @@
- <div class="dashboard" layout="row" layout-wrap flex="100">
+<div class="dashboard" layout="row" layout-wrap flex="100">
   <!-- Center -->
- 	<div class="perfil-contenedor" flex="100" layout="container" layout-wrap>
- 		<div class="perfil-information row" layout="row" flex="95">
- 			<!-- Perfil Imagen -->
- 			<div flex="40" class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
- 				<div>
- 					<img class="img-perfil" style="border-color: #f9b985; border-style: solid; border-width: 4px;" ng-src= "{{ vm.perfil.url_foto_profesor }}">
- 				</div>
- 			</div>	
- 			<!-- Perfil informacion -->	
- 			<div class="perfil-datos" flex="30">
- 					<h2>{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
- 					<p>Profesión: {{ vm.perfil.profesion }}</p>
+  <div class="perfil-contenedor" flex="100" layout="container" layout-wrap>
+    <div class="perfil-information row" layout="row" flex="95">
+      <!-- Perfil Imagen -->
+      <div flex="40" class="perfil-information-img" layout="column" style="border-top-left-radius: 8px; border-bottom-left-radius: 8px" flex>
+        <div>
+          <img class="img-perfil" style="border-color: #f9b985; border-style: solid; border-width: 4px;" ng-src= "{{ vm.perfil.url_foto_profesor }}">
+        </div>
+      </div>  
+      <!-- Perfil informacion --> 
+      <div class="perfil-datos" flex="30">
+          <h2>{{ vm.perfil.nombres_profesor }}  {{ vm.perfil.apellidos_profesor }}</h2>
+          <p>Profesión: {{ vm.perfil.profesion }}</p>
           <p>Cargo: {{ vm.perfil.cargo }}</p>
- 					<p>Establecimiento: <a href="#">{{vm.perfil.establecimientos[0].nombre_establecimiento}}</a></p>
- 					<h4><p>Email: {{ vm.perfil.usuario.email }}</p></h4>
- 			</div>
- 			<!-- Perfil Opciones -->
- 			<div flex="30" layout="column">
+          <p>Establecimiento: <a href="#">{{vm.perfil.establecimientos[0].nombre_establecimiento}}</a></p>
+          <h4><p>Email: {{ vm.perfil.usuario.email }}</p></h4>
+      </div>
+      <!-- Perfil Opciones -->
+      <div flex="30" layout="column">
         <!-- Añadir Button -->
         <div ng-if="!vm.isUser && vm.estadoAmistad == 4 || !vm.isUser && vm.estadoAmistad == 3 || !vm.isUser && vm.estadoAmistad == 0">
           <md-button ng-click="vm.anadiramigo(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
@@ -95,78 +95,88 @@
         <!-- Estadisticas -->
         <div style="background-color: ">Espacio reservado para estadisticas</div>
       </div>
- 		</div>
+    </div>
 
- 		<!-- Valoradas -->
+    <!-- Valoradas -->
      
- 		<div class="perfil-publicaciones-valoradas" flex="95" layout="column">
- 			<div class="titulo-perfil-valoradas">
- 				<h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
- 			</div>
- 			<div layout="row">
-        <md-content  layout="row">
+    <div class="perfil-publicaciones-valoradas" flex="95">
+      <div id="titulo-perfil-valoradas">
+        <h2 class="texto-titulo-perfil">Las mejor valoradas</h2>
+      </div>
         <md-card class="post-card material-card" style="background-color: #bddf8b" ng-repeat="mejormaterial in vm.mejoresFavoritos">
-          <md-card-title style="background-color: #bddf8b; border-radius: 18px;"> 
+          <md-card-title style="background-color: #bddf8b; border-radius: 18px;">
             <md-card-title-text class="mimaterial-titulo">
-              <span><a ui-sref="editdocument({id:mejormaterial.id_material})">{{mejormaterial.titulo_material}}</a></span>
+              <span><a ui-sref='editdocument({id: mejormaterial.id_material})'>{{mejormaterial.titulo_material}}</a></span>
             </md-card-title-text>
           </md-card-title>
           <div>
-            <a ui-sref='editdocument({id: mejormaterial.id_material})'>
-              <div class="preview md-card-image" id={{mejormaterial.id_material}}>
-            </a>
+            <a ui-sref='editdocument({id: mejormaterial.id_material})'><img class="preview md-card-image" src="data:image/svg+xml,{{mejormaterial.vista_previa}}" alt="No se encontro vista previa"></a>
           </div> 
           <md-card-actions layout="row" layout-align="end center" style="color: white;">
-            <md-button>{{mejormaterial.cantidad}} Fav</md-button>
+            <md-button>
+              {{mejormaterial.cantidad}} Fav
+              <md-tooltip md-direction="bottom">
+                Cantidad Favoritos
+              </md-tooltip>
+            </md-button>
             <md-button ng-click="vm.goMaterial(mejormaterial.id_material)">
               <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
-              Ver documento
+              <md-tooltip md-direction="bottom">
+                Ver Material
+              </md-tooltip>
             </md-button>
             <md-button ng-if="mejormaterial.esFavorito == true" ng-click="vm.darFavorito(mejormaterial)">
               <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
             </md-button>
             <md-button ng-if="mejormaterial.esFavorito == false" ng-click="vm.darFavorito(mejormaterial)">
               <md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
             </md-button>
           </md-card-actions>
         </md-card>
-      </md-content>
- 				<div flex="5"></div>
- 			</div>
- 		</div>
+    </div>
      
- 		<!-- Recientes -->
- 		<div class="perfil-publicaciones-recientes" flex="95" layout="column">
- 			<div class="titulo-perfil-recientes">
- 				<h2 class="texto-titulo-perfil">Las más recientes</h2>
- 			</div>
- 			<md-content  layout="row">
+    <!-- Recientes -->
+    <div class="perfil-publicaciones-recientes" flex="95">
+      <div id="titulo-perfil-recientes">
+        <h2 class="texto-titulo-perfil">Las más recientes</h2>
+      </div>
         <md-card class="post-card material-card" style="background-color: #fad98f" ng-repeat="material in vm.materialreciente">
           <md-card-title style="background-color: #fad98f; border-radius: 18px;"> 
             <md-card-title-text class="mimaterial-titulo">
-              <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
-              <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span>
+              <span><a ui-sref="editdocument({id: material.id})">{{material.titulo_material}}</a></span>
             </md-card-title-text>
           </md-card-title>
           <div>
-            <a ui-sref='editdocument({id: material.id})'>
-              <img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="Previsualización no encontrada"></a>
-            </a>
+            <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa"></a>
+            <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
           </div> 
           <md-card-actions layout="row" layout-align="end center" style="color: white;">
             <md-button ng-click="vm.goMaterial(material.id)">
               <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
-              Ver documento
+              <md-tooltip md-direction="bottom">
+                Ver Documento
+              </md-tooltip>
             </md-button>
             <md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
               <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
             </md-button>
             <md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
               <md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
             </md-button>
           </md-card-actions>
         </md-card>
- 			</md-content>
- 		</div>
- 	</div>
+    </div>
+  </div>
 </div>
