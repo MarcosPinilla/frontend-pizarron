@@ -56,24 +56,27 @@
     };
 
   PerfilService.get().$promise.then(function (data) {
-   vm.usuarioID = data.id; 
+    console.log(data);
+    vm.usuarioID = data.id; 
+
+     AmigoService.query().$promise.then(function (data) {
+          console.log(data);
+          console.log(vm.usuarioID);
+
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].amigo_1 != vm.usuarioID) {
+                vm.amigos.push(data[i].amigo1);
+              }else {
+                vm.amigos.push(data[i].amigo2);
+              }
+          }
+
+          console.log(vm.amigos);
+
+        });
    });
 
-  AmigoService.query().$promise.then(function (data) {
-    console.log(data);
-    console.log(vm.usuarioID);
-
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].amigo_1 != vm.usuarioID) {
-          vm.amigos.push(data[i].amigo1);
-        }else {
-          vm.amigos.push(data[i].amigo2);
-        }
-    }
-
-    console.log(vm.amigos);
-
-  });
+ 
 
   vm.toggle = function (item) {
     console.log(item);
@@ -245,13 +248,15 @@
 
 
 vm.chatEnv = function (message, index){
-
-  vm.mensajes.push(message.message);
-  message.group_id =  vm.idGrupo;
-  message.inde = index;
+  var mensajeEvn = {};
   console.log(message);
+  vm.mensajes.push(message);
+  mensajeEvn.message = message;
+  mensajeEvn.group_id =  vm.idGrupo;
+  mensajeEvn.index = index;
+  console.log(mensajeEvn);
   console.log(index);
-  MessageService.save(message, function (data) {
+  MessageService.save(mensajeEvn, function (data) {
     console.log(data);
     console.log(vm.chats[index].conversations);
     vm.chats[index].conversations = data.conversations;
