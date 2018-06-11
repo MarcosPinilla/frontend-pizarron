@@ -6,83 +6,100 @@
 	<div flex="20"></div>
 	<div class="post" layout="column" flex="60" flex-offset="20">
 		<md-card class="post-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #fad98f">
-		    <md-card-title style="background-color: #fad98f; border-radius: 18px;"> 
-		      <md-card-title-text class="mimaterial-titulo">
-		      	<div layout="row">
-					<div><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})"><img class="publicacion-img" src="{{material.colaboradores[0].url_foto_profesor}}"></a></div>
-						<div class="material-titulo"><span><a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}</a> publicó <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span></div>
-				</div>
-		      </md-card-title-text>
-		    </md-card-title>
-		    <div>
-		      <a ui-sref='editdocument({id: material.id})'>
-		      	<div class="preview md-card-image" id={{material.id}}>
-		      </a>
-		    </div> 
-		    <md-card-actions layout="row" layout-align="space-around" style="color: white;">
-		    	<md-button ng-click="vm.goMaterial(material.id)">
-		      		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
-		      		<md-tooltip md-direction="bottom">
-          				Ver Documento
-        			</md-tooltip>
-		      	</md-button>
-		      	<md-button ng-click="vm.imprimirDocumento(material.id)">
-		      		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ICONOS-17.svg"></md-icon>
-		      		<md-tooltip md-direction="bottom">
-          				Imprimir
-        			</md-tooltip>
-		      	</md-button>
-		    	<md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
-		    		<md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
-		    		<md-tooltip md-direction="bottom">
-          				Favoritos
-        			</md-tooltip>
-		    	</md-button>
-		    	<md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
-		    		<md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
-		    		<md-tooltip md-direction="bottom">
-          				Favoritos
-        			</md-tooltip>
-		    	</md-button>
-		    	<md-button ng-click="vm.showNewDocument($event, material.id)">
-		    		<md-icon style="fill: white;" md-svg-icon="app/resources/icons/share-symbol.svg"></md-icon>
-		    		<md-tooltip md-direction="bottom">
-          				Compartir
-        			</md-tooltip>
-		    	</md-button>
-		    </md-card-actions>
-		    <md-content class="sin-comentario" ng-if="material.comentarios.length <= 0">
-		    	<md-divider class="comentario-divider"></md-divider>
-		    	<center><h4>Este material aun no tiene comentarios</h4></center>
-		    	<md-divider class="comentario-divider"></md-divider>
-		    </md-content>
-		    <md-content ng-if="material.comentarios.length > 0" ng-repeat="comentario in material.comentarios">
-				<div class="comentario" layout="row">
-					<div class="comentario-foto" style="" flex="20">
-						<img class="amigos-amigo-img" src="{{comentario.profesor.url_foto_profesor}}">
-					</div>
-					<div class="comentario-contenido" style="" layout="column" flex="80">
-						<div class="comentario-nombre"><a href="#">{{comentario.profesor.nombres_profesor}} {{comentario.profesor.apellidos_profesor}}</a> <span class="comentario-fecha">  ({{comentario.fecha}})</span></div>
-						<div class="comentario-texto">
-							{{comentario.comentario}}
+			<md-card-title style="background-color: #fad98f; border-radius: 18px;">
+				<md-card-title-text class="mimaterial-titulo">
+					<div layout="row">
+						<div>
+							<a ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">
+								<img class="publicacion-img" src="{{material.colaboradores[0].url_foto_profesor}}">
+							</a>
+						</div>
+						<div class="material-titulo">
+							<span>
+								<a class="material-links" ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">
+									{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}} <span class="material-prof-profesion">({{material.colaboradores[0].profesion}})</span>
+								</a> 
+								publicó <a class="material-links" ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a>
+							</span>
 						</div>
 					</div>
+				</md-card-title-text>
+			</md-card-title>
+			<div>
+				<a ui-sref='editdocument({id: material.id})'>
+					<div class="preview md-card-image" id={{material.id}}>
+				</a>
 				</div>
-			</md-content>
-			<div layout="row" flex>
-				<div flex="5"></div>
-				<div class="caja-comentario" flex="70">
-					 <input type="text" placeholder="Escribe un comentario..." ng-model="comentario.comentar">
-				</div>
-				<div flex="5"></div>
-				<div flex="25">
-					<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar); comentario.comentar = ''">
-						<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
+				<md-card-actions layout="row" layout-align="space-around" style="color: white;">
+					<md-button ng-click="vm.goMaterial(material.id)">
+						<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Ver Documento
+						</md-tooltip>
 					</md-button>
+					<md-button ng-click="vm.imprimirDocumento(material.id)">
+						<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ICONOS-17.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Imprimir
+						</md-tooltip>
+					</md-button>
+					<md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
+						<md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Favoritos
+						</md-tooltip>
+					</md-button>
+					<md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
+						<md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Favoritos
+						</md-tooltip>
+					</md-button>
+					<md-button ng-click="vm.showNewDocument($event, material.id)">
+						<md-icon style="fill: white;" md-svg-icon="app/resources/icons/share-symbol.svg"></md-icon>
+						<md-tooltip md-direction="bottom">
+							Compartir
+						</md-tooltip>
+					</md-button>
+				</md-card-actions>
+				<md-content class="sin-comentario" ng-if="material.comentarios.length <= 0">
+					<md-divider class="comentario-divider"></md-divider>
+					<center>
+						<h4>Este material aun no tiene comentarios</h4>
+					</center>
+					<md-divider class="comentario-divider"></md-divider>
+				</md-content>
+				<md-content ng-if="material.comentarios.length > 0" ng-repeat="comentario in material.comentarios">
+					<div class="comentario" layout="row">
+						<div class="comentario-foto" style="" flex="20">
+							<img class="amigos-amigo-img" src="{{comentario.profesor.url_foto_profesor}}">
+						</div>
+						<div class="comentario-contenido" style="" layout="column" flex="80">
+							<div class="comentario-nombre">
+								<a href="#">{{comentario.profesor.nombres_profesor}} {{comentario.profesor.apellidos_profesor}}</a>
+								<span class="comentario-fecha">
+								({{comentario.fecha}})</span>
+							</div>
+							<div class="comentario-texto">
+								{{comentario.comentario}}
+							</div>
+						</div>
+					</div>
+				</md-content>
+				<div layout="row" flex>
+					<div flex="5"></div>
+					<div class="caja-comentario" flex="70">
+						<input type="text" placeholder="Escribe un comentario..." ng-model="comentario.comentar">
+					</div>
+					<div flex="5"></div>
+					<div flex="25">
+						<md-button class="comentario-button" ng-click="vm.comentar(material.id, comentario.comentar); comentario.comentar = ''">
+							<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
+						</md-button>
+					</div>
+					<div flex="5"></div>
 				</div>
-				<div flex="5"></div>
-			</div>
-  		</md-card>
+		</md-card>
+		</div>
+		<div flex="20"></div>
 	</div>
-	<div flex="20"></div>
-</div>

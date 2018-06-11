@@ -173,7 +173,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'noticia',
     isPrivate: true  
   })
-  .state('notificaciones', {
+  .state('dashboard.notificaciones', {
     url: '/notificaciones',
     component: 'notificacion',
     isPrivate: true
