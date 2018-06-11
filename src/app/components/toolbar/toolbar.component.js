@@ -2,18 +2,18 @@
   'use strict';
 
   angular
-  .module('app')
-  .component('myToolbar', {
-    templateUrl: 'app/components/toolbar/toolbar.html',
-    controller: toolbarCtrl,
-    controllerAs: 'vm'
-  });
+    .module('app')
+    .component('myToolbar', {
+      templateUrl: 'app/components/toolbar/toolbar.html',
+      controller: toolbarCtrl,
+      controllerAs: 'vm'
+    });
 
   toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
-   'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
+    'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-   ListartipomaterialService, NotificacionesNoLeidasService) {
+    ListartipomaterialService, NotificacionesNoLeidasService) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -35,7 +35,7 @@
     };
 
     vm.isLogged = CredentialsService.isLogged();
-    
+
     vm.logout = function () {
       CredentialsService.clearCredentials();
       vm.isinLogin = true;
@@ -61,17 +61,17 @@
       vm.isnotinLogin = true;
     });
 
-    $rootScope.$on('isAdmin', function() {
+    $rootScope.$on('isAdmin', function () {
       vm.isadmin = true;
     });
 
-    $rootScope.$on('isnotAdmin', function() {
+    $rootScope.$on('isnotAdmin', function () {
       vm.isnotadmin = true;
     });
 
-    if(CredentialsService.getRol() == 1){
+    if (CredentialsService.getRol() == 1) {
       vm.isadmin = true;
-    }else{
+    } else {
       vm.isadmin = false;
     }
 
@@ -87,12 +87,12 @@
       vm.tipo_material = data;
     });
 
-    BuscarNombreProfesorService.query({nombre: "Ma"}).$promise.then(function (data) {
-        vm.profesores = data;
-        
-      });
+    BuscarNombreProfesorService.query({ nombre: "Ma" }).$promise.then(function (data) {
+      vm.profesores = data;
+
+    });
     vm.buscarProfesor = function () {
-      BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
+      BuscarNombreProfesorService.query({ nombre: vm.nombre_profesor }).$promise.then(function (data) {
         vm.profesores = data;
         console.log(vm.profesores);
       });
@@ -100,25 +100,25 @@
 
     vm.irPerfil = function () {
       console.log("SELECCIONADOx!!!");
-      $state.go('dashboard.perfil', {id: vm.selected_profesor.id});
+      $state.go('dashboard.perfil', { id: vm.selected_profesor.id });
     };
 
     vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
-        $mdDialog.show({
-          controller: dialogoController,
-          controllerAs: 'vm',
-          templateUrl: 'app/components/dashboard/nuevodocumento.dialogo.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true,
-          fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
-          locals: {
-            usuario: usuario,
-            asignaturas: asignaturas,
-            niveles: niveles,
-            tipomaterial: tipomaterial
-          },
-        })
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/dashboard/nuevodocumento.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          usuario: usuario,
+          asignaturas: asignaturas,
+          niveles: niveles,
+          tipomaterial: tipomaterial
+        },
+      })
         .then(function (answer) {
           vm.status = 'Documento:  ' + answer + '.';
         }, function () {
@@ -126,21 +126,21 @@
         });
     };
 
-    vm.showAdvanced = function(ev) {
-        $mdDialog.show({
-          controller: DialogController,
-          controllerAs: 'vm',
-          templateUrl: 'dialog2.tmpl.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true
-        })
-        .then(function(answer) {
+    vm.showAdvanced = function (ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        controllerAs: 'vm',
+        templateUrl: 'dialog2.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true
+      })
+        .then(function (answer) {
           vm.status = 'You said the information was "' + answer + '".';
-        }, function() {
+        }, function () {
           vm.status = 'You cancelled the dialog.';
         });
-      };
+    };
 
     function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService) {
       var vm = this;
@@ -153,17 +153,17 @@
       vm.material_id = '';
 
       vm.crearmaterial = function (material) {
-        if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
-          MaterialService.save(material, function (res){
+        if (material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
+          MaterialService.save(material, function (res) {
             console.log(res);
             vm.material_id = res.id;
-            $state.go('editdocument', {id: res.id});
+            $state.go('editdocument', { id: res.id });
             $mdDialog.hide();
-          },function (err) {
+          }, function (err) {
             console.log(err);
           });
         }
-      };     
+      };
 
       vm.hide = function () {
         $mdDialog.hide();
@@ -178,51 +178,55 @@
       };
     }
 
-    function DialogController($scope, $mdDialog, NotificacionesNoLeidasService, CambiarNotificacionesLeidas, NotificacionesLeidasService) {
-    var vm = this;
-    vm.notificaciones = {};
+    function DialogController($scope, $mdDialog, NotificacionesNoLeidasService, CambiarNotificacionesLeidas, $state, NotificacionesLeidasService) {
+      var vm = this;
+      vm.notificaciones = {};
 
-       NotificacionesNoLeidasService.get().$promise.then(function (data) {
-            console.log(data);
-            vm.notificaciones = data;
-
-            CambiarNotificacionesLeidas.get().$promise.then(function (data) {
-                console.log(data);
-           });
-       });
-
-    vm.notificacionesLeidas = {};
-       NotificacionesLeidasService.get().$promise.then(function (data) {
-            console.log(data);
-            vm.notificacionesLeidas = data;
-       });
-
-    vm.hide = function() {
-      $mdDialog.hide();
-    };
-
-    vm.cancel = function() {
-      $mdDialog.cancel();
-    };
-
-    vm.answer = function(answer) {
-      $mdDialog.hide(answer);
-    };
-  }
-
-      /*vm.material = {
-        material_id: "2"
-      };*/
-
-
-     /* vm.darFavorito = function(data){
+      NotificacionesNoLeidasService.get().$promise.then(function (data) {
         console.log(data);
-      DarFavorito.save(data,function(res){
-        console.log('entra');
-        $state.go('dashboard');
-      },function(err){
-        console.log(err);
+        vm.notificaciones = data;
+
+        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+          console.log(data);
+        });
       });
-*/
+
+      vm.notificacionesLeidas = {};
+      NotificacionesLeidasService.get().$promise.then(function (data) {
+        console.log(data);
+        vm.notificacionesLeidas = data;
+      });
+
+      vm.verNotificaciones = function () { 
+        vm.hide();
+      };  
+
+      vm.hide = function () {
+        $mdDialog.hide();
+      };
+
+      vm.cancel = function () {
+        $mdDialog.cancel();
+      };
+
+      vm.answer = function (answer) {
+        $mdDialog.hide(answer);
+      };
     }
+
+    /*vm.material = {
+      material_id: "2"
+    };*/
+
+
+    /* vm.darFavorito = function(data){
+       console.log(data);
+     DarFavorito.save(data,function(res){
+       console.log('entra');
+       $state.go('dashboard');
+     },function(err){
+       console.log(err);
+     });
+*/
+  }
 })();
