@@ -498,6 +498,11 @@
           vm.guardar();
         }
       }
+      //Se guarda al hacer cualquier cambio al título
+      document.getElementById("titulo-material").addEventListener('input',
+       function (evt) {
+          vm.guardar();
+      });
 
     vm.eliminar = function() {
       var seleccion = canvas.getActiveObject();
