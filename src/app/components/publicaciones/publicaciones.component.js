@@ -73,8 +73,12 @@
       };
 
       vm.comentar = function(idmaterial, texto) {
+        if(texto != null) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
-        ComentarioService.save(coment);
+        ComentarioService.save(coment); 
+        } else {
+          console.log("Comentario vacio.");
+        }
       };
 
       vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
