@@ -2,17 +2,24 @@
   'use strict';
 
   angular
-  .module('app')
-  .component('notificacion', {
-    templateUrl: 'app/components/notificaciones/notificaciones.html',
-    controller: notificacionCtrl,
-    controllerAs: 'vm'
-  });
+    .module('app')
+    .component('notificacion', {
+      templateUrl: 'app/components/notificaciones/notificaciones.html',
+      controller: notificacionCtrl,
+      controllerAs: 'vm'
+    });
 
-  //materialCtrl.$inject = ['notificacionService'];
+  notificacionCtrl.$inject = ['NotificacionService'];
 
-  function notificacionCtrl() {
+  function notificacionCtrl(NotificacionService) {
     var vm = this;
+    vm.notificaciones = {};
+
+    NotificacionService.query().$promise.then(function (data) {
+      vm.notificaciones = data;
+      console.log(vm.notificaciones);
+    });
+
   }
-  
+
 })();

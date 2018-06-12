@@ -539,6 +539,18 @@ md-list.make-scrollable {
   color: black;
 }
 
+.notificacion-item {
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #90caf9;
+  margin-bottom: 12px;
+}
+
+.notificacion-container .notificacion-item .md-list-item-text .notificacion-text {
+  font-size: 1.3em;
+}
+
+
 #chat {
   position: fixed;
   min-width: 210px;
@@ -939,7 +951,6 @@ md-icon svg {
 }
 
 .notificaciones-contenedor md-divider {
-  background-color: ;
   margin-left: 0.2em;
   margin-right: 0.2em;
 }
@@ -1101,6 +1112,16 @@ md-list-item.md-2-line .md-list-item-text h4 {
   color: white;
 }
 
+.material-links {
+  color: #64b5f6;
+  font-size: 18px;
+}
+
+.material-prof-profesion {
+  color: white;
+  font-size: 16px;
+}
+
 .sin-comentario {
   color: white;
   background-color: #fad98f;
@@ -1167,11 +1188,6 @@ md-list-item.md-2-line .md-list-item-text h4 {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-}
-
-.mimaterial-titulo a {
-  font-size: 16px;
-  color: white;
 }
 
 .mimaterial-options {
