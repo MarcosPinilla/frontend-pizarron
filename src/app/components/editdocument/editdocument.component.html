@@ -241,7 +241,10 @@
                   Eliminar página
               </md-tooltip>
           </md-button>
-
+          
+           <md-select :placeholder="{{vm.documento.visibilidad.nombre_visibilidad}}" name="repeatSelect" id="repeatSelect" ng-model="modeloVisibilidad.id"  class="md-no-underline" ng-change="vm.updateVisibilidad(modeloVisibilidad)">
+            <md-option ng-repeat="option in vm.visibilidades" value="{{option.id}}">{{option.nombre_visibilidad}}</md-option>
+          </md-select>
 
     </div>
     <div flex="30" style="text-align: right;">
