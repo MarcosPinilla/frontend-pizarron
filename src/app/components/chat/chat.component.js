@@ -10,9 +10,9 @@
  });
 
 
- chatCtrl.$inject = ['$mdDialog', 'ListarNoticiasService', 'NoticiaService', 'NotificacionesRecientesService', 'CredentialsService', 'AmigoService','PerfilService', 'MessageService', 'GrupoService', '$pusher'];
+ chatCtrl.$inject = ['$mdDialog', 'ListarNoticiasService', 'NoticiaService', 'NotificacionesRecientesService', 'CredentialsService', 'AmigoService','PerfilService', 'MessageService', 'GrupoService','$state', '$pusher'];
 
- function chatCtrl($mdDialog, ListarNoticiasService, NoticiaService, NotificacionesRecientesService, CredentialsService, AmigoService, PerfilService, MessageService, GrupoService, $pusher, $scope ) {
+ function chatCtrl($mdDialog, ListarNoticiasService, NoticiaService, NotificacionesRecientesService, CredentialsService, AmigoService, PerfilService, MessageService, GrupoService,$state, $pusher, $scope) {
 
   var vm = this;
 
@@ -54,6 +54,10 @@
         vm.status = 'CANCELADO';
       });
     };
+
+    vm.historialAvisos = function(){
+      $state.go("dashboard.historialavisos");
+    }
 
   PerfilService.get().$promise.then(function (data) {
     console.log(data);

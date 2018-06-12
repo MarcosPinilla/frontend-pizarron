@@ -3,12 +3,19 @@
 		<div class="sidebar-titulo" style="background-color: #f9b985";>
 			<div class="sidebar-titulo-content">
 				<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-				Noticias
+				Avisos
+
+				<md-button  class="md-icon-button md-primary boton-historial-aviso"  aria-label="crear noticia" ng-click="vm.historialAvisos()">
+	              <md-icon style="color:white;" md-svg-icon="app/resources/icons/historial.svg"></md-icon>
+	              	<md-tooltip md-direction="bottom">
+			          Ver más avisos
+			        </md-tooltip>
+	            </md-button>
 				
 				<md-button  class="md-icon-button md-primary boton-nueva-noticia"  aria-label="crear noticia" ng-click="vm.nuevaNoticia()">
 	              <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
-	              	<md-tooltip md-direction="bottom">
-			          Agregar noticia
+	              	<md-tooltip md-direction="left">
+			          Agregar aviso
 			        </md-tooltip>
 	            </md-button>
 			</div>

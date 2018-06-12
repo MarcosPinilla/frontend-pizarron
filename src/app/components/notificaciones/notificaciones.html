@@ -1,45 +1,18 @@
-<div class="dashboard" layout="row" layout-wrap flex="100">
-	<!-- Center -->
-	<div flex="100" class="notificaciones-contenedor" layout="column">
-		<div class="notificacion-titulo"><h2 style="margin-left: 0.5em;">Noticias</h2></div>
-		<!-- Lista -->
-		<div class="notificaciones-lista" layout="row" flex>
-			<div class="notificacion-imagen" flex="10">
-				<img ng-src= "https://scontent-eze1-1.xx.fbcdn.net/v/t1.0-9/10372266_10209027489747206_4877061340362593155_n.jpg?oh=726bca5cafd8ec5df3c348bd12125c07&oe=5AF2DB96">
-			</div>			
-			<div class="notificacion-mensaje" flex="50">
-				<div class="md-list-item-text">
-					<a href=#>Marcos Pinilla</a> te ha enviado una solicitud de amistad
-					<p>hace una hora</p>
+<center>
+	<h2>Notificaciones</h2>
+	<md-divider style="width: 400px;"></md-divider>
+</center>
+<br>
+<div>
+	<md-content>
+		<md-list class="notificacion-container" flex>
+			<md-list-item class="md-2-line notificacion-item" ng-repeat="notificacion in vm.notificaciones" ng-href="{{notificacion.enlace}}">
+				<img ng-src="notificacion.profesor.url_foto_profesor" class="md-avatar" />
+				<div class="md-list-item-text" layout="column">
+					<p class="notificacion-text">{{notificacion.mensaje}}</p>
+					<p>{{notificacion.fecha_notificacion}}</p>
 				</div>
-			</div>
-			<div class="notificacion-botones" flex="40" layout="row">
-				<md-button class="md-raised">Confirmar Solicitud</md-button>
-				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="" aria-label="borrar profe" class="md-secondary md-hue-3">
-				</md-icon>
-				<!--<md-button class="md-raised">Agregar a amigos</md-button>
-				<md-button class="md-raised">borrar</md-button>-->
-			</div>
-		</div>
-		<md-divider></md-divider>
-		<div class="notificaciones-lista" layout="row" flex>
-			<div class="notificacion-imagen" flex="10">
-				<img ng-src= "https://scontent-eze1-1.xx.fbcdn.net/v/t1.0-9/10372266_10209027489747206_4877061340362593155_n.jpg?oh=726bca5cafd8ec5df3c348bd12125c07&oe=5AF2DB96">
-			</div>			
-			<div class="notificacion-mensaje" flex="50">
-				<div class="md-list-item-text">
-					<a href=#>Marcos Pinilla</a> te ha enviado una solicitud de amistad
-					<p>hace una hora</p>
-				</div>
-			</div>
-			<div class="notificacion-botones" flex="40" layout="row">
-				<md-button class="md-raised">Confirmar Solicitud</md-button>
-				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="" aria-label="borrar profe" class="md-secondary md-hue-3">
-				</md-icon>
-				<!--<md-button class="md-raised">Agregar a amigos</md-button>
-				<md-button class="md-raised">borrar</md-button>-->
-			</div>
-		</div>
-		<md-divider></md-divider>
-	</div>
+			</md-list-item>
+		</md-list>
+	</md-content>
 </div>
