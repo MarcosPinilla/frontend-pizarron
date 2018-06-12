@@ -996,6 +996,10 @@ md-icon svg {
   
 }
 
+md-list md-list-item .md-list-item-text .noti-fecha {
+  font-size: 12px !important;
+}
+
 .notificacion-botones {
   background-color: #F5F5F5;
 }

@@ -107,7 +107,7 @@
         vm.nombre_profesor = null;
         vm.selected_profesor = null;
 
-        /*vm.compartirMaterial = function(profesorid) {
+        vm.compartirMaterial = function(profesorid) {
           if(vm.selected_profesor == null) {
             console.log("No se ha seleccionado profesor");
             return;
@@ -116,7 +116,8 @@
           console.log(idmaterial);
           var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
           CompartirmaterialService.save(compartir);
-        };*/
+          vm.hide();
+        };
 
         vm.hide = function () {
           $mdDialog.hide();
