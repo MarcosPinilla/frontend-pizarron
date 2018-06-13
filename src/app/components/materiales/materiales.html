@@ -47,9 +47,7 @@
 			</md-card-title-text>
 		</md-card-title>
 		<div>
-			<a ui-sref='editdocument({id: material.id})'>
-				<div class="preview md-card-image" id={{material.id}}>
-			</a>
+			<img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, material.vista_previa)">
 		</div> 
 		<md-card-actions layout="row" layout-align="end center" style="background-color: #6d72ad;">
 			<md-button ng-click="vm.goMaterial(material)">

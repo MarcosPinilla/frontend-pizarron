@@ -110,7 +110,7 @@
             </md-card-title-text>
           </md-card-title>
           <div>
-            <a ui-sref='editdocument({id: mejormaterial.id_material})'><img class="preview md-card-image" src="data:image/svg+xml,{{mejormaterial.vista_previa}}" alt="No se encontro vista previa"></a>
+            <img class="preview md-card-image" src="data:image/svg+xml,{{mejormaterial.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, mejormaterial.vista_previa)">
           </div> 
           <md-card-actions layout="row" layout-align="end center" style="color: white;">
             <md-button>
@@ -153,8 +153,7 @@
             </md-card-title-text>
           </md-card-title>
           <div>
-            <a ui-sref='editdocument({id: material.id})'><img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa"></a>
-            <!--<a ui-sref="editdocument({id:material.id})"><img class="preview" src="app/resources/img/prueba.jpg" class="md-card-image"></a>-->
+              <img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, material.vista_previa)">
           </div> 
           <md-card-actions layout="row" layout-align="end center" style="color: white;">
             <md-button ng-click="vm.goMaterial(material.id)">

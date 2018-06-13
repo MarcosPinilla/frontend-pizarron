@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  materialesCtrl.$inject = ['PublicMaterialService','AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
+  materialesCtrl.$inject = ['$mdDialog', 'PublicMaterialService','AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
 
-  function materialesCtrl(PublicMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
+  function materialesCtrl($mdDialog, PublicMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
     var vm = this;
 
     vm.materiales = {};
@@ -72,15 +72,44 @@
       DarFavorito.save({material_id: material.id}).$promise.then(function (data) {
         material.esFavorito = !material.esFavorito;
       });
-    }
+    };
 
-    /*vm.darFavorito = function(data){
-      DarFavorito.save(data,function(res){
-        console.log(res);
-      },function(err){
-        console.log(err);
-      });
-      console.log(data);
-    };*/
+    vm.showCloseUp = function (ev, vista_previa) {
+      $mdDialog.show({
+        controller: closeUpController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/materiales/closeUp.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen,
+        locals: {
+          vista_previa: vista_previa,
+        },
+      })
+        .then(function (answer) {
+          vm.status = 'Documento:  ' + answer + '.';
+        }, function () {
+          vm.status = 'CANCELADO';
+        });
+    };
+
+    function closeUpController($mdDialog, vista_previa) {
+      var vm = this;
+      vm.vista_previa = vista_previa;
+
+      vm.hide = function () {
+        $mdDialog.hide();
+      };
+
+      vm.cancel = function () {
+        $mdDialog.cancel();
+      };
+
+      vm.answer = function (answer) {
+        $mdDialog.hide(answer);
+      };
+
+    };
   }
 })();
