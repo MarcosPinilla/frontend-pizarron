@@ -151,6 +151,7 @@
           if(data.id_estado_amistad == 1)
             vm.estadoAmistad = 1;
         });
+        $rootScope.$emit('Solicitud');
       };  
 
       vm.seguirxd = function(idseguido) {
@@ -159,6 +160,7 @@
         console.log('{"id_seguido": ' + idseguido + '}');
         FollowService.save(seguido1);
         vm.isSeguido=true;
+        $rootScope.$emit('Siguiendo');
       };
 
       vm.aceptarSolicitud = function($idamistad) {
