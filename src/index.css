@@ -885,6 +885,19 @@ md-icon svg {
   border-style: solid;*/
 }
 
+.img-actualizacion {
+  width: 12.5em;
+  height: 12.5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  /*border-width: 20px;
+  border-color: white;
+  border-style: solid;*/
+}
+
 #perfil-post-left {
   background-color: #fad98f;
   margin-top: 1em;

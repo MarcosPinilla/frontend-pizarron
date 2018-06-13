@@ -17,6 +17,7 @@
             <th md-column md-numeric md-order-by="fecha" md-desc><span style="float: left;">Fecha</span></th>
             <th md-column md-numeric md-order-by="titulo"><span style="float: left;">Título</span></th>
             <th md-column md-numeric md-order-by="contenido"><span style="float: left;">Contenido</span></th>
+            <th md-column md-numeric md-order-by="contenido"><span style="float: left;">Imágen</span></th>
             <th md-column md-numeric md-order-by="profesor.nombres_profesor"><span style="float: left;">Autor</span></th>
             <th md-column md-numeric></th>
             <th md-column md-numeric></th>
@@ -27,6 +28,7 @@
             <td md-cell><span class="text-justify" style="float: left;">{{ actualizacion.fecha }}</span></td>
             <td md-cell><span class="text-justify" style="float: left;">{{ actualizacion.titulo }}</span></td>
             <td md-cell><span class="text-justify" style="float: left;">{{ actualizacion.contenido }}</span></td>
+            <td md-cell><img ng-src="{{ actualizacion.imagen }}" class="md-avatar" style="height: 45px;" /></td>
             <td md-cell>
               <span class="text-justify" style="float: left;">
 

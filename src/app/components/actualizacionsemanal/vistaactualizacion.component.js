@@ -24,6 +24,7 @@
 
     ListarActualizacionesService.query().$promise.then(function (data) {
       vm.actualizaciones = data;
+      console.log(vm.actualizaciones);
     });
   }
 
