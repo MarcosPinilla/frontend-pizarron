@@ -17,7 +17,7 @@
     vm.avisos = {};
 
     vm.query = {
-      order: 'fecha',
+      order: '-fecha',
       limit: 5,
       page: 1
     };
