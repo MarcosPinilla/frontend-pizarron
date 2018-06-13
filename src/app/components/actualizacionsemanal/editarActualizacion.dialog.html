@@ -1,0 +1,30 @@
+<div class="modal-title" style="background-color: #bddf8b;">
+	<h2><strong>Editar actualización semanal</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+	<form>
+	<md-input-container class="md-block" flex="100">
+	    <label>Título de la actualización semanal</label>
+	    <input type="text" required md-no-asterisk name="titulo" md-maxlength="50" ng-model="vm.upactualizacion.titulo">
+	    <div ng-messages="form.titulo.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+	</md-input-container>
+
+	 <md-input-container class="md-block" flex="100">
+          <label>Contenido</label>
+          <textarea name="contenido" ng-model="vm.upactualizacion.contenido" md-maxlength="150" rows="3" md-select-on-focus required></textarea>
+          <div ng-messages="form.contenido.$error">
+        	<div ng-message="required">Este campo es requerido.</div>
+    	</div>
+     </md-input-container>
+     <input type="file" fileread="vm.newelemento.contenido_archivo">
+	<br>
+	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.editarActualizacion()">Editar actualización</md-button></center>
+
+	<br>
+	</form>
+</md-content>
+<div class="modal-footer">
+	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+</div>

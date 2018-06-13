@@ -1,0 +1,22 @@
+<div class="dashboard" layout="row" layout-wrap flex="100">
+  <!-- Center -->
+  <div class="perfil-contenedor" flex="100" layout="container" layout-wrap ng-repeat="actualizacion in vm.actualizaciones | orderBy: vm.query.order">
+    <div class="perfil-information row" layout="row" flex="95">
+      <!-- Imagen Actualizacion-->
+      <div flex="40" layout="column" flex>
+        <div>
+          <img class="img-actualizacion" ng-src="{{ actualizacion.imagen }}">
+        </div>
+      </div>  
+      <!-- Contenido actualizacion --> 
+      <div class="perfil-datos" flex="60">
+          <h2>{{ actualizacion.titulo }}</h2>
+          <p>{{ actualizacion.contenido }}</p>
+          <br>
+          <p>Publicado por {{ actualizacion.profesor.nombres_profesor}} {{actualizacion.profesor.apellidos_profesor}}</p>
+          <p>Fecha de publicación: {{ actualizacion.fecha }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
