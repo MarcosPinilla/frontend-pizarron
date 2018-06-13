@@ -6,11 +6,13 @@
 <div>
 	<md-content>
 		<md-list class="notificacion-container" flex>
-			<md-list-item class="md-2-line notificacion-item" ng-repeat="notificacion in vm.notificaciones" ng-href="{{notificacion.enlace}}">
-				<img ng-src="notificacion.profesor.url_foto_profesor" class="md-avatar" />
+			<md-list-item class="md-2-line notificacion-item" ng-repeat="notificacion in vm.notificaciones">
+				<a ui-sref="dashboard.perfil({id:notificacion.id_remitente})"><img class="md-avatar" ng-src="{{ notificacion.foto_remitente }}" alt="" /></a>
 				<div class="md-list-item-text" layout="column">
-					<p class="notificacion-text">{{notificacion.mensaje}}</p>
-					<p>{{notificacion.fecha_notificacion}}</p>
+					<a ng-href="{{notificacion.enlace}}">
+						<p class="notificacion-text">{{notificacion.mensaje}}</p>
+						<p>{{notificacion.fecha_notificacion}}</p>
+					</a>
 				</div>
 			</md-list-item>
 		</md-list>
