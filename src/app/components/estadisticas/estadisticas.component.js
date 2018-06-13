@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	estadisticasCtrl.$inject = ['ProfesorService', 'UsuarioService', 'MaterialService', 'ElementoService', 'AsignaturaService', 'EstablecimientoService', 'EtiquetaService'];
+  	estadisticasCtrl.$inject = ['ProfesorService', 'UsuarioService', 'MaterialService', 'ElementoService', 'AsignaturaService', 'EstablecimientoService', 'EtiquetaService', 'ListarActualizacionesService'];
 
-  	function estadisticasCtrl(ProfesorService, UsuarioService, MaterialService, ElementoService, AsignaturaService, EstablecimientoService, EtiquetaService) {
+  	function estadisticasCtrl(ProfesorService, UsuarioService, MaterialService, ElementoService, AsignaturaService, EstablecimientoService, EtiquetaService, ListarActualizacionesService) {
       var vm = this;
       
       vm.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
@@ -47,5 +47,10 @@
       EstablecimientoService.query().$promise.then(function (data) {
       vm.establecimientos = data;
       });
+
+      ListarActualizacionesService.query().$promise.then(function (data) {
+        vm.actualizaciones = data;
+      });
+
   	}
 })();
