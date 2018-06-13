@@ -206,23 +206,25 @@
 
     };
 
-    vm.anadiramigo = function (idamigo) {
+    vm.anadiramigo = function(idamigo) {
       var amigo1 = JSON.parse('{"id_amigo": ' + idamigo + '}');
       console.log('{"id_amigo": ' + idamigo + '}');
       AmigoService.save(amigo1).$promise.then(function (data) {
         vm.amistad = data;
         console.log("El amigo se guardo: " + data.id_estado_amistad);
-        if (data.id_estado_amistad == 1)
+        if(data.id_estado_amistad == 1)
           vm.estadoAmistad = 1;
       });
-    };
+      $rootScope.$emit('Solicitud');
+    };  
 
-    vm.seguirxd = function (idseguido) {
+    vm.seguirxd = function(idseguido) {
       console.log("siguiendo");
       var seguido1 = JSON.parse('{"id_seguido": ' + idseguido + '}');
       console.log('{"id_seguido": ' + idseguido + '}');
       FollowService.save(seguido1);
-      vm.isSeguido = true;
+      vm.isSeguido=true;
+      $rootScope.$emit('Siguiendo');
     };
 
     vm.aceptarSolicitud = function ($idamistad) {
