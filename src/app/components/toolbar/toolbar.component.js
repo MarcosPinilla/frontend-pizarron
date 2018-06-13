@@ -130,7 +130,7 @@
       $mdDialog.show({
         controller: DialogController,
         controllerAs: 'vm',
-        templateUrl: 'dialog2.tmpl.html',
+        templateUrl: 'app/components/toolbar/toolbarnotificacion.dialogo.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true

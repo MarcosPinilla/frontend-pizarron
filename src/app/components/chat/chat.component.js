@@ -60,24 +60,29 @@
     }
 
   PerfilService.get().$promise.then(function (data) {
-   vm.usuarioID = data.id; 
+    console.log(data);
+    vm.usuarioID = data.id; 
+
+     
    });
 
   AmigoService.query().$promise.then(function (data) {
-    console.log(data);
-    console.log(vm.usuarioID);
+          console.log(data);
+          console.log(vm.usuarioID);
 
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].amigo_1 != vm.usuarioID) {
-          vm.amigos.push(data[i].amigo1);
-        }else {
-          vm.amigos.push(data[i].amigo2);
-        }
-    }
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].amigo_1 != vm.usuarioID) {
+                vm.amigos.push(data[i].amigo1);
+              }else {
+                vm.amigos.push(data[i].amigo2);
+              }
+          }
 
-    console.log(vm.amigos);
+          console.log(vm.amigos);
 
-  });
+    });
+
+ 
 
   vm.toggle = function (item) {
     console.log(item);
@@ -249,7 +254,6 @@
 
 
 vm.chatEnv = function (message, index){
-
   vm.mensajes.push(message.message);
   message.group_id =  vm.idGrupo;
   message.inde = index;

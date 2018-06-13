@@ -178,7 +178,7 @@
   <div flex="55" ng-class="{'flex-80' : vm.esColaborador===false}">
     <div class="contenedor-pagina" style="margin:0 auto !important" ng-style="{'transform':vm.esColaborador === true ? 'scale(0.75)' : 'scale(0.9)' }">
      <div layout="row">
-      <div flex="70" style="text-align: left;">
+      <div flex="90" style="text-align: left;">
 
         <md-button ng-if="vm.esColaborador===true" class="md-icon-button boton-pagina" ng-disabled="vm.documentoCompleto.length - 1 === 10" ng-click="vm.nuevaPagina()">
           <md-icon md-svg-icon="app/resources/icons/ICONOS-09.svg"></md-icon>
@@ -241,10 +241,15 @@
                   Eliminar página
               </md-tooltip>
           </md-button>
-
+          <md-input-container>
+           <md-select :placeholder="{{vm.documento.visibilidad.nombre_visibilidad}}" name="repeatSelect" id="repeatSelect" ng-model="modeloVisibilidad.id"  class="md-no-underline" ng-change="vm.updateVisibilidad(modeloVisibilidad)">
+            <md-option ng-repeat="option in vm.visibilidades" value="{{option.id}}">{{option.nombre_visibilidad}}</md-option>
+          </md-select>
+        </md-input-container>
 
     </div>
-    <div flex="30" style="text-align: right;">
+    <div flex="10" style="text-align: right;">
+
       <!--
        <md-button ng-disabled="vm.paginaActual === 1" ng-click="vm.paginaAnterior()">Anterior
           <md-tooltip>

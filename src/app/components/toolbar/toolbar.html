@@ -84,6 +84,12 @@
           Administrador
         </md-tooltip>
       </md-button>
+      <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard.seguidores">
+        <md-icon md-svg-icon="app/resources/icons/ICONOS-06.svg"></md-icon>
+        <md-tooltip md-direction="bottom">
+          Mis Seguidores
+        </md-tooltip>
+      </md-button>
       <md-button ng-if="vm.isLogged" class="md-fab md-raised md-mini" aria-label="Favorite" ng-click="vm.logout()">
         <md-icon md-svg-icon="app/resources/icons/baseline-exit_to_app-24px.svg"></md-icon>
         <md-tooltip md-direction="left">
@@ -94,59 +100,3 @@
   </md-fab-speed-dial>
   </div>
 </div>
-
-<!-- dialog -->
-  <script type="text/ng-template" id="dialog2.tmpl.html"><md-dialog aria-label="Notificaciones">
-
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Notificaciones</h2>
-        <span flex></span>
-        <md-button class="md-raised" ng-click="vm.verNotificaciones()" ui-sref="dashboard.notificaciones">
-          Ver Todas
-        </md-button>
-      </div>
-    </md-toolbar>
-
-    <md-dialog-content>
-      <div class="">
-      <div flex-gt-sm="100" flex>
-
-          <md-content>
-            <md-list flex>
-              <md-subheader class="md-no-sticky">NUEVAS</md-subheader>
-              <md-list-item ng-href="{{item.enlace}}" class="md-3-line" ng-repeat="item in vm.notificaciones" ng-click="null">
-                <img class="md-avatar" ng-src="{{ item.profesor.url_foto_profesor }}"  alt="" />
-                <div class="md-list-item-text" layout="column">
-                   <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
-                  <h4>{{ prueba }}</h4>
-                  <p>{{ item.created_at }}</p>
-                </div>
-              </md-list-item>
-        
-
-            </md-list>
-          </md-content>
-        </div>
-
-          <md-divider></md-divider>
-      <md-content>
-            <md-list flex>
-              <md-subheader class="md-no-sticky">ANTERIORES</md-subheader>
-              <md-list-item ng-href="{{item.enlace}}" class="md-3-line" ng-repeat="item in vm.notificacionesLeidas" ng-click="null">
-                <img ng-src="{{ item.profesor.url_foto_profesor }}" class="md-avatar" alt="" />
-                <div class="md-list-item-text" layout="column">
-                  <p>{{ item.mensaje }}</p><strong>{{ item.profesor.nombres_profesor}} {{item.profesor.apellidos_profesor}}</strong>
-                  <h4>{{ prueba }}</h4>
-                  <p>{{ item.created_at }}</p>
-                </div>
-              </md-list-item>
-        
-
-            </md-list>
-          </md-content>
-  
-      </div>
-    </md-dialog-content>
-</md-dialog>
-</script>

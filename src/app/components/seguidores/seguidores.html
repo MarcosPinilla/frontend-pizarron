@@ -1,0 +1,15 @@
+<md-divider></md-divider>
+<h2 class="titulo" style="color: #B0AFD0;">Mis Seguidores</h2>
+<md-content layout-xs="row" layout="column" ng-repeat="seguidor in vm.Seguidores">
+	<md-card class="amigos-card" flex-xs flex-gt-xs="50" layout="row" >
+		<md-card-title>
+			<md-card-title-media class="amigos-img">
+				<a ui-sref="dashboard.perfil({id:seguidor.id})"><img class="amigos-amigo-img" ng-src="{{seguidor.url_foto_profesor}}"></a>
+			</md-card-title-media>
+			<md-card-title-text>
+				<span class="md-headline amigos-nombre">{{seguidor.nombres_profesor}} {{seguidor.apellidos_profesor}}</span>
+			</md-card-title-text>
+		</md-card-title>
+	</md-card>
+</md-content>
+</div>

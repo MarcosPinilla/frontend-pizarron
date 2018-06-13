@@ -23,9 +23,9 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService', 'VisibilidadService', 'UpdateVisibilidadService'];
 
-  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService) {
+  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService, VisibilidadService, UpdateVisibilidadService) {
     var vm = this;
 
     vm.indexTabs=0;
@@ -34,6 +34,7 @@
 
     vm.documento = MaterialService.get({id: $stateParams.id});
 
+
     validarColaboradorService.query({id: $stateParams.id}).$promise.then(function(data){
         if(data.length!=0){
           vm.esColaborador=true;
@@ -41,6 +42,25 @@
           vm.esColaborador=false;
         }
       });
+
+    VisibilidadService.query().$promise.then(function (data) {
+      vm.visibilidades = data;
+      console.log(vm.visibilidades);
+    });
+
+    vm.modeloVisibilidad = null;
+    vm.updateVisibilidad = function(id) {
+      console.log(id.id);
+      var data = {};
+      data.id_visibilidad = id.id;
+      console.log(data);
+      UpdateVisibilidadService.update({id: vm.documento.id},data,function(response){
+        console.log('ok');
+        vm.documento = response;
+      },function(err){
+  
+      });
+    }
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
