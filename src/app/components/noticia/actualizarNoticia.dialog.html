@@ -1,10 +1,10 @@
 <div class="modal-title" style="background-color: #bddf8b;">
-	<h2><strong>Actualizar Noticia</strong></h2>
+	<h2><strong>Actualizar Aviso</strong></h2>
 </div>
 <md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 	<form>
 	<md-input-container class="md-block" flex="100">
-	    <label>Título de la noticia</label>
+	    <label>Título del aviso</label>
 	    <input type="text" required md-no-asterisk name="titulo" md-maxlength="50" ng-model="vm.upnoticia.titulo">
 	    <div ng-messages="form.titulo.$error">
         	<div ng-message="required">Este campo es requerido.</div>
@@ -27,7 +27,7 @@
      </md-input-container>
 
 	<br>
-	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.actualizarNoticia()">Actualizar noticia</md-button></center>
+	<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.actualizarNoticia()">Actualizar aviso</md-button></center>
 	<!-- ng-click="vm.crearmaterial(vm.material)" -->
 	<!--ui-sref="editdocument" -->
 	<br>
