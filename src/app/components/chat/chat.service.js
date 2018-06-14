@@ -8,6 +8,11 @@
 	chatService.$inject = ['$resource', 'API'];
 
 	function chatService($resource, API){
-		return $resource(API + 'send');
+		return $resource(API + 'send', {
+			get: {
+				method: 'GET',
+				isArray: true,
+			}
+		});
 	}
 })();

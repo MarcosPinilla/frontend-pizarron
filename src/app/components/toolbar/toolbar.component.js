@@ -10,10 +10,10 @@
     });
 
   toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
-    'ListartipomaterialService', 'NotificacionesNoLeidasService', 'CambiarNotificacionesLeidas', 'NotificacionesLeidasService'];
+    'ListartipomaterialService', 'PrimerasNotificacionesService'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-    ListartipomaterialService, NotificacionesNoLeidasService) {
+  ListartipomaterialService, PrimerasNotificacionesService) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -130,7 +130,7 @@
       $mdDialog.show({
         controller: DialogController,
         controllerAs: 'vm',
-        templateUrl: 'dialog2.tmpl.html',
+        templateUrl: 'app/components/toolbar/toolbarnotificacion.dialogo.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true
@@ -178,23 +178,13 @@
       };
     }
 
-    function DialogController($scope, $mdDialog, NotificacionesNoLeidasService, CambiarNotificacionesLeidas, $state, NotificacionesLeidasService) {
+    function DialogController($scope, $mdDialog, $state, PrimerasNotificacionesService) {
       var vm = this;
       vm.notificaciones = {};
 
-      NotificacionesNoLeidasService.get().$promise.then(function (data) {
+      PrimerasNotificacionesService.query().$promise.then(function (data) {
         console.log(data);
         vm.notificaciones = data;
-
-        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
-          console.log(data);
-        });
-      });
-
-      vm.notificacionesLeidas = {};
-      NotificacionesLeidasService.get().$promise.then(function (data) {
-        console.log(data);
-        vm.notificacionesLeidas = data;
       });
 
       vm.verNotificaciones = function () { 
@@ -213,20 +203,5 @@
         $mdDialog.hide(answer);
       };
     }
-
-    /*vm.material = {
-      material_id: "2"
-    };*/
-
-
-    /* vm.darFavorito = function(data){
-       console.log(data);
-     DarFavorito.save(data,function(res){
-       console.log('entra');
-       $state.go('dashboard');
-     },function(err){
-       console.log(err);
-     });
-*/
   }
 })();

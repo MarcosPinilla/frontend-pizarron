@@ -138,6 +138,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'etiqueta',
     isPrivate: true
   })
+  .state('administrator.actualizacionsemanal', {
+    url: '/actualizaciones',
+    component: 'actualizacionsemanal',
+    isPrivate: true
+  })
   .state('dashboard.perfil', {
     url: '/perfil/:id',
     component: 'perfil',
@@ -186,6 +191,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   .state('dashboard.notificaciones', {
     url: '/notificaciones',
     component: 'notificacion',
+    isPrivate: true
+  })
+  .state('dashboard.vistaactualizacion', {
+    url: '/actualizacionsemanal',
+    component: 'vistaactualizacion',
     isPrivate: true
   })
   .state('register', {

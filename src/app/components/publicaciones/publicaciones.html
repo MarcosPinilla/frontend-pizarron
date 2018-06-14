@@ -17,7 +17,8 @@
 						<div class="material-titulo">
 							<span>
 								<a class="material-links" ui-sref="dashboard.perfil({id:material.colaboradores[0].id})">
-									{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}} <span class="material-prof-profesion">({{material.colaboradores[0].profesion}})</span>
+									{{material.colaboradores[0].nombres_profesor}} {{material.colaboradores[0].apellidos_profesor}}
+									<md-tooltip md-direction="bottom">{{material.colaboradores[0].profesion}}</md-tooltip>
 								</a> 
 								publicó <a class="material-links" ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a>
 							</span>

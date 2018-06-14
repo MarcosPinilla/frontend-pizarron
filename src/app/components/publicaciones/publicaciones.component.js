@@ -73,8 +73,12 @@
       };
 
       vm.comentar = function(idmaterial, texto) {
+        if(texto != null) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
-        ComentarioService.save(coment);
+        ComentarioService.save(coment); 
+        } else {
+          console.log("Comentario vacio.");
+        }
       };
 
       vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
@@ -103,7 +107,7 @@
         vm.nombre_profesor = null;
         vm.selected_profesor = null;
 
-        /*vm.compartirMaterial = function(profesorid) {
+        vm.compartirMaterial = function(profesorid) {
           if(vm.selected_profesor == null) {
             console.log("No se ha seleccionado profesor");
             return;
@@ -112,7 +116,8 @@
           console.log(idmaterial);
           var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
           CompartirmaterialService.save(compartir);
-        };*/
+          vm.hide();
+        };
 
         vm.hide = function () {
           $mdDialog.hide();

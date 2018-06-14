@@ -1,0 +1,30 @@
+<md-dialog aria-label="Notificaciones">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Notificaciones</h2>
+      <span flex></span>
+      <md-button class="md-raised" ng-click="vm.verNotificaciones()" ui-sref="dashboard.notificaciones">
+        Ver Todas
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <div flex-gt-sm="100" flex>
+      <md-content>
+        <md-list flex>
+          <md-subheader class="md-no-sticky">Ultimas notificaciones</md-subheader>
+          <md-list-item class="md-3-line" ng-repeat="notificacion in vm.notificaciones">
+            <a ui-sref="dashboard.perfil({id:notificacion.id_remitente})" ng-click="vm.hide()"><img class="md-avatar" ng-src="{{ notificacion.foto_remitente }}" alt=""/></a>
+            <div class="md-list-item-text" layout="column">
+              <a ng-href="{{notificacion.enlace}}" ng-click="vm.hide()">
+                <p>{{ notificacion.mensaje }}</p>
+                <p class="noti-fecha">{{ notificacion.created_at }}</p>
+              </a>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </div>
+  </md-dialog-content>
+</md-dialog>

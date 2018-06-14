@@ -1,27 +1,27 @@
  <div>
    <center>
-      <h2 class="titulo">Mis Noticias</h2>
+      <h2 class="titulo">Mis Avisos</h2>
       <br>
   </center>
   <md-divider></md-divider>
 
   <br>
     <md-content style="background-color: transparent !important;">
-        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.nuevaNoticia()" md-theme="dark-green" aria-label="addprofe">añadir noticia</md-button>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.nuevaNoticia()" md-theme="dark-green" aria-label="addprofe">añadir aviso</md-button>
     </md-content>
     <md-table-container>
       <table md-table md-row-select multiple md-progress="promise">
-        <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+        <thead md-head md-order="vm.query.order" md-on-reorder="getDesserts">
           <tr md-row>
-            <th md-column md-numeric><span style="float: left;">Fecha</span></th>
-            <th md-column md-numeric><span style="float: left;">Título</span></th>
-            <th md-column md-numeric><span style="float: left;">Contenido</span></th>
+            <th md-column md-numeric md-order-by="fecha" md-desc><span style="float: left;">Fecha</span></th>
+            <th md-column md-numeric md-order-by="titulo"><span style="float: left;">Título</span></th>
+            <th md-column md-numeric md-order-by="contenido"><span style="float: left;">Contenido</span></th>
             <th md-column md-numeric></th>
             <th md-column md-numeric></th>
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="noticia in vm.noticias | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
+          <tr md-row md-select="noticia" md-select-id="name" md-auto-select class="tabla" ng-repeat="noticia in vm.noticias |orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit">
             <td md-cell><span class="text-justify" style="float: left;">{{ noticia.fecha }}</span></td>
             <td md-cell><span class="text-justify" style="float: left;">{{ noticia.titulo }}</span></td>
             <td md-cell><span class="text-justify" style="float: left;">{{ noticia.contenido }}</span></td>

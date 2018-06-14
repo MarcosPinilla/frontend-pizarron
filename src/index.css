@@ -64,6 +64,17 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 }
 
+#modalCloseUp {
+  height: 850px;
+  width: 471px;
+  background-color: transparent;  
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#modalCloseUp .preview {
+}
+
 #speed-dial-button {
   background-color: rgba(0,0,0,0);
   box-shadow: none;
@@ -885,6 +896,19 @@ md-icon svg {
   border-style: solid;*/
 }
 
+.img-actualizacion {
+  width: 12.5em;
+  height: 12.5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  /*border-width: 20px;
+  border-color: white;
+  border-style: solid;*/
+}
+
 #perfil-post-left {
   background-color: #fad98f;
   margin-top: 1em;
@@ -994,6 +1018,10 @@ md-icon svg {
   margin-left: 0.5em;
   color: #BDBDBD;
   
+}
+
+md-list md-list-item .md-list-item-text .noti-fecha {
+  font-size: 12px !important;
 }
 
 .notificacion-botones {
