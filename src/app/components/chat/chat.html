@@ -71,18 +71,18 @@
 					</md-list>
 				</md-content>
 				<md-input-container md-no-float class="md-block" style="bottom: 0em !important; margin: 0 !important; position: fixed; border-top-width: 10px; border-top-color: #CC0000; height: 3em; width: 16em	;">
-					<form ng-submit="vm.chatEnv(vm.message, $index)" >
+
 						<div layout="row" layout-xs="column" style="border-top: 1px solid #BDBDBD;">
 							<div flex=80>
-								<input type="text" ng-model="vm.message.message" placeholder="Escribe un mensaje ..." ng-value="vm.inputVacio" style="border-width: 0 0 0 0 !important; padding: 0px; margin-top: 0.7em;">
+								<input type="text" ng-model="chat.message" placeholder="Escribe un mensaje ..."  style="border-width: 0 0 0 0 !important; padding: 0px; margin-top: 0.7em;">
 							</div>
 							<div flex=20>
-									<md-button class="md-fab md-mini md-primary" aria-label="" type="submit" >
+									<md-button class="md-fab md-mini md-primary" aria-label="" ng-click="vm.chatEnv(chat.message, $index); chat.message = ''" >
  										<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 								</md-button>
 							</div>
 						</div>
-					</form> 
+
 				</md-input-container>
 			</div>
 		</md-card>
