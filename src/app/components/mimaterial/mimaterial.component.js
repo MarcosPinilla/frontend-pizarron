@@ -9,14 +9,17 @@
       controllerAs: 'vm'
     });
 
-  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
+  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
 
-  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
+  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
     var vm = this;
     vm.materiales = {};
+    vm.autoria = [{id: 0, nombre: 'autor'}, {id: 1, nombre: 'colaborador'}];
+    console.log(vm.autoria);
 
     AsignaturaService.query().$promise.then(function (data) {
       vm.asignatura = data;
+      console.log(vm.asignatura);
     });
 
     ListarnivelesService.query().$promise.then(function (data) {
@@ -27,19 +30,28 @@
       vm.tipo = data;
     });
 
+    PerfilService.get().$promise.then(function (data) {
+      console.log("GENEEEEEEEEEEEEEEE");
+      console.log(data);
+      vm.perfil = data;
+    });
+
     ObtenerMiMaterialService.query().$promise.then(function (data) {
       vm.materiales = data;
       setTimeout(function () {
         for (let i = 0; i < vm.materiales.length; i++) {
-          document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;
+          if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
+            vm.materiales[i].autor = 'autor';
+          else
+            vm.materiales[i].autor = 'colaborador';
         }
-      }, 300);
+      }, 2000);
+
+      console.log("NO!");
+      console.log(vm.materiales);
 
       ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
         vm.favoritos = data;
-        console.log("ESTOS SON LOS FAVORITOS!!!")
-        console.log(vm.favoritos);
-
         vm.idfavoritos = vm.favoritos.map(function (i) { return i.id_material; });
 
         for (var x = 0; x < vm.materiales.length; x++) {

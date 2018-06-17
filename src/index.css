@@ -342,8 +342,14 @@ md-dialog {
   padding: 50px;
 }
 
-.caja-card {
+.card-autor {
+  background-color: #fad98f !important;
 }
+
+.card-colaborador {
+  background-color: #f9b985 !important;
+}
+
 
 .buttondash {
   width: 80%;
