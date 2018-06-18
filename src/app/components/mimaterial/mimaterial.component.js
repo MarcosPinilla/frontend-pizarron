@@ -31,39 +31,37 @@
     });
 
     PerfilService.get().$promise.then(function (data) {
-      console.log("GENEEEEEEEEEEEEEEE");
       console.log(data);
       vm.perfil = data;
-    });
 
-    ObtenerMiMaterialService.query().$promise.then(function (data) {
-      vm.materiales = data;
-      setTimeout(function () {
-        for (let i = 0; i < vm.materiales.length; i++) {
-          if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
-            vm.materiales[i].autor = 'autor';
-          else
-            vm.materiales[i].autor = 'colaborador';
-        }
-      }, 2000);
+      ObtenerMiMaterialService.query().$promise.then(function (data) {
+        vm.materiales = data;
 
-      console.log("NO!");
-      console.log(vm.materiales);
-
-      ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
-        vm.favoritos = data;
-        vm.idfavoritos = vm.favoritos.map(function (i) { return i.id_material; });
-
-        for (var x = 0; x < vm.materiales.length; x++) {
-          //if(!vm.materiales.hasOwnProperty(x)) continue;
-          if (vm.idfavoritos.length > 0) {
-            console.log(vm.idfavoritos);
-            vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
-            console.log(vm.materiales[x]);
-          } else {
-            vm.materiales[x].esFavorito = false;
+          for (let i = 0; i < vm.materiales.length; i++) {
+            if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
+              vm.materiales[i].autor = 'autor';
+            else
+              vm.materiales[i].autor = 'colaborador';
           }
-        }
+
+        console.log("NO!");
+        console.log(vm.materiales);
+
+        ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
+          vm.favoritos = data;
+          vm.idfavoritos = vm.favoritos.map(function (i) { return i.id_material; });
+
+          for (var x = 0; x < vm.materiales.length; x++) {
+            //if(!vm.materiales.hasOwnProperty(x)) continue;
+            if (vm.idfavoritos.length > 0) {
+              console.log(vm.idfavoritos);
+              vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
+              console.log(vm.materiales[x]);
+            } else {
+              vm.materiales[x].esFavorito = false;
+            }
+          }
+        });
       });
     });
 
