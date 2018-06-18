@@ -75,6 +75,12 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 #modalCloseUp .preview {
 }
 
+.modalAnswer{
+  color: #7cb342;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 #speed-dial-button {
   background-color: rgba(0,0,0,0);
   box-shadow: none;

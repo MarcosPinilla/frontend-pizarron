@@ -16,7 +16,7 @@
       vm.materiales = {};
       vm.comentarios = {};
       vm.favoritos = {};
-      vm.comentario;
+      vm.comentario; 
 
       var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
@@ -106,6 +106,8 @@
         vm.profesores = {};
         vm.nombre_profesor = null;
         vm.selected_profesor = null;
+        vm.answercompartir = "";
+        vm.answerb = false;
 
         vm.compartirMaterial = function(profesorid) {
           if(vm.selected_profesor == null) {
@@ -115,11 +117,14 @@
           console.log(profesorid);
           console.log(idmaterial);
           var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
-          CompartirmaterialService.save(compartir);
-          vm.hide();
+          CompartirmaterialService.save(compartir).$promise.then(function (data) {
+            vm.answer("Material compartido con exito");
+          });
         };
 
         vm.hide = function () {
+          vm.answercompartir = ""
+          vm.answerb = false;
           $mdDialog.hide();
         };
 
@@ -128,8 +133,16 @@
         };
 
         vm.answer = function (answer) {
-          $mdDialog.hide(answer);
+          vm.answercompartir = "Material compartido con exito";
+          vm.answerb = true;
+          setTimeout(function () { 
+            $mdDialog.hide();
+          }, 2000);
         };
+
+        vm.error = function (answer) {
+          vm.answercompartir = "Error al compartir el material, intentelo denuevo";
+        }
 
         vm.buscarProfesor = function () {
           BuscarNombreProfesorService.query({nombre: vm.nombre_profesor}).$promise.then(function (data) {
