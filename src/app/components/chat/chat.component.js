@@ -133,21 +133,28 @@
                          data.nombreChat = data.users[i].nombres_profesor;
                        }
                      }
- 
-                   
-                     if (vm.chats.length == 0) {
+
+
+                  var esta = false;
+
+                   console.log(vm.chats);
+                    if (vm.chats.length == 0) {
                        vm.chats.push(data);
                      }else{
-                       for (var i = 0; i < vm.chats.length; i++) {
-                         if (vm.chats[i].group.id != data.group.id) {
-                           vm.chats.push(data);
-                           //vm.chats[i] = data;
+                       for (var i = 0; i < vm.chats.length; i++) { 
+                        console.log(vm.chats[i].group.id);
+                        console.log(data.group.id);
+                         if (vm.chats[i].group.id == data.group.id) {
+                           esta = true;
+                           console.log(esta);
                          }
                        }
+
+                       if (!esta) {
+                        console.log('entro por que son distintos');
+                          vm.chats.push(data);
+                       }
                      }
-                   
-                     
- 
                    
  
                    console.log(vm.chats);
