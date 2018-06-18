@@ -1,7 +1,7 @@
 <div>
   <center>
-      <h2 class="titulo">Mis Materiales</h2>
-      <br>
+    <h2 class="titulo">Mis Materiales</h2>
+    <br>
   </center>
   <md-divider></md-divider>
   <br>
@@ -10,39 +10,48 @@
       <label flex="100">Buscador</label>
       <input ng-model="buscador" type="text" flex="100">
     </md-input-container>
-    
+
   </div>
   <br>
   <div class="mimaterial-options" layout="row">
     <div class="mimaterial-select">
       <label>Asignatura</label>
       <select class="form-control" ng-model="filter.asignatura.nombre_asignatura">
-          <option value="">Todas </option>
-          <option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
+        <option value="">Todas </option>
+        <option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
       </select>
     </div>
-    
+
     <div class="mimaterial-select">
       <label>Nivel</label>
       <select class="form-control" ng-model="filter.nivel.nombre_nivel">
-          <option value="">Todos </option>
-          <option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
+        <option value="">Todos </option>
+        <option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
       </select>
     </div>
 
     <div class="mimaterial-select">
       <label>Tipo</label>
       <select class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
-          <option value="">Todos </option>
-          <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
+        <option value="">Todos </option>
+        <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
+      </select>
+    </div>
+    <div class="mimaterial-select">
+      <label>Autor</label>
+      <select class="form-control" ng-model="filter.tipoautor.nombre">
+        <option value="">Todos</option>
+        <option ng-repeat="tipoautor in vm.autoria" value="{{tipoautor.nombre}}">{{tipoautor.nombre}}</option>
       </select>
     </div>
   </div>
-  <md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" style="background-color: #f9b985">
-    <md-card-title style="background-color: #f9b985; border-radius: 18px;"> 
+  <md-card class="post-card material-card" ng-repeat="material in vm.materiales|filter: filter |filter: buscador" ng-class="{'card-autor': material.autor == 'autor', 'card-colaborador' : material.autor == 'colaborador'}">
+    <md-card-title>
       <md-card-title-text class="mimaterial-titulo">
-        <span><a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
-        <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a></span>
+        <span>
+          <a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
+          <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a>
+        </span>
       </md-card-title-text>
     </md-card-title>
     <div>
@@ -50,7 +59,7 @@
         <div class="preview md-card-image" id={{material.id}}>
       </a>-->
       <img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, material.vista_previa)">
-    </div> 
+    </div>
     <md-card-actions layout="row" layout-align="end center" style="color: white;">
       <md-button ng-click="vm.goMaterial(material)">
         <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
