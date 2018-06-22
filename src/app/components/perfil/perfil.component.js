@@ -9,16 +9,17 @@
       controllerAs: 'vm'
     });
 
-  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', '$rootScope'];
+  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', 'UnfollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SeguidorService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', '$rootScope'];
 
-  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, DarFavorito, $state, $rootScope) {
+  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, UnfollowService, $stateParams, PerfilService, AmigoService, SeguidorService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, DarFavorito, $state, $rootScope) {
     var vm = this;
     vm.perfil = {};
     vm.amistad = {};
     vm.mejoresFavoritos = {};
     vm.materialreciente = {};
     vm.isUser = false;
-    vm.isSolicitado = false;
+    vm.isSolicitado = false;  
+    vm.seguido = false;
     /*
       0 = No amigo
       1 = Amigo
@@ -36,6 +37,14 @@
 
     $rootScope.$on('AceptarSolicitud', function () {
       vm.estadoAmistad = 1;
+    });
+
+    $rootScope.$on('Siguiendo', function () {
+      vm.seguido = true;
+    });
+
+    $rootScope.$on('DesSiguiendo', function () {
+      vm.seguido = false;
     });
 
     $rootScope.$on('EliminarSolicitud', function () {
@@ -107,6 +116,15 @@
             }
           });
           /*Obtiene la seguimiento entre usuarios*/
+          SeguidorService.get({id: vm.profesorId}).$promise.then(function (data) {
+            console.log(data);
+            if(data.error){
+              vm.seguido = false;
+            } else {
+              vm.seguido = data.seguido;
+            }
+            
+          });
         }
       });
     } else { //Si la ruta no trae id, entonces es nuestro perfil
@@ -237,13 +255,22 @@
       $rootScope.$emit('Solicitud');
     };  
 
-    vm.seguirxd = function(idseguido) {
+    vm.seguir = function(idseguido) {
       console.log("siguiendo");
       var seguido1 = JSON.parse('{"id_seguido": ' + idseguido + '}');
       console.log('{"id_seguido": ' + idseguido + '}');
       FollowService.save(seguido1);
       vm.isSeguido=true;
       $rootScope.$emit('Siguiendo');
+    };
+
+    vm.desseguir = function(idseguido) {
+      console.log("dessiguiendo");
+      var seguido1 = JSON.parse('{"id_seguido": ' + idseguido + '}');
+      console.log('{"id_seguido": ' + idseguido + '}');
+      UnfollowService.save(seguido1);
+      vm.isSeguido=false;
+      $rootScope.$emit('DesSiguiendo');
     };
 
     vm.aceptarSolicitud = function ($idamistad) {

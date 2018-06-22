@@ -16,6 +16,11 @@
     vm.amigos = {};
     vm.perfil = {};
     vm.solicitudes = {};
+    vm.actionSolicitud= false;
+
+    $rootScope.$on('ActionSolicitud', function () {
+      vm.actionSolicitud = true;
+    });
 
     PerfilService.get().$promise.then(function (data) {
       //console.log(data);
