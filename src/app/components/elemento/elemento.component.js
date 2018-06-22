@@ -94,7 +94,9 @@
     };
 
     vm.eliminarelemento = function (id) {
-      ElementoService.delete({id: id});
+      ElementoService.delete({id: id}).$promise.then(function (data){
+        console.log(data);
+      });
       ElementoService.query().$promise.then(function (data) {
         vm.elementos = data;
         console.log(vm.elementos);

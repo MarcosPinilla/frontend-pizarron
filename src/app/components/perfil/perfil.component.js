@@ -121,7 +121,7 @@
             if(data.error){
               vm.seguido = false;
             } else {
-              vm.seguido = data.seguido;
+              vm.seguido = data.seguidor;
             }
             
           });
