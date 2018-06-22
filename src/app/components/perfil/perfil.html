@@ -25,7 +25,7 @@
              Añadir a amigos 
           </md-button>
         </div>
-        <div>
+        <div ng-if="!vm.isUser">
           <md-button ng-click="vm.seguirxd(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
             <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
              Seguir

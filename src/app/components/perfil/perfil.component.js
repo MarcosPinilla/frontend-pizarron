@@ -25,6 +25,24 @@
       2 = Amistad pendiente
     */
     vm.estadoAmistad = 0;
+
+    $rootScope.$on('Solicitud', function () {
+      vm.estadoAmistad = 2;
+    });
+
+    $rootScope.$on('EliminarAmistad', function () {
+      vm.estadoAmistad = 0;
+    });
+
+    $rootScope.$on('AceptarSolicitud', function () {
+      vm.estadoAmistad = 1;
+    });
+
+    $rootScope.$on('EliminarSolicitud', function () {
+      vm.estadoAmistad = 0;
+      vm.isSolicitado = false;
+    });
+
     vm.isSeguido = false;
 
     vm.profesorId = $stateParams.id;
@@ -88,6 +106,7 @@
               }
             }
           });
+          /*Obtiene la seguimiento entre usuarios*/
         }
       });
     } else { //Si la ruta no trae id, entonces es nuestro perfil
@@ -233,6 +252,8 @@
       console.log(amistad);
       SolicitudService.save(amistad);
       vm.isSolicitado = false;
+      $rootScope.$emit('AceptarSolicitud');
+      
     };
 
     /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -249,6 +270,7 @@
         vm.amistad = data;
         if (vm.amistad.id_estado_amistad == 1)
           vm.estadoAmistad = 0;
+          $rootScope.$emit('EliminarAmistad');
       });
     };
 
@@ -258,6 +280,7 @@
         vm.amistad = data;
         if (vm.amistad.id_estado_amistad == 1)
           vm.estadoAmistad = 0;
+          $rootScope.$emit('EliminarSolicitud');
       });
     };
 
