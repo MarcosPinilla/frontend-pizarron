@@ -21,10 +21,12 @@
   </div>
   <div flex="40" id="toolbar-icons">
     <md-button class="md-icon-button" ng-click="vm.showAdvanced($event)">
-      <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
-      {{ vm.cantidadNotificaciones.notificaciones }}
+      <md-icon ng-if="vm.cantidadNotificaciones.notificaciones == 0" style="fill: white;" md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
+      <md-icon ng-if="vm.cantidadNotificaciones.notificaciones > 0" style="fill: #ef5350;" md-svg-icon="app/resources/icons/ic_notifications_white_24px.svg"></md-icon>
       <md-tooltip md-direction="bottom">
-        Notificaciones
+        <span ng-if="vm.cantidadNotificaciones.notificaciones == 0">Notificaciones</span>
+        <span ng-if="vm.cantidadNotificaciones.notificaciones == 1">{{vm.cantidadNotificaciones.notificaciones}} Notificación Nueva</span>
+        <span ng-if="vm.cantidadNotificaciones.notificaciones > 1">{{vm.cantidadNotificaciones.notificaciones}} Notificaciones Nuevas</span>
       </md-tooltip>
     </md-button>
     <md-button ng-if="vm.isLogged" class="md-icon-button" aria-label="Favorite" ui-sref="dashboard">

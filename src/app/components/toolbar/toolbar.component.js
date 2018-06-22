@@ -9,11 +9,11 @@
       controllerAs: 'vm'
     });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
-    'ListartipomaterialService', 'PrimerasNotificacionesService'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
+    'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-  ListartipomaterialService, PrimerasNotificacionesService) {
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
+  ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -23,6 +23,7 @@
     vm.profesores = {};
     vm.nombre_profesor = null;
     vm.selected_profesor = null;
+    vm.cantidadNotificaciones = null;
 
     vm.isinRegister = false;
     vm.isinLogin = false;
@@ -89,8 +90,12 @@
 
     BuscarNombreProfesorService.query({ nombre: "Ma" }).$promise.then(function (data) {
       vm.profesores = data;
-
     });
+
+    CantidadNotificaciones.get().$promise.then(function (data) {
+      vm.cantidadNotificaciones = data;
+    });
+
     vm.buscarProfesor = function () {
       BuscarNombreProfesorService.query({ nombre: vm.nombre_profesor }).$promise.then(function (data) {
         vm.profesores = data;
@@ -127,6 +132,17 @@
     };
 
     vm.showAdvanced = function (ev) {
+      if(vm.cantidadNotificaciones != 0)
+      {
+        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+          if(data) 
+          {
+            vm.cantidadNotificaciones.notificaciones = 0;
+            console.log("LOOOOOOOOOOOOOOOOOOOOOOL");
+          }
+        });
+      };
+      
       $mdDialog.show({
         controller: DialogController,
         controllerAs: 'vm',
@@ -142,7 +158,7 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService) {
+    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas) {
       var vm = this;
       vm.usuario = usuario;
       vm.asignaturas = asignaturas;
