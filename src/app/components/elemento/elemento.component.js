@@ -93,6 +93,29 @@
       });
     };
 
+    vm.actualizarelemento = function (elemento, event) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/elemento/editarelemento.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: event,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          elemento : elemento
+        }
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+        ElementoService.query().$promise.then(function (data) {
+          vm.elementos = data;
+        });
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+
     vm.eliminarelemento = function (id) {
       ElementoService.delete({id: id}).$promise.then(function (data){
         console.log(data);
@@ -138,6 +161,12 @@
       ElementoService.save(vm.newelemento);
       $state.go('administrator.elemento');
       vm.hide();
+    };
+
+    vm.actualizaelemento = function (elemento) {
+      ElementoService.update({id: vm.elemento.id}, elemento, function () {
+        vm.hide();
+      }, function () {});
     };
 
     vm.hide = function () {
