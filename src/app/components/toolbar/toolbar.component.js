@@ -13,7 +13,7 @@
     'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-  ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas) {
+    ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -132,17 +132,6 @@
     };
 
     vm.showAdvanced = function (ev) {
-      if(vm.cantidadNotificaciones != 0)
-      {
-        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
-          if(data) 
-          {
-            vm.cantidadNotificaciones.notificaciones = 0;
-            console.log("LOOOOOOOOOOOOOOOOOOOOOOL");
-          }
-        });
-      };
-      
       $mdDialog.show({
         controller: DialogController,
         controllerAs: 'vm',
@@ -155,6 +144,13 @@
           vm.status = 'You said the information was "' + answer + '".';
         }, function () {
           vm.status = 'You cancelled the dialog.';
+          if (vm.cantidadNotificaciones != 0) {
+            CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+              if (data) {
+                vm.cantidadNotificaciones.notificaciones = 0;
+              }
+            });
+          };
         });
     };
 
@@ -203,9 +199,9 @@
         vm.notificaciones = data;
       });
 
-      vm.verNotificaciones = function () { 
+      vm.verNotificaciones = function () {
         vm.hide();
-      };  
+      };
 
       vm.hide = function () {
         $mdDialog.hide();

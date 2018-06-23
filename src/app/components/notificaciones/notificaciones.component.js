@@ -16,19 +16,16 @@
     vm.notificaciones = {};
     vm.cantidadNotificaciones = null;
 
-    if (vm.cantidadNotificaciones != 0) {
-      CambiarNotificacionesLeidas.get().$promise.then(function (data) {
-        if (data) {
-          vm.cantidadNotificaciones.notificaciones = 0;
-        }
-      });
-    };
-
     NotificacionService.query().$promise.then(function (data) {
       vm.notificaciones = data;
-      console.log(vm.notificaciones);
+      if (vm.cantidadNotificaciones != 0) {
+        CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+          if (data) {
+            vm.cantidadNotificaciones.notificaciones = 0;
+          }
+        });
+      };
     });
-
   }
 
 })();

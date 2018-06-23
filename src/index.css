@@ -569,6 +569,14 @@ md-list.make-scrollable {
   margin-bottom: 12px;
 }
 
+.notificacion-item-nueva {
+  border-radius: 10px;
+  border-style: solid;
+  background-color: #ffcdd2; 
+  border-color: #ef5350;
+  margin-bottom: 12px;
+}
+
 .notificacion-container .notificacion-item .md-list-item-text .notificacion-text {
   font-size: 1.3em;
 }
