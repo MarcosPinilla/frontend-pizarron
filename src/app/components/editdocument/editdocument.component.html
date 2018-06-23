@@ -20,7 +20,7 @@
      <div class="sidebar-left" layout="column" style="height: 100%">
       <div layout="row">
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
               <img src="app/resources/icons/ICONOS-26.svg">
               <md-tooltip md-direction="bottom">
                 Ilustraciones
@@ -28,7 +28,7 @@
             </md-button>
           </div>
           <div flex="25">
-            <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
+            <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
              <img src="app/resources/icons/ICONOS-25.svg">
              <md-tooltip md-direction="bottom">
                Plantillas
@@ -250,7 +250,7 @@
                   Eliminar página
               </md-tooltip>
           </md-button>
-          <md-input-container>
+          <md-input-container ng-if="vm.esColaborador===true">
            <md-select :placeholder="{{vm.documento.visibilidad.nombre_visibilidad}}" name="repeatSelect" id="repeatSelect" ng-model="modeloVisibilidad.id"  class="md-no-underline" ng-change="vm.updateVisibilidad(modeloVisibilidad)">
             <md-option ng-repeat="option in vm.visibilidades" value="{{option.id}}">{{option.nombre_visibilidad}}</md-option>
           </md-select>
