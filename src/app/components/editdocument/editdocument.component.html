@@ -20,28 +20,41 @@
      <div class="sidebar-left" layout="column" style="height: 100%">
       <div layout="row">
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
               <img src="app/resources/icons/ICONOS-26.svg">
+              <md-tooltip>
+                Ilustraciones
+              </md-tooltip>
             </md-button>
           </div>
 
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
-              <img src="app/resources/icons/ICONOS-27.svg">
+             <md-button style="margin:0 !important; padding:0 !important;">
+              <img src="app/resources/icons/ICONOS-25.svg">
+              <md-tooltip>
+                Plantillas
+              </md-tooltip>
             </md-button>
-          </div>
+           </div>
 
           <div flex="25">
              <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab figuras" ng-click="vm.indexTabs = 1">
               <img src="app/resources/icons/ICONOS-28.svg">
+              <md-tooltip>
+                Tipografías
+              </md-tooltip>
             </md-button>
           </div>
 
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab elementos" ng-click="vm.indexTabs = 0">
-              <img src="app/resources/icons/ICONOS-25.svg">
+            <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+              <img src="app/resources/icons/ICONOS-27.svg">
+              <md-tooltip>
+                Fichas
+              </md-tooltip>
             </md-button>
-           </div>
+          </div>
+
         </div>
 
         <md-card class="page contenedor-curvo panel-figuras">
