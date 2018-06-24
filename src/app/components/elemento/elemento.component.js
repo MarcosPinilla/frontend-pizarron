@@ -164,9 +164,11 @@
     };
 
     vm.actualizaelemento = function (elemento) {
-      ElementoService.update({id: vm.elemento.id}, elemento, function () {
-        vm.hide();
-      }, function () {});
+      console.log('entre al actualizarusuario');
+        ElementoService.update({id: vm.elemento.id}, elemento, function () {
+          vm.hide();
+          console.log('se debio actualizar')
+        }, function () {});
     };
 
     vm.hide = function () {
