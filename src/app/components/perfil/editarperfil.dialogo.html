@@ -19,12 +19,12 @@
 	    	</div>
 		</md-input-container>
 		<md-input-container class="md-block" flex="100">
-		    <label>Profesión</label>
-		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.profesion">
-		    <div ng-messages="form.titulo.$error">
-	        	<div ng-message="required">Este campo es requerido.</div>
-	    	</div>
+			<label>Profesión*</label>
+			 <md-select name="repeatSelect" id="repeatSelect" ng-model="vm.perfil.profesion">
+				<md-option ng-repeat="opcion in vm.profesiones" value="{{opcion.nombre}}">{{opcion.nombre}}</md-option>
+			</md-select>
 		</md-input-container>
+
 		<md-input-container class="md-block" flex="100">
 		    <label>Cargo</label>
 		    <input type="text" required md-no-asterisk name="titulo" ng-model="vm.perfil.cargo">
@@ -38,8 +38,6 @@
 			<input id="fotoProfesor" type="file" fileread="vm.perfil.url_foto_profesor">
 		</md-input-container>
 		<center><md-button class="md-raised md-warn login-button" type="submit" ng-click="vm.actualizarprofesor(vm.perfil)">Guardar cambios</md-button></center>
-		<!-- ng-click="vm.crearmaterial(vm.material)" -->
-		<!--ui-sref="editdocument" -->
 		<br>
 		</form>
 	</md-content>

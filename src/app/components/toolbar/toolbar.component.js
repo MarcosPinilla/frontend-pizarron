@@ -112,7 +112,7 @@
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
-        templateUrl: 'app/components/dashboard/nuevodocumento.dialogo.html',
+        templateUrl: 'app/components/toolbar/nuevodocumento.dialogo.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
