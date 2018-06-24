@@ -154,7 +154,7 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas) {
+    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
       var vm = this;
       vm.usuario = usuario;
       vm.asignaturas = asignaturas;
@@ -163,6 +163,20 @@
 
       vm.material = {};
       vm.material_id = '';
+
+      VisibilidadService.query().$promise.then(function (data) {
+        vm.visibilidades = data;
+        console.log(vm.visibilidades);
+      });
+
+      vm.modeloVisibilidad = null;
+      vm.updateVisibilidad = function(id) {
+        console.log(id.id);
+        var data = {};
+        data.id_visibilidad = id.id;
+        console.log(data);
+        vm.material.id_visibilidad=data.id_visibilidad;
+      }
 
       vm.crearmaterial = function (material) {
         if (material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
