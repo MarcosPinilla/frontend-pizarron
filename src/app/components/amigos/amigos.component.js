@@ -17,10 +17,16 @@
     vm.perfil = {};
     vm.solicitudes = {};
     vm.actionSolicitud= false;
+    vm.actionAmigo= false;
 
     $rootScope.$on('ActionSolicitud', function () {
       vm.actionSolicitud = true;
     });
+
+    $rootScope.$on('ActionAmigo', function () {
+      vm.actionAmigo= true;
+    });
+
 
     PerfilService.get().$promise.then(function (data) {
       vm.perfil = data;
@@ -43,16 +49,19 @@
       AmigoService.query().$promise.then(function (data) {
         vm.amigos = data;
       });
+      $rootScope.$emit('ActionAmigo');
     };
 
     vm.confirmarAmistad = function($idamistad) {
       var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
       SolicitudService.save(amistad);
+      $rootScope.$emit('ActionSolicitud');
     };
 
     vm.rechazarAmistad = function($idamistad) {
       var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 2 + '}');
       SolicitudService.save(amistad);
+      $rootScope.$emit('ActionSolicitud');
     };
   }
   
