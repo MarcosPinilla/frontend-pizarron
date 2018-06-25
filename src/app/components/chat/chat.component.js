@@ -29,6 +29,8 @@
    vm.usuarioID = 0;
    vm.inputVacio = '';
    console.log(vm.token);
+   vm.keypress = 0;
+
 
   ListarNoticiasService.query().$promise.then(function(data){
     vm.noticias=data;
@@ -182,13 +184,13 @@
                    canal2.bind('NewMessage',
                      function (data) {
                        console.log(data);
-                       if (data.usuario_id != vm.usuarioID) {
-                         vm.mensajes.push(data.message);
-                           vm.chats[data.index].conversations = data.grupo;
-                       }
+                       // if (data.usuario_id != vm.usuarioID) {
+                       //   vm.mensajes.push(data.message);
+                       //     vm.chats[data.index].conversations = data.grupo;
+                       // }
  
-                       console.log(vm.mensajes);
- 
+                       // console.log(vm.mensajes);
+                       vm.chats[data.index].conversations = data.grupo;
  
                      });
  
@@ -271,10 +273,10 @@ vm.chatEnv = function (message, index){
    console.log(mensajeEvn);
   console.log(index);
   MessageService.save(mensajeEvn, function (data) {
-    console.log(data);
-    console.log(vm.chats[index].conversations);
-    vm.chats[index].conversations = data.conversations;
-    console.log(vm.chats[index].conversations);
+    // console.log(data);
+    // console.log(vm.chats[index].conversations);
+    // vm.chats[index].conversations = data.conversations;
+    // console.log(vm.chats[index].conversations);
   }, function (error) {
     console.log(error);
   });

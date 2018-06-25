@@ -605,6 +605,14 @@ md-list.make-scrollable {
   width: 3em; 
 }
 
+#chat-iconDerecha {
+  height: 3em; 
+  width: 3em; 
+  float: right;
+  padding: 0px;
+  margin: 0px;
+}
+
 .sidebar-titulo {
   height: 30px;
   border-top-left-radius: 18px;
