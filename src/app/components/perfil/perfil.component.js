@@ -183,7 +183,7 @@
       var vm = this;
 
       vm.perfil = perfil;
-      console.log(vm.perfil);
+      vm.profesiones = [{id : 0 , nombre: 'Fonoadióloga'}, {id: 1, nombre: 'Sicóloga'}, {id : 2, nombre: 'Educadora'}, {id : 3, nombre: 'Otro'}];
 
       vm.actualizarprofesor = function (profesor) {
         vm.profesor = profesor;
