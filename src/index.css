@@ -256,13 +256,15 @@ md-dialog {
 .login-button{
   background-color : #6d72ad;
   color: white;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding-left: 20px;
+  padding-right: 20px; 
+  padding-top: 2px;
+  padding-bottom: 2px; 
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  font-size: 20px;
+  font-size: 14px;
 }
 .login-button2{
   background-color : #b0afd0;
