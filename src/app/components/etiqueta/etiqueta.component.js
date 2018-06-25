@@ -71,6 +71,29 @@
       });
     };
 
+    vm.editaretiqueta = function (etiqueta, event) {
+      $mdDialog.show({
+        controller: editdialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/etiqueta/editaretiqueta.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: event,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          etiqueta : etiqueta
+        }
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+        EtiquetaService.query().$promise.then(function (data) {
+          vm.etiquetas = data;
+        });
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+
     vm.eliminaretiqueta = function (id) {
       EtiquetaService.delete({id: id});
       EtiquetaService.query().$promise.then(function (data) {
@@ -81,17 +104,11 @@
     };
   }
 
-  function dialogoController($mdDialog, etiqueta, EtiquetaService, ElementoService, $state) {
+  function dialogoController($mdDialog, etiqueta, EtiquetaService, $state) {
     var vm = this;
     vm.etiqueta = etiqueta;
     
-    vm.upetiqueta = {};
     vm.etiquetas = {}; 
-    vm.elementos = {};
-
-    ElementoService.query().$promise.then(function (data) {
-      vm.elementos = data;
-    });
 
     vm.newetiqueta={};
 
@@ -103,6 +120,48 @@
       EtiquetaService.save(vm.newetiqueta);
       $state.go('etiqueta');
       vm.hide();
+    };
+
+    vm.hide = function () {
+      $mdDialog.hide();
+    };
+
+    vm.cancel = function () {
+      $mdDialog.cancel();
+    };
+
+    vm.answer = function (answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+  function editdialogoController($mdDialog, etiqueta, EtiquetaService, $state) {
+    var vm = this;
+    vm.etiqueta = etiqueta;
+    
+    vm.upetiqueta = {};
+    vm.etiquetas = {}; 
+
+    vm.cantidadElementos = vm.etiqueta.elementos.length;    
+
+    vm.editable = false;
+
+    if(vm.cantidadElementos > 0){
+      vm.editable = true;
+    }
+
+    vm.newetiqueta={};
+
+    console.log(vm.etiqueta);
+
+    EtiquetaService.query().$promise.then(function (data) {
+      vm.etiquetas = data;
+    });
+
+    vm.actualizaretiqueta = function (laetiqueta) {
+      EtiquetaService.update({id: vm.etiqueta.id}, laetiqueta, function () {
+        vm.hide();
+      }, function () {});
     };
 
     vm.hide = function () {

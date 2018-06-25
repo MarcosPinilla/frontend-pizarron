@@ -1,0 +1,18 @@
+<md-dialog id="modalEditarUsu">
+	<div class="modal-title" style="background-color: #bddf8b;">
+		<h2><strong>Editar Información de la Etiqueta</strong></h2>
+	</div>
+	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+        <center><h5 ng-if="vm.editable" style="color: red">ADVERTENCIA: Esta etiqueta está asociada a {{ vm.etiqueta.elementos.length }} elementos</h5></center>
+		<md-input-container class="md-block">
+			<label>Nombre</label>
+			<input ng-model="vm.upetiqueta.nombre_etiqueta" type="text" ng-value="vm.etiqueta.nombre_etiqueta">
+		</md-input-container>
+		<br>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.actualizaretiqueta(vm.upetiqueta)" md-theme="dark-green" aria-label="addprofe">Actualizar Etiqueta</md-button></center>
+		<br>
+	</md-content>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
+</md-dialog>

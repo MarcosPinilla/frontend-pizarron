@@ -11,8 +11,9 @@
 			</md-card-title-text>
 		</md-card-title>
 		<md-card-actions layout="row" layout-align="start center" style="padding-right: 20px;">
-			<md-button class="md-raised md-primary" style="background-color: rgb(244,67,54)" ng-click="vm.confirmarAmistad(solicitud.id)">Confirmar</md-button>
-			<md-button class="md-raised" ng-click="vm.rechazarAmistad(solicitud.id)">Rechazar</md-button>
+			<md-button class="md-raised md-primary" ng-if="!vm.actionSolicitud" style="background-color: rgb(244,67,54)" ng-click="vm.confirmarAmistad(solicitud.id)">Confirmar</md-button>
+			<md-button class="md-raised" ng-if="!vm.actionSolicitud" ng-click="vm.rechazarAmistad(solicitud.id)">Rechazar</md-button>
+			<md-button class="md-raised" ng-if="vm.actionSolicitud" ng-disabled="true">Has Respondido</md-button>
 		</md-card-actions>
 	</md-card>
 </md-content>
@@ -29,8 +30,9 @@
 		</md-card-title>
 		<md-card-actions layout="row" layout-align="start center">
 			<md-button>
-				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-if="!vm.actionAmigo" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
 			</md-button>
+			<md-button class="md-raised" ng-if="vm.actionAmigo" ng-disabled="true">Eliminado</md-button>
 		</md-card-actions>
 	</md-card>
 	<md-card class="amigos-card" flex-xs flex-gt-xs="50" layout="row" ng-if="amigo.id_estado_amistad == 1 && amigo.amigo2.id != vm.perfil.id">
@@ -44,8 +46,9 @@
 		</md-card-title>
 		<md-card-actions layout="row" layout-align="start center">
 			<md-button>
-				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
+				<md-icon md-svg-icon="app/resources/icons/basurero.svg" ng-if="!vm.actionAmigo" ng-click="vm.eliminaramistad(amigo.id)" aria-label="borrar profe" class="md-secondary md-hue-3">
 			</md-button>
+			<md-button class="md-raised" ng-if="vm.actionAmigo" ng-disabled="true">Eliminado</md-button>
 		</md-card-actions>
 	</md-card>
 </md-content>

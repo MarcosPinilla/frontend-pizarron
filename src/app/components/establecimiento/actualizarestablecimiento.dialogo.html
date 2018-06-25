@@ -5,11 +5,11 @@
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 		<md-input-container class="md-block">
 			<label>Nombre</label>
-			<input ng-model="vm.upestablecimiento.nombre_establecimiento" type="text" required>
+			<input ng-model="vm.upestablecimiento.nombre_establecimiento" ng-value="vm.establecimiento.nombre_establecimiento" type="text">
 		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Descripción</label>
-			<input ng-model="vm.upestablecimiento.desc_establecimiento" type="text" required>
+			<input ng-model="vm.upestablecimiento.desc_establecimiento" ng-value="vm.establecimiento.desc_establecimiento" type="text">
 		</md-input-container>
 		<label for="fotoEstablecimiento">Foto</label>
 		<center><input id="fotoEstablecimiento" type="file" fileread="vm.upestablecimiento.url_foto_establecimiento"></center>

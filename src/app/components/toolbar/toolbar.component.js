@@ -9,11 +9,11 @@
       controllerAs: 'vm'
     });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', '$window', 'DarFavorito', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
-    'ListartipomaterialService', 'PrimerasNotificacionesService'];
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
+    'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, $window, DarFavorito, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-  ListartipomaterialService, PrimerasNotificacionesService) {
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
+    ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -23,6 +23,7 @@
     vm.profesores = {};
     vm.nombre_profesor = null;
     vm.selected_profesor = null;
+    vm.cantidadNotificaciones = null;
 
     vm.isinRegister = false;
     vm.isinLogin = false;
@@ -89,8 +90,12 @@
 
     BuscarNombreProfesorService.query({ nombre: "Ma" }).$promise.then(function (data) {
       vm.profesores = data;
-
     });
+
+    CantidadNotificaciones.get().$promise.then(function (data) {
+      vm.cantidadNotificaciones = data;
+    });
+
     vm.buscarProfesor = function () {
       BuscarNombreProfesorService.query({ nombre: vm.nombre_profesor }).$promise.then(function (data) {
         vm.profesores = data;
@@ -107,7 +112,7 @@
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
-        templateUrl: 'app/components/dashboard/nuevodocumento.dialogo.html',
+        templateUrl: 'app/components/toolbar/nuevodocumento.dialogo.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
@@ -139,10 +144,17 @@
           vm.status = 'You said the information was "' + answer + '".';
         }, function () {
           vm.status = 'You cancelled the dialog.';
+          if (vm.cantidadNotificaciones != 0) {
+            CambiarNotificacionesLeidas.get().$promise.then(function (data) {
+              if (data) {
+                vm.cantidadNotificaciones.notificaciones = 0;
+              }
+            });
+          };
         });
     };
 
-    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService) {
+    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
       var vm = this;
       vm.usuario = usuario;
       vm.asignaturas = asignaturas;
@@ -151,6 +163,20 @@
 
       vm.material = {};
       vm.material_id = '';
+
+      VisibilidadService.query().$promise.then(function (data) {
+        vm.visibilidades = data;
+        console.log(vm.visibilidades);
+      });
+
+      vm.modeloVisibilidad = null;
+      vm.updateVisibilidad = function(id) {
+        console.log(id.id);
+        var data = {};
+        data.id_visibilidad = id.id;
+        console.log(data);
+        vm.material.id_visibilidad=data.id_visibilidad;
+      }
 
       vm.crearmaterial = function (material) {
         if (material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
@@ -187,9 +213,9 @@
         vm.notificaciones = data;
       });
 
-      vm.verNotificaciones = function () { 
+      vm.verNotificaciones = function () {
         vm.hide();
-      };  
+      };
 
       vm.hide = function () {
         $mdDialog.hide();

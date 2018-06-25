@@ -5,15 +5,15 @@
   <md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
   	<md-input-container class="md-block">
   		<label>Email</label>
-  		<input ng-model="vm.upusuario.email" type="text" required>
+  		<input ng-model="vm.upusuario.email" type="text" ng-value="vm.person.email">
   	</md-input-container>
   	<md-input-container class="md-block">
   		<label>Password</label>
-  		<input ng-model="vm.upusuario.password" type="Password" required>
+  		<input ng-model="vm.upusuario.password" type="Password" ng-value="vm.person.password">
   	</md-input-container>
   	<md-input-container class="md-block" >
         <label>Rol</label>
-        <md-select ng-model="vm.upusuario.id_rol">
+        <md-select ng-model="vm.upusuario.id_rol" ng-value="vm.person.rol.nombre_rol">
           <md-option ng-repeat="rol in vm.roles" value="{{ rol.id }}">
             {{ rol.nombre_rol }}
           </md-option>

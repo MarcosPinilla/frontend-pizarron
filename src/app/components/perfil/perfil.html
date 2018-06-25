@@ -25,12 +25,6 @@
              Añadir a amigos 
           </md-button>
         </div>
-        <div>
-          <md-button ng-click="vm.seguirxd(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
-            <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
-             Seguir
-          </md-button>
-        </div>
         <div ng-if="vm.estadoAmistad == 1">
           <md-menu md-position-mode="target-right target" md-offset="0 50">
             <md-button class="md-raised md-primary perfil-button-amigo" ng-mouseenter="$mdMenu.open()">
@@ -85,6 +79,17 @@
           <md-button class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;" ng-click="vm.showEditarPerfil($event, vm.perfil)">
             <md-icon md-svg-icon="app/resources/icons/ic_mode_edit_black_24px.svg"></md-icon>
              Editar perfil
+          </md-button>
+        </div>
+        <div ng-if="!vm.isUser && !vm.seguido">
+          <md-button ng-click="vm.seguir(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: #EEEEEE;">
+            <md-icon md-svg-icon="app/resources/icons/ic_person_add_black_24px.svg"></md-icon>
+             Seguir
+          </md-button>
+        </div>
+        <div ng-if="!vm.isUser && vm.seguido">
+          <md-button ng-click="vm.desseguir(vm.perfil.id)" class="md-raised perfil-button-amigo" style="background-color: rgb(23, 218, 88);">
+            <span style="color: white">Siguiendo</span>
           </md-button>
         </div>
         <!-- Estadisticas -->

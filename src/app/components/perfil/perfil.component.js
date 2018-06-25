@@ -9,22 +9,49 @@
       controllerAs: 'vm'
     });
 
-  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', '$rootScope'];
+  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', 'UnfollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SeguidorService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', '$rootScope'];
 
-  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, $stateParams, PerfilService, AmigoService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, DarFavorito, $state, $rootScope) {
+  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, UnfollowService, $stateParams, PerfilService, AmigoService, SeguidorService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, DarFavorito, $state, $rootScope) {
     var vm = this;
     vm.perfil = {};
     vm.amistad = {};
     vm.mejoresFavoritos = {};
     vm.materialreciente = {};
     vm.isUser = false;
-    vm.isSolicitado = false;
+    vm.isSolicitado = false;  
+    vm.seguido = false;
     /*
       0 = No amigo
       1 = Amigo
       2 = Amistad pendiente
     */
     vm.estadoAmistad = 0;
+
+    $rootScope.$on('Solicitud', function () {
+      vm.estadoAmistad = 2;
+    });
+
+    $rootScope.$on('EliminarAmistad', function () {
+      vm.estadoAmistad = 0;
+    });
+
+    $rootScope.$on('AceptarSolicitud', function () {
+      vm.estadoAmistad = 1;
+    });
+
+    $rootScope.$on('Siguiendo', function () {
+      vm.seguido = true;
+    });
+
+    $rootScope.$on('DesSiguiendo', function () {
+      vm.seguido = false;
+    });
+
+    $rootScope.$on('EliminarSolicitud', function () {
+      vm.estadoAmistad = 0;
+      vm.isSolicitado = false;
+    });
+
     vm.isSeguido = false;
 
     vm.profesorId = $stateParams.id;
@@ -88,6 +115,16 @@
               }
             }
           });
+          /*Obtiene la seguimiento entre usuarios*/
+          SeguidorService.get({id: vm.profesorId}).$promise.then(function (data) {
+            console.log(data);
+            if(data.error){
+              vm.seguido = false;
+            } else {
+              vm.seguido = data.seguidor;
+            }
+            
+          });
         }
       });
     } else { //Si la ruta no trae id, entonces es nuestro perfil
@@ -146,7 +183,7 @@
       var vm = this;
 
       vm.perfil = perfil;
-      console.log(vm.perfil);
+      vm.profesiones = [{id : 0 , nombre: 'Fonoadióloga'}, {id: 1, nombre: 'Sicóloga'}, {id : 2, nombre: 'Educadora'}, {id : 3, nombre: 'Otro'}];
 
       vm.actualizarprofesor = function (profesor) {
         vm.profesor = profesor;
@@ -218,7 +255,7 @@
       $rootScope.$emit('Solicitud');
     };  
 
-    vm.seguirxd = function(idseguido) {
+    vm.seguir = function(idseguido) {
       console.log("siguiendo");
       var seguido1 = JSON.parse('{"id_seguido": ' + idseguido + '}');
       console.log('{"id_seguido": ' + idseguido + '}');
@@ -227,12 +264,23 @@
       $rootScope.$emit('Siguiendo');
     };
 
+    vm.desseguir = function(idseguido) {
+      console.log("dessiguiendo");
+      var seguido1 = JSON.parse('{"id_seguido": ' + idseguido + '}');
+      console.log('{"id_seguido": ' + idseguido + '}');
+      UnfollowService.save(seguido1);
+      vm.isSeguido=false;
+      $rootScope.$emit('DesSiguiendo');
+    };
+
     vm.aceptarSolicitud = function ($idamistad) {
       //console.log('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
       var amistad = JSON.parse('{"id_amistad": ' + $idamistad + ', "opcion": ' + 1 + '}');
       console.log(amistad);
       SolicitudService.save(amistad);
       vm.isSolicitado = false;
+      $rootScope.$emit('AceptarSolicitud');
+      
     };
 
     /*AmigoService.get({id: vm.profesorId}).$promise.then(function (data) {
@@ -249,6 +297,7 @@
         vm.amistad = data;
         if (vm.amistad.id_estado_amistad == 1)
           vm.estadoAmistad = 0;
+          $rootScope.$emit('EliminarAmistad');
       });
     };
 
@@ -258,6 +307,7 @@
         vm.amistad = data;
         if (vm.amistad.id_estado_amistad == 1)
           vm.estadoAmistad = 0;
+          $rootScope.$emit('EliminarSolicitud');
       });
     };
 

@@ -8,9 +8,7 @@
   cantidadNotificaciones.$inject = ['$resource', 'API'];
 
   function cantidadNotificaciones($resource, API){
-    return $resource(API + 'cantidadNotificaciones', {id: '@id'}, {
-   
-    	
+    return $resource(API + 'cantidadNotificaciones', {
     });
   }
 })();
