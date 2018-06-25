@@ -96,6 +96,7 @@
         }
         else {
           vm.perfil = data;
+          console.log(data[0]);
           /*Si el usuario buscado, es el mismo que el usuario logeado*/
           if (vm.perfil.usuario.email == localStorage.getItem('user'))
             vm.isUser = true;
