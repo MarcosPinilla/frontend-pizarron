@@ -5,11 +5,11 @@
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 		<md-input-container class="md-block">
 			<label>Nombre</label>
-			<input ng-model="vm.upasignatura.nombre_asignatura" type="text" required>
+			<input ng-model="vm.upasignatura.nombre_asignatura" type="text" ng-value="vm.asignatura.nombre_asignatura">
 		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Descripción</label>
-			<input ng-model="vm.upasignatura.descripcion_asignatura" type="text" required>
+			<input ng-model="vm.upasignatura.descripcion_asignatura" ng-value="vm.asignatura.descripcion_asignatura" type="text">
 		</md-input-container>
 		<center><md-button class="md-raised md-primary login-button" ng-click="vm.actualizarasignatura(vm.upasignatura)" md-theme="dark-green" aria-label="editasignatura">Actualizar Asignatura</md-button></center>
 	</md-content>

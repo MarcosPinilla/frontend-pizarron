@@ -27,6 +27,10 @@
       page: 1
     };
 
+    vm.irMaterial = function (id){
+      $state.go("editdocument/" + id);
+    }
+
     vm.anadirMaterial = function (material, event) {
       $mdDialog.show({
         controller: dialogoController,

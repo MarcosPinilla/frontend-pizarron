@@ -14,12 +14,18 @@
           <th md-column md-numeric md-order-by="id">Id</th>
           <th md-column md-numeric md-order-by="nombre_etiqueta">Nombre Etiqueta</th>
           <th md-column md-numeric></th>
+          <th md-column md-numeric></th>
         </tr>
       </thead>
       <tbody md-body>
         <tr md-row md-select="etiqueta" md-select-id="name" md-auto-select class="tabla" ng-repeat="etiqueta in vm.etiquetas | orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit" >
           <td md-cell>{{ etiqueta.id }}</td>
           <td md-cell>{{ etiqueta.nombre_etiqueta }}</td>
+          <td md-cell>
+            <md-button class="md-icon-button" ng-click="vm.editaretiqueta(etiqueta)" style="margin-right: -40px;">
+              <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
+            </md-button>
+          </td>
           <td md-cell>
             <md-button class="md-icon-button" ng-click="vm.eliminaretiqueta(etiqueta.id)" >
                 <md-icon md-svg-icon="app/resources/icons/basurero.svg"></md-icon>

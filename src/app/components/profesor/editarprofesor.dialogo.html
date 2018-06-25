@@ -5,19 +5,19 @@
 	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
 		<md-input-container class="md-block">
 			<label>Nombres</label>
-			<input ng-model="vm.upperson.nombres_profesor" type="text" required>
+			<input ng-model="vm.upperson.nombres_profesor" type="text" ng-value="vm.person.nombres_profesor">
 		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Apellidos</label>
-			<input ng-model="vm.upperson.apellidos_profesor" type="text" required>
+			<input ng-model="vm.upperson.apellidos_profesor" type="text" ng-value="vm.person.apellidos_profesor">
 		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Cargo</label>
-			<input ng-model="vm.upperson.cargo" type="text" required>
+			<input ng-model="vm.upperson.cargo" type="text" ng-value="vm.person.cargo">
 		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Profesión</label>
-			<input ng-model="vm.upperson.profesion" type="text" required>
+			<input ng-model="vm.upperson.profesion" type="text" ng-value="vm.person.profesion">
 		</md-input-container>
 		<label for="fotoProfesor">Foto</label>
 		<center><input id="fotoProfesor" type="file" fileread="vm.upperson.url_foto_profesor"></center>
