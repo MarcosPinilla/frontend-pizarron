@@ -88,10 +88,6 @@
       vm.tipo_material = data;
     });
 
-    BuscarNombreProfesorService.query({ nombre: "Ma" }).$promise.then(function (data) {
-      vm.profesores = data;
-    });
-
     CantidadNotificaciones.get().$promise.then(function (data) {
       vm.cantidadNotificaciones = data;
     });
@@ -99,12 +95,10 @@
     vm.buscarProfesor = function () {
       BuscarNombreProfesorService.query({ nombre: vm.nombre_profesor }).$promise.then(function (data) {
         vm.profesores = data;
-        console.log(vm.profesores);
       });
     };
 
     vm.irPerfil = function () {
-      console.log("SELECCIONADOx!!!");
       $state.go('dashboard.perfil', { id: vm.selected_profesor.id });
     };
 
