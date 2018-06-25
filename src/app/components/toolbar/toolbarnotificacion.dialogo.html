@@ -14,7 +14,7 @@
       <md-content>
         <md-list flex>
           <md-subheader class="md-no-sticky">Ultimas notificaciones</md-subheader>
-          <md-list-item class="md-3-line" ng-repeat="notificacion in vm.notificaciones">
+          <md-list-item class="md-3-line" ng-repeat="notificacion in vm.notificaciones" ng-style="notificacion.leido == false && {'background-color': '#ffcdd2'}">
             <a ui-sref="dashboard.perfil({id:notificacion.id_remitente})" ng-click="vm.hide()"><img class="md-avatar" ng-src="{{ notificacion.foto_remitente }}" alt=""/></a>
             <div class="md-list-item-text" layout="column">
               <a ng-href="{{notificacion.enlace}}" ng-click="vm.hide()">
