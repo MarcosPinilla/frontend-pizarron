@@ -275,6 +275,17 @@ md-dialog {
   border-bottom-left-radius: 25px;
   font-size: 10px;
 }
+.login-button3{
+  background-color : #bddf8b;
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  font-size: 10px;
+}
 
 .userLogin {
   width: 95%;
