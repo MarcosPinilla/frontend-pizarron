@@ -124,7 +124,7 @@
 				<span>{{ amigo.amigo2.nombres_profesor }}</span>
 			</div> -->
 
-			<md-list flex>
+			<md-list flex style="margin-bottom: 50px;">
 				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.id)">
 					<div class="md-list-item-text" layout="row">
 						<img ng-src="{{amigo.url_foto_profesor}}" class="chat-avatar">
@@ -134,9 +134,10 @@
 				<md-divider ></md-divider>
 			</md-list>
 		</div>
-		<div ng-if="vm.visibleChatGrupal">
-
-			<md-list flex>
+		<md-button ng-if="vm.visibleChatGrupal" style="margin-left: 50px" ng-click="vm.crearChatGrupal()">Crear </md-button>
+		<div ng-if="vm.visibleChatGrupal" id="chat-profesores" style="margin-bottom: 1em; margin-top: 0px!important">
+			
+			<md-list flex style="margin-bottom: 50px;">
 				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" >
 					<md-checkbox ng-model="ctrl.disableParentScroll"  ng-click="vm.toggle(amigo)"> </md-checkbox>
 					<div class="md-list-item-text" layout="row">
@@ -148,7 +149,7 @@
 				<md-divider ></md-divider>
 			</md-list>
 
-			<md-button ng-click="vm.crearChatGrupal()">Crear </md-button>
+			
 		</div>
 
 

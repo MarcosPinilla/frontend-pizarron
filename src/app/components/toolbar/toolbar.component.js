@@ -10,10 +10,10 @@
     });
 
   toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
-    'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas'];
+    'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas',  '$pusher'];
 
   function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
-    ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas) {
+    ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas, $pusher) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
@@ -34,6 +34,8 @@
     vm.iralogin = function () {
       $state.go('login');
     };
+
+    console.log(vm.usuario);
 
     vm.isLogged = CredentialsService.isLogged();
 
@@ -91,6 +93,22 @@
     BuscarNombreProfesorService.query({ nombre: "Ma" }).$promise.then(function (data) {
       vm.profesores = data;
     });
+
+         var client = new Pusher('28705022aa554d22c965', {
+        cluster: 'us2',
+        // authEndpoint: "http://example.com/pusher/auth",
+        encrypted: true
+      });
+
+     var pusher = $pusher(client);
+
+     var canal = pusher.subscribe('notificacion'+vm.usuario);
+
+     canal.bind('NotificacionesEvent',
+      function (data) {
+        console.log(data);
+        vm.cantidadNotificaciones = data.notificaciones;
+      });
 
     CantidadNotificaciones.get().$promise.then(function (data) {
       vm.cantidadNotificaciones = data;
