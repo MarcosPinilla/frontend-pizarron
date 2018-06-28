@@ -96,6 +96,7 @@
         }
         else {
           vm.perfil = data;
+          console.log(data[0]);
           /*Si el usuario buscado, es el mismo que el usuario logeado*/
           if (vm.perfil.usuario.email == localStorage.getItem('user'))
             vm.isUser = true;
@@ -183,7 +184,7 @@
       var vm = this;
 
       vm.perfil = perfil;
-      vm.profesiones = [{id : 0 , nombre: 'Fonoadióloga'}, {id: 1, nombre: 'Sicóloga'}, {id : 2, nombre: 'Educadora'}, {id : 3, nombre: 'Otro'}];
+      vm.profesiones = [{nombre: 'Fonoaudiología'}, {nombre: 'Psicología'}, {nombre: 'Educadora'}, {nombre: 'Otro'}];
 
       vm.actualizarprofesor = function (profesor) {
         vm.profesor = profesor;
