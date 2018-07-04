@@ -180,10 +180,11 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, ambitos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
+    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
       var vm = this;
       vm.usuario = usuario;
       vm.ambitos = ambitos;
+      vm.nucleos = nucleos;
       vm.niveles = niveles;
       vm.tipo_materiales = tipomaterial;
 
@@ -205,7 +206,7 @@
       }
 
       vm.crearmaterial = function (material) {
-        if (material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
+        if (material.titulo_material != null && material.id_ambito != null && material.id_nucleo != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
           MaterialService.save(material, function (res) {
             console.log(res);
             vm.material_id = res.id;

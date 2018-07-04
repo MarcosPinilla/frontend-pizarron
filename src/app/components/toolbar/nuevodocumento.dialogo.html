@@ -22,7 +22,7 @@
 	<md-input-container class="md-block" flex="100">
 	    <label>Núcleo</label>
 	     <md-select required="true" ng-model="vm.material.id_nucleo">
-	        <md-option ng-repeat="nucleo in vm.nucleos" ng-value="ambito.id">
+	        <md-option ng-repeat="nucleo in vm.nucleos" ng-value="nucleo.id">
 	        	{{nucleo.nombre_nucleo}}
 	    	</md-option>
 	    </md-select>
