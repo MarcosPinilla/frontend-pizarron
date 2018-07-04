@@ -91,6 +91,7 @@
 
     ListarnivelesService.query().$promise.then(function (data) {
       vm.niveles = data;
+      console.log(vm.niveles);
     });
 
     ListartipomaterialService.query().$promise.then(function (data) {
@@ -132,7 +133,7 @@
       $state.go('dashboard.perfil', { id: vm.selected_profesor.id });
     };
 
-    vm.showNewDocument = function (ev, usuario, ambitos, niveles, tipomaterial) {
+    vm.showNewDocument = function (ev, usuario, ambitos, nucleos, niveles, tipomaterial) {
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
@@ -144,6 +145,7 @@
         locals: {
           usuario: usuario,
           ambitos: ambitos,
+          nucleos: nucleos,
           niveles: niveles,
           tipomaterial: tipomaterial
         },
