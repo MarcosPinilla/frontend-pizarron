@@ -9,15 +9,16 @@
       controllerAs: 'vm'
     });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarambitosService', 'ListarnucleosService', 'ListarnivelesService',
     'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas',  '$pusher'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarambitosService, ListarnucleosService, ListarnivelesService,
     ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas, $pusher) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
-    vm.asignaturas = {};
+    vm.ambitos = {};
+    vm.nucleos = {};
     vm.niveles = {};
     vm.tipo_material = {};
     vm.profesores = {};
@@ -78,8 +79,14 @@
       vm.isadmin = false;
     }
 
-    ListarasignaturasService.query().$promise.then(function (data) {
-      vm.asignaturas = data;
+    ListarambitosService.query().$promise.then(function (data) {
+      vm.ambitos = data;
+      console.log(vm.ambitos);
+    });
+
+    ListarnucleosService.query().$promise.then(function (data) {
+      vm.nucleos = data;
+      console.log(vm.nucleos);
     });
 
     ListarnivelesService.query().$promise.then(function (data) {
@@ -125,7 +132,7 @@
       $state.go('dashboard.perfil', { id: vm.selected_profesor.id });
     };
 
-    vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
+    vm.showNewDocument = function (ev, usuario, ambitos, niveles, tipomaterial) {
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
@@ -136,7 +143,7 @@
         fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
         locals: {
           usuario: usuario,
-          asignaturas: asignaturas,
+          ambitos: ambitos,
           niveles: niveles,
           tipomaterial: tipomaterial
         },
@@ -171,10 +178,10 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
+    function dialogoController($mdDialog, usuario, ambitos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
       var vm = this;
       vm.usuario = usuario;
-      vm.asignaturas = asignaturas;
+      vm.ambitos = ambitos;
       vm.niveles = niveles;
       vm.tipo_materiales = tipomaterial;
 
