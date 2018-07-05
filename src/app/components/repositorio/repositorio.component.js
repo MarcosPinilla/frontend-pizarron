@@ -17,6 +17,7 @@
     vm.elementos = [];
     vm.etiquetas = [];
     vm.searchText;
+    vm.buscarEtiqueta;
 
     ElementoService.query().$promise.then(function (data) {
       vm.elementos = data;
