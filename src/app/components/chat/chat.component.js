@@ -30,7 +30,8 @@
    vm.inputVacio = '';
    console.log(vm.token);
    vm.keypress = 0;
-
+   vm.nuevo = false;
+   vm.textBuscar ='';
 
   ListarNoticiasService.query().$promise.then(function(data){
     vm.noticias=data;
@@ -82,6 +83,19 @@
 
      
    });
+
+  vm.buscarAmigos = function(event) {
+    console.log('asda'+textBuscar);
+    var amigos = [];
+    for (var i = 0; i < vm.amigos.length; i++) {
+      if (vm.amigos[i].nombres_profesor.indexOf(textBuscar)) {
+        amigos.push(vm.amigos[i]);
+      }
+    }
+    console.log(amigos);
+    vm.amigos = amigos;
+
+  }
 
 
 
@@ -157,7 +171,8 @@
                           vm.chats.push(data);
                        }
                      }
-                   
+
+                   vm.nuevo = true;
  
                    console.log(vm.chats);
  

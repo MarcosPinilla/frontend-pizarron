@@ -15,7 +15,7 @@
       
   </div>
 
-  <div class="dashboard" id="todocanvas" layout="row" layout-wrap>
+  <div class="dashboard" id="todocanvas" layout="row" layout-wrap style="padding-top: 1em !important; ">
   <div flex="25" ng-if="vm.esColaborador===true">
      <div class="sidebar-left" layout="column" style="height: 100%">
       <div layout="row">
@@ -53,9 +53,9 @@
          </div>
         </div>
 
-        <md-card class="page contenedor-curvo panel-figuras">
+        <md-card class="page contenedor-curvo panel-figuras" >
       
-        <md-content class="contenedor-curvo" style=" background-color: white;">
+        <md-content class="contenedor-curvo" style=" background-color: white;height: 100%;">
           <!--
           <div layout="row">
             <div flex="100">
@@ -85,7 +85,7 @@
           </md-content>
           -->
           
-        <md-tabs md-dynamic-height md-border-bottom md-selected="vm.indexTabs">
+        <md-tabs   md-selected="vm.indexTabs" style="min-height: 85% !important; height: 85% !important; max-height: 85% !important;">
           
           <md-tab>
             
@@ -96,7 +96,7 @@
           </md-tab>
 
         
-          <md-tab >
+          <md-tab style=" top: 1px !important">
              
 
              <md-tab-body>
