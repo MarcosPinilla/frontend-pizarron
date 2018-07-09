@@ -12,10 +12,18 @@
     	</div>
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
-	    <label>Asignatura</label>
-	     <md-select required="true" ng-model="vm.material.id_asignatura">
-	        <md-option ng-repeat="asignatura in vm.asignaturas" ng-value="asignatura.id">
-	        	{{asignatura.nombre_asignatura}}
+	    <label>Ámbito</label>
+	     <md-select required="true" ng-model="vm.material.id_ambito">
+	        <md-option ng-repeat="ambito in vm.ambitos" ng-value="ambito.id">
+	        	{{ambito.nombre_ambito}}
+	    	</md-option>
+	    </md-select>
+	</md-input-container>
+	<md-input-container class="md-block" flex="100">
+	    <label>Núcleo</label>
+	     <md-select required="true" ng-model="vm.material.id_nucleo">
+	        <md-option ng-repeat="nucleo in vm.nucleos" ng-value="nucleo.id">
+	        	{{nucleo.nombre_nucleo}}
 	    	</md-option>
 	    </md-select>
 	</md-input-container>

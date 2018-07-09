@@ -9,15 +9,16 @@
       controllerAs: 'vm'
     });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarasignaturasService', 'ListarnivelesService',
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarambitosService', 'ListarnucleosService', 'ListarnivelesService',
     'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas',  '$pusher'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarasignaturasService, ListarnivelesService,
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarambitosService, ListarnucleosService, ListarnivelesService,
     ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas, $pusher) {
     var vm = this;
 
     vm.usuario = localStorage.getItem("user");
-    vm.asignaturas = {};
+    vm.ambitos = {};
+    vm.nucleos = {};
     vm.niveles = {};
     vm.tipo_material = {};
     vm.profesores = {};
@@ -78,12 +79,19 @@
       vm.isadmin = false;
     }
 
-    ListarasignaturasService.query().$promise.then(function (data) {
-      vm.asignaturas = data;
+    ListarambitosService.query().$promise.then(function (data) {
+      vm.ambitos = data;
+      console.log(vm.ambitos);
+    });
+
+    ListarnucleosService.query().$promise.then(function (data) {
+      vm.nucleos = data;
+      console.log(vm.nucleos);
     });
 
     ListarnivelesService.query().$promise.then(function (data) {
       vm.niveles = data;
+      console.log(vm.niveles);
     });
 
     ListartipomaterialService.query().$promise.then(function (data) {
@@ -125,7 +133,7 @@
       $state.go('dashboard.perfil', { id: vm.selected_profesor.id });
     };
 
-    vm.showNewDocument = function (ev, usuario, asignaturas, niveles, tipomaterial) {
+    vm.showNewDocument = function (ev, usuario, ambitos, nucleos, niveles, tipomaterial) {
       $mdDialog.show({
         controller: dialogoController,
         controllerAs: 'vm',
@@ -136,7 +144,8 @@
         fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
         locals: {
           usuario: usuario,
-          asignaturas: asignaturas,
+          ambitos: ambitos,
+          nucleos: nucleos,
           niveles: niveles,
           tipomaterial: tipomaterial
         },
@@ -171,10 +180,11 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, asignaturas, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
+    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
       var vm = this;
       vm.usuario = usuario;
-      vm.asignaturas = asignaturas;
+      vm.ambitos = ambitos;
+      vm.nucleos = nucleos;
       vm.niveles = niveles;
       vm.tipo_materiales = tipomaterial;
 
@@ -196,7 +206,7 @@
       }
 
       vm.crearmaterial = function (material) {
-        if (material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
+        if (material.titulo_material != null && material.id_ambito != null && material.id_nucleo != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
           MaterialService.save(material, function (res) {
             console.log(res);
             vm.material_id = res.id;

@@ -9,17 +9,22 @@
       controllerAs: 'vm'
     });
 
-  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
+  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
 
-  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
+  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
     var vm = this;
     vm.materiales = {};
     vm.autoria = [{id: 0, nombre: 'autor'}, {id: 1, nombre: 'colaborador'}];
     console.log(vm.autoria);
 
-    AsignaturaService.query().$promise.then(function (data) {
-      vm.asignatura = data;
-      console.log(vm.asignatura);
+    AmbitoService.query().$promise.then(function (data) {
+      vm.ambito = data;
+      console.log(vm.ambito);
+    });
+
+    NucleoService.query().$promise.then(function (data) {
+      vm.nucleo = data;
+      console.log(vm.nucleo);
     });
 
     ListarnivelesService.query().$promise.then(function (data) {

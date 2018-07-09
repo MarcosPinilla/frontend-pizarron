@@ -10,8 +10,9 @@
 				<thead md-head>
 					<tr md-row>
 					<th md-column>Titulo</th>
-						<th md-column>Asignatura</th>
+						<th md-column>Ámbito</th>
 						<th md-column>Nivel</th>
+						<th md-column>Núcleo</th>
 						<th md-column></th>
 
 					</tr>
@@ -19,8 +20,9 @@
 				<tbody md-body>
 					<tr ng-repeat="documento in vm.materiales "  md-row>
 						<td md-cell>{{documento.titulo_material}}</td>
-						<td md-cell>{{documento.asignatura.nombre_asignatura}}</td>
+						<td md-cell>{{documento.ambito.nombre_ambito}}</td>
 						<td md-cell>{{documento.nivel.nombre_nivel}}</td>
+						<td md-cell>{{documento.nucleo.nombre_nucleo}}</td>
 						<td md-cell>
 						<a ui-sref="editdocument({id:documento.id})"><md-button class="md-raised md-success">Ver</md-button></a>
 						</td>

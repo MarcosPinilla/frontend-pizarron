@@ -9,14 +9,16 @@
     controllerAs: 'vm'
   });
 
-  materialesCtrl.$inject = ['$mdDialog', 'PublicMaterialService','AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
+  materialesCtrl.$inject = ['$mdDialog', 'PublicMaterialService','AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
 
-  function materialesCtrl($mdDialog, PublicMaterialService, AsignaturaService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
+  function materialesCtrl($mdDialog, PublicMaterialService, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
     var vm = this;
 
     vm.materiales = {};
 
-    vm.asignatura = {};
+    vm.ambito = {};
+
+    vm.nucleo = {};
 
     vm.nivel = {};
 
@@ -49,9 +51,14 @@
         });
     });
 
-    AsignaturaService.query().$promise.then(function (data) {
-      vm.asignatura = data;
-      console.log(vm.asignatura);
+    AmbitoService.query().$promise.then(function (data) {
+      vm.ambito = data;
+      console.log(vm.ambito);
+    });
+
+    NucleoService.query().$promise.then(function (data) {
+      vm.nucleo = data;
+      console.log(vm.nucleo);
     });
 
     ListarnivelesService.query().$promise.then(function (data) {

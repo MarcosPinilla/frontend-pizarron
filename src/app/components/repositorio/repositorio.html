@@ -17,17 +17,17 @@
 	<md-input-container flex="100">
  		<md-autocomplete
  		  md-no-cache="false"
-          md-search-text="vm.searchText"
+          md-search-text="vm.buscarEtiqueta"
           md-items="etiqueta in vm.etiquetas"
           md-item-text="etiqueta.nombre_etiqueta"
           placeholder="Buscar por etiqueta"
           md-min-length="0"
-          md-search-text-change="vm.searchTextChange(vm.searchText)">
+          md-search-text-change="vm.searchTextChange(vm.buscarEtiqueta)">
         <md-item-template>
-          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{etiqueta.nombre_etiqueta}}</span>
+          <span md-highlight-text="vm.buscarEtiqueta" md-highlight-flags="^i">{{etiqueta.nombre_etiqueta}}</span>
         </md-item-template>
         <md-not-found>
-          No existen coincidencias con "{{vm.searchText}}"
+          No existen coincidencias con "{{vm.buscarEtiqueta}}"
         </md-not-found>
       </md-autocomplete>
 	</md-input-container>
@@ -59,7 +59,9 @@
 </md-content>
 <div style="overflow-x: scroll;background-color: white ;height: 40% !important;">
 	
-		<div ng-repeat="elemento in vm.elementos|filter:vm.searchText" class="hover12" >
+
+		<div ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta" class="hover12">
+
 			<!--
 			<md-button aria-label="name" ng-click="vm.generarImagen(elemento.contenido_elemento)">
 				<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />

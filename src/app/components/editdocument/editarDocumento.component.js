@@ -1098,8 +1098,9 @@
         //documentoTemp.contenido_material = json;
         
         documentoTemp.id_tipo_material = vm.documento.id_tipo_material;
-        documentoTemp.id_asignatura = vm.documento.id_asignatura;
+        documentoTemp.id_ambito = vm.documento.id_ambito;
         documentoTemp.id_nivel = vm.documento.id_nivel;
+        documentoTemp.id_nucleo = vm.documento.id_nucleo;
         documentoTemp.id_visibilidad = vm.documento.id_visibilidad;
         
 
