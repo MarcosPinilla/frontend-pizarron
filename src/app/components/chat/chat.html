@@ -118,10 +118,23 @@
       </md-button>
 			</div>
 		</div>
-		<md-input-container md-no-float class="md-block" style="margin: 0px;">
-      <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-      <input ng-model="textBuscar" type="text" placeholder="Buscar amigo" ng-keypress="buscarAmigos($event)">
-    </md-input-container>
+			<form ng-submit="vm.buscarAmigos(vm.nombre)" >
+				<div layout="row" layout-xs="column" style="margin: 0px!important" >
+					<div flex=20 style="padding-right: 10%">
+						<md-button class="md-icon-button md-white" type="submit" style="padding-right: 5px" >
+							<md-icon md-svg-icon="app/resources/icons/ic_search_white_24px.svg" style="color: grey;"></md-icon>
+						</md-button>
+					</div>
+					<div flex=80 style="padding-left: 10%;">
+		  			<md-input-container class="md-block" style="margin:0px !important; padding: 0px !important" >
+		    			<input ng-model="vm.nombre" type="text" placeholder="Buscar amigo">
+		  			</md-input-container>
+					</div>
+				</div>
+
+		</form> 
+
+
 		<div id="chat-profesores" ng-if="vm.visibleChat">
 			<!-- div class="chat-profesor" layout="row" ng-repeat="amigo in vm.amigos">
 				<img ng-src="{{amigo.amigo2.url_foto_profesor}}" class="chat-avatar">

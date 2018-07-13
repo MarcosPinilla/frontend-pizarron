@@ -84,16 +84,20 @@
      
    });
 
-  vm.buscarAmigos = function(event) {
-    console.log('asda'+textBuscar);
+  vm.buscarAmigos = function(valor) {
+    console.log(valor);
     var amigos = [];
     for (var i = 0; i < vm.amigos.length; i++) {
-      if (vm.amigos[i].nombres_profesor.indexOf(textBuscar)) {
+      if (!vm.amigos[i].nombres_profesor.indexOf(valor)) {
+        console.log(valor, vm.amigos[i].nombres_profesor)
         amigos.push(vm.amigos[i]);
       }
     }
     console.log(amigos);
-    vm.amigos = amigos;
+    
+    if (amigos.length > 0) {
+      vm.amigos = amigos;
+    }
 
   }
 

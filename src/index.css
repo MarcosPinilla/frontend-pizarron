@@ -608,8 +608,8 @@ md-list.make-scrollable {
 }
 
 #chat-profesores {
-  margin-top: 1em;
-  height: 15.5em;
+  margin-top: 0px;
+  height: 70%;
   overflow: auto;
 }
 
