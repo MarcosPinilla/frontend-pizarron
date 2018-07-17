@@ -782,7 +782,8 @@ md-list.make-scrollable {
 }
 
 .img-repository{
-  width: 130px;
+  height: 12%;
+  width: 12%;
   padding: 5px;
   float: left;
 }
