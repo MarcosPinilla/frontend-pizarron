@@ -9,9 +9,9 @@
       controllerAs: 'vm'
     });
 
-  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'AsignaturaService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
+  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
 
-  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, AsignaturaService, ListarnivelesService, ListartipomaterialService, $state) {
+  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, $state) {
     var vm = this;
 
     vm.favoritos = {};
@@ -30,8 +30,12 @@
       }, 300);
     });
 
-    AsignaturaService.query().$promise.then(function (data) {
-      vm.asignatura = data;
+    AmbitoService.query().$promise.then(function (data) {
+      vm.ambito = data;
+    });
+
+    NucleoService.query().$promise.then(function (data) {
+      vm.nucleo = data;
     });
 
     ListarnivelesService.query().$promise.then(function (data) {

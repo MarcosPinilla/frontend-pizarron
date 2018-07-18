@@ -13,31 +13,39 @@
     
   </div>
   <br>
-  <div class="mimaterial-options" layout="row" style="background-color: #b0afd0;">
-    <div class="mimaterial-select">
-      <label>Asignatura</label>
-      <select class="form-control" ng-model="filter.asignatura.nombre_asignatura">
-          <option value="">Todas </option>
-          <option ng-repeat="asignatura in vm.asignatura" value="{{asignatura.nombre_asignatura}}">{{asignatura.nombre_asignatura}}</option>
-      </select>
-    </div>
-    
-    <div class="mimaterial-select">
-      <label>Nivel</label>
-      <select class="form-control" ng-model="filter.nivel.nombre_nivel">
-          <option value="">Todos </option>
-          <option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
-      </select>
-    </div>
+  <div layout="row" class="mimaterial-options" style="background-color: #b0afd0;">
+		<div class="mimaterial-select">
+			<label>Ámbito</label>
+			<select id="input2" class="form-control" ng-model="filter.ambito.descripcion_ambito">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="ambito in vm.ambito" value="{{ambito.descripcion_ambito}}">{{ambito.descripcion_ambito}}</option>
+	  		</select>
+		</div>
 
-    <div class="mimaterial-select">
-      <label>Tipo</label>
-      <select class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
-          <option value="">Todos </option>
-          <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
-      </select>
-    </div>
-  </div>
+		<div class="mimaterial-select">
+			<label>Núcleo</label>
+			<select id="input2" class="form-control" ng-model="filter.nucleo.nombre_nucleo">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="nucleo in vm.nucleo" value="{{nucleo.nombre_nucleo}}">{{nucleo.nombre_nucleo}}</option>
+	  		</select>
+		</div>
+		
+		<div class="mimaterial-select">
+			<label>Nivel</label>
+			<select id="input2" class="form-control" ng-model="filter.nivel.nombre_nivel">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="nivel in vm.nivel" value="{{nivel.nombre_nivel}}">{{nivel.nombre_nivel}}</option>
+	  		</select>
+		</div>
+
+		<div class="mimaterial-select">
+			<label>Tipo</label>
+			<select id="input2" class="form-control" ng-model="filter.tipo_material.nombre_tipo_material">
+	   			<option value="">Todos </option>
+	   			<option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
+	  		</select>
+		</div>
+	</div>
   <md-card class="post-card material-card" ng-repeat="favorito in vm.favoritos |filter: filter |filter: buscador" style="background-color: #bddf8b">
     <md-card-title style="background-color: #bddf8b; border-radius: 18px;"> 
       <md-card-title-text class="mimaterial-titulo">
