@@ -27,6 +27,14 @@ md-tabs-canvas {
   display: none !important;
 }
 
+md-tabs md-tabs-content-wrapper {
+  margin-top:-30px !important;
+}
+
+md-tabs-content-wrapper md-tab-content{
+  overflow-y:hidden; 
+}
+
 
 /*
  .md-tab:first-child{background: #ffcc99; } 
