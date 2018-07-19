@@ -62,8 +62,8 @@
 					</div>
 				</div>
 			</md-card-header>
-			<div flex-gt-sm="100" flex  >
-				<div style="height: 15em; overflow: auto;"  >
+			<div flex-gt-sm="100" flex   >
+				<div style="height: 15em; overflow: scroll;" id="bottom" scrollBottom="bottom" >
 					<!-- <md-list flex  style="overflow: auto;" id="scroll"> -->
 						<ul style="padding-left:  10px;padding-right: 10px;width: auto; " ng-repeat="item in chat.conversations " >
 							<p ng-if="vm.usuarioID != item.usuario_id" style="background-color: #DFDFDF; color: #787878; padding-top: 8px; padding-bottom: 8px;  margin-bottom: 0px; padding-left: 13px;border-radius: 15px; font-size: 14px; background-size: auto;width: auto;"  >{{ item.message }}</p>
@@ -91,10 +91,10 @@
 
 						<div layout="row" layout-xs="column" style="border-top: 1px solid #BDBDBD;">
 							<div flex=80>
-								<input type="text" custom-autofocus="$index == focusIndex"  ng-model="chat.message[$index]" placeholder="Escribe un mensaje ..."  style="border-width: 0 0 0 0 !important; padding: 0px; margin-top: 0.7em;">
+								<input type="text"  ng-model="chat.message[$index]" placeholder="Escribe un mensaje ..."  style="border-width: 0 0 0 0 !important; padding: 0px; margin-top: 0.7em;">
 							</div>
 							<div flex=20>
-									<md-button type="submit" class="md-fab md-mini md-primary" aria-label="" ng-click="vm.chatEnv(chat.message, $index); chat.message = ''" >
+									<md-button type="submit" class="md-fab md-mini md-primary" aria-label="" ng-click="vm.chatEnv(chat.message, $index); "   scroll-bottom="bottom">
  										<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 								</md-button>
 							</div>
@@ -142,7 +142,7 @@
 			</div> -->
 
 
-			<md-list flex style="margin-bottom: 50px;">
+			<md-list flex style="margin-bottom: 50px;" scroll-to-bottom="ctrl.messages" layout="column" ng-style="{'height':ctrl.messageWindowHeight}">
 				<md-list-item class="md-1-line" ng-repeat="amigo in vm.amigos" ng-click="vm.crearChatGrupal(amigo.id)">
 					<div class="md-list-item-text" layout="row">
 						<img ng-src="{{amigo.url_foto_profesor}}" class="chat-avatar">

@@ -84,22 +84,22 @@
      
    });
 
-  vm.buscarAmigos = function(valor) {
-    console.log(valor);
-    var amigos = [];
-    for (var i = 0; i < vm.amigos.length; i++) {
-      if (!vm.amigos[i].nombres_profesor.indexOf(valor)) {
-        console.log(valor, vm.amigos[i].nombres_profesor)
-        amigos.push(vm.amigos[i]);
-      }
-    }
-    console.log(amigos);
+  // vm.buscarAmigos = function(valor) {
+  //   console.log(valor);
+  //   var amigos = [];
+  //   for (var i = 0; i < vm.amigos.length; i++) {
+  //     if (!vm.amigos[i].nombres_profesor.indexOf(valor)) {
+  //       console.log(valor, vm.amigos[i].nombres_profesor)
+  //       amigos.push(vm.amigos[i]);
+  //     }
+  //   }
+  //   console.log(amigos);
     
-    if (amigos.length > 0) {
-      vm.amigos = amigos;
-    }
+  //   if (amigos.length > 0) {
+  //     vm.amigos = amigos;
+  //   }
 
-  }
+  // }
 
 
 
@@ -210,6 +210,7 @@
  
                        // console.log(vm.mensajes);
                        vm.chats[data.index].conversations = data.grupo;
+                       $("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
  
                      });
  
@@ -253,12 +254,13 @@
          console.log(data);
          vm.idGrupo = data.id;
          vm.selected = [];
+         $("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
  
        },function(err){
          console.log(err);
        });
  
- 
+        
      }
  
         vm.cerrarChat = function (id) {
@@ -281,7 +283,6 @@
 
 
 
-
 vm.chatEnv = function (message, index){
  var mensajeEvn = {};
   console.log(message);
@@ -292,6 +293,7 @@ vm.chatEnv = function (message, index){
    console.log(mensajeEvn);
   console.log(index);
   MessageService.save(mensajeEvn, function (data) {
+  
     // console.log(data);
     // console.log(vm.chats[index].conversations);
     // vm.chats[index].conversations = data.conversations;
@@ -325,6 +327,17 @@ var client = new Pusher('28705022aa554d22c965', {
 
 }
 
+angular.module('app').directive("scrollBottom", function(){
+    return {
+        link: function(scope, element, attr){
+            var $id= $("#" + attr.scrollBottom);
+            $(element).on("click", function(){
+                $id.scrollTop($id[0].scrollHeight);
+            });
+        }
+    }
+  });
+
 function dialogoController($mdDialog, NoticiaService) {
 
     var vm = this;
@@ -357,5 +370,17 @@ function dialogoController($mdDialog, NoticiaService) {
     };
   }
 
+  app.directive("scrollBottom", function(){
+    return {
+        link: function(scope, element, attr){
+            var $id= $("#" + attr.scrollBottom);
+            $(element).on("click", function(){
+                $id.scrollTop($id[0].scrollHeight);
+            });
+        }
+    }
+  });
+
 
   })();
+
