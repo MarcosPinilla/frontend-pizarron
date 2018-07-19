@@ -29,6 +29,28 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   max-width: 40px;
 }
 
+.planificacion{
+  background-image: url(app/resources/img/fondos/fondo-chicos-02.png);
+  background-size: 2000px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: auto;
+}
+
+.centerplanificacion{
+  background-image: url(app/resources/img/planificacion-background.png);
+  background-size: 2000px;
+  background-repeat: repeat;
+  background-color: white;
+  background-size: 100% 100%;
+  font-size: 12px;
+}
+
+.input-planificacion{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /*** MODALS ***/
 
 #modalNuevodoc {
