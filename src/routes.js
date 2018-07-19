@@ -50,6 +50,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     controllerAs: 'vm',
     templateUrl: 'app/components/editdocument/editdocument.component.html'
   })
+  .state('editplanificacion', {
+    url: '/editplanificacion',
+    component: 'editplanificacion',
+    isPrivate: true
+  })
   .state('obtenerMaterialProfesor', {
     url: '/obtenerMaterialProfesor',
     controller: 'MaterialesProfesor.controller',
