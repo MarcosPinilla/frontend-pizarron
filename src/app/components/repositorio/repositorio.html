@@ -58,34 +58,29 @@
 	</md-input-container>
 </md-content>
 <div style="overflow-x: scroll;background-color: white ;height: 40% !important;">
-	
 
+	<md-grid-list
+        md-cols="1" md-cols-sm="2" md-cols-md="3" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="4:3"
+        md-gutter="8px" md-gutter-gt-sm="4px" >
+
+    <md-grid-tile ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta" class="hover12"
+                  md-colspan-sm="1"
+                  md-colspan-xs="1"
+                 >
+       
+					<img ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.generarImagen(elemento.contenido_elemento)" class="img-repository" />
+		
+    </md-grid-tile>
+  </md-grid-list>
+	
+<!--
 		<div ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta" class="hover12">
 
-			<!--
-			<md-button aria-label="name" ng-click="vm.generarImagen(elemento.contenido_elemento)">
-				<img ng-src="{{ elemento.contenido_elemento }}" class="img-repository" />
-			</md-button>
-		-->
 			<figure style="margin-left:0px;">
 				<img ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.generarImagen(elemento.contenido_elemento)" class="img-repository" />
 			</figure>
 		</div>
+-->
 
-<!--
-		<div ng-repeat="elemento in vm.elementos">
-		  <div layout="row" ng-if="$even">
-		    <div flex>
-		      <md-button aria-label="name" ng-click="vm.generarImagen((vm.elementos |filter:buscador )[$index].contenido_elemento)">
-				<img ng-src="{{ (vm.elementos |filter:buscador )[$index].contenido_elemento }}" class="img-repository" />
-			</md-button>
-		    </div>
-		    <div flex>
-		      <md-button aria-label="name" ng-click="vm.generarImagen((vm.elementos |filter:buscador )[$index+1].contenido_elemento)">
-				<img ng-src="{{ (vm.elementos |filter:buscador)[$index+1].contenido_elemento }}" class="img-repository" />
-			</md-button>  
-		    </div>
-		  </div>
-		</div>
-		-->
 </div>

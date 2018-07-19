@@ -400,6 +400,8 @@
 
               fabric.loadSVGFromURL(ruta, function(objects, options) {
                 var obj = fabric.util.groupSVGElements(objects, options);
+                obj.scaleToWidth(canvas.getWidth()/4);
+                obj.scaleToHeight(canvas.getHeight()/4);
                 canvas.add(obj);
                 var a = canvas.setActiveObject(obj);
                 $scope.$apply(function () {
