@@ -9,14 +9,37 @@
       controllerAs: 'vm'
     });
 
-  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
+  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'DarFavorito', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
 
-  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, $state) {
+  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, DarFavorito, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, $state) {
     var vm = this;
 
     vm.favoritos = {};
 
+    vm.darFavorito = function (material) {
+      console.log(material.id);
+      DarFavorito.save({ material_id: material.id }).$promise.then(function (data) {
+        material.esFavorito = !material.esFavorito;
+        console.log(data);
+            ObtenerFavoritosProfesor.query().$promise.then(function (data) {
+      console.log(data);
+      vm.favoritos = data;
+      vm.imagePath = data.vista_previa;
+      for (var x = 0; x < vm.favoritos.length; x++) {
+        vm.favoritos[x].esFavorito = true;
+      }
+      console.log(vm.favoritos);
+      setTimeout(function () {
+        for (let i = 0; i < vm.favoritos.length; i++) {
+          document.getElementById(vm.favoritos[i].id).innerHTML = vm.favoritos[i].vista_previa;
+        }
+      }, 300);
+    });
+      });
+    };
+
     ObtenerFavoritosProfesor.query().$promise.then(function (data) {
+      console.log(data);
       vm.favoritos = data;
       vm.imagePath = data.vista_previa;
       for (var x = 0; x < vm.favoritos.length; x++) {

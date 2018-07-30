@@ -60,7 +60,12 @@
           <a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
           <a ui-sref="editdocument({id:material.id})">{{material.titulo_material}}</a>
         </span>
+
       </md-card-title-text>
+       <md-button class="md-icon-button" ng-click="vm.eliminarMaterial(material.id)" style="color: white; background-color: white; margin-right: 5px">
+                <md-icon  md-svg-icon="app/resources/icons/basurero.svg"></md-icon>
+              </md-button>
+
     </md-card-title>
     <div>
       <!--<a ui-sref='editdocument({id: material.id})'>
