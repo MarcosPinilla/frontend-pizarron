@@ -23,9 +23,10 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService', 'VisibilidadService', 'UpdateVisibilidadService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$anchorScroll', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService', 'VisibilidadService', 'UpdateVisibilidadService'];
 
-  function editarDocumentoCtrl(MaterialService, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService, VisibilidadService, UpdateVisibilidadService) {
+  function editarDocumentoCtrl(MaterialService, $anchorScroll, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService, VisibilidadService, UpdateVisibilidadService) {
+    $anchorScroll();
     var vm = this;
 
     vm.indexTabs=0;
@@ -170,7 +171,7 @@
       //_config.redoButton.disabled= "disabled";
       //_config.undoButton.disabled= "disabled";
 
-      vm.fonts = ["Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
+      vm.fonts = ["Roboto", "Open Sans", "Lato", "Montserrat", "Ubuntu", "Lobster", "Shadows Into Light", "Dancing Script", "Source Code Pro"];
       vm.fontsizes = [];
 
       for(var i=0;i<100;i++){
