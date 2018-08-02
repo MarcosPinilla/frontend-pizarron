@@ -1445,6 +1445,70 @@
       console.log(json);
       canvas.loadFromJSON(json.data);
     }
+    //la función solo setea el background del canvas actual (por motivos de pruebas)
+    vm.agregarPlantilla = function(){
+      var ruta="https://i.imgur.com/ZO6eFFe.png";
+
+      console.log(ruta);
+          var cadena = ruta.split(".");
+          var extension = cadena[cadena.length-1]
+          console.log(extension);
+
+            if (extension === "svg") {
+
+              fabric.loadSVGFromURL(ruta, function(objects, options) {
+                var obj = fabric.util.groupSVGElements(objects, options);
+
+                obj.set({
+                    top: 0,
+                    left: 0,
+                    scaleX: canvas.width/obj.width,
+                    scaleY: canvas.height/obj.height,
+                    selectable:false,
+                    evented: false
+                  });
+                /*
+                obj.scaleToWidth(794);
+                obj.scaleToHeight(1112);
+                */
+                canvas.add(obj);
+                //var a = canvas.setActiveObject(obj);
+                
+              });
+
+            } else if (extension === "png" || extension === "jpg") {
+              fabric.Image.fromURL(ruta, function(img) {
+                  //var oImg = img.set({ left: 0, top: 0}).scale(0.25);
+                  img.crossOrigin = 'anonymous';
+                  img.set({
+                    top: 0,
+                    left: 0,
+                    scaleX: canvas.width/img.width,
+                    scaleY: canvas.height/img.height,
+                    selectable:false,
+                    evented: false
+                  });
+                  canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                    // Optionally add an opacity lvl to the image
+                    backgroundImageOpacity: 0.5,
+                    // should the image be resized to fit the container?
+                    backgroundImageStretch: false
+                });
+                  /*
+                  img.scaleToWidth(canvas.getWidth());
+                  img.height=canvas.getWidth();
+                  */
+                  //canvas.add(img);
+                  //var a = canvas.setActiveObject(img);
+                 
+                  //canvas.add(oImg);
+                }, { crossOrigin: 'anonymous'});  
+            }
+            
+          
+    }
+
+
   }
 
   function configuracionPaginaController($mdDialog, orientacion, tipo) {
