@@ -864,6 +864,41 @@
       
     };
 
+     vm.canvasModifiedAddBackground = function(img) {
+      var bg= {
+        backgroundImage:img.backgroundImage
+      };
+
+      vm.documentoCompleto['background']=(JSON.parse(JSON.stringify(bg)));
+      
+      //vm.documentoCompleto[vm.paginaActual].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+      
+      for(var i=0;i<vm.documentoCompleto.length;i++){
+        if(typeof vm.documentoCompleto[i].data !== 'undefined'){
+          vm.documentoCompleto[i].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+          
+        }
+        
+      }
+
+
+      if(vm.pegar){
+        vm.pegar=false;
+        $timeout(function () {
+          //vm.figuras = canvas.getObjects().length;
+          console.log(vm.figuras);
+          vm.pegar=false;
+         }); 
+
+        vm.pegar=false;
+      }
+      //genera problrmas
+      //vm.guardar();
+      
+    };
+
+
+
     vm.canvasModified=function(){
       var json = canvas.toJSON();
       var editado = {
@@ -1196,7 +1231,7 @@
           vm.documentoCompleto = json;
 
           //Inicia en la página 1
-          vm.paginaActual = 1;
+          //vm.paginaActual = 1;(modificado)
 
           var json = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual}, true)[0];
           canvas.loadFromJSON(json.data); 
@@ -1395,10 +1430,19 @@
       vm.paginaActual++;
 
       var json = canvas.toJSON();
-
+      if(vm.documentoCompleto['background']){
+        json.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+      }
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length, 
         data: json});
+
+      
+      var doc = $filter('filter')(vm.documentoCompleto, {id: vm.documentoCompleto.length-1 }, true)[0];
+      console.log(vm.documentoCompleto);
+      canvas.loadFromJSON(doc.data);
+     
+   
 
      }else{
 
@@ -1414,10 +1458,20 @@
           vm.paginaActual++
 
            var json = canvas.toJSON();
-            
+           console.log(vm.documentoCompleto);
+            if(vm.documentoCompleto['background']){
+              json.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+            }
             vm.documentoCompleto.push({
               id: vm.paginaActual, 
               data: json});
+
+              setTimeout(function(){ 
+              var doc = $filter('filter')(vm.documentoCompleto, {id: vm.paginaActual }, true)[0];
+
+              canvas.loadFromJSON(doc.data);
+              }, 500);
+   
             break;
            }
            
@@ -1467,6 +1521,12 @@
                     selectable:false,
                     evented: false
                   });
+                canvas.setBackgroundImage(obj, canvas.renderAll.bind(canvas), {
+                    // Optionally add an opacity lvl to the image
+                    backgroundImageOpacity: 0.5,
+                    // should the image be resized to fit the container?
+                    backgroundImageStretch: false
+                });
                 /*
                 obj.scaleToWidth(794);
                 obj.scaleToHeight(1112);
@@ -1488,12 +1548,16 @@
                     selectable:false,
                     evented: false
                   });
-                  canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                  var img=canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
                     // Optionally add an opacity lvl to the image
                     backgroundImageOpacity: 0.5,
                     // should the image be resized to fit the container?
                     backgroundImageStretch: false
                 });
+                  
+                vm.canvasModifiedAddBackground(img);
+
+                  
                   /*
                   img.scaleToWidth(canvas.getWidth());
                   img.height=canvas.getWidth();
