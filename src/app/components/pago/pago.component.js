@@ -24,7 +24,7 @@
             console.log("a pagar");
             ContratoService.get().$promise.then(function (data) {
                 vm.aPagar = data;
-                console.log(vm.aPagar);
+                window.location.href = API + 'contrato/'+ data.id +'/pagar';
             });
             /*ContratoService.save(vm.contrato, function (res) {
                 console.log(res);
@@ -33,8 +33,8 @@
                 console.log("error");
                 console.log(err);
             });*/
-            
-            window.location.href = API + 'contrato/'+ vm.aPagar.id +'/pagar';
+            console.log(vm.aPagar.id);
+            //window.location.href = API + 'contrato/'+ vm.aPagar.id +'/pagar';
         }  
   	}
 })();
