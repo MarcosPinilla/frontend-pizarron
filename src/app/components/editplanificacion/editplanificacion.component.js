@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	//editplanificacionCtrl.$inject = [];
+  	editplanificacionCtrl.$inject = ['MaterialService', '$stateParams'];
 
-  	function editplanificacionCtrl() {
-
+  	function editplanificacionCtrl(MaterialService, $stateParams) {
+		vm.documento = MaterialService.get({id: $stateParams.id});
   	}
 })();

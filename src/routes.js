@@ -14,6 +14,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'login',
     isPrivate: false
   })
+  .state('pago', {
+    url: '/pago',
+    component: 'pago',
+    isPrivate: false,
+    isPago: true
+  })
   .state('landing', {
     url: '/home',
     component: 'landing',
@@ -51,7 +57,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     templateUrl: 'app/components/editdocument/editdocument.component.html'
   })
   .state('editplanificacion', {
-    url: '/editplanificacion',
+    url: '/editplanificacion/:id',
     component: 'editplanificacion',
     isPrivate: true
   })
@@ -216,14 +222,19 @@ function middlewareConfig($state, CredentialsService, $transitions) {
   // Funcion cada vez que se intenta acceder a una ruta
   $transitions.onStart({}, function (trans) {
     var isPrivate = trans.$to().isPrivate;
+    var isPago = trans.$to().isPago;
     var to = trans.$to().name;
     // Compruebo si esta logeado para acceder a rutas protegidas, si no esta logeado se va a la pestaña login
     if (isPrivate && !CredentialsService.isLogged()) {
       $state.go('login');
     }
 
+    if (isPrivate && CredentialsService.isLogged() && !CredentialsService.isActive()) {
+      $state.go('pago');
+    }
+
     // Compruebo que quiera entrar a el login cuando ya esta logeado
-    if (to === 'login' && CredentialsService.isLogged()) {
+    if (to === 'login' && CredentialsService.isLogged() ) {
       $state.go('dashboard.publicaciones');
     }
 
@@ -250,6 +261,8 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     if (to === 'dashboard' && CredentialsService.isLogged()) {
       $state.go('dashboard.publicaciones');
     }
+
+    
 
   });
 }

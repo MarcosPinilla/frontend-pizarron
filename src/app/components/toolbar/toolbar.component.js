@@ -210,8 +210,15 @@
           MaterialService.save(material, function (res) {
             console.log(res);
             vm.material_id = res.id;
-            $state.go('editdocument', { id: res.id });
-            $mdDialog.hide();
+            if(material.id_tipo_material == 2){
+              console.log("entre a planificacion");
+              $state.go('editplanificacion', { id: res.id });
+              $mdDialog.hide();
+            }else{
+              console.log("entre a fichas");
+              $state.go('editdocument', { id: res.id });
+              $mdDialog.hide();
+            }
           }, function (err) {
             console.log(err);
           });
