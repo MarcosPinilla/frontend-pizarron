@@ -9,10 +9,10 @@
       controllerAs: 'vm'
     });
 
-  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarambitosService', 'ListarnucleosService', 'ListarnivelesService',
+  toolbarCtrl.$inject = ['CredentialsService', '$rootScope', '$mdDialog', '$state', 'BuscarNombreProfesorService', 'ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService',
     'ListartipomaterialService', 'PrimerasNotificacionesService', 'CantidadNotificaciones', 'CambiarNotificacionesLeidas',  '$pusher'];
 
-  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarambitosService, ListarnucleosService, ListarnivelesService,
+  function toolbarCtrl(CredentialsService, $rootScope, $mdDialog, $state, BuscarNombreProfesorService, ListarambitosService, NucleoByAmbitoService, NivelByNucleoService,
     ListartipomaterialService, PrimerasNotificacionesService, CantidadNotificaciones, CambiarNotificacionesLeidas, $pusher) {
     var vm = this;
 
@@ -83,16 +83,7 @@
       vm.ambitos = data;
       console.log(vm.ambitos);
     });
-
-    ListarnucleosService.query().$promise.then(function (data) {
-      vm.nucleos = data;
-      console.log(vm.nucleos);
-    });
-
-    ListarnivelesService.query().$promise.then(function (data) {
-      vm.niveles = data;
-      console.log(vm.niveles);
-    });
+    
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
@@ -180,7 +171,7 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService) {
+    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService, NucleoByAmbitoService, NivelByNucleoService) {
       var vm = this;
       vm.usuario = usuario;
       vm.ambitos = ambitos;
@@ -190,6 +181,20 @@
 
       vm.material = {};
       vm.material_id = '';
+
+      vm.cargarNucleos = function() {
+        var idAmbito = JSON.parse('{"id": ' + vm.material.id_ambito + '}');
+        NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
+          vm.nucleos = data;
+        }); 
+      }
+  
+      vm.cargarNiveles = function() {
+        var idNucleo = JSON.parse('{"id": ' + vm.material.id_nucleo + '}');
+        NivelByNucleoService.query(idNucleo).$promise.then(function (data) {
+          vm.niveles = data;
+        });
+      }
 
       VisibilidadService.query().$promise.then(function (data) {
         vm.visibilidades = data;
@@ -206,6 +211,8 @@
       }
 
       vm.crearmaterial = function (material) {
+        material.id_objetivo = vm.material.id_nivel;
+        console.log(material);
         if (material.titulo_material != null && material.id_ambito != null && material.id_nucleo != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
           MaterialService.save(material, function (res) {
             console.log(res);

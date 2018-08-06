@@ -12,6 +12,7 @@
   	editplanificacionCtrl.$inject = ['MaterialService', '$stateParams'];
 
   	function editplanificacionCtrl(MaterialService, $stateParams) {
+		var vm = this;  
 		vm.documento = MaterialService.get({id: $stateParams.id});
   	}
 })();

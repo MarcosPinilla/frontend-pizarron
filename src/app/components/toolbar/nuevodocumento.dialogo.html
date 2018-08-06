@@ -13,7 +13,7 @@
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
 	    <label>Ámbito</label>
-	     <md-select required="true" ng-model="vm.material.id_ambito">
+	     <md-select required="true" ng-model="vm.material.id_ambito" ng-change="vm.cargarNucleos()">
 	        <md-option ng-repeat="ambito in vm.ambitos" ng-value="ambito.id">
 	        	{{ambito.descripcion_ambito}}
 	    	</md-option>
@@ -21,7 +21,7 @@
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">
 	    <label>Núcleo</label>
-	     <md-select required="true" ng-model="vm.material.id_nucleo">
+	     <md-select required="true" ng-model="vm.material.id_nucleo" ng-change="vm.cargarNiveles()">
 	        <md-option ng-repeat="nucleo in vm.nucleos" ng-value="nucleo.id">
 	        	{{nucleo.nombre_nucleo}}
 	    	</md-option>
