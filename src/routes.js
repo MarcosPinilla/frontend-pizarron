@@ -189,6 +189,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'mimaterial',
     isPrivate: true  
   })
+  .state('dashboard.miplanificacion', {
+    url: '/miplanificacion',
+    component: 'miplanificacion',
+    isPrivate: true  
+  })
   .state('dashboard.misnoticias', {
     url: '/misnoticias',
     component: 'noticia',

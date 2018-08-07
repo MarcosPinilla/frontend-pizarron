@@ -1396,6 +1396,15 @@ md-list-item.md-2-line .md-list-item-text h4 {
   width: 100%;
 }
 
+.planificacion-card {
+  width: 285px;
+  float: left;
+}
+
+.planificacion-card img{
+  width: 100%;
+}
+
 /*chat*/
 
 .virtualRepeatdemoInfiniteScroll #vertical-container {
