@@ -18,12 +18,9 @@
             id_suscripcion : 1
         };
 
-        vm.aPagar={}
-
         vm.pagar = function (){
             console.log("a pagar");
             ContratoService.get().$promise.then(function (data) {
-                vm.aPagar = data;
                 window.location.href = API + 'contrato/'+ data.id +'/pagar';
             });
             /*ContratoService.save(vm.contrato, function (res) {
@@ -33,7 +30,7 @@
                 console.log("error");
                 console.log(err);
             });*/
-            console.log(vm.aPagar.id);
+            //console.log(vm.aPagar.id);
             //window.location.href = API + 'contrato/'+ vm.aPagar.id +'/pagar';
         }  
   	}

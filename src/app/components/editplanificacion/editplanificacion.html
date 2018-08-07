@@ -4,88 +4,144 @@
     <div flex="15"></div>
     <div flex="70" class="centerplanificacion" layout="column">
         <br>
-        <div style="border: 1px solid black; margin: 30px; background-color:rgba(0, 0, 0, 0);">
-            <md-content>
+        <br>
+        <br>
+        <br>
+        <div style="border: 1px solid black; margin: 30px; background-color:rgba(0, 0, 0, 0);" layout="column">
+                
                 <div layout="row">
                     <md-input-container flex="30" class="input-planificacion" >
                         <label>NOMBRE DE EXPERIENCIA DE APRENDIZAJE</label>
-                        <input ng-model="user.title" ng-value="{{ vm.documento.titulo_material }}">
+                        <input ng-model="vm.planificacion.titulo_material" ng-value="vm.planificacion.titulo_material">
                     </md-input-container>
                     
                     <md-input-container flex="30" class="input-planificacion">
                         <label>FECHA</label>
-                        <input ng-model="user.email" type="email">
+                        <center><md-datepicker flex="100" ng-model="vm.contenido_material.fecha" ng-value="vm.contenido_material.fecha"></md-datepicker></center>
                     </md-input-container>
     
                     <md-input-container flex="30" class="input-planificacion">
                         <label>EDUCADORA DE AULA</label>
-                        <input ng-model="user.email" type="email">
+                        <input ng-model="vm.contenido_material.educadora" ng-value="vm.contenido_material.educadora">
                     </md-input-container>
                 </div>
-            </md-content>
-            <md-content >
+                       
                 <div layout="row">
                     <md-input-container flex="30" class="input-planificacion">
                         <label>NIVEL</label>
-                        <input ng-model="user.title">
+                        <input ng-disabled="true" ng-model="vm.planificacion.objetivo_aprendizaje.nivel.nombre_nivel" ng-value="vm.planificacion.objetivo_aprendizaje.nivel.nombre_nivel">
                     </md-input-container>
     
                     <md-input-container flex="30" class="input-planificacion">
                         <label>CENTRO EDUCATIVO</label>
-                        <input ng-model="user.email" type="email">
+                        <input ng-model="vm.contenido_material.centro" ng-value="vm.contenido_material.centro">
                     </md-input-container>
                     
                     <md-input-container flex="30" class="input-planificacion">
                         <label>PERIODO</label>
-                        <input ng-model="user.email" type="email">
+                        <input ng-model="vm.contenido_material.periodo" ng-value="vm.contenido_material.periodo">
                     </md-input-container>
                 </div>
-            </md-content>
-            <md-content >
+            
                 <div layout="row">
                     <md-input-container flex="60" class="input-planificacion">
                         <label>ORGANIZACIÓN DE GRUPO</label>
-                        <input ng-model="user.title">
+                        <input ng-model="vm.contenido_material.organizacion" ng-value="vm.contenido_material.organizacion">
                     </md-input-container>
                     <div flex="30"></div>
-                </div>
-            </md-content>
+                </div>       
         </div>
         <div style="margin-left: 20px; margin-right: 20px; background-color:rgba(0, 0, 0, 0);" layout="row">
             
-            <md-input-container flex="40" class="input-planificacion" style="border: 1px solid black; margin-top: 2px;">
+            <md-input-container flex="40" class="input-planificacion" style="border: 1px solid black; padding-top: -10px;">
                 <label>ÁMBITO PARA EL APRENDIZAJE</label>
-                <input ng-model="user.title">
+                <input ng-disabled="true" ng-model="vm.planificacion.objetivo_aprendizaje.nivel.nucleo.ambito.descripcion_ambito" ng-value="vm.planificacion.objetivo_aprendizaje.nivel.nucleo.ambito.descripcion_ambito">
             </md-input-container>
 
-            <md-input-container flex="30" class="input-planificacion" style="border: 1px solid black; margin-top: 2px;">
+            <md-input-container flex="30" class="input-planificacion" style="border: 1px solid black; padding-top: -10px;">
                 <label>NÚCLEO</label>
-                <input ng-model="user.email" type="email">
+                <input ng-disabled="true" ng-model="vm.planificacion.objetivo_aprendizaje.nivel.nucleo.descripcion_nucleo" ng-value="vm.planificacion.objetivo_aprendizaje.nivel.nucleo.descripcion_nucleo">
             </md-input-container>
             
-            <md-input-container flex="30" class="input-planificacion" style="border: 1px solid black; margin-top: 2px;">
+            <md-input-container flex="30" class="input-planificacion" style="border: 1px solid black; padding-top: -10px;">
                 <label>EJE</label>
-                <input ng-model="user.email" type="email">
+                <input ng-model="vm.contenido_material.eje" ng-value="vm.contenido_material.eje">
             </md-input-container>
                
         </div>
         <div style="margin-left: 20px; margin-right: 20px; background-color:rgba(0, 0, 0, 0);" layout="row">
             
-            <md-input-container flex="100" class="input-planificacion" style="border: 1px solid black; margin-top: 2px;">
+            <md-input-container flex="100" class="input-planificacion2" style="border: 1px solid black; margin-top: 2px;">
                 <label>APRENDIZAJE ESPERADO GENERAL</label>
-                <input ng-model="user.title">
+                <textarea ng-model="vm.contenido_material.aprendizaje_general" ng-value="vm.contenido_material.aprendizaje_general" md-maxlength="60" rows="1" md-select-on-focus></textarea>
             </md-input-container>
                    
         </div>
-        <div style="margin-left: 20px; margin-right: 20px; background-color:rgba(0, 0, 0, 0);" layout="row">
-            
-            <md-input-container flex="100" class="input-planificacion" style="border: 1px solid black; margin-top: 2px;">
+        <div style="margin-left: 20px; margin-right: 20px; background-color:rgba(0, 0, 0, 0);" layout="row">   
+            <md-input-container flex="100" class="input-planificacion2" style="border: 1px solid black; margin-top: 2px;">
                 <label>APRENDIZAJE ESPERADO ESPECÍFICO</label>
-                <input ng-model="user.title">
-            </md-input-container>
-                    
+                <textarea ng-model="vm.contenido_material.aprendizaje_especifico" ng-value="vm.contenido_material.aprendizaje_especifico" md-maxlength="60" rows="1" md-select-on-focus></textarea>
+            </md-input-container>     
         </div>
+        <div style="margin-left: 20px; margin-right: 20px; background-color:rgba(0, 0, 0, 0);" layout="row">
+            <div flex="25" class="input-planificacion2" style="border: 1px solid black;" layout="column">
+                <md-input-container  class="input-planificacion3" >
+                    <label>EXPERIENCIA METODOLÓGICA</label>
+                    <textarea ng-model="vm.contenido_material.exp_metodologica" ng-value="vm.contenido_material.exp_metodologica" md-maxlength="255" rows="12" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>
+            <div flex="25" class="input-planificacion2" style="border: 1px solid black;" layout="column">
+                <md-input-container  class="input-planificacion3" >
+                    <label>EXPERIENCIA DE APRENDIZAJE</label>
+                    <textarea ng-model="vm.contenido_material.exp_aprendizaje" ng-value="vm.contenido_material.exp_aprendizaje" md-maxlength="255" rows="12" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>   
+            <div flex="25" class="input-planificacion2" style="border: 1px solid black;" layout="column">
+                <md-input-container class="input-planificacion3" >
+                    <label>EVALUACIÓN INDICADORES OBSERVABLES</label>
+                    <textarea ng-model="vm.contenido_material.ev_observables" ng-value="vm.contenido_material.ev_observables" md-maxlength="255" rows="12" md-select-on-focus></textarea>
+                </md-input-container>
+            </div>      
+                
+                <div flex="25" class="input-planificacion2" style="border: 1px solid black;" layout="column">
+                    <p style="margin-left: 2px;">RECURSOS:</p>
+                    <!--
+                    <md-input-container class="input-planificacion3" >
+                        <label>RECURSOS</label>
+                        <textarea ng-model="vm.contenido_material.recursos" ng-value="vm.contenido_material.recursos" md-maxlength="60" rows="2" md-select-on-focus></textarea>
+                    </md-input-container>-->
+
+                    <md-input-container class="input-planificacion3">
+                        <label>HUMANOS</label>
+                        <textarea ng-model="vm.contenido_material.humanos" ng-value="vm.contenido_material.humanos" md-maxlength="60" rows="2" md-select-on-focus></textarea>
+                    </md-input-container> 
+
+                    <md-input-container class="input-planificacion3" >
+                        <label>MATERIALES</label>
+                        <textarea ng-model="vm.contenido_material.materiales" ng-value="vm.contenido_material.materiales" md-maxlength="60" rows="2" md-select-on-focus></textarea>
+                    </md-input-container> 
+
+                    <md-input-container class="input-planificacion3" >
+                        <label>EDAD</label>
+                        <textarea ng-model="vm.contenido_material.edad" ng-value="vm.contenido_material.edad" md-maxlength="60" rows="2" md-select-on-focus></textarea>
+                    </md-input-container> 
+
+                    <md-input-container class="input-planificacion3" >
+                        <label>TIEMPO</label>
+                        <textarea ng-model="vm.contenido_material.tiempo" ng-value="vm.contenido_material.tiempo" md-maxlength="60" rows="2" md-select-on-focus></textarea>
+                    </md-input-container>  
+                </div>  
+                      
+            </div>
+            <div>
+                <center>
+                    <md-button flex="25" ng-click="vm.updatear()" class="login-button">Guardar Cambios</md-button>
+                    <md-button flex="25" class="button-footer md-raised md-warn login-button" ui-sref="#">Salir</md-button>
+                </center>
+            </div>
         
+        <br>
+        <br>
     </div>
     <div flex="15"></div>
 </div>

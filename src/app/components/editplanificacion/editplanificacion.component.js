@@ -9,10 +9,28 @@
     	controllerAs: 'vm'
   	});
 
-  	editplanificacionCtrl.$inject = ['MaterialService', '$stateParams'];
+  	editplanificacionCtrl.$inject = ['MaterialService', '$stateParams', 'ActualizarPlanificacionService', 'ContenidoPlanificacionService', '$state'];
 
-  	function editplanificacionCtrl(MaterialService, $stateParams) {
+  	function editplanificacionCtrl(MaterialService, $stateParams, ActualizarPlanificacionService, ContenidoPlanificacionService, $state) {
 		var vm = this;  
-		vm.documento = MaterialService.get({id: $stateParams.id});
+		vm.planificacion = MaterialService.get({id: $stateParams.id});
+		if(vm.planificacion.id_tipo_material == 2){
+			$state.go('editdocument', { id: material.id });
+		}
+		vm.contenido_material = ContenidoPlanificacionService.get({id: $stateParams.id});
+		console.log(vm.planificacion);
+		console.log(vm.contenido_material);
+
+		vm.update = {
+			contenido_material:{}
+		}
+
+		vm.update.contenido_material= vm.contenido_material;
+
+		vm.updatear = function(){
+			ActualizarPlanificacionService.update({id: $stateParams.id}, vm.update, function () {
+			}, function () {});
+		}
+		
   	}
 })();

@@ -49,7 +49,25 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 .input-planificacion{
   margin-left: 10px;
   margin-right: 10px;
+  float: left;
+  height: 30px;
 }
+
+.input-planificacion2{
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+  max-height: 590px;
+}
+
+.input-planificacion3{
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+  height: 50px;
+  max-height: 580px;
+}
+
 
 /*** MODALS ***/
 
