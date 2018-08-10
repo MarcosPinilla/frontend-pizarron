@@ -9,9 +9,9 @@
     controllerAs: 'vm'
   });
 
-  materialesCtrl.$inject = ['$mdDialog', 'PublicMaterialService','AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
+  materialesCtrl.$inject = ['$mdDialog', 'PublicMaterialService','ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state'];
 
-  function materialesCtrl($mdDialog, PublicMaterialService, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
+  function materialesCtrl($mdDialog, PublicMaterialService, ListarambitosService, NucleoByAmbitoService, NivelByNucleoService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state) {
     var vm = this;
 
     vm.materiales = {};
@@ -51,20 +51,24 @@
         });
     });
 
-    AmbitoService.query().$promise.then(function (data) {
-      vm.ambito = data;
-      console.log(vm.ambito);
+    ListarambitosService.query().$promise.then(function (data) {
+      vm.ambitos = data;
+      console.log(vm.ambitos);
     });
 
-    NucleoService.query().$promise.then(function (data) {
-      vm.nucleo = data;
-      console.log(vm.nucleo);
-    });
+    vm.cargarNucleos = function() {
+      var idAmbito = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id + '}');
+      NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
+        vm.nucleos = data;
+      }); 
+    }
 
-    ListarnivelesService.query().$promise.then(function (data) {
-      vm.nivel = data;
-      console.log(vm.nivel);
-    });
+    vm.cargarNiveles = function() {
+      var idNucleo = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.id + '}');
+      NivelByNucleoService.query(idNucleo).$promise.then(function (data) {
+        vm.niveles = data;
+      });
+    }
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo = data;

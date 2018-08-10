@@ -30,14 +30,23 @@
       return localStorage.getItem('rol');
     };
 
+    this.setActive = function (active) {
+      localStorage.setItem('active', active);
+    };
+
+    this.getActive = function () {
+      return localStorage.getItem('active');
+    };
+
     this.clearCredentials = function () {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('rol');
+      localStorage.removeItem('active');
     };
 
     this.isLogged = function () {
-      if (this.getToken() && this.getUser() && this.getRol()) {
+      if (this.getToken() && this.getUser() && this.getRol() && this.getActive()) {
         return true;
       }
       return false;
@@ -49,5 +58,14 @@
       }
       return false;
     };
+
+    this.isActive = function (){
+      if(this.getActive() == 'true'){
+        return true;
+      }else{
+        return false;
+      }
+    };
+
   }
 })();

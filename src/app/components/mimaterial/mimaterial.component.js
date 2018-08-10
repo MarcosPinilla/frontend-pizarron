@@ -9,27 +9,32 @@
       controllerAs: 'vm'
     });
 
-  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'MaterialService', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
+  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'MaterialService', 'ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
 
-  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, MaterialService,AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
+  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, MaterialService,ListarambitosService, NucleoByAmbitoService, NivelByNucleoService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
     var vm = this;
     vm.materiales = {};
     vm.autoria = [{id: 0, nombre: 'autor'}, {id: 1, nombre: 'colaborador'}];
     console.log(vm.autoria);
 
-    AmbitoService.query().$promise.then(function (data) {
-      vm.ambito = data;
-      console.log(vm.ambito);
+    ListarambitosService.query().$promise.then(function (data) {
+      vm.ambitos = data;
+      console.log(vm.ambitos);
     });
 
-    NucleoService.query().$promise.then(function (data) {
-      vm.nucleo = data;
-      console.log(vm.nucleo);
-    });
+    vm.cargarNucleos = function() {
+      var idAmbito = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id + '}');
+      NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
+        vm.nucleos = data;
+      }); 
+    }
 
-    ListarnivelesService.query().$promise.then(function (data) {
-      vm.nivel = data;
-    });
+    vm.cargarNiveles = function() {
+      var idNucleo = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.id + '}');
+      NivelByNucleoService.query(idNucleo).$promise.then(function (data) {
+        vm.niveles = data;
+      });
+    }
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo = data;
