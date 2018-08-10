@@ -892,8 +892,8 @@
 
         vm.pegar=false;
       }
-      //genera problrmas
-      //vm.guardar();
+      
+      vm.guardar();
       
     };
 
@@ -1076,13 +1076,19 @@
     //Método utilizado para guardar el documento en la base de datos
     vm.guardar = function(documento) {
       $timeout(function(){
+        var bg;
+        if(vm.documentoCompleto['background']){
+          bg=vm.documentoCompleto['background'];
+        }else if(vm.documentoCompleto[0].background){
+          bg=vm.documentoCompleto[0].background;
+        }
         var editado = {
           id: 0,
-          figuras: vm.figuras
+          figuras: vm.figuras,
+          background: bg
         }
 
         vm.documentoCompleto[0] = editado;
-        
         var json = vm.documentoCompleto;
         console.log(json);
         console.log(vm.documentoCompleto);
@@ -1430,8 +1436,8 @@
       vm.paginaActual++;
 
       var json = canvas.toJSON();
-      if(vm.documentoCompleto['background']){
-        json.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+      if(vm.documentoCompleto[0].background){
+        json.backgroundImage=vm.documentoCompleto[0].background.backgroundImage;
       }
       vm.documentoCompleto.push({
         id: vm.documentoCompleto.length, 
@@ -1459,8 +1465,8 @@
 
            var json = canvas.toJSON();
            console.log(vm.documentoCompleto);
-            if(vm.documentoCompleto['background']){
-              json.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+            if(vm.documentoCompleto[0].background){
+              json.backgroundImage=vm.documentoCompleto[0].background.backgroundImage;
             }
             vm.documentoCompleto.push({
               id: vm.paginaActual, 
