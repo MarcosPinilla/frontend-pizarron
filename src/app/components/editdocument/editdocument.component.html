@@ -106,8 +106,8 @@
                 <md-grid-tile class="hover12"
                               md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1"  md-rowspan-sm="1" md-rowspan-xs="1"
                              >
-                   
-                      <img ng-class="{'seleccionada':vm.plantillaSeleccionada === 'none'}" ng-src="https://unitx140033354.files.wordpress.com/2016/03/delete_sign-256.png" ng-click="vm.agregarPlantilla('none')" class="img-repository" />
+                   <!--https://unitx140033354.files.wordpress.com/2016/03/delete_sign-256.png-->
+                      <img ng-class="{'seleccionada':vm.plantillaSeleccionada === 'none'}" ng-src="http://sistema.educadoras.cl/v1/storage/ninguna.svg" ng-click="vm.agregarPlantilla('none')" class="img-repository" />
 
                       <md-tooltip>
                         Ninguna
@@ -295,7 +295,7 @@
 -->     <md-input-container ng-if="vm.esColaborador===true">
            <md-select :placeholder="{{vm.plantillaSeleccionada}}" ng-model="vm.plantillaSeleccionada" name="repeatSelect" class="md-no-underline" ng-change="vm.updatePlantilla(vm.plantillaSeleccionada)">
             <md-option value="none">Ninguna</md-option>
-              <md-option ng-repeat="option in vm.elementos | filter:{id_tipo_elemento:8}" value="{{option.contenido_elemento}}">{{option.descripcion_elemento}}</md-option>
+              <md-option ng-repeat="option in vm.elementos | filter:{id_tipo_elemento:8} | limitTo:4" value="{{option.contenido_elemento}}">{{option.descripcion_elemento}}</md-option>
           </md-select>
         </md-input-container>
 
