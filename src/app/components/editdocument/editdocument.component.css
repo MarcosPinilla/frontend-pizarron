@@ -18,6 +18,10 @@
   font-size:30px;
 }
 
+.seleccionada {
+  border: 2px solid green;
+}
+
 .contenedorDnD {
   width: 700px;
   height: 500px;

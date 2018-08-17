@@ -107,7 +107,7 @@
                               md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1"  md-rowspan-sm="1" md-rowspan-xs="1"
                              >
                    
-                      <img ng-src="https://unitx140033354.files.wordpress.com/2016/03/delete_sign-256.png" ng-click="vm.agregarPlantilla('none')" class="img-repository" />
+                      <img ng-class="{'seleccionada':vm.plantillaSeleccionada === 'none'}" ng-src="https://unitx140033354.files.wordpress.com/2016/03/delete_sign-256.png" ng-click="vm.agregarPlantilla('none')" class="img-repository" />
 
                       <md-tooltip>
                         Ninguna
@@ -117,9 +117,9 @@
 
                 <md-grid-tile ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta | filter:{id_tipo_elemento:8} " class="hover12"
                               md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1"  md-rowspan-sm="1" md-rowspan-xs="1"
-                             >
+                      >
                    
-                      <img ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.agregarPlantilla(elemento.contenido_elemento)" class="img-repository" />
+                      <img ng-class="{'seleccionada':vm.plantillaSeleccionada === elemento.contenido_elemento}" ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.agregarPlantilla(elemento.contenido_elemento)" class="img-repository" />
                 
                       <md-tooltip>
                         {{elemento.descripcion_elemento}}
