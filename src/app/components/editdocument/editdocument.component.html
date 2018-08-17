@@ -28,7 +28,7 @@
             </md-button>
           </div>
           <div flex="25">
-            <md-button style="margin:0 !important; padding:0 !important;" aria-label="">
+            <md-button style="margin:0 !important; padding:0 !important;" aria-label="" ng-click="vm.indexTabs = 1">
              <img src="app/resources/icons/ICONOS-25.svg">
              <md-tooltip md-direction="bottom">
                Plantillas
@@ -36,7 +36,7 @@
            </md-button>
           </div>
           <div flex="25">
-             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab figuras" ng-click="vm.indexTabs = 1">
+             <md-button style="margin:0 !important; padding:0 !important;" aria-label="Tab figuras" ng-click="vm.indexTabs = 2">
               <img src="app/resources/icons/ICONOS-28.svg">
               <md-tooltip md-direction="bottom">
                 Tipografías
@@ -91,6 +91,43 @@
             
             <md-tab-body>
               <repositorio></repositorio>
+            </md-tab-body>
+            
+          </md-tab>
+
+           <md-tab>
+            
+            <md-tab-body>
+              <md-grid-list
+                    md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
+                    md-row-height-gt-md="1:1" md-row-height="4:3"
+                    md-gutter="12px" md-gutter-gt-sm="8px">
+
+                <md-grid-tile class="hover12"
+                              md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1"  md-rowspan-sm="1" md-rowspan-xs="1"
+                             >
+                   
+                      <img ng-src="https://unitx140033354.files.wordpress.com/2016/03/delete_sign-256.png" ng-click="vm.agregarPlantilla('none')" class="img-repository" />
+
+                      <md-tooltip>
+                        Ninguna
+                    </md-tooltip>
+                
+                </md-grid-tile>
+
+                <md-grid-tile ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta | filter:{id_tipo_elemento:8} " class="hover12"
+                              md-rowspan="3" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1"  md-rowspan-sm="1" md-rowspan-xs="1"
+                             >
+                   
+                      <img ng-src="{{ elemento.contenido_elemento }}" ng-click="vm.agregarPlantilla(elemento.contenido_elemento)" class="img-repository" />
+                
+                      <md-tooltip>
+                        {{elemento.descripcion_elemento}}
+                      </md-tooltip>
+
+                </md-grid-tile>
+              </md-grid-list>
+
             </md-tab-body>
             
           </md-tab>
@@ -251,10 +288,16 @@
               </md-tooltip>
             
           </md-button>
-
-           <md-button ng-click="vm.agregarPlantilla()">
+<!--
+           <md-button  ng-if="vm.esColaborador===true" ng-click="vm.agregarPlantilla()">
             Poner plantilla
           </md-button>
+-->     <md-input-container ng-if="vm.esColaborador===true">
+           <md-select :placeholder="{{vm.documentoCompleto[0].plantilla}}" ng-model="vm.plantillaSeleccionada" name="repeatSelect" class="md-no-underline" ng-change="vm.updatePlantilla(vm.plantillaSeleccionada)">
+            <md-option value="none">Ninguna</md-option>
+              <md-option ng-repeat="option in vm.elementos | filter:{id_tipo_elemento:8}" value="{{option.contenido_elemento}}">{{option.descripcion_elemento}}</md-option>
+          </md-select>
+        </md-input-container>
 
           <md-input-container ng-if="vm.esColaborador===true">
            <md-select :placeholder="{{vm.documento.visibilidad.nombre_visibilidad}}" name="repeatSelect" id="repeatSelect" ng-model="modeloVisibilidad.id"  class="md-no-underline" ng-change="vm.updateVisibilidad(modeloVisibilidad)">

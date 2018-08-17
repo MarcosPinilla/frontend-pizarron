@@ -23,11 +23,13 @@
     };
   });
 
-  editarDocumentoCtrl.$inject = ['MaterialService', '$anchorScroll', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService', 'VisibilidadService', 'UpdateVisibilidadService'];
+  editarDocumentoCtrl.$inject = ['MaterialService', '$anchorScroll', '$pusher', '$log', '$stateParams', '$scope', '$mdDialog', 'ActualizarContenidoMaterialService', 'ObtenerContenidoMaterialService', '$timeout', '$filter','ActualizarMaterialService','validarColaboradorService', 'VisibilidadService', 'UpdateVisibilidadService','ElementoService'];
 
-  function editarDocumentoCtrl(MaterialService, $anchorScroll, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService, VisibilidadService, UpdateVisibilidadService) {
+  function editarDocumentoCtrl(MaterialService, $anchorScroll, $pusher, $log, $stateParams, $scope, $mdDialog, ActualizarContenidoMaterialService, ObtenerContenidoMaterialService, $timeout, $filter, ActualizarMaterialService,validarColaboradorService, VisibilidadService, UpdateVisibilidadService,ElementoService) {
     $anchorScroll();
     var vm = this;
+
+    vm.plantillaSeleccionada="Ninguna";
 
     vm.indexTabs=0;
 
@@ -35,6 +37,12 @@
 
     vm.documento = MaterialService.get({id: $stateParams.id});
 
+    vm.elementos = [];
+ 
+    ElementoService.query().$promise.then(function (data) {
+      vm.elementos = data;
+      console.log(vm.elementos);
+    });
 
     validarColaboradorService.query({id: $stateParams.id}).$promise.then(function(data){
         if(data.length!=0){
@@ -61,6 +69,10 @@
       },function(err){
   
       });
+    }
+
+    vm.updatePlantilla = function(url){
+      vm.agregarPlantilla(url);
     }
 
     vm.documento.$promise.then(function(data){
@@ -866,20 +878,41 @@
     };
 
      vm.canvasModifiedAddBackground = function(img) {
-      var bg= {
-        backgroundImage:img.backgroundImage
-      };
+     
+      if(img===""){
+        var bg= {
+          backgroundImage:""
+        };
 
-      vm.documentoCompleto['background']=(JSON.parse(JSON.stringify(bg)));
-      
-      //vm.documentoCompleto[vm.paginaActual].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
-      
-      for(var i=0;i<vm.documentoCompleto.length;i++){
-        if(typeof vm.documentoCompleto[i].data !== 'undefined'){
-          vm.documentoCompleto[i].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+        vm.documentoCompleto['background']=(JSON.parse(JSON.stringify(bg)));
+        
+        //vm.documentoCompleto[vm.paginaActual].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+        
+        for(var i=0;i<vm.documentoCompleto.length;i++){
+          if(typeof vm.documentoCompleto[i].data !== 'undefined'){
+            vm.documentoCompleto[i].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+            
+          }
           
         }
-        
+
+      }else{
+          var bg= {
+            backgroundImage:img.backgroundImage,
+          };
+
+          vm.documentoCompleto['background']=(JSON.parse(JSON.stringify(bg)));
+          
+          //vm.documentoCompleto[vm.paginaActual].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+          
+          for(var i=0;i<vm.documentoCompleto.length;i++){
+            if(typeof vm.documentoCompleto[i].data !== 'undefined'){
+              vm.documentoCompleto[i].data.backgroundImage=vm.documentoCompleto['background'].backgroundImage;
+              
+            }
+            
+          }
+
       }
 
 
@@ -1086,7 +1119,7 @@
         var editado = {
           id: 0,
           figuras: vm.figuras,
-          background: bg
+          background: bg,
         }
 
         vm.documentoCompleto[0] = editado;
@@ -1191,7 +1224,6 @@
         console.log(json);
         canvas.loadFromJSON(json.data); 
         
-
         setTimeout(function(){
           if(!vm.esColaborador){
             canvas.selection = false;
@@ -1507,9 +1539,9 @@
       canvas.loadFromJSON(json.data);
     }
     //la función solo setea el background del canvas actual (por motivos de pruebas)
-    vm.agregarPlantilla = function(){
-      var ruta="https://i.imgur.com/ZO6eFFe.png";
-
+    vm.agregarPlantilla = function(url){
+      //var ruta='https://i.imgur.com/6zbAb32.png';
+      var ruta=url;
       console.log(ruta);
           var cadena = ruta.split(".");
           var extension = cadena[cadena.length-1]
@@ -1519,7 +1551,6 @@
 
               fabric.loadSVGFromURL(ruta, function(objects, options) {
                 var obj = fabric.util.groupSVGElements(objects, options);
-
                 obj.set({
                     top: 0,
                     left: 0,
@@ -1528,7 +1559,7 @@
                     selectable:false,
                     evented: false
                   });
-                canvas.setBackgroundImage(obj, canvas.renderAll.bind(canvas), {
+                 var img=canvas.setBackgroundImage(obj, canvas.renderAll.bind(canvas), {
                     // Optionally add an opacity lvl to the image
                     backgroundImageOpacity: 0.5,
                     // should the image be resized to fit the container?
@@ -1538,7 +1569,8 @@
                 obj.scaleToWidth(794);
                 obj.scaleToHeight(1112);
                 */
-                canvas.add(obj);
+                vm.canvasModifiedAddBackground(img);
+                //canvas.add(obj);
                 //var a = canvas.setActiveObject(obj);
                 
               });
@@ -1574,6 +1606,8 @@
                  
                   //canvas.add(oImg);
                 }, { crossOrigin: 'anonymous'});  
+            }else if(url==="none"){
+              vm.canvasModifiedAddBackground("");
             }
             
           
