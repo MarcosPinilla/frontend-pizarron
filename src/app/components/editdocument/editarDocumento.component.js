@@ -1116,10 +1116,12 @@
         }else if(vm.documentoCompleto[0].background){
           bg=vm.documentoCompleto[0].background;
         }
+        var plantilla = {nombre:vm.plantillaSeleccionada};
         var editado = {
           id: 0,
           figuras: vm.figuras,
           background: bg,
+          plantilla:(JSON.parse(JSON.stringify(plantilla)))
         }
 
         vm.documentoCompleto[0] = editado;
@@ -1215,6 +1217,7 @@
          //Documento completo sin páginas
           vm.documentoCompleto = json;
           //vm.documentoCompleto = angular.fromJson(vm.nuevo.contenido_material);
+          vm.plantillaSeleccionada = vm.documentoCompleto[0].plantilla.nombre;
           console.log(vm.documentoCompleto);
           //Inicia en la página 1
           vm.paginaActual = 1;
@@ -1542,6 +1545,7 @@
     vm.agregarPlantilla = function(url){
       //var ruta='https://i.imgur.com/6zbAb32.png';
       var ruta=url;
+      vm.plantillaSeleccionada = url;
       console.log(ruta);
           var cadena = ruta.split(".");
           var extension = cadena[cadena.length-1]

@@ -293,7 +293,7 @@
             Poner plantilla
           </md-button>
 -->     <md-input-container ng-if="vm.esColaborador===true">
-           <md-select :placeholder="{{vm.documentoCompleto[0].plantilla}}" ng-model="vm.plantillaSeleccionada" name="repeatSelect" class="md-no-underline" ng-change="vm.updatePlantilla(vm.plantillaSeleccionada)">
+           <md-select :placeholder="{{vm.plantillaSeleccionada}}" ng-model="vm.plantillaSeleccionada" name="repeatSelect" class="md-no-underline" ng-change="vm.updatePlantilla(vm.plantillaSeleccionada)">
             <md-option value="none">Ninguna</md-option>
               <md-option ng-repeat="option in vm.elementos | filter:{id_tipo_elemento:8}" value="{{option.contenido_elemento}}">{{option.descripcion_elemento}}</md-option>
           </md-select>
