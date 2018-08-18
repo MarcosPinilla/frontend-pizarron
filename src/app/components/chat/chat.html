@@ -152,7 +152,11 @@
 				<md-divider ></md-divider>
 			</md-list>
 		</div>
-		<md-button ng-if="vm.visibleChatGrupal" style="margin-left: 50px" ng-click="vm.crearChatGrupal()">Crear </md-button>
+		<div layout="row"  style="margin: 0px!important" >
+			<md-button ng-if="vm.visibleChatGrupal"  ng-click="vm.crearChatGrupal()">Crear </md-button>
+			<md-button ng-if="vm.visibleChatGrupal" ng-click="vm.cancelarChatGrupal()">Cancelar </md-button>
+		</div>
+
 		<div ng-if="vm.visibleChatGrupal" id="chat-profesores" style="margin-bottom: 1em; margin-top: 0px!important">
 			
 			<md-list flex style="margin-bottom: 50px;">

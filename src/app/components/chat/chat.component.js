@@ -227,7 +227,10 @@
          vm.visibleChatGrupal = true;
        }
  
- 
+      vm.cancelarChatGrupal = function () {
+        vm.visibleChatGrupal = false;
+        vm.visibleChat = true;
+      }
  
        vm.crearChatGrupal = function (id) {
          vm.visibleChat = true;
