@@ -9,9 +9,9 @@
       controllerAs: 'vm'
     });
 
-  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'DarFavorito', 'AmbitoService', 'NucleoService', 'ListarnivelesService', 'ListartipomaterialService', '$state'];
+  favoritosCtrl.$inject = ['$mdDialog', 'ObtenerFavoritosProfesor', 'DarFavorito', 'ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService', 'ListartipomaterialService', '$state'];
 
-  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, DarFavorito, AmbitoService, NucleoService, ListarnivelesService, ListartipomaterialService, $state) {
+  function favoritosCtrl($mdDialog, ObtenerFavoritosProfesor, DarFavorito, ListarambitosService, NucleoByAmbitoService, NivelByNucleoService, ListartipomaterialService, $state) {
     var vm = this;
 
     vm.favoritos = {};
@@ -53,17 +53,24 @@
       }, 300);
     });
 
-    AmbitoService.query().$promise.then(function (data) {
-      vm.ambito = data;
+    ListarambitosService.query().$promise.then(function (data) {
+      vm.ambitos = data;
+      console.log(vm.ambitos);
     });
 
-    NucleoService.query().$promise.then(function (data) {
-      vm.nucleo = data;
-    });
+    vm.cargarNucleos = function() {
+      var idAmbito = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id + '}');
+      NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
+        vm.nucleos = data;
+      }); 
+    }
 
-    ListarnivelesService.query().$promise.then(function (data) {
-      vm.nivel = data;
-    });
+    vm.cargarNiveles = function() {
+      var idNucleo = JSON.parse('{"id": ' + vm.filter.objetivo_aprendizaje.nivel.nucleo.id + '}');
+      NivelByNucleoService.query(idNucleo).$promise.then(function (data) {
+        vm.niveles = data;
+      });
+    }
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo = data;

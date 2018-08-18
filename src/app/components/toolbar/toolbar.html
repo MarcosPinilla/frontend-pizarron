@@ -80,6 +80,12 @@
       </md-button>
     </md-fab-trigger>
     <md-fab-actions>
+      <md-button ng-if="vm.isLogged" class="md-fab md-raised md-mini" aria-label="Favorite" ui-sref="dashboard.miplanificacion">
+        <md-icon md-svg-icon="app/resources/icons/document-in-circular-button.svg"></md-icon>
+        <md-tooltip md-direction="left">
+          Mis Planificaciones
+        </md-tooltip>
+      </md-button>
       <md-button ng-if="vm.isadmin && !vm.isnotadmin" class="md-fab md-raised md-mini" aria-label="Favorite" ui-sref="administrator">
         <md-icon md-svg-icon="app/resources/icons/baseline-settings-20px.svg"></md-icon>
         <md-tooltip md-direction="left">

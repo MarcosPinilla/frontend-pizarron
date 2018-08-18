@@ -27,9 +27,9 @@
     }
   }]);
 
-  elementoCtrl.$inject = ['$mdDialog', 'ElementoService'];
+  elementoCtrl.$inject = ['$mdDialog', 'ElementoService', 'TipoElementoService'];
 
-  function elementoCtrl($mdDialog, ElementoService) {
+  function elementoCtrl($mdDialog, ElementoService, TipoElementoService) {
     var vm = this;
 
     vm.elemento={
@@ -136,7 +136,7 @@
     };
   }
 
-  function dialogoController($mdDialog, elemento, ElementoService, $state, EtiquetaService) {
+  function dialogoController($mdDialog, elemento, ElementoService, $state, EtiquetaService, TipoElementoService) {
     var vm = this;
     vm.elemento = elemento;
     
@@ -149,9 +149,11 @@
       vm.etiquetas = data;
     });
 
-    vm.newelemento={
-      id_tipo_elemento: 1
-    };
+    vm.newelemento={};
+
+    TipoElementoService.query().$promise.then(function (data) {
+      vm.tipoelementos = data;
+    });
 
     ElementoService.query().$promise.then(function (data) {
       vm.elementos = data;

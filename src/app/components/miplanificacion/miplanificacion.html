@@ -1,0 +1,75 @@
+<div>
+    <center>
+        <h2 class="titulo">Mis Planificaciones</h2>
+        <br>
+    </center>
+    <md-divider></md-divider>
+    <br>
+    <div class="div-buscador" flex-offset="30" flex="40">
+        <md-input-container class="buscador-repo" flex="98">
+        <label flex="100">Buscador</label>
+        <input ng-model="buscador" type="text" flex="100">
+        </md-input-container>
+    
+    </div>
+    <br>
+    <div class="mimaterial-options" layout="row">
+        <div class="mimaterial-select">
+            <label>Ámbito</label>
+            <select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id" ng-change="vm.cargarNucleos()">
+                <option value="">Todos </option>
+                <option ng-repeat="ambito in vm.ambitos" value="{{ambito.id}}" >{{ambito.descripcion_ambito}}</option>
+            </select>
+        </div>
+    
+        <div class="mimaterial-select">
+            <label>Núcleo</label>
+            <select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.id" ng-change="vm.cargarNiveles()">
+                <option value="">Todos </option>
+                <option ng-repeat="nucleo in vm.nucleos" value="{{nucleo.id}}">{{nucleo.nombre_nucleo}}</option>
+            </select>
+        </div>
+        
+        <div class="mimaterial-select">
+            <label>Nivel</label>
+            <select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.id">
+                <option value="">Todos </option>
+                <option ng-repeat="nivel in vm.niveles" value="{{nivel.id}}">{{nivel.nombre_nivel}}</option>
+            </select>
+        </div>
+    </div>
+    <md-card class="post-card planificacion-card" ng-repeat="material in vm.materiales|filter: vm.filter |filter: buscador" ng-class="{'card-autor': material.autor == 'autor', 'card-colaborador' : material.autor == 'colaborador'}">
+        <md-card-title>
+        <md-card-title-text class="mimaterial-titulo">
+            <span>
+            <a ng-repeat="colaboradores in vm.materiales.colaboradores" href="#">{{colaboradores.nombres_profesor}}</a>
+            <a ui-sref="editplanificacion({id:material.id})">{{material.titulo_material}}</a>
+            </span>
+    
+        </md-card-title-text>
+            <md-button class="md-icon-button" ng-click="vm.eliminarMaterial(material.id)" style="color: white; background-color: white; margin-right: 5px">
+                    <md-icon  md-svg-icon="app/resources/icons/basurero.svg"></md-icon>
+                </md-button>
+    
+        </md-card-title>
+        <div>
+        <!--<a ui-sref='editdocument({id: material.id})'>
+            <div class="preview md-card-image" id={{material.id}}>
+        </a>-->
+        <!--<img class="preview md-card-image" src="data:image/svg+xml,{{material.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, material.vista_previa)">-->
+        <img class="preview md-card-image" src="https://cms-assets.tutsplus.com/uploads/users/33/posts/27093/preview_image/folded-document-icon-large.png" alt="No se encontro vista previa">
+        </div>
+        <md-card-actions layout="row" layout-align="end center" style="color: white;">
+        <md-button ng-click="vm.goMaterial(material)">
+            <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+            Ver planificacion
+        </md-button>
+        <md-button ng-if="material.esFavorito == true" ng-click="vm.darFavorito(material)">
+            <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+        </md-button>
+        <md-button ng-if="material.esFavorito == false" ng-click="vm.darFavorito(material)">
+            <md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+        </md-button>
+        </md-card-actions>
+    </md-card>
+    </div>
