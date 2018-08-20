@@ -87,6 +87,9 @@
 						</div>
 					</div>
 				</md-content>
+			<md-button ng-if="material.comentarios.length > 3" md-no-ink class="md-primary"  ng-click="cargarComentario(index)">
+				Ver todos los comentarios
+			</md-button>
 				<div layout="row" flex>
 					<div flex="5"></div>
 					<div class="caja-comentario" flex="70">

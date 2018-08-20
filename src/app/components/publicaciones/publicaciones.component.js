@@ -17,11 +17,31 @@
     vm.comentarios = {};
     vm.favoritos = {};
     vm.comentario;
+    vm.materialesVarible = {};
 
     var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
+    vm.cargarComentario = function (index) {
+      vm.materiales[index] = vm.materialesVarible[index];
+    }
+
     MaterialService.query().$promise.then(function (data) {
+      console.log(data);
       vm.materiales = data;
+      vm.materialesVarible = data;
+
+     
+      for (var i = 0; i > vm.materiales.length; i++) {
+        if (vm.materiales[i].comentarios.length > 3) {
+          var comentariosTres = [];
+          comentariosTres.push(vm.materiales[i].comentarios[1]);
+          comentariosTres.push(vm.materiales[i].comentarios[2]);
+          comentariosTres.push(vm.materiales[i].comentarios[3]);
+          vm.materiales[i].comentarios = comentariosTres;
+        }
+       
+      }
+      
 
       setTimeout(function () {
         for (let i = 0; i < vm.materiales.length; i++) {
