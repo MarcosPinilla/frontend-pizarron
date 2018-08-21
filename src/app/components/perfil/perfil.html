@@ -316,5 +316,39 @@
         </md-card-actions>
         </md-card>
     </div>
+    <!--Planificaciones-->
+    <div class="perfil-publicaciones-valoradas" flex="95">
+      <div id="titulo-perfil-valoradas"  style="background-color: #6D72AD">
+        <h2 class="texto-titulo-perfil">Planificaciones</h2>
+      </div>
+        <md-card class="post-card planificacion-card" style="background-color: #6D72AD" ng-repeat="planificacion in vm.planificaciones">
+          <md-card-title style="background-color: #6D72AD; border-radius: 18px;">
+            <md-card-title-text class="mimaterial-titulo">
+              <span><a ui-sref='editplanificacion({id: planificacion.id_material})'>{{planificacion.titulo_material}}</a></span>
+            </md-card-title-text>
+          </md-card-title>
+          <div>
+            <img class="preview md-card-image" src="https://cms-assets.tutsplus.com/uploads/users/33/posts/27093/preview_image/folded-document-icon-large.png" alt="No se encontro vista previa">
+          </div> 
+          <md-card-actions layout="row" layout-align="end center" style="color: white;">
+            <md-button ng-click="vm.goPlanificacion(planificacion)">
+                <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+                Ver planificacion
+            </md-button>
+            <md-button ng-if="planificacion.esFavorito == true" ng-click="vm.darFavorito(planificacion)">
+              <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
+            </md-button>
+            <md-button ng-if="planificacion.esFavorito == false" ng-click="vm.darFavorito(planificacion)">
+              <md-icon class="corazon-vacio" md-svg-icon="app/resources/icons/ic_favorite_border_black_24px.svg"></md-icon>
+              <md-tooltip md-direction="bottom">
+                Favoritos
+              </md-tooltip>
+            </md-button>
+          </md-card-actions>
+        </md-card>
+    </div>
   </div>
 </div>

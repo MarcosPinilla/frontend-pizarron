@@ -9,14 +9,15 @@
       controllerAs: 'vm'
     });
 
-  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', 'UnfollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SeguidorService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', '$rootScope'];
+  perfilCtrl.$inject = ['$mdDialog', 'ProfesorService', 'ObtenerMejoresFavoritos', 'FollowService', 'UnfollowService', '$stateParams', 'PerfilService', 'AmigoService', 'SeguidorService', 'SolicitudService', 'MaterialRecientelService', 'ObtenerFavoritosAnalogosService', 'PlanificacionPerfilService', 'DarFavorito', '$state', '$rootScope'];
 
-  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, UnfollowService, $stateParams, PerfilService, AmigoService, SeguidorService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, DarFavorito, $state, $rootScope) {
+  function perfilCtrl($mdDialog, ProfesorService, ObtenerMejoresFavoritos, FollowService, UnfollowService, $stateParams, PerfilService, AmigoService, SeguidorService, SolicitudService, MaterialRecientelService, ObtenerFavoritosAnalogosService, PlanificacionPerfilService, DarFavorito, $state, $rootScope) {
     var vm = this;
     vm.perfil = {};
     vm.amistad = {};
     vm.mejoresFavoritos = {};
     vm.materialreciente = {};
+    vm.planificaciones = {};
     vm.isUser = false;
     vm.isSolicitado = false;  
     vm.seguido = false;
@@ -155,6 +156,30 @@
             console.log(vm.materialreciente[x]);
           } else {
             vm.materialreciente[x].esFavorito = false;
+          }
+        }
+      });
+    });
+
+    PlanificacionPerfilService.query({ id: vm.profesorId }).$promise.then(function (data) {
+      vm.planificaciones = data;
+      console.log("PLanificaciones:" + vm.planificaciones);
+
+      ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
+        vm.favoritos = data;
+        console.log("ESTOS SON LOS FAVORITOS!!!")
+        console.log(vm.favoritos);
+
+        vm.idfavoritos = vm.favoritos.map(function (i) { return i.id_material; });
+
+        for (var x = 0; x < vm.planificaciones.length; x++) {
+          //if(!vm.materiales.hasOwnProperty(x)) continue;
+          if (vm.idfavoritos.length > 0) {
+            console.log(vm.idfavoritos);
+            vm.planificaciones[x].esFavorito = vm.idfavoritos.indexOf(vm.planificaciones[x].id) > -1;
+            console.log(vm.planificaciones[x]);
+          } else {
+            vm.planificaciones[x].esFavorito = false;
           }
         }
       });
@@ -314,6 +339,10 @@
 
     vm.goMaterial = function (materialid) {
       $state.go('editdocument', { id: materialid });
+    };
+
+    vm.goPlanificacion = function (material) {
+      $state.go('editplanificacion', { id: material.id });
     };
 
     vm.darFavorito = function (material) {
