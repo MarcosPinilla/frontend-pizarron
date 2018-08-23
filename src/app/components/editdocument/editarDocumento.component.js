@@ -77,7 +77,9 @@
 
     vm.documento.$promise.then(function(data){
       vm.documento = data;
-      vm.nombreInicial=vm.documento.titulo_material;
+
+      vm.nombreInicial = vm.documento.titulo_material;
+      
       console.log(vm.documento.contenido_material);
       console.log(vm.documento);
       //Forma de iniciar el editar documento
@@ -534,7 +536,7 @@
         }
       }
       //Se guarda al hacer cualquier cambio al título
-      document.getElementById("titulo-material").addEventListener('input',
+      document.getElementById("titulo-material").addEventListener('blur',
        function (evt) {
           vm.guardar();
       });
@@ -1151,8 +1153,8 @@
           documentoTemp.titulo_material = vm.documento.titulo_material;
           vm.nombreInicial = vm.documento.titulo_material;
         }else{
-          vm.documento.titulo_material = vm.nombreInicial;
-          documentoTemp.titulo_material = vm.nombreInicial
+          vm.documento.titulo_material = "Documento sin título";
+          documentoTemp.titulo_material = "Documento sin título";
         }
         
         if (vm.paginaActual === 1) {
@@ -1336,13 +1338,11 @@
     $scope.$watch("vm.figuras",function(numero) {
      
       if (numero > 50) {
-
         setTimeout(function(){
          vm.eliminar() 
         }, 100);
       }
        
-     
     });
 
     //Dialog para añadir nuevo colaborador a la edición del material
