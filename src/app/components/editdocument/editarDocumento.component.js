@@ -1073,12 +1073,11 @@
       //Se crea la estructura para imprimir
       var windowContent = '<!DOCTYPE html>';
       windowContent += '<html>'
-      windowContent += '<head><title></title></head>';
       windowContent += '<body>'
       
       //Mediante una iteración se agregan las páginas a imprimir
       for (var i = 0; i < paginas.length; i++) {
-        windowContent += '<img src="' + paginas[i] + '" onload=window.print();window.close();>';
+        windowContent += '<img style="top: 0; bottom: 0; left: 0; right: 0; max-width: 100%; max-height: 100%; margin: auto; overflow: auto;" src="' + paginas[i] + '" onload=window.print();window.close();>';
       }
       windowContent += '</body>';
       windowContent += '</html>';
