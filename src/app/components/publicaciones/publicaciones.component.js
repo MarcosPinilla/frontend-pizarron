@@ -23,6 +23,7 @@
 
     vm.cargarComentario = function (index) {
       vm.materiales[index] = vm.materialesVarible[index];
+      console.log(index);
     }
 
     MaterialService.query().$promise.then(function (data) {
@@ -31,13 +32,15 @@
       vm.materialesVarible = data;
 
      
-      for (var i = 0; i > vm.materiales.length; i++) {
+      for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
+          comentariosTres.push(vm.materiales[i].comentarios[0]);
           comentariosTres.push(vm.materiales[i].comentarios[1]);
           comentariosTres.push(vm.materiales[i].comentarios[2]);
-          comentariosTres.push(vm.materiales[i].comentarios[3]);
           vm.materiales[i].comentarios = comentariosTres;
+          console.log(comentariosTres);
+          console.log(vm.materiales[i])
         }
        
       }
