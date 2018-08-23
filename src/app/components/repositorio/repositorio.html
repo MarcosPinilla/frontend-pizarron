@@ -64,7 +64,7 @@
         md-row-height-gt-md="1:1" md-row-height="4:3"
         md-gutter="8px" md-gutter-gt-sm="4px" >
 
-    <md-grid-tile ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta" class="hover12"
+    <md-grid-tile ng-repeat="elemento in vm.elementos | filter:vm.searchText | filter:vm.buscarEtiqueta | filter:{nombre_tipo:'Imagen'}" class="hover12"
                   md-colspan-sm="1"
                   md-colspan-xs="1"
                  >
