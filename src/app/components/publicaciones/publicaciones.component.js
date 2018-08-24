@@ -21,10 +21,7 @@
 
     var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
-    vm.cargarComentario = function (index) {
-      vm.materiales[index] = vm.materialesVarible[index];
-      console.log(index);
-    }
+
 
     MaterialService.query().$promise.then(function (data) {
       console.log(data);
@@ -54,6 +51,7 @@
 
       });
 
+
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
@@ -61,12 +59,16 @@
           comentariosTres.push(vm.materiales[i].comentarios[1]);
           comentariosTres.push(vm.materiales[i].comentarios[2]);
           vm.materiales[i].comentarios = comentariosTres;
+          vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
           console.log(vm.materiales[i]);
+        }else {
+          vm.materiales[i].botonComentarios = false;
         }
        
       }
       console.log(vm.materiales);
+
     });
 
 
@@ -76,6 +78,25 @@
         material.esFavorito = !material.esFavorito;
       });
     };
+
+    vm.indexXD = 0;
+     vm.cargarComentario = function (index) {
+      console.log(index);
+      vm.indexXD =index;
+        MaterialService.query().$promise.then(function (data) {
+          console.log(data);
+
+          vm.materiales[vm.indexXD].comentarios = data[vm.indexXD].comentarios;
+          vm.materiales[vm.indexXD].botonComentarios = false;
+          
+      });
+
+         
+
+     };
+
+
+
 
     vm.goMaterial = function (id_material) {
       $state.go('editdocument', { id: id_material });

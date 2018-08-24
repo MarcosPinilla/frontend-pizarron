@@ -87,7 +87,7 @@
 						</div>
 					</div>
 				</md-content>
-			<md-button ng-if="materialesVarible[index].comentarios.length > 3" md-no-ink class="md-primary"  ng-click="cargarComentario(index)">
+			<md-button ng-click="vm.cargarComentario($index)" ng-if="material.botonComentarios"  class="md-primary"  >
 				Ver todos los comentarios
 			</md-button>
 				<div layout="row" flex>
