@@ -205,10 +205,10 @@
               }
             }
           });
-        });
 
-       vm.materialesVarible = data;
 
+                 vm.materialesVarible = data;
+                 console.log(vm.materialesVarible);
      
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
@@ -223,6 +223,9 @@
        
       }
       console.log(vm.materiales);
+        });
+
+
       });
 
 
