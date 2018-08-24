@@ -335,7 +335,8 @@ md-dialog {
 }
 
 .userLogin {
-  width: 95%;
+  /* width: 95%; para el logo viejo*/
+  width: 75%; /* Para el logo nuevo */
 }
 
 .userRegister {
