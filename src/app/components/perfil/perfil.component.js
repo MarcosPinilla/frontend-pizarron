@@ -378,7 +378,7 @@
 
         vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
       $mdDialog.show({
-        controller: dialogoController,
+        controller: dialogoCompartirController,
         controllerAs: 'vm',
         templateUrl: 'app/components/publicaciones/compartirmaterial.dialogo.html',
         parent: angular.element(document.body),
@@ -397,7 +397,7 @@
     };
 
 
-        function dialogoController($mdDialog, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
+        function dialogoCompartirController($mdDialog, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
       var vm = this;
       vm.profesores = {};
       vm.nombre_profesor = null;
