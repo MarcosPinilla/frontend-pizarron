@@ -5,7 +5,7 @@
 <div>
 	<div flex="20"></div>
 	<div class="post" layout="column" flex="60" flex-offset="20">
-		<md-card class="post-card material-dashboard" ng-repeat="(material, index) in vm.materiales|filter: filter |filter: buscador">
+		<md-card class="post-card material-dashboard" ng-repeat="material in vm.materiales|filter: filter |filter: buscador track by index">
 			<md-card-title style="border-radius: 18px;">
 				<md-card-title-text class="mimaterial-titulo">
 					<div layout="row">
