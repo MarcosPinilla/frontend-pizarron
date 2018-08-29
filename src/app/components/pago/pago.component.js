@@ -9,14 +9,16 @@
     	controllerAs: 'vm'
   	});
 
-  	pagoCtrl.$inject = ['ContratoService','API'];
+  	pagoCtrl.$inject = ['ContratoService','API', '$rootScope'];
 
-  	function pagoCtrl(ContratoService, API) {
+  	function pagoCtrl(ContratoService, API, $rootScope) {
         var vm = this;
 
         vm.contrato={
             id_suscripcion : 1
         };
+
+        $rootScope.$emit('isinLogin'); 
 
         vm.pagar = function (){
             console.log("a pagar");
