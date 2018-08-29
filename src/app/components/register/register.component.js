@@ -21,8 +21,7 @@
     vm.comunas=[];
     vm.regiones={};
     vm.modelo={
-      id_rol : 2,
-      id_contrato: 1
+      id_rol : 2
     };
     
     vm.regionId = $stateParams.id;
