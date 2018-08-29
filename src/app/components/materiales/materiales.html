@@ -38,14 +38,6 @@
 	   			<option ng-repeat="nivel in vm.niveles" value="{{nivel.id}}">{{nivel.nombre_nivel}}</option>
 	  		</select>
 		</div>
-
-		<div class="mimaterial-select">
-			<label>Tipo</label>
-			<select id="input2" class="form-control" ng-model="vm.filter.tipo_material.nombre_tipo_material">
-	   			<option value="">Todos </option>
-	   			<option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
-	  		</select>
-		</div>
 	</div>
 	<md-card class="post-card material-card" style="background-color: #6d72ad; color: white;" ng-repeat="material in vm.materiales|filter: vm.filter |filter: buscador">
 		<md-card-title style="background-color: #6d72ad; border-radius: 18px;">

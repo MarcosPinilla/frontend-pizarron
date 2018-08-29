@@ -37,14 +37,6 @@
               <option ng-repeat="nivel in vm.niveles" value="{{nivel.id}}">{{nivel.nombre_nivel}}</option>
           </select>
       </div>
-  
-      <div class="mimaterial-select">
-        <label>Tipo</label>
-        <select id="input2" class="form-control" ng-model="vm.filter.tipo_material.nombre_tipo_material">
-              <option value="">Todos </option>
-              <option ng-repeat="tipo in vm.tipo" value="{{tipo.nombre_tipo_material}}">{{tipo.nombre_tipo_material}}</option>
-          </select>
-      </div>
     <div class="mimaterial-select">
       <label>Autoría</label>
       <select class="form-control" ng-model="vm.filter.autor">

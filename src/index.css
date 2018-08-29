@@ -1398,7 +1398,8 @@ md-list-item.md-2-line .md-list-item-text h4 {
 }
 
 .planificacion-card {
-  width: 285px;
+  width: 23%;
+  min-width: 200px;
   float: left;
 }
 

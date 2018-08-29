@@ -187,7 +187,7 @@
 
     vm.showEditarPerfil = function (ev, perfil) {
       $mdDialog.show({
-        controller: dialogoController,
+        controller: dialogController,
         controllerAs: 'vm',
         templateUrl: 'app/components/perfil/editarperfil.dialogo.html',
         parent: angular.element(document.body),
@@ -205,7 +205,7 @@
         });
     };
 
-    function dialogoController($scope, $mdDialog, $state, perfil, ProfesorService) {
+    function dialogController($scope, $mdDialog, $state, perfil, ProfesorService) {
       var vm = this;
 
       vm.perfil = perfil;
