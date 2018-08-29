@@ -57,7 +57,6 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   margin-left: 10px;
   margin-right: 10px;
   float: left;
-  max-height: 590px;
 }
 
 .input-planificacion3{
@@ -65,7 +64,6 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   margin-right: 10px;
   float: left;
   height: 50px;
-  max-height: 580px;
 }
 
 
