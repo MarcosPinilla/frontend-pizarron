@@ -210,7 +210,7 @@
  
                        // console.log(vm.mensajes);
                        vm.chats[data.index].conversations = data.grupo;
-                       $("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
+                      $("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
  
                      });
  
@@ -257,7 +257,7 @@
          console.log(data);
          vm.idGrupo = data.id;
          vm.selected = [];
-         $("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
+         //$("#bottom").animate({ scrollTop: $('#bottom')[0].scrollHeight}, 1000);
  
        },function(err){
          console.log(err);
@@ -373,16 +373,7 @@ function dialogoController($mdDialog, NoticiaService) {
     };
   }
 
-  app.directive("scrollBottom", function(){
-    return {
-        link: function(scope, element, attr){
-            var $id= $("#" + attr.scrollBottom);
-            $(element).on("click", function(){
-                $id.scrollTop($id[0].scrollHeight);
-            });
-        }
-    }
-  });
+
 
 
   })();
