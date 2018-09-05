@@ -9,11 +9,12 @@
         controllerAs: 'vm'
       });
   
-    seguidoresCtrl.$inject = ['SeguidoresService', 'PerfilService', '$state'];
+    seguidoresCtrl.$inject = ['SeguidoresService', 'SeguidosService', 'PerfilService', '$state'];
   
-    function seguidoresCtrl(SeguidoresService, PerfilService, $state) {
+    function seguidoresCtrl(SeguidoresService, SeguidosService, PerfilService, $state) {
       var vm = this;
       vm.seguidores = {};
+      vm.seguidos = {};
       vm.perfil = {};
   
       PerfilService.get().$promise.then(function (data) {
@@ -24,6 +25,11 @@
       SeguidoresService.query().$promise.then(function (data) {
         console.log(data);
         vm.seguidores = data;
+      });
+
+      SeguidosService.query().$promise.then(function (data) {
+        console.log(data);
+        vm.seguidos = data;
       });
   
       vm.verPerfil = function(profesorid) {

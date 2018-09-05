@@ -333,7 +333,9 @@
           <md-card-actions layout="row" layout-align="end center" style="color: white;">
             <md-button ng-click="vm.goPlanificacion(planificacion)">
                 <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
-                Ver planificacion
+                <md-tooltip md-direction="bottom">
+                  Ver Planificacion
+                </md-tooltip>
             </md-button>
             <md-button ng-if="planificacion.esFavorito == true" ng-click="vm.darFavorito(planificacion)">
               <md-icon class="corazon-rojo" md-svg-icon="app/resources/icons/ic_favorite_white_24px.svg"></md-icon>

@@ -57,7 +57,6 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   margin-left: 10px;
   margin-right: 10px;
   float: left;
-  max-height: 590px;
 }
 
 .input-planificacion3{
@@ -65,7 +64,6 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   margin-right: 10px;
   float: left;
   height: 50px;
-  max-height: 580px;
 }
 
 
@@ -335,7 +333,8 @@ md-dialog {
 }
 
 .userLogin {
-  width: 95%;
+  /* width: 95%; para el logo viejo*/
+  width: 75%; /* Para el logo nuevo */
 }
 
 .userRegister {
@@ -1397,7 +1396,8 @@ md-list-item.md-2-line .md-list-item-text h4 {
 }
 
 .planificacion-card {
-  width: 285px;
+  width: 23%;
+  min-width: 200px;
   float: left;
 }
 
@@ -1430,3 +1430,13 @@ md-list-item.md-2-line .md-list-item-text h4 {
 .imageDataTable{
   height: 5px;
 }
+
+.tabsdemoDynamicHeight md-content {
+  background-color: transparent !important; }
+  .tabsdemoDynamicHeight md-content md-tabs {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+    .tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
+      background: white; }
+  .tabsdemoDynamicHeight md-content h1:first-child {
+    margin-top: 0; }

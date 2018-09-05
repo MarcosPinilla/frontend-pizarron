@@ -14,6 +14,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'login',
     isPrivate: false
   })
+  .state('pagoexitoso', {
+    url: '/pagoexitoso',
+    component: 'pagoexitoso',
+    isPrivate: false,
+    isPago: true
+  })
   .state('pago', {
     url: '/pago',
     component: 'pago',
