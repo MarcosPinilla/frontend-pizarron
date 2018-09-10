@@ -16,7 +16,8 @@
     vm.usuario = localStorage.getItem("user");
     vm.asignaturas = {};
     vm.niveles = {};
-    vm.tipo_material = {}
+    vm.tipo_material = {};
+    vm.loading = true;
 
     vm.customFullscreen = true;
 
@@ -31,9 +32,27 @@
 
     ListartipomaterialService.query().$promise.then(function (data) {
       vm.tipo_material = data;
+      
     });
 
     //console.log(vm.asignaturas);
+
+   // setTimeout(function () {
+   //    vm.loading = false;
+   //    }, 4000);
+
+
+
+      vm.determinateValue = 30;
+
+   setTimeout(function() {
+
+        vm.determinateValue += 1;
+        if (vm.determinateValue > 100) {
+          vm.determinateValue = 30;
+        }
+        vm.loading = false;
+      }, 5000);
 
     vm.showPrompt = function (ev) {
       // Appending dialog to document.body to cover sidenav in docs app

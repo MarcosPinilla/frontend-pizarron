@@ -18,6 +18,7 @@
     vm.favoritos = {};
     vm.comentario;
     vm.materialesVarible = {};
+    vm.loading = false;
 
     var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
@@ -48,7 +49,7 @@
             vm.materiales[x].esFavorito = false;
           }
         }
-
+        vm.loading = true;
       });
 
 

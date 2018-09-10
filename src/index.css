@@ -17,6 +17,30 @@ body {
   /*//margin-top: 4em;*/
 }
 
+/*pantall carga*/
+
+.cargando-container {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  color: white;
+}
+
+    .color-verde{
+background-color: #00695C;
+}
+.carga {
+  margin: auto;
+}
+
+.carga p {
+  text-align: center;
+  margin: 2px;
+}
+
+.md-preloader{font-size:0;text-align: center;-webkit-animation:outer 6600ms linear infinite;animation:outer 6600ms linear infinite}.md-preloader svg{-webkit-animation:inner 1320ms linear infinite;animation:inner 1320ms linear infinite}.md-preloader svg circle{fill:none;stroke:white;stroke-linecap:square;-webkit-animation:arc 1320ms cubic-bezier(.8, 0, .4, .8) infinite;animation:arc 1320ms cubic-bezier(.8, 0, .4, .8) infinite}@-webkit-keyframes outer{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes outer{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes inner{0%{-webkit-transform:rotate(-100.8deg);transform:rotate(-100.8deg)}100%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes inner{0%{-webkit-transform:rotate(-100.8deg);transform:rotate(-100.8deg)}100%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes arc{0%{stroke-dasharray:1 210.48670779px;stroke-dashoffset:0}40%{stroke-dasharray:151.55042961px,210.48670779px;stroke-dashoffset:0}100%{stroke-dasharray:1 210.48670779px;stroke-dashoffset:-151.55042961px}}@keyframes arc{0%{stroke-dasharray:1 210.48670779px;stroke-dashoffset:0}40%{stroke-dasharray:151.55042961px,210.48670779px;stroke-dashoffset:0}100%{stroke-dasharray:1 210.48670779px;stroke-dashoffset:-151.55042961px}}
+
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   background-color: #6d72ad;
 }

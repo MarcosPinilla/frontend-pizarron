@@ -1,4 +1,21 @@
-<div class="dashboard" layout="row" layout-wrap>
+<div ng-show="vm.loading" class="dashboard" layout="row" layout-wrap>
+			<div ng-if="vm.loading" class="cargando-container " style="background-color: #6d72ad">
+
+			<div class="carga">
+									<div flex="30" style="height: 100%">
+				     <img src="app/resources/img/logo-toolbar1.png" id="logo-toolbar">
+				  </div>
+				<div class="md-preloader">
+			
+			
+					<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="75" width="75" viewbox="0 0 75 75">
+						<circle cx="37.5" cy="37.5" r="33.5" stroke-width="8"/>
+					</svg>
+				</div>
+			</div>
+		</div>
+</div>
+<div ng-show="!vm.loading"  class="dashboard" layout="row" layout-wrap>
 	<!-- Left ~ Sidebar -->
 	<div flex="25"><my-sidebar></my-sidebar></div>
 	<!-- Center -->

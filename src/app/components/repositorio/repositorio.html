@@ -22,9 +22,10 @@
           md-item-text="etiqueta.nombre_etiqueta"
           placeholder="Buscar por etiqueta"
           md-min-length="0"
+          md-selected-item-change="vm.obtenerElementos(etiqueta.id)"
           md-search-text-change="vm.searchTextChange(vm.buscarEtiqueta)">
-        <md-item-template>
-          <span md-highlight-text="vm.buscarEtiqueta" md-highlight-flags="^i">{{etiqueta.nombre_etiqueta}}</span>
+        <md-item-template >
+          <span md-highlight-text="vm.buscarEtiqueta" md-highlight-flags="^i" >{{etiqueta.nombre_etiqueta}}</span>
         </md-item-template>
         <md-not-found>
           No existen coincidencias con "{{vm.buscarEtiqueta}}"
@@ -42,6 +43,7 @@
 <md-content layout-gt-sm="row" layout-padding style="background-color: white;margin-bottom: 0px;">
 	<md-input-container flex="100" style="margin-bottom: 0px;">
  		<md-autocomplete
+          md-no-cache="true"
           md-search-text="vm.searchText"
           md-items="elemento in vm.elementos"
           md-item-text="elemento.descripcion_elemento"
