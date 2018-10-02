@@ -62,6 +62,31 @@
           vm.status = 'CANCELADO';
         });
       };
+
+      vm.editarOrientacion = function (orientacion,ambitos, event) {
+        $mdDialog.show({
+          controller: dialogoController,
+          controllerAs: 'vm',
+          templateUrl: 'app/components/orientacion/editarorientacion.dialogo.html',
+          parent: angular.element(document.body),
+          targetEvent: event,
+          clickOutsideToClose: true,
+          fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+          locals: {
+            orientacion : orientacion,
+            ambitos: ambitos
+          }
+        })
+        .then(function (answer) {
+          vm.status = 'Documento:  ' + answer + '.';
+          OrientacionService.query().$promise.then(function (data) {
+            vm.orientaciones = data;
+            console.log(vm.orientaciones);
+          });
+        }, function () {
+          vm.status = 'CANCELADO';
+        });
+      };
   
       vm.eliminarOrientacion = function (id) {
         OrientacionService.delete({id: id});
@@ -101,6 +126,20 @@
           vm.niveles = data;
         });
       }
+
+      vm.cargarNucleos2 = function() {
+        var idAmbito = JSON.parse('{"id": ' + vm.uporientacion.id_ambito + '}');
+        NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
+          vm.nucleos = data;
+        }); 
+      }
+  
+      vm.cargarNiveles2 = function() {
+        var idNucleo = JSON.parse('{"id": ' + vm.uporientacion.id_nucleo + '}');
+        NivelByNucleoService.query(idNucleo).$promise.then(function (data) {
+          vm.niveles = data;
+        });
+      }
   
       vm.anadirorientacion = function () {
         vm.neworientacion.id_objetivo = vm.neworientacion.id_nivel;
@@ -108,6 +147,12 @@
         OrientacionService.save(vm.neworientacion);
         $state.go('administrator.orientacion');
         vm.hide();
+      };
+
+      vm.actualizarOrientacion = function (orientacion) {
+        OrientacionService.update({id: vm.orientacion.id}, orientacion, function () {
+          vm.hide();
+        }, function () {});
       };
   
       vm.hide = function () {

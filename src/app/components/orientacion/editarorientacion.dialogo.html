@@ -1,0 +1,46 @@
+<md-dialog id="modalEditarUsu">
+	<div class="modal-title" style="background-color: #bddf8b;">
+		<h2><strong>Editar Información de la Orientacion</strong></h2>
+	</div>
+	<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+        <md-input-container class="md-block">
+            <label>Nombre</label>
+            <input ng-model="vm.uporientacion.nombre_orientacion" type="text" ng-value="vm.orientacion.nombre_orientacion">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Descripción</label>
+            <input ng-model="vm.uporientacion.descripcion_orientacion" type="text" ng-value="vm.orientacion.descripcion_orientacion">
+        </md-input-container>
+        <md-input-container class="md-block" >
+            <label>Ámbito</label>
+                <md-select required="true" ng-model="vm.uporientacion.id_ambito" ng-change="vm.cargarNucleos2()" placeholder="{{vm.orientacion.objetivo_aprendizaje.nivel.nucleo.ambito.descripcion_ambito}}">
+                <md-option ng-repeat="ambito in vm.ambitos" ng-value="ambito.id">
+                    {{ambito.descripcion_ambito}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block" >
+            <label>Núcleo</label>
+                <md-select required="true" ng-model="vm.uporientacion.id_nucleo" ng-change="vm.cargarNiveles2()" placeholder="{{vm.orientacion.objetivo_aprendizaje.nivel.nucleo.descripcion_nucleo}}">
+                <md-option ng-repeat="nucleo in vm.nucleos" ng-value="nucleo.id">
+                    {{nucleo.nombre_nucleo}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block" >
+            <label>Nivel</label>
+            <md-select required="true" ng-model="vm.uporientacion.id_nivel" placeholder="{{vm.orientacion.objetivo_aprendizaje.nivel.descripcion_nivel}}">
+                <md-option ng-repeat="nivel in vm.niveles" ng-value="nivel.id">
+                    {{nivel.nombre_nivel}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <center><center><input type="file" fileread="vm.uporientacion.pdf_orientacion"></center></center>
+		<br>
+		<center><md-button class="md-raised md-primary login-button" ng-click="vm.actualizarOrientacion(vm.uporientacion)" md-theme="dark-green" aria-label="addprofe">Actualizar Orientacion</md-button></center>
+		<br>
+	</md-content>
+	<div class="modal-footer">
+    	<center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+ 	</div>
+</md-dialog>
