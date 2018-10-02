@@ -1,0 +1,45 @@
+<div flex="90" flex-offset="5" flex-md="90" flex-offset-md="5" flex-xs="90" flex-offset-xs="5" class="fond" style="margin-bottom: 20px;background-color: white;" >
+    <center>
+      <h2 class="titulo">Orientaciones</h2>
+      <br>
+    </center>
+    <md-divider></md-divider>
+    <md-content layout-padding layout-wrap>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirorientacion(vm.orientacion, vm.ambitos, $event)"  md-theme="dark-green" aria-label="addprofe">añadir orientacion</md-button>
+    </md-content>
+    <md-table-container>
+      <table md-table md-row-select multiple md-progress="promise">
+        <thead md-head md-order="vm.query.order" md-on-reorder="getDesserts">
+          <tr md-row>
+            <th md-column md-numeric md-order-by="id">Id</th>
+            <th md-column md-numeric md-order-by="titulo_material">Nombre Orientacion</th>
+            <th md-column md-numeric md-order-by="asignatura.nombre_asignatura">Ambito</th>
+            <th md-column md-numeric md-order-by="nivel.nombre_nivel">Nucleo</th>
+            <th md-column md-numeric md-order-by="tipo_material.nombre_tipo_material">Nivel</th>
+            <th md-column md-numeric></th>
+            <th md-column md-numeric></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="dessert" md-select-id="name" md-auto-select class="tabla" ng-repeat="material in vm.materiales|orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit" ng-click="vm.goToPerson(person, $event)" >
+            <td md-cell>{{ material.id }}</td>
+            <td md-cell>{{ material.titulo_material }}</td>
+            <td md-cell>{{ material.asignatura.nombre_asignatura }}</td>
+            <td md-cell>{{ material.nivel.nombre_nivel }}</td>
+            <td md-cell>{{ material.tipo_material.nombre_tipo_material }}</td>
+            <td md-cell>
+              <md-button class="md-icon-button" ui-sref="editdocument/material.id" style="margin-right: -40px;">
+                <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
+              </md-button>
+            </td>
+            <td md-cell>
+              <md-button class="md-icon-button" ng-click="vm.eliminarMaterial(material.id)" style="margin-right: -25px;">
+                <md-icon  md-svg-icon="app/resources/icons/basurero.svg"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+    <md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page" md-total="{{vm.materiales.length}}" md-page-select></md-table-pagination>
+  </div>

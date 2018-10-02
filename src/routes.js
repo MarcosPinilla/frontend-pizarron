@@ -155,6 +155,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'etiqueta',
     isPrivate: true
   })
+  .state('administrator.orientacion', {
+    url: '/orientacion',
+    component: 'orientacion',
+    isPrivate: true
+  })
   .state('administrator.actualizacionsemanal', {
     url: '/actualizaciones',
     component: 'actualizacionsemanal',
@@ -168,6 +173,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
   .state('dashboard.publicaciones', {
     url: '/publicaciones',
     component: 'publicaciones',
+    isPrivate: true
+  })
+  .state('dashboard.orientaciones', {
+    url: '/orientaciones',
+    component: 'orientaciones',
     isPrivate: true
   })
   .state('dashboard.materiales', {
