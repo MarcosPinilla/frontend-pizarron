@@ -160,6 +160,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'orientacion',
     isPrivate: true
   })
+  .state('administrator.materialanexo', {
+    url: '/materialanexo',
+    component: 'materialanexo',
+    isPrivate: true
+  })
   .state('administrator.actualizacionsemanal', {
     url: '/actualizaciones',
     component: 'actualizacionsemanal',

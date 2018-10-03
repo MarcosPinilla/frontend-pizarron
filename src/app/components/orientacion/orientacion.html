@@ -12,10 +12,10 @@
         <thead md-head md-order="vm.query.order" md-on-reorder="getDesserts">
           <tr md-row>
             <th md-column md-numeric md-order-by="id">Id</th>
-            <th md-column md-numeric md-order-by="titulo_material">Nombre Orientacion</th>
-            <th md-column md-numeric md-order-by="asignatura.nombre_asignatura">Ambito</th>
-            <th md-column md-numeric md-order-by="nivel.nombre_nivel">Nucleo</th>
-            <th md-column md-numeric md-order-by="tipo_material.nombre_tipo_material">Nivel</th>
+            <th md-column md-numeric md-order-by="nombre_orientacion">Nombre Orientacion</th>
+            <th md-column md-numeric md-order-by="objetivo_aprendizaje.nivel.nucleo.ambito.descripcion_ambito">Ambito</th>
+            <th md-column md-numeric md-order-by="objetivo_aprendizaje.nivel.nucleo.descripcion_nucleo">Nucleo</th>
+            <th md-column md-numeric md-order-by="objetivo_aprendizaje.nivel.descripcion_nivel">Nivel</th>
             <th md-column md-numeric></th>
             <th md-column md-numeric></th>
           </tr>
