@@ -1415,6 +1415,37 @@ md-list-item.md-2-line .md-list-item-text h4 {
   float: left;
 }
 
+.materialanexo-card {
+  width: 31%;
+  height: auto;
+  float: left;
+  min-height: 575px;
+}
+
+@media (max-width: 1366px) {
+  .materialanexo-card {
+    width: 31%;
+    height: auto;
+    float: left;
+    min-height: 461px;
+  }
+}
+
+.material-card-orientacion {
+  width: 100%;
+  height: auto;
+  float: left;
+}
+
+.material-card-orientacion img {
+  vertical-align: center;
+  width: 80%;
+}
+
+.materialanexo-card img{
+  width: 100%;
+}
+
 .material-card img{
   width: 100%;
 }

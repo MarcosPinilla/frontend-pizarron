@@ -1,0 +1,51 @@
+<div layout="row" layout-align="center start" style="margin-bottom: 65px;">
+</div>
+<div flex="100" layout="row">
+    <div flex="40" style="position:fixed">
+        <md-card class="post-card material-card-orientacion" style="background-color: #6d72ad; color: white;" flex="95">
+            <md-card-title style="background-color: #6d72ad; border-radius: 18px;">
+                <md-card-title-text style="font-size: 16px; color: #C5CAE9">
+                    <span>{{ vm.orientacion.nombre_orientacion }}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <div flex="100" style="height: 100%;">
+                <img class="preview" ng-src="{{vm.orientacion.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, vm.orientacion.vista_previa)">
+            </div>
+            <md-card-actions layout="row" layout-align="end center" style="background-color: #6d72ad;">
+                <md-button ng-click="vm.compartirOrientacion($event, vm.orientacion, vm.amigos, vm.perfil)" target="_blank">
+                    <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+                    Compartir
+                </md-button>
+                <md-button ng-href="{{ vm.orientacion.pdf_orientacion }}" target="_blank">
+                    <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+                    Descargar PDF
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+    <div flex="40"></div>
+    <div flex="60">
+        <center><h3>Materiales Anexos</h3></center>
+        <div flex="100">
+            <md-card class="post-card materialanexo-card" style="background-color: #BDDF8B; color: white;" ng-repeat="materialanexo in vm.orientacion.materiales_anexos">
+                <md-card-title style="background-color: #BDDF8B; border-radius: 18px;">
+                    <md-card-title-text style="font-size: 16px; color: #C5CAE9">
+                        <a ui-sref="editdocument({id:material.id})">{{ materialanexo.nombre_anexo }}</a></span>
+                    </md-card-title-text>
+                </md-card-title>
+                <div>
+                    <img class="preview md-card-image" ng-src="{{materialanexo.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, materialanexo.vista_previa)">
+                </div> 
+                <md-card-actions layout="row" layout-align="end center" style="background-color: #BDDF8B;">
+                    <md-button ng-click="vm.goMaterial(material)">
+                        <md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+                        Ver documento
+                    </md-button>
+                    <!--<md-button class="dashboard-button-fab" ng-click="vm.darFavorito(material)"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon></md-button>-->
+                </md-card-actions>
+            </md-card>
+        </div>
+        
+    </div>
+</div>
+<div layout="row" layout-align="center start" style="padding-bottom: 65px;"></div>

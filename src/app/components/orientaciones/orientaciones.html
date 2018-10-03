@@ -1,44 +1,60 @@
-<div flex="100">
-    <div class="div-buscador" flex-offset="30" flex="40">
-		
-		<md-input-container class="buscador-repo" flex="98">
-			<label flex="100">Buscador</label>
-			<input ng-model="buscador" type="text" flex="100">
-		</md-input-container>
-		
+<div>
+		<center>
+		  <h2 class="titulo">Orientaciones Pedagogicas</h2>
+		  <br>
+		</center>
+		<md-divider></md-divider>
+		<br>
+		<div class="div-buscador" flex-offset="30" flex="40">
+			
+			<md-input-container class="buscador-repo" flex="98">
+				<label flex="100">Buscador</label>
+				<input ng-model="buscador" type="text" flex="100">
+			</md-input-container>
+			
+		</div>
+		<br>
+		<div layout="row" class="mimaterial-options" style="background-color: #b0afd0;">
+			<div class="mimaterial-select">
+				<label>Ámbito</label>
+				<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id" ng-change="vm.cargarNucleos()">
+					   <option value="">Todos </option>
+					   <option ng-repeat="ambito in vm.ambitos" value="{{ambito.id}}" >{{ambito.descripcion_ambito}}</option>
+				  </select>
+			</div>
+	
+			<div class="mimaterial-select">
+				<label>Núcleo</label>
+				<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.id" ng-change="vm.cargarNiveles()">
+					   <option value="">Todos </option>
+					   <option ng-repeat="nucleo in vm.nucleos" value="{{nucleo.id}}">{{nucleo.nombre_nucleo}}</option>
+				  </select>
+			</div>
+			
+			<div class="mimaterial-select">
+				<label>Nivel</label>
+				<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.id">
+					   <option value="">Todos </option>
+					   <option ng-repeat="nivel in vm.niveles" value="{{nivel.id}}">{{nivel.nombre_nivel}}</option>
+				  </select>
+			</div>
+		</div>
+		<md-card class="post-card material-card" style="background-color: #6d72ad; color: white;" ng-repeat="orientacion in vm.orientaciones|filter: vm.filter |filter: buscador">
+			<md-card-title style="background-color: #6d72ad; border-radius: 18px;">
+				<md-card-title-text style="font-size: 16px; color: #C5CAE9">
+					<span>{{ orientacion.nombre_orientacion }}</span>
+				</md-card-title-text>
+			</md-card-title>
+			<div>
+				<img class="preview md-card-image" ng-src="{{orientacion.vista_previa}}" alt="No se encontro vista previa" ng-click="vm.showCloseUp($event, orientacion.vista_previa)">
+			</div> 
+			<md-card-actions layout="row" layout-align="end center" style="background-color: #6d72ad;">
+				<md-button ui-sref="verorientacion({id:orientacion.id})">
+					<md-icon style="fill: white;" md-svg-icon="app/resources/icons/ic_remove_red_eye_white_24px.svg"></md-icon>
+					Ver Materiales Anexos
+				</md-button>
+				<!--<md-button class="dashboard-button-fab" ng-click="vm.darFavorito(material)"><md-icon md-svg-icon="app/resources/icons/ic_favorite_border_white_24px.svg"></md-icon></md-button>-->
+			</md-card-actions>
+		</md-card>
 	</div>
-	<br>
-	<div layout="row" class="mimaterial-options" style="background-color: #b0afd0;">
-		<div class="mimaterial-select">
-			<label>Ámbito</label>
-			<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.ambito.id" ng-change="vm.cargarNucleos()">
-	   			<option value="">Todos </option>
-	   			<option ng-repeat="ambito in vm.ambitos" value="{{ambito.id}}" >{{ambito.descripcion_ambito}}</option>
-	  		</select>
-		</div>
-
-		<div class="mimaterial-select">
-			<label>Núcleo</label>
-			<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.nucleo.id" ng-change="vm.cargarNiveles()">
-	   			<option value="">Todos </option>
-	   			<option ng-repeat="nucleo in vm.nucleos" value="{{nucleo.id}}">{{nucleo.nombre_nucleo}}</option>
-	  		</select>
-		</div>
-		
-		<div class="mimaterial-select">
-			<label>Nivel</label>
-			<select id="input2" class="form-control" ng-model="vm.filter.objetivo_aprendizaje.nivel.id">
-	   			<option value="">Todos </option>
-	   			<option ng-repeat="nivel in vm.niveles" value="{{nivel.id}}">{{nivel.nombre_nivel}}</option>
-	  		</select>
-		</div>
-	</div>
-</div>
-<div flex="100">
-    <div flex="30">
-
-    </div>
-    <div flex="70">
-
-    </div>
-</div>
+	
