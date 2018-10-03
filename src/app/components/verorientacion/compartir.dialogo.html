@@ -5,12 +5,14 @@
         <md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
             <md-input-container class="md-block" >
                 <label>Selecciona a un Amigo</label>
-                 <md-select required="true" ng-model="vm.compartir.id_profesor">
-                    <md-option ng-repeat="amigo in vm.amigos" ng-value="amigo.id">
-                        <p ng-if="amigo.amigo1.id != vm.perfil.id">{{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}</p>
-                        <p ng-if="amigo.amigo2.id != vm.perfil.id">{{amigo.amigo2.nombres_profesor}} {{amigo.amigo2.apellidos_profesor}}</p>
-                    </md-option>
-                </md-select>
+                <md-select required="true" ng-model="vm.compartir.id_profesor">
+                        <md-option ng-repeat="amigo in vm.amigos" ng-value="amigo.amigo1.id" ng-if="amigo.amigo1.id != vm.perfil.id">
+                            {{amigo.amigo1.nombres_profesor}} {{amigo.amigo1.apellidos_profesor}}
+                        </md-option>
+                        <md-option ng-repeat="amigo in vm.amigos" ng-value="amigo.amigo2.id" ng-if="amigo.amigo2.id != vm.perfil.id">
+                            {{amigo.amigo2.nombres_profesor}} {{amigo.amigo2.apellidos_profesor}}
+                        </md-option>
+                    </md-select>
             </md-input-container>
             <center><md-button class="md-raised md-primary login-button" ng-click="vm.compartirOrientacion()" md-theme="dark-green" aria-label="addprofe">Compartir</md-button></center>
             <br>

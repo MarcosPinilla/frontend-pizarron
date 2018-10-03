@@ -3,20 +3,20 @@
 
 	angular
   	.module('app')
-  	.component('verorientacion', {
-    	templateUrl: 'app/components/verorientacion/verorientacion.html',
+  	.component('vermaterial', {
+    	templateUrl: 'app/components/vermaterial/vermaterial.html',
     	controller: verorientacionCtrl,
     	controllerAs: 'vm'
   	});
 
-  	verorientacionCtrl.$inject = ['$mdDialog', 'OrientacionService', '$state', '$stateParams', 'AmigoService', 'CompartirOrientacionService', 'PerfilService'];
+  	verorientacionCtrl.$inject = ['$mdDialog', 'MaterialAnexoService', '$state', '$stateParams', 'AmigoService', 'CompartirMaterialAnexoService', 'PerfilService'];
 
-  	function verorientacionCtrl($mdDialog, OrientacionService, $state, $stateParams, AmigoService, CompartirOrientacionService, PerfilService) {
+  	function verorientacionCtrl($mdDialog, MaterialAnexoService, $state, $stateParams, AmigoService, CompartirMaterialAnexoService, PerfilService) {
 		var vm = this;
 
-        vm.orientaciones = {};
+        vm.materialesanexos = {};
         
-        vm.orientacion = OrientacionService.get({id: $stateParams.id});
+        vm.materialanexo = MaterialAnexoService.get({id: $stateParams.id});
 
         vm.amigos = {};
         vm.perfil = {};
@@ -29,17 +29,13 @@
             vm.perfil = data;
         });
 
-        console.log(vm.orientacion);
-	  
-		vm.goMaterial = function (material) { 
-		    $state.go('vermaterial', {id: material.id});
-		};  
+        console.log(vm.materialanexo);
 	  
 		vm.showCloseUp = function (ev, vista_previa) {
 		  $mdDialog.show({
 		    controller: closeUpController,
 		    controllerAs: 'vm',
-		    templateUrl: 'app/components/verorientacion/closeUp.dialogo.html',
+		    templateUrl: 'app/components/vermaterial/closeUp.dialogo.html',
 		    parent: angular.element(document.body),
 		    targetEvent: ev,
 		    clickOutsideToClose: true,
@@ -54,18 +50,22 @@
 			vm.status = 'CANCELADO';
 		    });
         };
+
+        vm.goOrientacion = function (orientacion) { 
+		    $state.go('verorientacion', {id: orientacion.id});
+		}; 
         
-        vm.compartirOrientacion = function (ev, orientacion, amigos, perfil) {
+        vm.compartirMaterialAnexo = function (ev, materialanexo, amigos, perfil) {
             $mdDialog.show({
-              controller: compartirOrientacionController,
+              controller: compartirMaterialAnexoController,
               controllerAs: 'vm',
-              templateUrl: 'app/components/verorientacion/compartir.dialogo.html',
+              templateUrl: 'app/components/vermaterial/compartir.dialogo.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose: true,
               fullscreen: vm.customFullscreen,
               locals: {
-              orientacion: orientacion,
+              materialanexo: materialanexo,
               amigos: amigos,
               perfil: perfil
               },
@@ -94,27 +94,27 @@
 		  };
 	  
         };
-        function compartirOrientacionController($mdDialog, orientacion, amigos, perfil, AmigoService, CompartirOrientacionService) {
+        function compartirMaterialAnexoController($mdDialog, materialanexo, amigos, perfil, AmigoService, CompartirMaterialAnexoService) {
             var vm = this;
-            vm.orientacion = orientacion;
+            vm.materialanexo = materialanexo;
 
             vm.perfil = perfil;
 
-            console.log(vm.orientacion);
+            console.log(vm.materialanexo);
 
             vm.compartir={
-                id_orientacion: 0
+                id_anexo: 0
             };
 
-            vm.compartir.id_orientacion = vm.orientacion.id;
+            vm.compartir.id_anexo = vm.materialanexo.id;
 
             vm.amigos = amigos;
 
             console.log(vm.amigos);
 
-            vm.compartirOrientacion = function () {
+            vm.compartirMaterialAnexo = function () {
                 console.log(vm.compartir);
-                CompartirOrientacionService.save(vm.compartir);
+                CompartirMaterialAnexoService.save(vm.compartir);
                 vm.hide();
               };
         
