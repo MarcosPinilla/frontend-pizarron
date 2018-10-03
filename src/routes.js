@@ -77,6 +77,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'vermaterial',
     isPrivate: true
   })
+  .state('verplanificacion', {
+    url: '/verplanificacion/:id',
+    component: 'verplanificacion',
+    isPrivate: true
+  })
   .state('obtenerMaterialProfesor', {
     url: '/obtenerMaterialProfesor',
     controller: 'MaterialesProfesor.controller',

@@ -5,13 +5,13 @@
   	.module('app')
   	.component('vermaterial', {
     	templateUrl: 'app/components/vermaterial/vermaterial.html',
-    	controller: verorientacionCtrl,
+    	controller: vermaterialCtrl,
     	controllerAs: 'vm'
   	});
 
-  	verorientacionCtrl.$inject = ['$mdDialog', 'MaterialAnexoService', '$state', '$stateParams', 'AmigoService', 'CompartirMaterialAnexoService', 'PerfilService'];
+  	vermaterialCtrl.$inject = ['$mdDialog', 'MaterialAnexoService', '$state', '$stateParams', 'AmigoService', 'CompartirMaterialAnexoService', 'PerfilService'];
 
-  	function verorientacionCtrl($mdDialog, MaterialAnexoService, $state, $stateParams, AmigoService, CompartirMaterialAnexoService, PerfilService) {
+  	function vermaterialCtrl($mdDialog, MaterialAnexoService, $state, $stateParams, AmigoService, CompartirMaterialAnexoService, PerfilService) {
 		var vm = this;
 
         vm.materialesanexos = {};

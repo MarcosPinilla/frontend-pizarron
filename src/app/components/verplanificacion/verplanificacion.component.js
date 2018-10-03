@@ -3,36 +3,24 @@
 
 	angular
   	.module('app')
-  	.component('editplanificacion', {
-    	templateUrl: 'app/components/editplanificacion/editplanificacion.html',
-    	controller: editplanificacionCtrl,
+  	.component('verplanificacion', {
+    	templateUrl: 'app/components/verplanificacion/verplanificacion.html',
+    	controller: verplanificacionCtrl,
     	controllerAs: 'vm'
   	});
 
-  	editplanificacionCtrl.$inject = ['$mdDialog', 'MaterialService', '$stateParams', 'ActualizarPlanificacionService', 'ContenidoPlanificacionService', '$state', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
+  	verplanificacionCtrl.$inject = ['$mdDialog', 'MaterialService', 'ContenidoPlanificacionService', '$state', '$stateParams', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
 
-  	function editplanificacionCtrl($mdDialog, MaterialService, $stateParams, ActualizarPlanificacionService, ContenidoPlanificacionService, $state, AmigoService, CompartirPlanificacionService, PerfilService) {
-		var vm = this;  
-		vm.planificacion = MaterialService.get({id: $stateParams.id});
-		if(vm.planificacion.id_tipo_material == 2){
-			$state.go('editdocument', { id: material.id });
-		}
-		vm.contenido_material = ContenidoPlanificacionService.get({id: $stateParams.id});
-		console.log(vm.planificacion);
-		console.log(vm.contenido_material);
+  	function verplanificacionCtrl($mdDialog, MaterialService, ContenidoPlanificacionService, $state, $stateParams, AmigoService, CompartirPlanificacionService, PerfilService) {
+		var vm = this;
 
-		vm.update = {
-			contenido_material:{}
-		}
+        vm.materialesanexos = {};
+        
+        vm.planificacion = MaterialService.get({id: $stateParams.id});
 
-		vm.update.contenido_material= vm.contenido_material;
+        vm.contenido_material = ContenidoPlanificacionService.get({id: $stateParams.id});
 
-		vm.updatear = function(){
-			ActualizarPlanificacionService.update({id: $stateParams.id}, vm.update, function () {
-			}, function () {});
-		}
-
-		vm.amigos = {};
+        vm.amigos = {};
         vm.perfil = {};
 
         AmigoService.query().$promise.then(function (data) {
@@ -50,7 +38,7 @@
             $mdDialog.show({
               controller: compartirPlanificacionController,
               controllerAs: 'vm',
-              templateUrl: 'app/components/editplanificacion/compartir.dialogo.html',
+              templateUrl: 'app/components/verplanificacion/compartir.dialogo.html',
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose: true,
@@ -104,7 +92,6 @@
               $mdDialog.hide(answer);
             };
         
-        };
-		
-  	}
+          };
+	}
 })();
