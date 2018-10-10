@@ -1,0 +1,42 @@
+<div flex="90" flex-offset="5" flex-md="90" flex-offset-md="5" flex-xs="90" flex-offset-xs="5" class="fond" style="margin-bottom: 20px;background-color: white;" >
+    <center>
+      <h2 class="titulo">Suscripciones</h2>
+      <br>
+    </center>
+    <md-divider></md-divider>
+    <md-content layout-padding layout-wrap>
+        <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirsuscripcion()"  md-theme="dark-green" aria-label="addprofe">añadir suscripcion</md-button>
+    </md-content>
+    <md-table-container>
+      <table md-table md-row-select multiple md-progress="promise">
+        <thead md-head md-order="vm.query.order" md-on-reorder="getDesserts">
+          <tr md-row>
+            <th md-column md-numeric md-order-by="id">Id</th>
+            <th md-column md-numeric md-order-by="nombre_suscripcion">Nombre</th>
+            <th md-column md-numeric md-order-by="monto">Monto</th>
+            <th md-column md-numeric></th>
+            <th md-column md-numeric></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="suscripcion" md-select-id="name" md-auto-select class="tabla" ng-repeat="suscripcion in vm.suscripciones|orderBy: vm.query.order | limitTo: vm.query.limit : (vm.query.page -1) * vm.query.limit"  >
+            <td md-cell>{{ suscripcion.id }}</td>
+            <td md-cell >{{ suscripcion.nombre_suscripcion }}</td>
+            <td md-cell >{{ suscripcion.monto }}</td>
+            <td md-cell>
+              <md-button class="md-icon-button" ng-click="vm.actualizarsuscripcion(suscripcion)" style="margin-right: -40px;">
+                <md-icon  md-svg-icon="app/resources/icons/editar.svg"></md-icon>
+              </md-button>
+            </td>
+            <td md-cell>
+              <md-button class="md-icon-button" ng-click="vm.eliminarsuscripcion(suscripcion.id)" style="margin-right: -25px;">
+                <md-icon  md-svg-icon="app/resources/icons/basurero.svg"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+    <md-table-pagination md-limit="vm.query.limit" md-limit-options="[5, 10, 15]" md-page="vm.query.page" md-total="{{vm.suscripciones.length}}" md-page-select></md-table-pagination>
+  </div>
+  

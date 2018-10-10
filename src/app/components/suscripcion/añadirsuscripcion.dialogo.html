@@ -1,0 +1,14 @@
+<div class="modal-title" style="background-color: #bddf8b;">
+	<h2><strong>Añadir Suscripción</strong></h2>
+</div>
+<md-content class="newdocument" layout-padding layout-wrap md-theme="app" flex="100">
+	<md-input-container class="md-block">
+		<label>Nombre</label>
+		<input ng-model="vm.newsuscripcion.nombre_suscripcion" type="text" required>
+	</md-input-container>
+	<md-input-container class="md-block">
+		<label>Monto</label>
+		<input ng-model="vm.newsuscripcion.monto" type="number" required>
+    </md-input-container>
+	<center><md-button class="md-raised md-primary login-button" ng-click="vm.anadirsuscripcion(vm.newsuscripcion)" md-theme="dark-green" aria-label="addprofe">Crear Suscripcion</md-button></center>
+</md-content>

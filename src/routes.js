@@ -103,6 +103,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'establecimiento',
     isPrivate: true
   })
+  .state('administrator.suscripcion', {
+    url: '/suscripcion',
+    component: 'suscripcion',
+    isPrivate: true
+  })
   .state('administrator.asignatura', {
     url: '/asignatura',
     component: 'asignatura',
