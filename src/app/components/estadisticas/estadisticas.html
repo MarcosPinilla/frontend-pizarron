@@ -1,28 +1,39 @@
 <div>
-	<md-button class="buttonadm" ui-sref="administrator.usuario">
+	<h3>Gestión de Usuarios y Suscripciones</h3>
+	<md-button class="buttonadm3" ui-sref="administrator.educadoras">
+			<center style="padding: 15px;">
+				<h4>Educadoras Registradas</h4>
+				<h1>{{ vm.profesores.length }}</h1>
+			</center>
+		</md-button>
+	<md-button class="buttonadm3" ui-sref="administrator.suscripcion">
 		<center style="padding: 15px;">
-			<h4>Usuarios Totales</h4>
-			<h1>{{ vm.usuarios.length }}</h1>
+			<h4>Sucripciones</h4>
+			<h1>{{ vm.suscripciones.length }}</h1>
 		</center>
 	</md-button>
-	<md-button class="buttonadm" ui-sref="administrator.profesor">
+	<md-button class="buttonadm3" ui-sref="administrator.establecimiento">
 		<center style="padding: 15px;">
-			<h4>Profesores Registrados</h4>
-			<h1>{{ vm.profesores.length }}</h1>
+			<h4>Establecimientos</h4>
+			<h1>{{ vm.establecimientos.length }}</h1>
 		</center>
 	</md-button>
-	<md-button class="buttonadm" ui-sref="administrator.orientacion">
+	<md-divider></md-divider>
+	<h3>Gestión de Orientaciones y sus Materiales Anexos</h3>
+	<md-button class="buttonadm2" ui-sref="administrator.orientacion">
 		<center style="padding: 15px;">
 			<h4>Orientaciones</h4>
 			<h1>{{ vm.orientaciones.length }}</h1>
 		</center>
 	</md-button>
-	<md-button class="buttonadm" ui-sref="administrator.materialanexo">
+	<md-button class="buttonadm2" ui-sref="administrator.materialanexo">
 		<center style="padding: 15px;">
 			<h4>Materiales Anexos</h4>
 			<h1>{{ vm.materialesanexos.length }}</h1>
 		</center>
 	</md-button>
+	<md-divider></md-divider>
+	<h3>Gestión de Materiales Creados por Educadoras </h3>
 	<md-button class="buttonadm" ui-sref="administrator.material">
 		<center style="padding: 15px;">
 			<h4>Materiales Creados</h4>
@@ -43,20 +54,17 @@
 			<h1>{{ vm.elementos.length }}</h1>
 		</center>
 	</md-button>
-	
-	<md-button class="buttonadm" ui-sref="administrator.establecimiento">
-		<center style="padding: 15px;">
-			<h4>Establecimientos</h4>
-			<h1>{{ vm.establecimientos.length }}</h1>
-		</center>
-	</md-button>
-
-	<md-button class="buttonadm" ui-sref="administrator.actualizacionsemanal">
+	<md-divider></md-divider>
+	<h3>Gestión de la Plataforma</h3>
+	<md-button class="buttonadm3" ui-sref="administrator.actualizacionsemanal">
 		<center style="padding: 15px;">
 			<h4>Actualizaciones semanales</h4>
 			<h1>{{ vm.actualizaciones.length }}</h1>
 		</center>
 	</md-button>
+	
+
+	
 	
 </div>
 <canvas id="pie" class="chart chart-pie"

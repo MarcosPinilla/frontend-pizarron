@@ -46,8 +46,8 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component:'documento',
     isPrivate: true
   })
-  .state('administrator.profesor', {
-    url: '/profesor',
+  .state('administrator.educadoras', {
+    url: '/educadoras',
     component: 'profesor',
     isPrivate: true
   })
