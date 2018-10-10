@@ -5,8 +5,8 @@
   </center>
   <md-divider></md-divider>
   <md-content layout-padding layout-wrap>
-      <md-button ng-disabled="true" class="md-raised md-warn buttoncrudadd noright" ui-sref="restaurarProfesor" md-theme="dark-green" aria-label="restaurarprofe">restaurar profesor</md-button>
-      <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirprofesor()" md-theme="dark-green" aria-label="addprofe">añadir profesor</md-button>
+      <md-button ng-disabled="true" class="md-raised md-warn buttoncrudadd noright" ui-sref="restaurarProfesor" md-theme="dark-green" aria-label="restaurarprofe">restaurar Educadora</md-button>
+      <md-button class="md-raised md-primary buttoncrudadd noright" ng-click="vm.anadirprofesor(vm.person, $event)" md-theme="dark-green" aria-label="addprofe">añadir Educadora</md-button>
   </md-content>
   <md-table-container>
     <table md-table md-row-select multiple md-progress="promise">

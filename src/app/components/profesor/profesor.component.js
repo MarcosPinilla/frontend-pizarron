@@ -9,12 +9,13 @@
     controllerAs: 'vm'
   });
 
-  profesorCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService', 'UsuarioService', '$state']
+  profesorCtrl.$inject = ['$mdDialog','ProfesorService','SexoService', 'ComunaService', 'UsuarioService', '$state', 'RolService', 'RegionService', '$stateParams', 'EducadoraService']
 
-  function profesorCtrl($mdDialog, ProfesorService, SexoService, ComunaService, UsuarioService, $state) {
+  function profesorCtrl($mdDialog, ProfesorService, SexoService, ComunaService, UsuarioService, $state, RolService, RegionService, $stateParams, EducadoraService) {
     var vm = this;
 
     vm.people = {};
+
 
     ProfesorService.query().$promise.then(function (data) {
       vm.people = data;
@@ -112,19 +113,55 @@
       });
     };
   }
-  function dialogoController($mdDialog, person, ProfesorService, $state, SexoService, ComunaService, UsuarioService) {
+  function dialogoController($mdDialog, person, ProfesorService, $state, SexoService, ComunaService, UsuarioService, RolService, RegionService, $stateParams, SuscripcionService, EducadoraService) {
         var vm = this;
         vm.person = person;
         console.log(person);
-        vm.upperson = {
-          id_usuario: person.id_usuario,
-          id_comuna: person.id_comuna,
-          id_sexo: person.id_sexo
-        };
         vm.profesor= {};
         vm.sexos ={};
         vm.comunas={};
         vm.usuarios={};
+        vm.roles={};
+        vm.suscripciones={};
+
+        vm.regiones={};
+        vm.modelo={};
+        
+        vm.regionId = $stateParams.id;
+
+        SuscripcionService.query().$promise.then(function (data) {
+          vm.suscripciones = data;
+          console.log(data);
+        });
+
+        RegionService.query().$promise.then(function (data) {
+          vm.regiones = data;
+          console.log(data);
+        });
+
+        RolService.query().$promise.then(function (data) {
+          vm.roles = data;
+          console.log(data);
+        });
+
+        console.log(vm.regionId);
+
+        vm.cargarComuna = function() {
+          console.log(vm.regionId);
+          var idRegion = JSON.parse('{"id": ' + vm.regionId + '}');
+          ComunaService.query(idRegion).$promise.then(function (data) {
+            vm.comunas = data;
+          }); 
+        }
+
+        SexoService.query().$promise.then(function (data) {
+          vm.sexos = data;
+        });
+        
+        vm.register = function(modelo) {
+          EducadoraService.save(modelo);
+          vm.hide();
+        }
 
         UsuarioService.query().$promise.then(function (data) {
           vm.usuarios = data;
@@ -146,6 +183,11 @@
 
 
         vm.actualizarprofesor = function (profesor) {
+          vm.upperson = {
+            id_usuario: vm.person.id_usuario,
+            id_comuna: vm.person.id_comuna,
+            id_sexo: vm.person.id_sexo
+          };
           ProfesorService.update({id: vm.person.id}, profesor, function () {
             vm.hide();
           }, function () {});

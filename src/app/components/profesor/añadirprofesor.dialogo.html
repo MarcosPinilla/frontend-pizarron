@@ -1,49 +1,152 @@
-<div id="addprofesor-title">
-  <h2><strong>Añadir profesor</strong></h2>
-</div>
-<div id="add-profesor">
-  <md-content layout-padding layout-wrap md-theme="app" flex="100">
-  	<md-input-container class="md-block">
-  		<label>Nombres</label>
-  		<input ng-model="vm.profesor.nombres_profesor" type="text" required>
-  	</md-input-container>
-  	<md-input-container class="md-block">
-  		<label>Apellidos</label>
-  		<input ng-model="vm.profesor.apellidos_profesor" type="text" required>
-  	</md-input-container>
-  	<md-input-container class="md-block" >
-  		<label>Cargo</label>
-  		<input ng-model="vm.profesor.cargo" type="text" required>
-  	</md-input-container>
-  	<md-input-container class="md-block">
-  		<label>Profesión</label>
-  		<input ng-model="vm.profesor.profesion" type="text" required>
-  	</md-input-container>
-  	<center><label>Foto</label><center><input type="file" fileread="vm.profesor.foto_profesor"></center></center>
-  	<md-input-container class="md-block" >
-        <label>Sexo</label>
-        <md-select ng-model="vm.profesor.id_sexo">
-          <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
-            {{ sexo.desc_sexo }}
-          </md-option>
-        </md-select>
-      </md-input-container>
-      <md-input-container class="md-block">
-        <label>Comuna</label>
-        <md-select ng-model="vm.profesor.id_comuna">
-          <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
-            {{ comuna.nombre_comuna }}
-          </md-option>
-        </md-select>
-      </md-input-container>
-      <md-input-container class="md-block" >
-        <label>Usuario</label>
-        <md-select ng-model="vm.profesor.id_usuario">
-          <md-option ng-repeat="usuario in vm.usuarios" value="{{ usuario.id }}">
-            {{ usuario.email }}
-          </md-option>
-        </md-select>
-      </md-input-container>
-  	<center><md-button class="md-raised md-primary" ng-click="vm.anadirprofesor(vm.profesor)" md-theme="dark-green" aria-label="addprofe">añadir profesor</md-button></center>
-  </md-content>
-</div>
+<md-dialog style="width:900px;">
+  <div id="addprofesor-title">
+    <h2><strong>Añadir Educadora</strong></h2>
+  </div>
+  <div id="add-profesor" >
+    <md-content layout-padding layout-wrap md-theme="app" flex="100">
+        <form ng-submit="vm.register(vm.modelo)" >
+            <center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
+            <div layout="column">
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Nombres</label>
+                    <input ng-model="vm.modelo.nombres_profesor" type="text" required>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Apellidos</label>
+                    <input ng-model="vm.modelo.apellidos_profesor" type="text" required>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin"  flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Email</label>
+                    <input ng-model="vm.modelo.email" type="text" required>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Nombre Establecimiento</label>
+                    <input ng-model="vm.modelo.nombre_establecimiento" type="text" required>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Contraseña</label>
+                    <input ng-model="vm.modelo.password" type="password" required>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Repetir Contraseña</label>
+                    <input ng-model="vm.modelo.passwordC" type="password" required>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Región</label>
+                    <md-select ng-model="vm.regionId" ng-change="vm.cargarComuna(vm.regionId)">
+                      <md-option ng-repeat="region in vm.regiones" value="{{ region.id }}">
+                        {{ region.nombre_region }}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Comuna</label>
+                    <md-select ng-model="vm.modelo.id_comuna">
+                      <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
+                        {{ comuna.nombre }}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Profesión</label>
+                    <input ng-model="vm.modelo.profesion" type="text" required>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90" >
+                    <label>Género</label>
+                    <md-select ng-model="vm.modelo.id_sexo">
+                      <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
+                        {{ sexo.desc_sexo }}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
+                    <label>Cargo</label>
+                    <input ng-model="vm.modelo.cargo" type="text" required>
+                  </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div class="divLogin" flex="45">
+                  <md-input-container class="md-block inputLogin" flex-offset="5" flex="90" >
+                    <label>Rol</label>
+                    <md-select ng-model="vm.modelo.id_rol">
+                      <md-option ng-repeat="rol in vm.roles" value="{{ rol.id }}">
+                        {{ rol.nombre_rol }}
+                      </md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="100">
+                    <md-input-container class="md-block inputLogin" flex-offset="25" flex="50" >
+                        <label>Suscripcion</label>
+                        <md-select ng-model="vm.modelo.id_suscripcion">
+                          <md-option ng-repeat="suscripcion in vm.suscripciones" value="{{ suscripcion.id }}">
+                            {{ suscripcion.nombre_suscripcion }} - ${{suscripcion.monto}}
+                          </md-option>
+                        </md-select>
+                      </md-input-container>
+                </div>
+              </div>
+              <br>
+              <div layout="row" flex="100">
+                <div class="divLogin" flex="100">
+                  <label flex="90" flex-offset="5">Foto</label><input class="inputLogin" type="file" fileread="vm.modelo.foto_profesor" flex="90" flex-offset="5" required>
+                </div>
+              </div>
+              <br>
+              <center><md-button type="submit" class="login-button">Añadir Educadora</md-button></center>
+              <center><p>{{vm.message}}<p></center>
+              <br>
+            </div>
+        </form>       
+  
+    </md-content>
+    <div class="modal-footer">
+        <center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
+     </div>
+  </div>
+</md-dialog>
