@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div style="overflow:scroll; overflow-x:hidden; height:90%;" id="notificacion">
-			<div style="margin-bottom: 5px; border-bottom: 1px solid  #d9d9d9;" ng-repeat="noticia in vm.noticias">
+			<div style="margin-bottom: 5px; border-bottom: 1px solid  #d9d9d9;" ng-repeat="noticia in vm.noticias | orderBy: '-fecha'">
 
 				<div layout="row" style="margin-left: 0px; padding-left: 0px;">
 					<div flex="4">
