@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	editplanificacionCtrl.$inject = ['$mdDialog', 'MaterialService', '$stateParams', 'ActualizarPlanificacionService', 'ContenidoPlanificacionService', '$state', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
+  	editplanificacionCtrl.$inject = ['$mdDialog', 'API', 'MaterialService', '$stateParams', 'ActualizarPlanificacionService', 'ContenidoPlanificacionService', '$state', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
 
-  	function editplanificacionCtrl($mdDialog, MaterialService, $stateParams, ActualizarPlanificacionService, ContenidoPlanificacionService, $state, AmigoService, CompartirPlanificacionService, PerfilService) {
+  	function editplanificacionCtrl($mdDialog, API, MaterialService, $stateParams, ActualizarPlanificacionService, ContenidoPlanificacionService, $state, AmigoService, CompartirPlanificacionService, PerfilService) {
 		var vm = this;  
 		vm.planificacion = MaterialService.get({id: $stateParams.id});
 		if(vm.planificacion.id_tipo_material == 2){
@@ -30,7 +30,13 @@
 		vm.updatear = function(){
 			ActualizarPlanificacionService.update({id: $stateParams.id}, vm.update, function () {
 			}, function () {});
-		}
+    }
+    
+    vm.pdf = function (){
+      console.log("ir a pdf");
+      window.location.href = API + 'getpdfplanificacion/'+ vm.planificacion.id;
+      
+    }  
 
 		vm.amigos = {};
         vm.perfil = {};

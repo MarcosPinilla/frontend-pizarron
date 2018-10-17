@@ -9,9 +9,9 @@
     	controllerAs: 'vm'
   	});
 
-  	verplanificacionCtrl.$inject = ['$mdDialog', 'MaterialService', 'ContenidoPlanificacionService', '$state', '$stateParams', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
+  	verplanificacionCtrl.$inject = ['$mdDialog', 'API', 'MaterialService', 'ContenidoPlanificacionService', '$state', '$stateParams', 'AmigoService', 'CompartirPlanificacionService', 'PerfilService'];
 
-  	function verplanificacionCtrl($mdDialog, MaterialService, ContenidoPlanificacionService, $state, $stateParams, AmigoService, CompartirPlanificacionService, PerfilService) {
+  	function verplanificacionCtrl($mdDialog, API, MaterialService, ContenidoPlanificacionService, $state, $stateParams, AmigoService, CompartirPlanificacionService, PerfilService) {
 		var vm = this;
 
         vm.materialesanexos = {};
@@ -30,6 +30,12 @@
         PerfilService.get().$promise.then(function (data) {
             vm.perfil = data;
         });
+
+        vm.pdf = function (){
+          console.log("ir a pdf");
+          window.location.href = API + 'getpdfplanificacion/'+ vm.planificacion.id;
+          
+        }  
 
         console.log(vm.planificacion);
 	  
