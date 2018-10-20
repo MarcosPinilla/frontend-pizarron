@@ -28,8 +28,6 @@
         PerfilService.get().$promise.then(function (data) {
             vm.perfil = data;
         });
-
-        console.log(vm.materialanexo);
 	  
 		vm.showCloseUp = function (ev, vista_previa) {
 		  $mdDialog.show({
@@ -100,8 +98,6 @@
 
             vm.perfil = perfil;
 
-            console.log(vm.materialanexo);
-
             vm.compartir={
                 id_anexo: 0
             };
@@ -110,10 +106,7 @@
 
             vm.amigos = amigos;
 
-            console.log(vm.amigos);
-
             vm.compartirMaterialAnexo = function () {
-                console.log(vm.compartir);
                 CompartirMaterialAnexoService.save(vm.compartir);
                 vm.hide();
               };

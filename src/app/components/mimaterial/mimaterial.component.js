@@ -51,7 +51,7 @@
       ObtenerMiMaterialService.query().$promise.then(function (data) {
         vm.materiales = data;
 
-          for (let i = 0; i < vm.materiales.length; i++) {
+          for (var i = 0; i < vm.materiales.length; i++) {
             if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
               vm.materiales[i].autor = 'autor';
             else
@@ -88,7 +88,7 @@
       ObtenerMiMaterialService.query().$promise.then(function (data) {
         vm.materiales = data;
 
-          for (let i = 0; i < vm.materiales.length; i++) {
+          for (var i = 0; i < vm.materiales.length; i++) {
             if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
               vm.materiales[i].autor = 'autor';
             else
@@ -316,7 +316,7 @@
         impresion.loadFromJSON(json.data);
 
         //Se pasa el canvas a imágen
-        let dataUrl = impresion.toDataURL();
+        var dataUrl = impresion.toDataURL();
 
         //Se añade al arreglo
         paginas.push(dataUrl);

@@ -51,7 +51,7 @@
         ObtenerMiPlanificacionService.query().$promise.then(function (data) {
           vm.materiales = data;
   
-            for (let i = 0; i < vm.materiales.length; i++) {
+            for (var i = 0; i < vm.materiales.length; i++) {
               if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
                 vm.materiales[i].autor = 'autor';
               else
@@ -88,7 +88,7 @@
         ObtenerMiPlanificacionService.query().$promise.then(function (data) {
           vm.materiales = data;
   
-            for (let i = 0; i < vm.materiales.length; i++) {
+            for (var i = 0; i < vm.materiales.length; i++) {
               if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
                 vm.materiales[i].autor = 'autor';
               else

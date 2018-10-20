@@ -30,7 +30,7 @@
       }
       console.log(vm.favoritos);
       setTimeout(function () {
-        for (let i = 0; i < vm.favoritos.length; i++) {
+        for (var i = 0; i < vm.favoritos.length; i++) {
           document.getElementById(vm.favoritos[i].id).innerHTML = vm.favoritos[i].vista_previa;
         }
       }, 300);
@@ -47,7 +47,7 @@
       }
       console.log(vm.favoritos);
       setTimeout(function () {
-        for (let i = 0; i < vm.favoritos.length; i++) {
+        for (var i = 0; i < vm.favoritos.length; i++) {
           document.getElementById(vm.favoritos[i].id).innerHTML = vm.favoritos[i].vista_previa;
         }
       }, 300);
@@ -272,7 +272,7 @@
         impresion.loadFromJSON(json.data);
 
         //Se pasa el canvas a imágen
-        let dataUrl = impresion.toDataURL();
+        var dataUrl = impresion.toDataURL();
 
         //Se añade al arreglo
         paginas.push(dataUrl);

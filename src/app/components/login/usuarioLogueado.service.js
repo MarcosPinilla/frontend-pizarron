@@ -10,4 +10,4 @@
   function obtenerUsuario($resource, API) {
     return $resource(API + 'profesor');
   }
-})
+})();

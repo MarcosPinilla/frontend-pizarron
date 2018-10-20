@@ -4,7 +4,7 @@ const useref = require('gulp-useref');
 const lazypipe = require('lazypipe');
 const rev = require('gulp-rev');
 const revReplace = require('gulp-rev-replace');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const cssnano = require('gulp-cssnano');
 const htmlmin = require('gulp-htmlmin');
 const sourcemaps = require('gulp-sourcemaps');
@@ -33,7 +33,7 @@ function build() {
     .pipe(useref({}, lazypipe().pipe(sourcemaps.init, {loadMaps: true})))
     .pipe(jsFilter)
     .pipe(ngAnnotate())
-    .pipe(uglify({preserveComments: uglifySaveLicense})).on('error', conf.errorHandler('Uglify'))
+    .pipe(uglify()).on('error', conf.errorHandler('Uglify'))
     .pipe(rev())
     .pipe(jsFilter.restore)
     .pipe(cssFilter)

@@ -22,7 +22,6 @@
       vm.customFullscreen = true;
       
        PerfilService.get().$promise.then(function (data) {
-          console.log(data);
           vm.perfil = data;
           vm.nombre = vm.perfil.nombres_profesor;
           vm.nombre = vm.nombre.split(" ");

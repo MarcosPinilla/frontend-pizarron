@@ -25,7 +25,6 @@
 
     UsuarioService.query().$promise.then(function (data) {
       vm.usuarios = data;
-      console.log(vm.usuarios);
     });
 
     vm.goToPerson = function(person, event) {
@@ -65,7 +64,6 @@
         vm.status = 'Documento:  ' + answer + '.';
         UsuarioService.query().$promise.then(function (data) {
           vm.usuarios = data;
-          console.log(vm.usuarios);
         });
       }, function () {
         vm.status = 'CANCELADO';
@@ -76,7 +74,6 @@
       UsuarioService.delete({id: id});
       UsuarioService.query().$promise.then(function (data) {
         vm.usuarios = data;
-        console.log(vm.usuarios);
       });
     };
 
@@ -97,7 +94,6 @@
         vm.status = 'Documento:  ' + answer + '.';
         UsuarioService.query().$promise.then(function (data) {
           vm.usuarios = data;
-          console.log(vm.usuarios);
         });
       }, function () {
         vm.status = 'CANCELADO';
@@ -142,7 +138,6 @@
           console.log('entre al actualizarusuario');
           UsuarioService.update({id: vm.person.id}, usuario, function () {
             vm.hide();
-            console.log('se debio actualizar')
           }, function () {});
         };
 

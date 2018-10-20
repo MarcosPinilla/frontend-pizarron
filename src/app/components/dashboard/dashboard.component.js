@@ -105,9 +105,7 @@
     console.log(vm.tipo_materiales);*/
 
     vm.crearmaterial = function (material) {
-      console.log('entra ala funcion');
       if(material.titulo_material != null && material.id_asignatura != null && material.id_nivel != null && material.id_tipo_material != null && vm.material.id_visibilidad != null) {
-        console.log("Entra a la funcino" + material);
         MaterialService.save(material );
         $mdDialog.hide();
         $state.go('documento');

@@ -28,14 +28,12 @@
    vm.noticias = [];
    vm.usuarioID = 0;
    vm.inputVacio = '';
-   console.log(vm.token);
    vm.keypress = 0;
    vm.nuevo = false;
    vm.textBuscar ='';
 
   ListarNoticiasService.query().$promise.then(function(data){
     vm.noticias=data;
-    console.log(vm.noticias);
   });
 
    vm.nuevaNoticia = function(ev) {
@@ -62,13 +60,9 @@
     }
 
   PerfilService.get().$promise.then(function (data) {
-    console.log(data);
     vm.usuarioID = data.id; 
 
       AmigoService.query().$promise.then(function (data) {
-          console.log(data);
-          console.log(vm.usuarioID);
-
           for (var i = 0; i < data.length; i++) {
             if (data[i].amigo_1 != vm.usuarioID) {
               vm.amigos.push(data[i].amigo1);
@@ -76,8 +70,6 @@
               vm.amigos.push(data[i].amigo2);
             }
           }
-
-          console.log(vm.amigos);
 
     });
 
@@ -106,15 +98,12 @@
  
 
   vm.toggle = function (item) {
-    console.log(item);
     vm.selected.push(item.id);
   };
 
 
    PerfilService.get().$promise.then(function (data) {
     vm.usuarioID = data.id;
-    console.log(data.id);
-    console.log(vm.usuarioID);
  
     var client = new Pusher('28705022aa554d22c965', {
      cluster: 'us2',
@@ -138,47 +127,33 @@
  
                canal.bind('GroupCreated',
                  function (data) {
-                   console.log(data);
                    vm.datosGrupo = data;
-                   console.log(vm.datosGrupo.group.id);
                    vm.idGrupo = data.group.id;
                    data.chatCerrado = true;
                    data.chatMinimizado = false;
-                   console.log(data.users.length);
                      for (var i = 0; i < data.users.length; i++) {
-                       console.log(vm.usuarioID);
-                       console.log(data.users[i].id);
                        if (vm.usuarioID != data.users[i].id) {
-                         console.log(data.users[i].nombres_profesor);
                          data.nombreChat = data.users[i].nombres_profesor;
                        }
                      }
 
 
                   var esta = false;
-
-                   console.log(vm.chats);
                     if (vm.chats.length == 0) {
                        vm.chats.push(data);
                      }else{
                        for (var i = 0; i < vm.chats.length; i++) { 
-                        console.log(vm.chats[i].group.id);
-                        console.log(data.group.id);
                          if (vm.chats[i].group.id == data.group.id) {
                            esta = true;
-                           console.log(esta);
                          }
                        }
 
                        if (!esta) {
-                        console.log('entro por que son distintos');
                           vm.chats.push(data);
                        }
                      }
 
                    vm.nuevo = true;
- 
-                   console.log(vm.chats);
  
                    var client = new Pusher('28705022aa554d22c965', {
                      cluster: 'us2',
@@ -202,7 +177,6 @@
  
                    canal2.bind('NewMessage',
                      function (data) {
-                       console.log(data);
                        // if (data.usuario_id != vm.usuarioID) {
                        //   vm.mensajes.push(data.message);
                        //     vm.chats[data.index].conversations = data.grupo;

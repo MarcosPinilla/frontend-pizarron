@@ -19,12 +19,9 @@
 
 
       vm.darFavorito = function(data){
-        console.log(data);
       DarFavorito.save(data,function(res){
-        console.log('entra');
         $state.go('dashboard');
       },function(err){
-        console.log(err);
       });
 
     };

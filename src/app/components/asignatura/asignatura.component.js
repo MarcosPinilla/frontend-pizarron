@@ -17,7 +17,6 @@
 
     AsignaturaService.query().$promise.then(function (data) {
       vm.asignaturas = data;
-      console.log(vm.asignaturas);
     });
 
     vm.query = {
@@ -29,7 +28,6 @@
     vm.verasignaturas = function () {
       AsignaturaService.query().$promise.then(function (data) {
       vm.asignaturas = data;
-      console.log(vm.asignaturas);
     });
     }
 
@@ -50,7 +48,6 @@
         vm.status = 'Documento:  ' + answer + '.';
         AsignaturaService.query().$promise.then(function (data) {
           vm.asignaturas = data;
-          console.log(vm.asignaturas);
         });
 
       }, function () {
@@ -62,7 +59,6 @@
       AsignaturaService.delete({id: id});
       AsignaturaService.query().$promise.then(function (data) {
         vm.asignaturas = data;
-        console.log(vm.asignaturas);
       });
     };
 
@@ -83,7 +79,6 @@
         vm.status = 'Documento:  ' + answer + '.';
         AsignaturaService.query().$promise.then(function (data) {
           vm.asignaturas = data;
-          console.log(vm.asignaturas);
         });
       }, function () {
         vm.status = 'CANCELADO';

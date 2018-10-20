@@ -28,8 +28,6 @@
         PerfilService.get().$promise.then(function (data) {
             vm.perfil = data;
         });
-
-        console.log(vm.orientacion);
 	  
 		vm.goMaterial = function (material) { 
 		    $state.go('vermaterial', {id: material.id});
@@ -100,8 +98,6 @@
 
             vm.perfil = perfil;
 
-            console.log(vm.orientacion);
-
             vm.compartir={
                 id_orientacion: 0
             };
@@ -109,8 +105,6 @@
             vm.compartir.id_orientacion = vm.orientacion.id;
 
             vm.amigos = amigos;
-
-            console.log(vm.amigos);
 
             vm.compartirOrientacion = function () {
                 console.log(vm.compartir);

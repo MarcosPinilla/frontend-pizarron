@@ -62,7 +62,7 @@
       console.log(data);
       vm.mejoresFavoritos = data;
       setTimeout(function () {
-        for (let i = 0; i < vm.mejoresFavoritos.length; i++) {
+        for (var i = 0; i < vm.mejoresFavoritos.length; i++) {
           document.getElementById(vm.mejoresFavoritos[i].id_material).innerHTML = vm.mejoresFavoritos[i].vista_previa;
         }
       }, 300);
@@ -507,7 +507,7 @@
         impresion.loadFromJSON(json.data);
 
         //Se pasa el canvas a imágen
-        let dataUrl = impresion.toDataURL();
+        var dataUrl = impresion.toDataURL();
 
         //Se añade al arreglo
         paginas.push(dataUrl);

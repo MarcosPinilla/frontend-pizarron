@@ -32,12 +32,9 @@
         });
 
         vm.pdf = function (){
-          console.log("ir a pdf");
           window.location.href = API + 'getpdfplanificacion/'+ vm.planificacion.id;
           
-        }  
-
-        console.log(vm.planificacion);
+        }
 	  
         
         vm.compartirPlanificacion = function (ev, planificacion, amigos, perfil) {
@@ -68,8 +65,6 @@
 
             vm.perfil = perfil;
 
-            console.log(vm.planificacion);
-
             vm.compartir={
                 id_planificacion: 0
             };
@@ -78,10 +73,7 @@
 
             vm.amigos = amigos;
 
-            console.log(vm.amigos);
-
             vm.compartirPlanificacion = function () {
-                console.log(vm.compartir);
                 CompartirPlanificacionService.save(vm.compartir);
                 vm.hide();
               };

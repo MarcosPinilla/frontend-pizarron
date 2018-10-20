@@ -26,7 +26,7 @@
       vm.materiales = data;
       console.log(vm.materiales);
       setTimeout(function() {
-        for(let i = 0; i < vm.materiales.length; i++) {
+        for(var i = 0; i < vm.materiales.length; i++) {
           document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;  
         }
       }, 300);

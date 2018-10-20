@@ -33,7 +33,7 @@
 
 
       setTimeout(function () {
-        for (let i = 0; i < vm.materiales.length; i++) {
+        for (var i = 0; i < vm.materiales.length; i++) {
           document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;
         }
       }, 300);
@@ -210,7 +210,7 @@
 
 
           setTimeout(function () {
-            for (let i = 0; i < vm.materiales.length; i++) {
+            for (var i = 0; i < vm.materiales.length; i++) {
               document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;
             }
           }, 300);
@@ -325,7 +325,7 @@
         impresion.loadFromJSON(json.data);
 
         //Se pasa el canvas a imágen
-        let dataUrl = impresion.toDataURL();
+        var dataUrl = impresion.toDataURL();
 
         //Se añade al arreglo
         paginas.push(dataUrl);

@@ -25,6 +25,7 @@
 				var last = index == keys.length - 1;
 				return last ? key : abbreviations[key];
 			}).join(seperator);
+
 		};
 	});
 
@@ -186,7 +187,7 @@
 			var activeGroup = canvas.getActiveGroup();
 			if (activeGroup) {
 				var activeObjects = activeGroup.getObjects();
-				for (let i in activeObjects) {
+				for (var i in activeObjects) {
 					canvas.remove(activeObjects[i]);
 				}
 				if(vm.esTexto===false){
@@ -305,7 +306,7 @@
 					if (vm.esGrupo) {
 						//clonedObj.canvas = canvas;
 						var arrayObj = clonedObj.getObjects();
-						for (let i in arrayObj) {
+						for (var i in arrayObj) {
 							canvas.add(arrayObj[i]);
 						}
 						 //clonedObj.setCoords();
