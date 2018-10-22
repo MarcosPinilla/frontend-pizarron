@@ -171,10 +171,14 @@
         });
     };
 
-    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, CambiarNotificacionesLeidas, VisibilidadService, NucleoByAmbitoService, NivelByNucleoService) {
+    function dialogoController($mdDialog, usuario, ambitos, nucleos, niveles, tipomaterial, $state, MaterialService, ListarambitosService, CambiarNotificacionesLeidas, VisibilidadService, NucleoByAmbitoService, NivelByNucleoService) {
       var vm = this;
+
+      ListarambitosService.query().$promise.then(function (data) {
+        vm.ambitos = data;
+      }); 
+
       vm.usuario = usuario;
-      vm.ambitos = ambitos;
       vm.nucleos = nucleos;
       vm.niveles = niveles;
       vm.tipo_materiales = tipomaterial;
