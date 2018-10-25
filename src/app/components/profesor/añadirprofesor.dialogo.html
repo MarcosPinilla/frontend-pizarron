@@ -4,7 +4,7 @@
   </div>
   <div id="add-profesor" >
     <md-content layout-padding layout-wrap md-theme="app" flex="100">
-        <form ng-submit="vm.register(vm.modelo)" >
+        <form ng-submit="vm.register(vm.modelo)" novalidate name="myForm" >
             <center><span ng-if="vm.loginError" style="color: red">El email y la contraseña son incorrectos</span></center>
             <div layout="column">
               <div layout="row" flex="100">
@@ -60,7 +60,7 @@
                   <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
                     <label>Región</label>
                     <md-select ng-model="vm.regionId" ng-change="vm.cargarComuna(vm.regionId)">
-                      <md-option ng-repeat="region in vm.regiones" value="{{ region.id }}">
+                      <md-option required ng-repeat="region in vm.regiones" value="{{ region.id }}">
                         {{ region.nombre_region }}
                       </md-option>
                     </md-select>
@@ -70,7 +70,7 @@
                 <div class="divLogin" flex="45">
                   <md-input-container class="md-block inputLogin" flex-offset="5" flex="90">
                     <label>Comuna</label>
-                    <md-select ng-model="vm.modelo.id_comuna">
+                    <md-select required ng-model="vm.modelo.id_comuna">
                       <md-option ng-repeat="comuna in vm.comunas" value="{{ comuna.id }}">
                         {{ comuna.nombre }}
                       </md-option>
@@ -90,7 +90,7 @@
                 <div class="divLogin" flex="45">
                   <md-input-container class="md-block inputLogin" flex-offset="5" flex="90" >
                     <label>Género</label>
-                    <md-select ng-model="vm.modelo.id_sexo">
+                    <md-select required ng-model="vm.modelo.id_sexo">
                       <md-option ng-repeat="sexo in vm.sexos" value="{{ sexo.id }}">
                         {{ sexo.desc_sexo }}
                       </md-option>
@@ -110,7 +110,7 @@
                 <div class="divLogin" flex="45">
                   <md-input-container class="md-block inputLogin" flex-offset="5" flex="90" >
                     <label>Rol</label>
-                    <md-select ng-model="vm.modelo.id_rol">
+                    <md-select required ng-model="vm.modelo.id_rol">
                       <md-option ng-repeat="rol in vm.roles" value="{{ rol.id }}">
                         {{ rol.nombre_rol }}
                       </md-option>
@@ -123,7 +123,7 @@
                 <div class="divLogin" flex="100">
                     <md-input-container class="md-block inputLogin" flex-offset="25" flex="50" >
                         <label>Suscripcion</label>
-                        <md-select ng-model="vm.modelo.id_suscripcion">
+                        <md-select required ng-model="vm.modelo.id_suscripcion">
                           <md-option ng-repeat="suscripcion in vm.suscripciones" value="{{ suscripcion.id }}">
                             {{ suscripcion.nombre_suscripcion }} - ${{suscripcion.monto}}
                           </md-option>
@@ -137,13 +137,10 @@
                   <label flex="90" flex-offset="5">Foto</label><input class="inputLogin" type="file" fileread="vm.modelo.foto_profesor" flex="90" flex-offset="5" required>
                 </div>
               </div>
-              <br>
-              <center><md-button type="submit" class="login-button">Añadir Educadora</md-button></center>
-              <center><p>{{vm.message}}<p></center>
-              <br>
+              <center><p style="color:red" ng-disabled="myForm.$invalid">Debes completar todos los campos para Añadir una Educadora.</p></center>
+              <center><md-button type="submit" ng-disabled="myForm.$invalid" class="login-button">Añadir Educadora</md-button></center>
             </div>
         </form>       
-  
     </md-content>
     <div class="modal-footer">
         <center><md-button class="button-footer md-raised md-warn login-button" type="submit" ng-click="vm.hide()">Cancelar</md-button></center>
