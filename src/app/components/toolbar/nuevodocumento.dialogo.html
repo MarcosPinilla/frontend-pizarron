@@ -38,9 +38,8 @@
 	<md-input-container class="md-block" flex="100">
 	    <label>Tipo de material</label>
 	    <md-select required="true" ng-model="vm.material.id_tipo_material">
-	    	<md-option ng-repeat="tipo_material in vm.tipo_materiales" ng-value="tipo_material.id">
-	    		{{tipo_material.nombre_tipo_material}}
-	    	</md-option>
+			<md-option ng-value="1">Ficha</md-option>
+			<md-option ng-value="2">Planificación</md-option>
 	    </md-select>
 	</md-input-container>
 	<md-input-container class="md-block" flex="100">

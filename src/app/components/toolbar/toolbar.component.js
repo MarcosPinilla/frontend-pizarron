@@ -186,6 +186,8 @@
       vm.material = {};
       vm.material_id = '';
 
+      console.log(vm.tipo_materiales);
+
       vm.cargarNucleos = function() {
         var idAmbito = JSON.parse('{"id": ' + vm.material.id_ambito + '}');
         NucleoByAmbitoService.query(idAmbito).$promise.then(function (data) {
