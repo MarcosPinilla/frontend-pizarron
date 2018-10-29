@@ -19,6 +19,9 @@
     vm.comentario;
     vm.materialesVarible = {};
     vm.loading = false;
+    vm.editarComentario = false;
+    vm.comentario_id = 0;
+    vm.modeloEditarComentario = '';
 
     var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
@@ -92,8 +95,6 @@
           
       });
 
-         
-
      };
 
 
@@ -118,25 +119,24 @@
       }
     };
 
-    vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
-      $mdDialog.show({
-        controller: dialogoController,
-        controllerAs: 'vm',
-        templateUrl: 'app/components/publicaciones/compartirmaterial.dialogo.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true,
-        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
-        locals: {
-          idmaterial: idmaterial,
-        },
-      })
-        .then(function (answer) {
-          vm.status = 'Documento:  ' + answer + '.';
-        }, function () {
-          vm.status = 'CANCELADO';
-        });
+    vm.eliminarComentario = function (id) {
+      ComentarioService.delete({id: id});
+
     };
+
+    vm.preEditarComentario = function (id, comentario) {
+      vm.editarComentario = true;
+      console.log(comentario);
+      vm.modeloEditarComentario = comentario;
+      vm.comentario_id = id;
+    };
+
+    vm.actualizarComentario = function (comentario) {
+      ComentarioService.update({id: vm.comentario_id}, modeloEditarComentario, function () {
+
+      }, function () {});
+    };
+
 
     function dialogoController($mdDialog, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
       var vm = this;
