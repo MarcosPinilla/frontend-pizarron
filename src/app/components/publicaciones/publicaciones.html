@@ -81,21 +81,19 @@
 								<a href="#">{{comentario.profesor.nombres_profesor}} {{comentario.profesor.apellidos_profesor}}</a>
 								<span class="comentario-fecha">
 								({{comentario.fecha}})</span>
-								 <md-menu>
-						      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdMenu, $event)">
-						        <md-icon md-menu-origin md-svg-icon="call:more_horiz"></md-icon>
+								<md-menu>
+						      <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+						        <md-icon md-menu-origin md-svg-icon="call:textsms"></md-icon>
 						      </md-button>
-						      <md-menu-content width="4">
-						        <md-menu-item>
+						      <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+						        <md-menu-item >
 						          <md-button ng-click="vm.preEditarComentario(comentario.id, comentario.comentario)">
-						            <md-icon md-svg-icon="call:edit" md-menu-align-target></md-icon>
-						            Editar
+						             Editar
 						          </md-button>
 						        </md-menu-item>
-						        <md-menu-item>
-						          <md-button  ng-click="vm.eliminarComentario(comentario.id)">
-						            <md-icon md-svg-icon="call:delete_outline"></md-icon>
-						            Eliminar
+						                <md-menu-item >
+						          <md-button ng-click="vm.eliminarComentario(comentario.id)">
+						             Eliminar
 						          </md-button>
 						        </md-menu-item>
 						      </md-menu-content>
@@ -111,14 +109,14 @@
 				Ver todos los comentarios
 			</md-button>
 			<!-- comentar editar  -->
-				<div layout="row" flex ng-if="editarComentario">
+				<div layout="row" flex ng-if="vm.editarComentario">
 					<div flex="5"></div>
 					<div class="caja-comentario" flex="70">
-						<input type="text"  ng-model="modeloEditarComentario">
+						<input type="text"  ng-model="vm.modeloEditarComentario">
 					</div>
 					<div flex="5"></div>
 					<div flex="25">
-						<md-button class="comentario-button" ng-click="vm.editarComentario(modeloEditarComentario)">
+						<md-button class="comentario-button" ng-click="vm.actualizarComentario(vm.modeloEditarComentario)">
 							<md-icon class="button-text" md-svg-icon="app/resources/icons/ic_send_white_18px.svg"></md-icon>
 						</md-button>
 					</div>
@@ -126,7 +124,7 @@
 				</div>
 
 				<!-- comentar normal -->
-				<div layout="row" flex ng-if="!editarComentario">
+				<div layout="row" flex ng-if="!vm.editarComentario">
 					<div flex="5"></div>
 					<div class="caja-comentario" flex="70">
 						<input type="text" placeholder="Escribe un comentario..." ng-model="comentario.comentar">

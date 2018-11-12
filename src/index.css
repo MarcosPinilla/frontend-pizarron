@@ -1505,6 +1505,12 @@ md-list-item.md-2-line .md-list-item-text h4 {
   height: 5px;
 }
 
+.menudemoBasicUsage .md-menu-demo {
+  padding: 24px; }
+
+.menudemoBasicUsage .menu-demo-container {
+  min-height: 200px; }
+
 .tabsdemoDynamicHeight md-content {
   background-color: transparent !important; }
   .tabsdemoDynamicHeight md-content md-tabs {

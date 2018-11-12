@@ -21,11 +21,16 @@
     vm.loading = false;
     vm.editarComentario = false;
     vm.comentario_id = 0;
-    vm.modeloEditarComentario = '';
+    vm.modeloEditarComentario = 'modelo para eitar comentario';
 
     var comentario = JSON.parse('{"idMaterial": ' + 1 + '}');
 
+    var originatorEv;
 
+    vm.openMenu = function($mdMenu, ev) {
+      originatorEv = ev;
+      $mdMenu.open(ev);
+    };
 
     MaterialService.query().$promise.then(function (data) {
       console.log(data);
@@ -59,9 +64,9 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[0]);
-          comentariosTres.push(vm.materiales[i].comentarios[1]);
-          comentariosTres.push(vm.materiales[i].comentarios[2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
           vm.materiales[i].comentarios = comentariosTres;
           vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
@@ -114,26 +119,122 @@
       if (texto != null) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
         ComentarioService.save(coment);
+         vm.materiales[idmaterial].botonComentarios = true;
       } else {
         console.log("Comentario vacio.");
       }
     };
 
     vm.eliminarComentario = function (id) {
+      console.log("elimnar comentario");
       ComentarioService.delete({id: id});
+      // crear metodo para no repetir 
+       MaterialService.query().$promise.then(function (data) {
+          vm.materiales = data;
 
+
+
+          setTimeout(function () {
+            for (var i = 0; i < vm.materiales.length; i++) {
+              document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;
+            }
+          }, 300);
+
+          ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
+            vm.favoritos = data;
+            vm.idfavoritos = vm.favoritos.map(function(i){return i.id_material;});
+            for(var x = 0; x < vm.materiales.length; x++) {
+              //if(!vm.materiales.hasOwnProperty(x)) continue;
+              if(vm.idfavoritos.length > 0) {
+                vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
+              }else {
+                vm.materiales[x].esFavorito = false;
+              }
+            }
+          });
+
+
+                 vm.materialesVarible = data;
+                 console.log(vm.materialesVarible);
+     
+      for (var i = 0; i < vm.materiales.length; i++) {
+        if (vm.materiales[i].comentarios.length > 3) {
+          var comentariosTres = [];
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          vm.materiales[i].comentarios = comentariosTres;
+          vm.materiales[i].botonComentarios = true;
+          console.log(comentariosTres);
+          console.log(vm.materiales[i]);
+        }
+       
+      }
+
+      console.log(vm.materiales);
+        });
     };
 
     vm.preEditarComentario = function (id, comentario) {
       vm.editarComentario = true;
       console.log(comentario);
       vm.modeloEditarComentario = comentario;
+      console.log(vm.modeloEditarComentario);
       vm.comentario_id = id;
     };
 
     vm.actualizarComentario = function (comentario) {
-      ComentarioService.update({id: vm.comentario_id}, modeloEditarComentario, function () {
+      var comentarioOB = {};
+      comentarioOB.comentario = comentario;
+      console.log(comentarioOB);
+      ComentarioService.update({id: vm.comentario_id}, comentarioOB, function () {
 
+
+        // crear metodo para no repetir 
+       MaterialService.query().$promise.then(function (data) {
+          vm.materiales = data;
+
+
+
+          setTimeout(function () {
+            for (var i = 0; i < vm.materiales.length; i++) {
+              document.getElementById(vm.materiales[i].id).innerHTML = vm.materiales[i].vista_previa;
+            }
+          }, 300);
+
+          ObtenerFavoritosAnalogosService.query().$promise.then(function (data) {
+            vm.favoritos = data;
+            vm.idfavoritos = vm.favoritos.map(function(i){return i.id_material;});
+            for(var x = 0; x < vm.materiales.length; x++) {
+              //if(!vm.materiales.hasOwnProperty(x)) continue;
+              if(vm.idfavoritos.length > 0) {
+                vm.materiales[x].esFavorito = vm.idfavoritos.indexOf(vm.materiales[x].id) > -1;
+              }else {
+                vm.materiales[x].esFavorito = false;
+              }
+            }
+          });
+
+
+                 vm.materialesVarible = data;
+                 console.log(vm.materialesVarible);
+     
+      for (var i = 0; i < vm.materiales.length; i++) {
+        if (vm.materiales[i].comentarios.length > 3) {
+          var comentariosTres = [];
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          vm.materiales[i].comentarios = comentariosTres;
+          vm.materiales[i].botonComentarios = true;
+          console.log(comentariosTres);
+          console.log(vm.materiales[i]);
+        }
+       
+      }
+
+      console.log(vm.materiales);
+        });
       }, function () {});
     };
 
@@ -235,10 +336,11 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[0]);
-          comentariosTres.push(vm.materiales[i].comentarios[1]);
-          comentariosTres.push(vm.materiales[i].comentarios[2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
           vm.materiales[i].comentarios = comentariosTres;
+          vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
           console.log(vm.materiales[i]);
         }
