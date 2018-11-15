@@ -107,7 +107,8 @@
  
     var client = new Pusher('28705022aa554d22c965', {
      cluster: 'us2',
-     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+     //authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+      authEndpoint: 'http://localhost:8000/broadcasting/auth',
      auth: {
        headers: {
          'Authorization': vm.token
@@ -157,7 +158,8 @@
  
                    var client = new Pusher('28705022aa554d22c965', {
                      cluster: 'us2',
-                     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+                     //authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+                     authEndpoint: 'http://localhost:8000/broadcasting/auth',
                      auth: {
                        headers: {
                          'Authorization': vm.token

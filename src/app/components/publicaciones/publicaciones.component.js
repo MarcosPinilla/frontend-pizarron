@@ -64,9 +64,9 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
           comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
           vm.materiales[i].comentarios = comentariosTres;
           vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
@@ -160,9 +160,9 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
           comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
           vm.materiales[i].comentarios = comentariosTres;
           vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
@@ -222,9 +222,9 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
           comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
           vm.materiales[i].comentarios = comentariosTres;
           vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
@@ -336,9 +336,9 @@
       for (var i = 0; i < vm.materiales.length; i++) {
         if (vm.materiales[i].comentarios.length > 3) {
           var comentariosTres = [];
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
-          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
           comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -1]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -2]);
+          comentariosTres.push(vm.materiales[i].comentarios[vm.materiales[i].comentarios.length -3]);
           vm.materiales[i].comentarios = comentariosTres;
           vm.materiales[i].botonComentarios = true;
           console.log(comentariosTres);
