@@ -43,16 +43,16 @@
 
 
 
-      vm.determinateValue = 30;
+   //    vm.determinateValue = 30;
 
-   setTimeout(function() {
+   // setTimeout(function() {
 
-        vm.determinateValue += 1;
-        if (vm.determinateValue > 50) {
-          vm.determinateValue = 15;
-        }
-        vm.loading = false;
-      }, 2500);
+   //      vm.determinateValue += 1;
+   //      if (vm.determinateValue > 50) {
+   //        vm.determinateValue = 15;
+   //      }
+   //      vm.loading = false;
+   //    }, 2500);
 
     vm.showPrompt = function (ev) {
       // Appending dialog to document.body to cover sidenav in docs app

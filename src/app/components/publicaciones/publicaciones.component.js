@@ -18,7 +18,7 @@
     vm.favoritos = {};
     vm.comentario;
     vm.materialesVarible = {};
-    vm.loading = false;
+    //vm.loading = false;
     vm.editarComentario = false;
     vm.comentario_id = 0;
     vm.modeloEditarComentario = 'modelo para eitar comentario';
@@ -57,7 +57,7 @@
             vm.materiales[x].esFavorito = false;
           }
         }
-        vm.loading = true;
+        //vm.loading = true;
       });
 
 
@@ -89,13 +89,19 @@
     };
 
     vm.indexXD = 0;
+    // deberia traer todo solo3 comentarios y despues a apretar el boton traer los comentarios de elemnto (no tiempo)
      vm.cargarComentario = function (index) {
       console.log(index);
       vm.indexXD =index;
         MaterialService.query().$promise.then(function (data) {
           console.log(data);
+          var largo = data[vm.indexXD].comentarios.length;
+          var j = 0;
+          for (var i = largo-1; i > -1; i--) {
+            vm.materiales[vm.indexXD].comentarios[j] = data[vm.indexXD].comentarios[i];
+            j++;
+          }
 
-          vm.materiales[vm.indexXD].comentarios = data[vm.indexXD].comentarios;
           vm.materiales[vm.indexXD].botonComentarios = false;
           
       });
