@@ -380,6 +380,78 @@
     };
 
 
+    vm.showNewDocument = function (ev, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
+      $mdDialog.show({
+        controller: dialogoController,
+        controllerAs: 'vm',
+        templateUrl: 'app/components/publicaciones/compartirmaterial.dialogo.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: vm.customFullscreen, // Only for -xs, -sm breakpoints.
+        locals: {
+          idmaterial: idmaterial,
+        },
+      })
+      .then(function (answer) {
+        vm.status = 'Documento:  ' + answer + '.';
+      }, function () {
+        vm.status = 'CANCELADO';
+      });
+    };
+
+
+    function dialogoController($mdDialog, idmaterial, CompartirmaterialService, BuscarNombreProfesorService) {
+      var vm = this;
+      vm.profesores = {};
+      vm.nombre_profesor = null;
+      vm.selected_profesor = null;
+      vm.answercompartir = "";
+      vm.answerb = false;
+
+      vm.compartirMaterial = function (profesorid) {
+        if (vm.selected_profesor == null) {
+          console.log("No se ha seleccionado profesor");
+          return;
+        }
+        var compartir = JSON.parse('{"id_material": ' + idmaterial + ', "id_seguidor": ' + profesorid + '}');
+        CompartirmaterialService.save(compartir).$promise.then(function (data) {
+          vm.answer("Material compartido con exito");
+        });
+      };
+
+      vm.hide = function () {
+        vm.answercompartir = ""
+        vm.answerb = false;
+        $mdDialog.hide();
+      };
+
+      vm.cancel = function () {
+        $mdDialog.cancel();
+      };
+
+      vm.answer = function (answer) {
+        vm.answercompartir = "Material compartido con exito";
+        vm.answerb = true;
+        setTimeout(function () {
+          $mdDialog.hide();
+        }, 2000);
+      };
+
+      vm.error = function (answer) {
+        vm.answercompartir = "Error al compartir el material, intentelo denuevo";
+      }
+
+      vm.buscarProfesor = function () {
+        BuscarNombreProfesorService.query({ nombre: vm.nombre_profesor }).$promise.then(function (data) {
+          vm.profesores = data;
+        });
+      };
+
+    };
+
+
+
   }
 
 
