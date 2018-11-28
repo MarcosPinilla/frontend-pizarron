@@ -49,6 +49,9 @@
         },
       })
       .then(function (answer) {
+         ListarNoticiasService.query().$promise.then(function(data){
+          vm.noticias=data;
+        });
         vm.status = 'Documento:  ' + answer + '.';
       }, function () {
         vm.status = 'CANCELADO';
