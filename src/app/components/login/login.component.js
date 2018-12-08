@@ -38,6 +38,7 @@
           CredentialsService.setUser(data.email);
           CredentialsService.setRol(data.rol);
           CredentialsService.setActive(data.activo);
+          CredentialsService.setid(data.id);
           $rootScope.$emit('isLogin');
           $rootScope.$emit('isnotinLogin');
           if(data.rol == 1){

@@ -215,7 +215,12 @@
         vm.profesor = profesor;
         ProfesorService.update({ id: vm.profesor.id }, profesor, function () {
           vm.hide();
-        }, function () { });
+          
+          console.log('editar profesor');
+          $state.reload();
+        }, function () { 
+
+        });
       };
 
       vm.hide = function () {

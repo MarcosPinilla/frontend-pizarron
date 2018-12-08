@@ -81,7 +81,7 @@
 								<a href="#">{{comentario.profesor.nombres_profesor}} {{comentario.profesor.apellidos_profesor}}</a>
 								<span class="comentario-fecha">
 								({{comentario.fecha}})</span>
-								<md-menu>
+								<md-menu ng-if="comentario.id_autor == vm.profesorlogeado">
 						      <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
 						        <md-icon md-menu-origin md-svg-icon="app/resources/icons/baseline-more_horiz-24px.svg"></md-icon>
 						      </md-button>

@@ -18,6 +18,9 @@
     vm.favoritos = {};
     vm.comentario;
     vm.materialesVarible = {};
+    console.log()
+    vm.profesorlogeado = CredentialsService.getid();
+     console.log(vm.profesorlogeado);
     //vm.loading = false;
     vm.editarComentario = false;
     vm.comentario_id = 0;

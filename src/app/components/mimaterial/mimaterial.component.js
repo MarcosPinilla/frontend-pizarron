@@ -9,9 +9,9 @@
       controllerAs: 'vm'
     });
 
-  mimaterialCtrl.$inject = ['$mdDialog', 'ObtenerMiMaterialService', 'MaterialService', 'ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService'];
+  mimaterialCtrl.$inject = ['$mdDialog','ObtenerMiMaterialService', 'MaterialService', 'ListarambitosService', 'NucleoByAmbitoService', 'NivelByNucleoService', 'ListartipomaterialService', 'ObtenerFavoritosAnalogosService', 'DarFavorito', '$state', 'PerfilService', 'ObtenerMiMaterialColaboradorService'];
 
-  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, MaterialService,ListarambitosService, NucleoByAmbitoService, NivelByNucleoService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService) {
+  function mimaterialCtrl($mdDialog, ObtenerMiMaterialService, MaterialService,ListarambitosService, NucleoByAmbitoService, NivelByNucleoService, ListartipomaterialService, ObtenerFavoritosAnalogosService, DarFavorito, $state, PerfilService, ObtenerMiMaterialColaboradorService) {
     var vm = this;
     vm.materiales = {};
     vm.autoria = [{id: 0, nombre: 'autor'}, {id: 1, nombre: 'colaborador'}];
@@ -48,15 +48,16 @@
       console.log(data);
       vm.perfil = data;
 
-      ObtenerMiMaterialService.query().$promise.then(function (data) {
+      ObtenerMiMaterialColaboradorService.query().$promise.then(function (data) {
+        console.log(data);
         vm.materiales = data;
 
-          for (var i = 0; i < vm.materiales.length; i++) {
+         /* for (var i = 0; i < vm.materiales.length; i++) {
             if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
               vm.materiales[i].autor = 'autor';
             else
               vm.materiales[i].autor = 'colaborador';
-          }
+          }*/
 
         console.log("NO!");
         console.log(vm.materiales);
@@ -85,15 +86,15 @@
       console.log(data);
       vm.perfil = data;
 
-      ObtenerMiMaterialService.query().$promise.then(function (data) {
+      ObtenerMiMaterialColaboradorService.query().$promise.then(function (data) {
+        console.log(data);
         vm.materiales = data;
-
-          for (var i = 0; i < vm.materiales.length; i++) {
+         /* for (var i = 0; i < vm.materiales.length; i++) {
             if(vm.materiales[i].colaboradores[0].id == vm.perfil.id)
               vm.materiales[i].autor = 'autor';
             else
               vm.materiales[i].autor = 'colaborador';
-          }
+          }*/
 
         console.log("NO!");
         console.log(vm.materiales);

@@ -13,6 +13,13 @@
     this.getToken = function () {
       return localStorage.getItem('token');
     };
+    this.setid = function (id) {
+      localStorage.setItem('id', id);
+    };
+
+    this.getid = function () {
+      return localStorage.getItem('id');
+    };
 
     this.setUser = function (user) {
       localStorage.setItem('user', user);
@@ -43,10 +50,11 @@
       localStorage.removeItem('user');
       localStorage.removeItem('rol');
       localStorage.removeItem('active');
+      localStorage.removeItem('id');
     };
 
     this.isLogged = function () {
-      if (this.getToken() && this.getUser() && this.getRol() && this.getActive()) {
+      if (this.getToken() && this.getUser() && this.getRol() && this.getActive() && this.getid()) {
         return true;
       }
       return false;
