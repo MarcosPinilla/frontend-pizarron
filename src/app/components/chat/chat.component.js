@@ -51,6 +51,7 @@
       .then(function (answer) {
          ListarNoticiasService.query().$promise.then(function(data){
           vm.noticias=data;
+          $state.reload();
         });
         vm.status = 'Documento:  ' + answer + '.';
       }, function () {
