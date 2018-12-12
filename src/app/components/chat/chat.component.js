@@ -337,6 +337,10 @@ function dialogoController($mdDialog, NoticiaService) {
       if(vm.noticia.titulo != null && vm.noticia.contenido != null) {
         NoticiaService.save(vm.noticia);
         $mdDialog.hide();
+         ListarNoticiasService.query().$promise.then(function(data){
+          vm.noticias=data;
+          //$state.reload();
+        });
       }
     };     
 
