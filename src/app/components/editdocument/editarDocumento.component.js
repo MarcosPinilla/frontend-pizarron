@@ -1089,6 +1089,78 @@
       
     }
 
+
+    // exportar a pdf 
+
+    vm.exportarPDF = function () {
+
+      //Se inicializa el arreglo con las páginas a imprimir
+
+      var pdf = new jsPDF();
+      
+      //Se itera entre todas las páginas creadas
+      for (var i = 1; i <= vm.documentoCompleto.length - 1; i++) {
+        
+        //Se crea nuevo canvas, para no modificar el de la edición
+        var impresion = new fabric.Canvas('c');
+
+        //Se cambia el tamaño (Validar)
+        impresion.setHeight(1122);
+        impresion.setWidth(794);
+
+        //Se obtiene la página de la iteración
+        var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
+
+        //Se carga la página al canvas
+        impresion.loadFromJSON(json.data);
+        
+        //Se pasa el canvas a imágen
+        let dataUrl = impresion.toDataURL();
+        pdf.addImage(dataUrl, 'JPEG', 0, 0);
+        
+      }
+      
+      pdf.save("download.pdf");
+
+      
+    }
+
+
+// imprimer a pdf 
+
+    vm.imprimir = function () {
+
+      //Se inicializa el arreglo con las páginas a imprimir
+
+      var pdf = new jsPDF();
+      
+      //Se itera entre todas las páginas creadas
+      for (var i = 1; i <= vm.documentoCompleto.length - 1; i++) {
+        
+        //Se crea nuevo canvas, para no modificar el de la edición
+        var impresion = new fabric.Canvas('c');
+
+        //Se cambia el tamaño (Validar)
+        impresion.setHeight(1122);
+        impresion.setWidth(794);
+
+        //Se obtiene la página de la iteración
+        var json = $filter('filter')(vm.documentoCompleto, {id: i}, true)[0];
+
+        //Se carga la página al canvas
+        impresion.loadFromJSON(json.data);
+        
+        //Se pasa el canvas a imágen
+        let dataUrl = impresion.toDataURL();
+        pdf.addImage(dataUrl, 'JPEG', 0, 0);
+        
+      }
+      
+      pdf.save("download.pdf");
+
+      
+    }
+
     //Provisorio para tests
     vm.obtener = function() {
       var json = canvas.toJSON();
