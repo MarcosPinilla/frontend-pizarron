@@ -109,10 +109,10 @@
    PerfilService.get().$promise.then(function (data) {
     vm.usuarioID = data.id;
  
-    var client = new Pusher('28705022aa554d22c965', {
+    var client = new Pusher('8cf3e9d7177ccf05dfc7', {
      cluster: 'us2',
-     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
-     // authEndpoint: 'http://localhost:8000/broadcasting/auth',
+     //authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+      authEndpoint: 'http://localhost:8000/broadcasting/auth',
      auth: {
        headers: {
          'Authorization': vm.token
@@ -121,7 +121,7 @@
                        // 'X-CSRF-Token' : vm.token,
                        // 'Access-Control-Allow-Headers': 'X-CSRF-Token',
                      }},
-                     key: '6af7dc41d3b9a2f104d8',
+                     key: 'd1bb6663ea1a94de9df7',
                      encrypted: true
                    });
  
@@ -160,10 +160,10 @@
 
                    vm.nuevo = true;
  
-                   var client = new Pusher('28705022aa554d22c965', {
+                   var client = new Pusher('8cf3e9d7177ccf05dfc7', {
                      cluster: 'us2',
-                     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
-                     //authEndpoint: 'http://localhost:8000/broadcasting/auth',
+                     //authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+                     authEndpoint: 'http://localhost:8000/broadcasting/auth',
                      auth: {
                        headers: {
                          'Authorization': vm.token
@@ -172,7 +172,7 @@
                                // 'X-CSRF-Token' : vm.token,
                                // 'Access-Control-Allow-Headers': 'X-CSRF-Token',
                              }},
-                             key: '6af7dc41d3b9a2f104d8',
+                             key: 'd1bb6663ea1a94de9df7',
                              encrypted: true
                            });
  
@@ -288,9 +288,9 @@ vm.chatEnv = function (message, index){
 
 //socket noticia
 
-var client = new Pusher('28705022aa554d22c965', {
+var client = new Pusher('8cf3e9d7177ccf05dfc7', {
         cluster: 'us2',
-                key: '6af7dc41d3b9a2f104d8',
+                key: '8cf3e9d7177ccf05dfc7',
                 encrypted: true
               });
 

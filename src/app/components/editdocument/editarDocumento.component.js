@@ -1322,7 +1322,7 @@
 
     // socket al editar el documento 
 
-      var client = new Pusher('28705022aa554d22c965', {
+      var client = new Pusher('8cf3e9d7177ccf05dfc7', {
           cluster: 'us2',
           // authEndpoint: "http://example.com/pusher/auth",
           encrypted: true
