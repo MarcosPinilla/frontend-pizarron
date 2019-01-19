@@ -16,10 +16,21 @@
 		vm.planificacion = MaterialService.get({id: $stateParams.id});
 		if(vm.planificacion.id_tipo_material == 2){
 			$state.go('editdocument', { id: material.id });
-		}
-		vm.contenido_material = ContenidoPlanificacionService.get({id: $stateParams.id});
-		console.log(vm.planificacion);
-		console.log(vm.contenido_material);
+    }
+
+    vm.contenido_material = ContenidoPlanificacionService.get({id: $stateParams.id});
+
+    vm.contenido_planificacion= {};
+
+    vm.contenido_material.$promise.then(function(contenido) {
+      vm.contenido_planificacion = contenido;
+      if(vm.contenido_planificacion.autor){
+        
+      }else{
+        $state.go('verplanificacion', { id: vm.planificacion.id });
+      }
+      
+    });
 
 		vm.update = {
 			contenido_material:{}
