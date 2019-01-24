@@ -111,7 +111,7 @@
  
     var client = new Pusher('8cf3e9d7177ccf05dfc7', {
      cluster: 'us2',
-     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+     authEndpoint: 'https://sistema.educadoras.cl/v1/broadcasting/auth',
       //authEndpoint: 'http://localhost:8000/broadcasting/auth',
      auth: {
        headers: {
@@ -162,7 +162,7 @@
  
                    var client = new Pusher('8cf3e9d7177ccf05dfc7', {
                      cluster: 'us2',
-                     authEndpoint: 'http://sistema.educadoras.cl/v1/broadcasting/auth',
+                     authEndpoint: 'https://sistema.educadoras.cl/v1/broadcasting/auth',
                      //authEndpoint: 'http://localhost:8000/broadcasting/auth',
                      auth: {
                        headers: {
@@ -275,6 +275,7 @@ vm.chatEnv = function (message, index){
    mensajeEvn.inde = index;
    console.log(mensajeEvn);
   console.log(index);
+  vm.chats[index] = "";
   MessageService.save(mensajeEvn, function (data) {
   
     // console.log(data);
