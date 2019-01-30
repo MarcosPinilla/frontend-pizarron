@@ -275,7 +275,7 @@ vm.chatEnv = function (message, index){
    mensajeEvn.inde = index;
    console.log(mensajeEvn);
   console.log(index);
-  vm.chats[index] = "";
+  //vm.chats[index] = "";
   MessageService.save(mensajeEvn, function (data) {
   
     // console.log(data);
