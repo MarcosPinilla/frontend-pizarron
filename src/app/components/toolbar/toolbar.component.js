@@ -185,6 +185,7 @@
 
       vm.material = {};
       vm.material_id = '';
+      vm.material.id_visibilidad = 1;
 
       console.log(vm.tipo_materiales);
 
