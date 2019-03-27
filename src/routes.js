@@ -14,7 +14,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'login',
     isPrivate: false
   })
-  .state('pagoexitoso', {
+  /*.state('pagoexitoso', {
     url: '/pagoexitoso',
     component: 'pagoexitoso',
     isPrivate: false,
@@ -25,7 +25,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     component: 'pago',
     isPrivate: false,
     isPago: true
-  })
+  })*/
   .state('landing', {
     url: '/home',
     component: 'landing',
@@ -274,11 +274,11 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     if (isPrivate && !CredentialsService.isLogged()) {
       $state.go('login');
     }
-
+    /* bloque comentado es el que verifica el pago
     if (isPrivate && CredentialsService.isLogged() && !CredentialsService.isActive()) {
       $state.go('pago');
     }
-
+    */
     // Compruebo que quiera entrar a el login cuando ya esta logeado
     if (to === 'login' && CredentialsService.isLogged() ) {
       $state.go('dashboard.publicaciones');
