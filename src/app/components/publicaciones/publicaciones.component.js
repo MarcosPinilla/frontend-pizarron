@@ -92,7 +92,7 @@
     };
 
     vm.indexXD = 0;
-    // deberia traer todo solo3 comentarios y despues a apretar el boton traer los comentarios de elemnto (no tiempo)
+    // deberia traer  solo 3 comentarios y despues al presionar el boton traer los comentarios de elemnto (no tiempo)
      vm.cargarComentario = function (index) {
       console.log(index);
       vm.indexXD =index;
@@ -124,11 +124,11 @@
     vm.agregarFavoritos = function () {
     };
 
-    vm.comentar = function (idmaterial, texto) {
+    vm.comentar = function (idmaterial, texto, index) {
       if (texto != null) {
         var coment = JSON.parse('{"id_material": ' + idmaterial + ', "comentario": ' + '"' + texto + '"' + '}');
         ComentarioService.save(coment);
-         vm.materiales[idmaterial].botonComentarios = true;
+        vm.materiales[index].botonComentarios = true;
       } else {
         console.log("Comentario vacio.");
       }
@@ -300,9 +300,9 @@
     vm.token = CredentialsService.getToken();
 
 
-    var client = new Pusher('28705022aa554d22c965', {
+    var client = new Pusher('8cf3e9d7177ccf05dfc7', {
       cluster: 'us2',
-      key: '6af7dc41d3b9a2f104d8',
+      key: 'd1bb6663ea1a94de9df7',
       encrypted: true
     });
 
